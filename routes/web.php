@@ -15,3 +15,11 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::get('/project-main', function () {
+    return view('Project.project-main');
+});
+
+Route::get('/view-pow', function () {
+    return view('Project.project-view-pow');
+});
