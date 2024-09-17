@@ -1,3 +1,4 @@
+
 {{-- HEADER --}}
 
 <div class="h-[85px] justify-between items-center px-5 hidden lg:flex transform ease-in-out transition"
