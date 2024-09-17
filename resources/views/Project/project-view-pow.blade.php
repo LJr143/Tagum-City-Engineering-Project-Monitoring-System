@@ -12,126 +12,158 @@
 
 <!-- Main Content -->
 <main>
-    @section('content')
         <div class="container mx-auto p-6">
             <!-- Project Header -->
-            <div class="flex items-center justify-between mb-4">
-                <div>
-                    <span class="bg-green-500 text-white px-2 py-1 rounded">#PRJ2023-03-19789</span>
-                    <h1 class="text-2xl font-bold">POW 1</h1>
-                </div>
-                <div class="w-1/4">
-                    <div class="p-4 bg-white shadow rounded">
-                        <img src="image-link.png" alt="Project Image" class="rounded mb-2">
-                        <h3 class="font-semibold">Constructive and destructive waves</h3>
-                        <p>Project Cost: 1,000,000,000</p>
-                    </div>
-                </div>
+            <div class="flex justify-between items-center mb-6">
+                <span class="bg-green-500 text-white py-1 px-4 rounded-full">#PRJ2023-03-19879</span>
+                <h2 class="text-xl font-bold">POW 1</h2>
             </div>
 
-            <!-- Material Cost Section -->
-            <div class="bg-white shadow rounded p-6 mb-6">
-                <div class="flex justify-between items-center">
-                    <h2 class="text-xl font-semibold">Material Cost</h2>
-                    <div class="flex items-center space-x-2">
-                        <button class="btn">Choose File</button>
-                        <button class="btn bg-green-500 text-white">Import Excel</button>
-                    </div>
-                </div>
-                <!-- Table -->
-                <table class="w-full mt-4">
-                    <thead>
-                    <tr class="bg-gray-100">
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Email</th>
-                        <th>Date</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <!-- Loop through data -->
-                    @foreach ($materials as $material)
-                        <tr>
-                            <td>{{ $material->id }}</td>
-                            <td>{{ $material->name }}</td>
-                            <td>{{ $material->position }}</td>
-                            <td>{{ $material->email }}</td>
-                            <td>{{ $material->date }}</td>
-                            <td>
-                                <button @click="editMaterial({{ $material->id }})" class="text-blue-500">Edit</button>
-                                <button @click="deleteMaterial({{ $material->id }})" class="text-red-500">Delete</button>
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-            </div>
+            <!-- Main Content Grid -->
+            <div class="grid grid-cols-3 gap-6">
 
-            <!-- Labor Cost Section -->
-            <div class="bg-white shadow rounded p-6">
-                <div class="flex justify-between items-center">
-                    <h2 class="text-xl font-semibold">Labor Cost</h2>
-                    <div class="flex items-center space-x-2">
-                        <button class="btn">Choose File</button>
-                        <button class="btn bg-green-500 text-white">Import Excel</button>
+                <!-- Material Cost Section -->
+                <div class="col-span-2">
+                    <div class="bg-white shadow-md rounded-lg p-4">
+                        <h3 class="text-lg font-bold mb-4">Material Cost</h3>
+
+                        <!-- Filter and File Upload -->
+                        <div class="flex justify-between mb-4">
+                            <div class="relative">
+                                <select class="border border-gray-300 rounded-md px-3 py-2 focus:ring-green-500 focus:border-green-500">
+                                    <option value="all">All</option>
+                                    <option value="admin">Admin</option>
+                                    <option value="engineer">Engineer</option>
+                                    <option value="viewer">Viewer</option>
+                                </select>
+                            </div>
+                            <div class="flex space-x-4">
+                                <input type="file" class="hidden" id="material-upload">
+                                <label for="material-upload" class="px-4 py-2 bg-yellow-500 text-white rounded-md cursor-pointer">Choose File</label>
+                                <button class="px-4 py-2 bg-green-500 text-white rounded-md">Import Excel</button>
+                            </div>
+                        </div>
+
+                        <!-- Table -->
+                        <table class="w-full table-auto">
+                            <thead>
+                            <tr class="bg-gray-100 text-left">
+                                <th class="p-2">User ID</th>
+                                <th class="p-2">Name</th>
+                                <th class="p-2">Position</th>
+                                <th class="p-2">Email</th>
+                                <th class="p-2">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!-- Example Row -->
+                            <tr>
+                                <td class="p-2">0000</td>
+                                <td class="p-2">Frame M.L. Lianne</td>
+                                <td class="p-2">Engineer</td>
+                                <td class="p-2">framemail@example.com</td>
+                                <td class="p-2">
+                                    <button class="px-3 py-1 bg-blue-500 text-white rounded-md">Edit</button>
+                                    <button class="px-3 py-1 bg-red-500 text-white rounded-md">Delete</button>
+                                </td>
+                            </tr>
+                            <!-- Repeat Rows as necessary -->
+                            </tbody>
+                        </table>
+
+                        <!-- Pagination -->
+                        <div class="flex justify-between items-center mt-4">
+                            <p class="text-sm">Showing 1 to 10 of 100 entries</p>
+                            <div class="space-x-1">
+                                <button class="px-3 py-1 bg-gray-300 rounded-md">1</button>
+                                <button class="px-3 py-1 bg-gray-300 rounded-md">2</button>
+                                <button class="px-3 py-1 bg-gray-300 rounded-md">3</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <!-- Table -->
-                <table class="w-full mt-4">
-                    <thead>
-                    <tr class="bg-gray-100">
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Email</th>
-                        <th>Date</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <!-- Loop through data -->
-                    @foreach ($labors as $labor)
-                        <tr>
-                            <td>{{ $labor->id }}</td>
-                            <td>{{ $labor->name }}</td>
-                            <td>{{ $labor->position }}</td>
-                            <td>{{ $labor->email }}</td>
-                            <td>{{ $labor->date }}</td>
-                            <td>
-                                <button @click="editLabor({{ $labor->id }})" class="text-blue-500">Edit</button>
-                                <button @click="deleteLabor({{ $labor->id }})" class="text-red-500">Delete</button>
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+
+                <!-- Side Panel -->
+                <div class="bg-white shadow-md rounded-lg p-4">
+                    <h3 class="text-lg font-bold mb-4">Constructive and destructive waves</h3>
+                    <p>Project Cost: 1,000,000,000</p>
+                </div>
+
+                <!-- Labor Cost Section -->
+                <div class="col-span-2 mt-6">
+                    <div class="bg-white shadow-md rounded-lg p-4">
+                        <h3 class="text-lg font-bold mb-4">Labor Cost</h3>
+
+                        <!-- Table -->
+                        <table class="w-full table-auto">
+                            <thead>
+                            <tr class="bg-gray-100 text-left">
+                                <th class="p-2">User ID</th>
+                                <th class="p-2">Name</th>
+                                <th class="p-2">Position</th>
+                                <th class="p-2">Email</th>
+                                <th class="p-2">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!-- Example Row -->
+                            <tr>
+                                <td class="p-2">0000</td>
+                                <td class="p-2">Frame M.L. Lianne</td>
+                                <td class="p-2">Engineer</td>
+                                <td class="p-2">framemail@example.com</td>
+                                <td class="p-2">
+                                    <button class="px-3 py-1 bg-blue-500 text-white rounded-md">Edit</button>
+                                    <button class="px-3 py-1 bg-red-500 text-white rounded-md">Delete</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- Pagination -->
+                        <div class="flex justify-between items-center mt-4">
+                            <p class="text-sm">Showing 1 to 10 of 100 entries</p>
+                            <div class="space-x-1">
+                                <button class="px-3 py-1 bg-gray-300 rounded-md">1</button>
+                                <button class="px-3 py-1 bg-gray-300 rounded-md">2</button>
+                                <button class="px-3 py-1 bg-gray-300 rounded-md">3</button>
+                            </div>
+                        </div>
+
+                        <!-- Save and Cancel Buttons -->
+                        <div class="flex justify-end mt-6 space-x-4">
+                            <button class="px-4 py-2 bg-gray-300 rounded-md">Cancel</button>
+                            <button class="px-4 py-2 bg-green-500 text-white rounded-md">Save</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Labor Cost Modal -->
+                <div class="bg-white shadow-md rounded-lg p-4 mt-6">
+                    <h3 class="text-lg font-bold mb-4">Labor Cost Entry</h3>
+                    <form>
+                        <div class="mb-4">
+                            <label for="quantity" class="block text-gray-700">Quantity</label>
+                            <input type="number" id="quantity" class="w-full border border-gray-300 rounded-md px-3 py-2" placeholder="Enter Quantity">
+                        </div>
+                        <div class="mb-4">
+                            <label for="amount" class="block text-gray-700">Amount</label>
+                            <input type="text" id="amount" class="w-full border border-gray-300 rounded-md px-3 py-2" placeholder="Enter Amount">
+                        </div>
+                        <div class="mb-4">
+                            <label for="payroll" class="block text-gray-700">Payroll Amount</label>
+                            <input type="text" id="payroll" class="w-full border border-gray-300 rounded-md px-3 py-2" placeholder="Enter Payroll Amount">
+                        </div>
+
+                        <!-- Save and Cancel Buttons -->
+                        <div class="flex justify-end space-x-4">
+                            <button type="button" class="px-4 py-2 bg-gray-300 rounded-md">Cancel</button>
+                            <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded-md">Save</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-
-        <!-- Alpine.js Methods -->
-        <script>
-            function costManagement() {
-                return {
-                    materials: @json($materials),
-                    labors: @json($labors),
-                    editMaterial(id) {
-                        console.log('Edit material', id);
-                    },
-                    deleteMaterial(id) {
-                        console.log('Delete material', id);
-                    },
-                    editLabor(id) {
-                        console.log('Edit labor', id);
-                    },
-                    deleteLabor(id) {
-                        console.log('Delete labor', id);
-                    }
-                }
-            }
-        </script>
-    @endsection
 </main>
 
 </body>

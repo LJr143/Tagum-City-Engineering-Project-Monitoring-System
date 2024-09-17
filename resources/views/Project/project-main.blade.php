@@ -9,7 +9,13 @@
 
 </head>
 <body>
+<x-slot name="header">
 
+</x-slot>
+
+<x-slot name="sidebar">
+
+</x-slot>
 <!-- Main Content -->
 <main class="w-4/5 p-6 bg-gray-50">
     <!-- Header -->
