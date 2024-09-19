@@ -14,11 +14,13 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::get('/project-main', function () {
+        return view('Project.project-main');
+    })->name('project-main');
+
 });
 
-Route::get('/project-main', function () {
-    return view('Project.project-main');
-});
 
 Route::get('/project-cost', function () {
     return view('Project.project-view-pow');
