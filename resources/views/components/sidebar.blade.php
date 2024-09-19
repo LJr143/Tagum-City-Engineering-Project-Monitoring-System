@@ -1,3 +1,4 @@
+
 {{-- HEADER --}}
 
 <div class="h-[85px] justify-between items-center px-5 hidden lg:flex transform ease-in-out transition"
@@ -24,7 +25,7 @@
             <li x-data="{toggle: false}"  @mouseenter="toggle = true"
                 @mouseleave="toggle = false"
                 :style="toggle ? 'background-color: rgba(36, 144, 0, 0.3);' : ''">
-                <a href="{{ route('dashboard') }}" @if (request()->routeIs('')){ @click.prevent="preventAction = true" }@endif aria-label="dashboard" @class(['relative flex items-center gap-3 px-6 py-0 text-Primary font-medium', ' text-customGreen font-semibold'=> request()->routeIs('dashboard')]) @mouseenter="toggle = true" @mouseleave="toggle = false"
+                <a href="{{ route('dashboard') }}" @if (request()->routeIs('dashboard')){ @click.prevent="preventAction = true" }@endif aria-label="dashboard" @class(['relative flex items-center gap-3 px-6 py-0 text-Primary font-medium', ' text-customGreen font-semibold'=> request()->routeIs('dashboard')]) @mouseenter="toggle = true" @mouseleave="toggle = false"
                    @click="setActiveTab('dashboard'); show = false; showManage = false; subActiveItem = ''; setsubTmsActiveItem(''); setsettingsTmsActiveItem('')">
                     <div class=" text-center p-[13px] rounded-full justify-center items-center flex"
                          :class="{'bg-customGreen-100': {{ request()->routeIs('dashboard') ? 'true' : 'false' }}, 'bg-none': {{ !request()->routeIs('dashboard') ? 'true' : 'false' }}}">
@@ -40,10 +41,10 @@
             </li>
 
             <li x-data="{toggle: false}">
-                <a href="" aria-label="dashboard" @class(['relative flex items-center gap-3 px-6 py-0 text-Primary font-medium', ' text-customGreen font-semibold'=> request()->routeIs('')]) @mouseenter="toggle = true" @mouseleave="toggle = false"
+                <a href="{{ route('project-main') }}" @if (request()->routeIs('project-main')){ @click.prevent="preventAction = true" }@endif" aria-label="project" @class(['relative flex items-center gap-3 px-6 py-0 text-Primary font-medium', ' text-customGreen font-semibold'=> request()->routeIs('project-main')]) @mouseenter="toggle = true" @mouseleave="toggle = false"
                    @click="setActiveTab(''); show = false; showManage = false; subActiveItem = ''; setsubTmsActiveItem(''); setsettingsTmsActiveItem('')">
                     <div class=" text-center p-[13px] rounded-full justify-center items-center flex"
-                         :class="{'bg-customGreen-100': {{ request()->routeIs('') ? 'true' : 'false' }}, 'bg-none': {{ !request()->routeIs('') ? 'true' : 'false' }}}">
+                         :class="{'bg-customGreen-100': {{ request()->routeIs('project-main') ? 'true' : 'false' }}, 'bg-none': {{ !request()->routeIs('project-main') ? 'true' : 'false' }}}">
                         <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M7.51699 3.11139L3.02533 6.61139C2.27533 7.19472 1.66699 8.43639 1.66699 9.37806V15.5531C1.66699 17.4864 3.24199 19.0697 5.17533 19.0697H14.8253C16.7587 19.0697 18.3337 17.4864 18.3337 15.5614V9.49472C18.3337 8.48639 17.6587 7.19472 16.8337 6.61972L11.6837 3.01139C10.517 2.19472 8.64199 2.23639 7.51699 3.11139Z" stroke="#3F3E44" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M10 15.7365V13.2365" stroke="#3F3E44" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
