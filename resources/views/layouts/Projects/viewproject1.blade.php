@@ -4,14 +4,12 @@
         <x-sidebar></x-sidebar>
     </x-slot>
 
-
     <x-slot name="header">
         <x-header></x-header>
     </x-slot>
 
     <x-slot name="main">
-        <livewire:project-main/>
-
+        <livewire:Viewproject1/>
     </x-slot>
 
 </x-app-layout>

@@ -20,15 +20,26 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::get('/project-main', function () {
+        return view('Project.project-main');
+    })->name('project-main');
 });
 
-Route::get('/project-main', function () {
-    return view('Project.project-main');
-});
+
 
 Route::get('/project-cost', function () {
     return view('Project.project-view-pow');
 });
+
+Route::get('/login', function () {
+    return view('Login.login');
+});
+
+Route::get('/dashboard2', function () {
+    return view('Login.dashboard');
+});
+
 
 Route::get('/userProfile', function () {
     return view('userProfile.userProfile');
@@ -45,4 +56,14 @@ Route::get('/editUserModal', function () {
 Route::get('/deleteUserModal', function () {
     return view('Modals.delete-user-modal');
 });
+Route::get('/viewproject1', function () {
+    return view('layouts.Projects.viewproject1');
+});
+Route::get('/material-table-cost', function () {
+    return view('layouts.Projects.material-cost-table');
+});
+
+
+
+
 

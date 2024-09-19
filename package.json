@@ -16,8 +16,13 @@
         "vite": "^5.0"
     },
     "dependencies": {
+<<<<<<< HEAD
         "@popperjs/core": "^2.11.8",
         "alpinejs": "^3.14.1",
         "bootstrap": "^5.3.3"
+=======
+        "alpinejs": "^3.14.1",
+        "chart.js": "^4.4.4"
+>>>>>>> a720d49f2cc11f7c1d4e27e904ea406e920b3c1c
     }
 }
