@@ -19,6 +19,7 @@
             <div class="overflow-x-auto">
                 <table class="min-w-full bg-white shadow-md rounded-xl">
                     <thead>
+                        <input id="vue-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                         <tr class="bg-blue-gray-100 text-gray-700">
                             <th class="py-3 px-4 text-left">Stock Name</th>
                             <th class="py-3 px-4 text-left">Price</th>
