@@ -26,6 +26,7 @@ Route::get('/project-cost', function () {
     return view('Project.project-view-pow');
 });
 
+
 Route::get('/userProfile', function () {
     return view('userProfile.userProfile');
 });
@@ -41,4 +42,7 @@ Route::get('/editUserModal', function () {
 Route::get('/deleteUserModal', function () {
     return view('Modals.delete-user-modal');
 });
+
+
+
 
