@@ -50,6 +50,12 @@ Route::get('/editUserModal', function () {
 Route::get('/deleteUserModal', function () {
     return view('Modals.delete-user-modal');
 });
+Route::get('/viewproject1', function () {
+    return view('layouts.Projects.viewproject1');
+});
+Route::get('/material-table-cost', function () {
+    return view('layouts.Projects.material-cost-table');
+});
 
 
 
