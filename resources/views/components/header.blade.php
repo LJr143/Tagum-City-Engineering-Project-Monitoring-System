@@ -17,7 +17,7 @@
     <div class="relative" x-data="{showProfile: false}" @click.outside="showProfile = false">
         <button @click="showProfile = !showProfile"
                 class="hover:bg-[#ededed] flex focus:bg-[#eaeaea] items-center gap-3 p-1.5 bg-[#F8F8FA] rounded-full">
-            <img src="{{ auth()->user()->profile_photo_path ? asset('storage/' . auth()->user()->profile_photo_path) : asset('default.png') }}" alt="profile" class="rounded-full object-cover bg-center w-8 h-8">
+{{--           <img src="{{ auth()->user()->profile_photo_path ? asset('storage/' . auth()->user()->profile_photo_path) : asset('default.png') }}" alt="profile" class="rounded-full object-cover bg-center w-8 h-8">
 {{--            @if($user)--}}
 {{--                <h1 class="text-sm">{{ $user->admin->username }}</h1>--}}
 {{--            @endif--}}

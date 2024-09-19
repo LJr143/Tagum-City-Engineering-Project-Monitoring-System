@@ -23,3 +23,20 @@ Route::get('/project-main', function () {
 Route::get('/project-cost', function () {
     return view('Project.project-view-pow');
 });
+
+Route::get('/userProfile', function () {
+    return view('userProfile.userProfile');
+});
+
+Route::get('/adduserModal', function () {
+    return view('Modals.add-user-modal');
+});
+
+Route::get('/editUserModal', function () {
+    return view('Modals.edit-user-modal');
+});
+
+Route::get('/deleteUserModal', function () {
+    return view('Modals.delete-user-modal');
+});
+
