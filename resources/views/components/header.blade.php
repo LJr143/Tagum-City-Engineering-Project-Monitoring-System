@@ -16,15 +16,19 @@
 <div class="flex items-center gap-5">
     <div class="relative" x-data="{showProfile: false}" @click.outside="showProfile = false">
         <button @click="showProfile = !showProfile"
-                class="hover:bg-[#ededed] flex focus:bg-[#eaeaea] items-center gap-3 p-1.5 bg-[#F8F8FA] rounded-full">
-<<<<<<< HEAD
+            class="hover:bg-[#ededed] flex focus:bg-[#eaeaea] items-center gap-3 p-1.5 bg-[#F8F8FA] rounded-full">
+            {{--
+                <<<<<<< HEAD
+                    {{--
             <img src="{{ auth()->user()->profile_photo_path ? asset('storage/' . auth()->user()->profile_photo_path) : asset('default.png') }}" alt="profile" class="rounded-full object-cover bg-center w-8 h-8">
-=======
-          {{--}}  <img src="{{ auth()->user()->profile_photo_path ? asset('storage/' . auth()->user()->profile_photo_path) : asset('default.png') }}" alt="profile" class="rounded-full object-cover bg-center w-8 h-8">
->>>>>>> a720d49f2cc11f7c1d4e27e904ea406e920b3c1c
-{{--            @if($user)--}}
-{{--                <h1 class="text-sm">{{ $user->admin->username }}</h1>--}}
-{{--            @endif--}}
+            --}}
+            =======
+            {{--}} <img src="{{ auth()->user()->profile_photo_path ? asset('storage/' . auth()->user()->profile_photo_path) : asset('default.png') }}" alt="profile" class="rounded-full object-cover bg-center w-8 h-8">
+            >>>>>>> a720d49f2cc11f7c1d4e27e904ea406e920b3c1c
+            --}}
+            {{-- @if($user)--}}
+            {{-- <h1 class="text-sm">{{ $user->admin->username }}</h1>--}}
+            {{-- @endif--}}
             <svg :class="{'rotate-180':showProfile, 'rotate-0':!showProfile}" class="transition ease-in-out mr-2 mx-2" width="10" height="10" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M7 1L4 4L1 1" stroke="#19323C" stroke-width="1.75" stroke-linecap="round"
                     stroke-linejoin="round" />
