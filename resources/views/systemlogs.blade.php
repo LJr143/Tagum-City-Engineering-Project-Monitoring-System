@@ -43,11 +43,6 @@
                                 </filter>
                             </defs>
                         </svg>
-
-
-                        <!-- <svg width=" 19" height="22" viewBox="0 0 19 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11.625 1.26953V5.40007C11.625 5.96012 11.625 6.24015 11.7408 6.45406C11.8427 6.64222 12.0052 6.7952 12.2051 6.89108C12.4324 7.00007 12.7299 7.00007 13.325 7.00007H17.7137M6.3125 14L9.5 17M9.5 17L12.6875 14M9.5 17L9.5 11M11.625 1H6.1C4.31483 1 3.42225 1 2.74041 1.32698C2.14064 1.6146 1.65301 2.07354 1.34742 2.63803C1 3.27976 1 4.11984 1 5.8V16.2C1 17.8802 1 18.7202 1.34742 19.362C1.65301 19.9265 2.14064 20.3854 2.74041 20.673C3.42225 21 4.31483 21 6.1 21H12.9C14.6852 21 15.5778 21 16.2596 20.673C16.8594 20.3854 17.347 19.9265 17.6526 19.362C18 18.7202 18 17.8802 18 16.2V7L11.625 1Z" stroke="#534D59" stroke-width="1.8625" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg> -->
                     </button>
                     <button>
                         <svg width="55" height="44" viewBox="0 0 55 44" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -75,60 +70,6 @@
                                 </filter>
                             </defs>
                         </svg>
-
-                        <!-- <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M19.5 4.5H5.5C4.39543 4.5 3.5 5.39543 3.5 6.5V20.5C3.5 21.6046 4.39543 22.5 5.5 22.5H19.5C20.6046 22.5 21.5 21.6046 21.5 20.5V6.5C21.5 5.39543 20.6046 4.5 19.5 4.5Z" stroke="#534D59" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M16.5 2.5V6.5" stroke="#534D59" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M8.5 2.5V6.5" stroke="#534D59" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M3.5 10.5H21.5" stroke="#534D59" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg> -->
-                    </button>
-
-
-                    <!-- <button id="dropdownRadioButton" data-dropdown-toggle="dropdownRadio" class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5   dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
-                        <svg class="w-3 h-3 text-gray-500 dark:text-gray-400 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm3.982 13.982a1 1 0 0 1-1.414 0l-3.274-3.274A1.012 1.012 0 0 1 9 10V6a1 1 0 0 1 2 0v3.586l2.982 2.982a1 1 0 0 1 0 1.414Z" />
-                        </svg>
-                        Last 30 days
-                        <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
-                        </svg>
-                    </button> -->
-                    <!-- Dropdown menu -->
-                    <!-- <div id="dropdownRadio" class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow  dark:divide-gray-600" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="top" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(522.5px, 3847.5px, 0px);">
-                        <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRadioButton">
-                            <li>
-                                <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                    <input id="filter-radio-example-1" type="radio" value="" name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2  dark:border-gray-600">
-                                    <label for="filter-radio-example-1" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last day</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                    <input checked="" id="filter-radio-example-2" type="radio" value="" name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2  dark:border-gray-600">
-                                    <label for="filter-radio-example-2" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last 7 days</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                    <input id="filter-radio-example-3" type="radio" value="" name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2  dark:border-gray-600">
-                                    <label for="filter-radio-example-3" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last 30 days</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                    <input id="filter-radio-example-4" type="radio" value="" name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2  dark:border-gray-600">
-                                    <label for="filter-radio-example-4" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last month</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                    <input id="filter-radio-example-5" type="radio" value="" name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2  dark:border-gray-600">
-                                    <label for="filter-radio-example-5" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last year</label>
-                                </div>
-                            </li>
-                        </ul>
-                    </div> -->
                 </div>
                 <label for="table-search" class="sr-only">Search</label>
                 <div class="relative">
