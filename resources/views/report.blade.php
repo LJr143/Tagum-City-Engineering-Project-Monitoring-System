@@ -84,19 +84,57 @@
 
                             <div class="flex justify-end ml-auto">
                                 <button type="button"
-                                    class="flex px-4 py-2 text-sm font-medium text-black rounded-lg bg-[#249000] justify-end">
+                                    class="flex px-4 py-2 text-sm font-medium text-black rounded-lg bg-[#249000] justify-end" id="openModal">
                                     View Report
                                 </button>
                             </div>
+                            <!-- View Report modal -->
+                            <div id="modal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+                                <div class="bg-white rounded-lg shadow-lg p-5 w-11/12 max-w-lg">
+                                    <div class="flex justify-between items-center mb-4">
+                                        <h2 class="text-lg font-semibold text-black">Report</h2>
+                                        <button id="closeModal" class="text-gray-500 hover:text-gray-700">
+                                            &times; <!-- Close icon -->
+                                        </button>
+                                    </div>
+                                    <div class="mb-4">
+                                        <p>Your report content goes here...</p>
+                                    </div>
+                                    <div class="flex justify-end">
+                                        <button id="closeModal" class="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700">
+                                            Close
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- JavaScript to Handle Modal Toggle -->
+                            <script>
+                                const openModalButton = document.getElementById('openModal');
+                                const modal = document.getElementById('modal');
+                                const closeModalButtons = document.querySelectorAll('#closeModal');
+
+                                // Open Modal
+                                openModalButton.addEventListener('click', () => {
+                                    modal.classList.remove('hidden');
+                                });
+
+                                // Close Modal
+                                closeModalButtons.forEach(button => {
+                                    button.addEventListener('click', () => {
+                                        modal.classList.add('hidden');
+                                    });
+                                });
+                            </script>
                         </div>
 
 
                     </div>
 
                 </div>
-                <div class="overflow-x-auto">
+                <div x-data="{ isModalOpen: false, isSecondModalOpen: false }" class="overflow-x-auto">
                     <table class="min-w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:text-gray-400">
+                        <thead class="text-xs text-gray-700 uppercase  dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="p-4">
                                     <!-- Checkbox or any other content can go here -->
@@ -125,11 +163,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="bg-white border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <tr class="bg-white border-b ">
                                 <td class="p-4 align-middle">
                                     <!-- Checkbox or any other content can go here -->
                                 </td>
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap align-middle">
+                                <th scope="row" class="px-6 py-4 font-medium  whitespace-nowrap align-middle">
                                     Project 1
                                 </th>
                                 <td class="px-6 py-4 align-middle">
@@ -144,77 +182,240 @@
                                 <td class="px-6 py-4 text-center align-middle">
                                     10 million
                                 </td>
+                                <!-- First Button in the First Table Cell to Open First Modal -->
                                 <td class="px-6 py-4 text-center align-middle">
-                                    <a href="#" @click.prevent="isModalOpen = true" class="text-gray-900 bg-[#FFC5C5] border border-[#DF0404] flex justify-center items-center px-3 py-1 gap-2 h-[29px] w-[84px] rounded-md focus:outline-none focus:ring-2 focus:ring-[#DF0404]">
+                                    <!-- Modal toggle -->
+                                    <a href="#" @click.prevent="isModalOpen = true"
+                                        class=" bg-[#FFC5C5] border border-[#DF0404] text-[#DF0404] flex justify-center items-center px-3 py-1 gap-2 h-[29px] w-[84px] rounded-md focus:outline-none focus:ring-2 focus:ring-[#DF0404] focus:ring-0">
                                         ONGOING
                                     </a>
                                 </td>
+
+                                <!-- Second Button in the Second Table Cell to Open Second Modal -->
                                 <td class="px-6 py-4 text-center align-middle">
-                                    <button type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5">
+                                    <button type="button" @click="isSecondModalOpen = true"
+                                        class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5">
                                         <svg width="12" height="12" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M16.06 0.588906L17.41 1.93891C18.2 2.71891 18.2 3.98891 17.41 4.76891L4.18 17.9989H0V13.8189L10.4 3.40891L13.23 0.588906C14.01 -0.191094 15.28 -0.191094 16.06 0.588906ZM2 15.9989L3.41 16.0589L13.23 6.22891L11.82 4.81891L2 14.6389V15.9989Z" fill="#6750A4" />
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M16.06 0.588906L17.41 1.93891C18.2 2.71891 18.2 3.98891 17.41 4.76891L4.18 17.9989H0V13.8189L10.4 3.40891L13.23 0.588906C14.01 -0.191094 15.28 -0.191094 16.06 0.588906ZM2 15.9989L3.41 16.0589L13.23 6.22891L11.82 4.81891L2 14.6389V15.9989Z"
+                                                fill="#6750A4" />
                                         </svg>
                                     </button>
                                 </td>
                             </tr>
 
+
                         </tbody>
                     </table>
 
+
+                    <!-- First Modal -->
+                    <div x-show="isModalOpen" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50" @click.away="isModalOpen = false" x-cloak>
+                        <div class="bg-white rounded-lg shadow-lg p-4 md:p-5 w-full max-w-md">
+                            <form>
+                                <div class="grid gap-4 mb-4 grid-cols-2">
+                                    <div class="flex justify-between items-center">
+                                        <!-- <h2 class="text-lg font-semibold">Modal Title</h2> -->
+                                        <h1 class="w-[593.33px] h-[28px] font-semibold text-[18px] leading-[28px] text-[#101828]">
+                                            Project Status
+                                        </h1>
+                                        <button @click="isModalOpen = false" class="text-gray-500 hover:text-gray-700">
+                                            &times;
+                                        </button>
+                                    </div>
+                                    <div class="col-span-2">
+                                        <label for="name" class="block mb-2 text-sm font-medium text-black">Personnel In-charge</label>
+                                        <input type="text" name="name" id="name"
+                                            class="bg-gray-50 border border-gray-300  text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 text-black dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            placeholder="Personnel name" required>
+                                    </div>
+                                    <div class="col-span-2">
+                                        <label for="name" class="block mb-2 text-sm font-medium text-black">Project name</label>
+                                        <input type="text" name="name" id="name"
+                                            class="bg-gray-50 border border-gray-300  text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 text-black dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            placeholder="Project name" required>
+                                    </div>
+                                    <div class="col-span-2 sm:col-span-1">
+                                        <label for="price" class="block mb-2 text-sm font-medium  text-black">Budget</label>
+                                        <input type="number" name="price" id="price"
+                                            class="bg-gray-50 border border-gray-300  text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 text-black dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            placeholder="10 million" required>
+                                    </div>
+                                    <div class="col-span-2 sm:col-span-1">
+                                        <label for="date" class="block mb-2 text-sm font-medium text-black">Date</label>
+                                        <input type="date" id="date"
+                                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 text-black dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            required>
+                                    </div>
+                                    <div class="col-span-2 sm:col-span-1">
+                                        <label for="category" class="block mb-2 text-sm font-medium  text-black">Category</label>
+                                        <select id="category"
+                                            class="bg-gray-50 border border-gray-300  text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 text-black dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                            <option selected>ONGOING</option>
+                                            <option value="TV">FINISHED</option>
+
+                                        </select>
+                                    </div>
+
+                                    <div class="col-span-2 sm:col-span-1">
+                                        <label for="percentage" class="block mb-2 text-sm font-medium text-black">Percentage</label>
+                                        <input type="number" name="percentage" id="percentage"
+                                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 text-black dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            placeholder="Enter percentage" required min="0" max="100" step="0.01">
+                                        <!-- <span class="text-gray-500 text-sm">%</span> -->
+                                    </div>
+
+                                    <!-- <div class="col-span-2">
+                                        <label for="description" class="block mb-2 text-sm font-medium  text-black">Product Description</label>
+                                        <textarea id="description" rows="4"
+                                            class="block p-2.5 w-full text-sm  bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            placeholder="Write product description here"></textarea>
+                                    </div> -->
+                                </div>
+                                <div class="flex justify-center space-x-4 mt-4">
+                                    <button type="button" @click.prevent="isModalOpen = false" class="text-black bg-white hover:bg-red-700 focus:ring-4 focus:outline-1 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center border border-black">
+                                        Cancel
+                                    </button>
+                                    <button type="submit"
+                                        class="text-white inline-flex items-center bg-[#249000] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                                        GENERATE
+                                    </button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Second Modal -->
+                    <div x-show="isSecondModalOpen" id="edit-modal" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50" @click.away="isSecondModalOpen = false" x-cloak>
+                        <form action="">
+                            <div class="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
+
+                                <div class="flex justify-between items-center">
+                                    <!-- <h2 class="text-lg font-semibold">Modal Title</h2> -->
+                                    <h1 class="w-[593.33px] h-[28px] font-semibold text-[18px] leading-[28px] text-[#101828]">
+                                        Project Status
+                                    </h1>
+                                    <button @click="isSecondModalOpen = false" class="text-gray-500 hover:text-gray-700">
+                                        &times;
+                                    </button>
+                                </div>
+                                <div class="grid gap-4 mb-4 grid-cols-2">
+                                    <div class="col-span-2">
+                                        <label for="name" class="block mb-2 text-sm font-medium text-black">Personnel In-charge</label>
+                                        <input type="text" name="name" id="name"
+                                            class="bg-gray-50 border border-gray-300  text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 text-black dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            placeholder="Personnel name" required>
+                                    </div>
+                                    <div class="col-span-2">
+                                        <label for="name" class="block mb-2 text-sm font-medium text-black">Project name</label>
+                                        <input type="text" name="name" id="name"
+                                            class="bg-gray-50 border border-gray-300  text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 text-black dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            placeholder="Project name" required>
+                                    </div>
+                                    <div class="col-span-2 sm:col-span-1">
+                                        <label for="price" class="block mb-2 text-sm font-medium  text-black">Budget</label>
+                                        <input type="number" name="price" id="price"
+                                            class="bg-gray-50 border border-gray-300  text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 text-black dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            placeholder="10 million" required>
+                                    </div>
+                                    <div class="col-span-2 sm:col-span-1">
+                                        <label for="date" class="block mb-2 text-sm font-medium text-black">Date</label>
+                                        <input type="date" id="date"
+                                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 text-black dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            required>
+                                    </div>
+                                    <div class="col-span-2 sm:col-span-1">
+                                        <label for="category" class="block mb-2 text-sm font-medium  text-black">Category</label>
+                                        <select id="category"
+                                            class="bg-gray-50 border border-gray-300  text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 text-black dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                            <option selected>ONGOING</option>
+                                            <option value="TV">FINISHED</option>
+
+                                        </select>
+                                    </div>
+
+                                    <div class="col-span-2 sm:col-span-1">
+                                        <label for="percentage" class="block mb-2 text-sm font-medium text-black">Percentage</label>
+                                        <input type="number" name="percentage" id="percentage"
+                                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 text-black dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            placeholder="Enter percentage" required min="0" max="100" step="0.01">
+                                        <!-- <span class="text-gray-500 text-sm">%</span> -->
+                                    </div>
+
+                                    <!-- <div class="col-span-2">
+                                        <label for="description" class="block mb-2 text-sm font-medium  text-black">Product Description</label>
+                                        <textarea id="description" rows="4"
+                                            class="block p-2.5 w-full text-sm  bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            placeholder="Write product description here"></textarea>
+                                    </div> -->
+                                </div>
+
+                                <div class="mt-6 flex justify-center">
+                                    <button @click="isSecondModalOpen = false" class="text-black bg-white hover:bg-red-700 mr-2 focus:ring-4 focus:outline-1 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center border border-black">
+                                        Cancel
+                                    </button>
+                                    <button class="px-4 py-2 bg-[#249000] text-white rounded-md hover:bg-blue-700">
+                                        Save
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <nav class="flex flex-col items-start justify-between p-4 space-y-3 md:flex-row md:items-center md:space-y-0" aria-label="Table navigation">
-                    <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
-                        Showing
-                        <span class="font-semibold text-gray-900 dark:text-black">1-10</span>
-                        of
-                        <span class="font-semibold text-gray-900 dark:text-black">1000</span>
-                    </span>
-                    <ul class="inline-flex items-stretch -space-x-px">
-                        <li>
-                            <a href="#" class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                <span class="sr-only">Previous</span>
-                                <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
-                        </li>
-                        <li>
-                            <a href="#" aria-current="page" class="z-10 flex items-center justify-center px-3 py-2 text-sm leading-tight border text-primary-600 bg-primary-50 border-primary-300 hover:bg-primary-100 hover:text-primary-700 dark:border-gray-700 dark:bg-gray-700 dark:text-black">3</a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">...</a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">100</a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                <span class="sr-only">Next</span>
-                                <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                                </svg>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+
+                <!-- Alpine.js Script -->
+                <script src="https://cdn.jsdelivr.net/npm/alpinejs" defer></script>
+
+
+            </div>
+
+            <nav class="flex flex-col items-start justify-between p-4 space-y-3 md:flex-row md:items-center md:space-y-0" aria-label="Table navigation">
+                <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
+                    Showing
+                    <span class="font-semibold  dark:text-black">1-10</span>
+                    of
+                    <span class="font-semibold  dark:text-black">1000</span>
+                </span>
+                <ul class="inline-flex items-stretch -space-x-px">
+                    <li>
+                        <a href="#" class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                            <span class="sr-only">Previous</span>
+                            <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
+                    </li>
+                    <li>
+                        <a href="#" aria-current="page" class="z-10 flex items-center justify-center px-3 py-2 text-sm leading-tight border text-primary-600 bg-primary-50 border-primary-300 hover:bg-primary-100 hover:text-primary-700 dark:border-gray-700 dark:bg-gray-700 dark:text-black">3</a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">...</a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">100</a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                            <span class="sr-only">Next</span>
+                            <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
             </div>
             </div>
         </section>
-        <div x-data="{ isModalOpen: false }" x-show="isModalOpen" @keydown.escape.window="isModalOpen = false" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-            <div class="flex flex-col items-center p-0 w-[641.33px] h-[566px] bg-white shadow-xl rounded-lg">
-                <!-- Modal content goes here -->
-                <button @click="isModalOpen = false" class="absolute top-2 right-2 text-gray-500 hover:text-gray-900">&times;</button>
-                <!-- Close button or any content inside the modal -->
-            </div>
-        </div>
 
-        <script src="//unpkg.com/alpinejs" defer></script>
+
     </x-slot>
 
 </x-app-layout>

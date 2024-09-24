@@ -24,46 +24,49 @@
             <li x-data="{toggle: false}" @mouseenter="toggle = true"
                 @mouseleave="toggle = false"
                 :style="toggle ? 'background-color: rgba(36, 144, 0, 0.3);' : ''">
-<<<<<<< HEAD
+                <!-- <<<<<<< HEAD -->
                 <a href="{{ route('dashboard') }}" @if (request()->routeIs('')){ @click.prevent="preventAction = true" }@endif aria-label="dashboard" @class(['relative flex items-center gap-3 px-6 py-0 text-Primary font-medium', ' text-customGreen font-semibold'=> request()->routeIs('dashboard')]) @mouseenter="toggle = true" @mouseleave="toggle = false"
                     @click="setActiveTab('dashboard'); show = false; showManage = false; subActiveItem = ''; setsubTmsActiveItem(''); setsettingsTmsActiveItem('')">
-=======
-                <a href="{{ route('dashboard') }}" @if (request()->routeIs('dashboard')){ @click.prevent="preventAction = true" }@endif aria-label="dashboard" @class(['relative flex items-center gap-3 px-6 py-0 text-Primary font-medium', ' text-customGreen font-semibold'=> request()->routeIs('dashboard')]) @mouseenter="toggle = true" @mouseleave="toggle = false"
-                   @click="setActiveTab('dashboard'); show = false; showManage = false; subActiveItem = ''; setsubTmsActiveItem(''); setsettingsTmsActiveItem('')">
->>>>>>> a720d49f2cc11f7c1d4e27e904ea406e920b3c1c
-                    <div class=" text-center p-[13px] rounded-full justify-center items-center flex"
-                        :class="{'bg-customGreen-100': {{ request()->routeIs('dashboard') ? 'true' : 'false' }}, 'bg-none': {{ !request()->routeIs('dashboard') ? 'true' : 'false' }}}">
-                        <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5.47292 2.47192C2.81715 2.47192 2 3.28908 2 5.94484C2 8.6006 2.81715 9.41776 5.47292 9.41776C8.12868 9.41776 8.94583 8.6006 8.94583 5.94484C8.94583 3.28908 8.12868 2.47192 5.47292 2.47192Z" stroke="#3F3E44" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M5.47292 12.196C2.81715 12.196 2 13.0132 2 15.669C2 18.3247 2.81715 19.1419 5.47292 19.1419C8.12868 19.1419 8.94583 18.3247 8.94583 15.669C8.94583 13.0132 8.12868 12.196 5.47292 12.196Z" stroke="#3F3E44" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M15.1971 12.196C12.5414 12.196 11.7242 13.0132 11.7242 15.669C11.7242 18.3247 12.5414 19.1419 15.1971 19.1419C17.8528 19.1419 18.67 18.3247 18.67 15.669C18.67 13.0132 17.8528 12.196 15.1971 12.196Z" stroke="#3F3E44" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M15.1971 2.47192C12.5414 2.47192 11.7242 3.28908 11.7242 5.94484C11.7242 8.6006 12.5414 9.41776 15.1971 9.41776C17.8528 9.41776 18.67 8.6006 18.67 5.94484C18.67 3.28908 17.8528 2.47192 15.1971 2.47192Z" stroke="#3F3E44" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </div>
-                    <span class="-mr-1 " :class="{'block':showSide, 'hidden':!showSide}">Dashboard</span>
-                </a>
+                    <!-- ======= -->
+                    <a href="{{ route('dashboard') }}" @if (request()->routeIs('dashboard')){ @click.prevent="preventAction = true" }@endif aria-label="dashboard" @class(['relative flex items-center gap-3 px-6 py-0 text-Primary font-medium', ' text-customGreen font-semibold'=> request()->routeIs('dashboard')]) @mouseenter="toggle = true" @mouseleave="toggle = false"
+                        @click="setActiveTab('dashboard'); show = false; showManage = false; subActiveItem = ''; setsubTmsActiveItem(''); setsettingsTmsActiveItem('')">
+                        <!-- >>>>>>> a720d49f2cc11f7c1d4e27e904ea406e920b3c1c -->
+                        <div class=" text-center p-[13px] rounded-full justify-center items-center flex"
+                            :class="{'bg-customGreen-100': {{ request()->routeIs('dashboard') ? 'true' : 'false' }}, 'bg-none': {{ !request()->routeIs('dashboard') ? 'true' : 'false' }}}">
+                            <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5.47292 2.47192C2.81715 2.47192 2 3.28908 2 5.94484C2 8.6006 2.81715 9.41776 5.47292 9.41776C8.12868 9.41776 8.94583 8.6006 8.94583 5.94484C8.94583 3.28908 8.12868 2.47192 5.47292 2.47192Z" stroke="#3F3E44" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M5.47292 12.196C2.81715 12.196 2 13.0132 2 15.669C2 18.3247 2.81715 19.1419 5.47292 19.1419C8.12868 19.1419 8.94583 18.3247 8.94583 15.669C8.94583 13.0132 8.12868 12.196 5.47292 12.196Z" stroke="#3F3E44" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M15.1971 12.196C12.5414 12.196 11.7242 13.0132 11.7242 15.669C11.7242 18.3247 12.5414 19.1419 15.1971 19.1419C17.8528 19.1419 18.67 18.3247 18.67 15.669C18.67 13.0132 17.8528 12.196 15.1971 12.196Z" stroke="#3F3E44" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M15.1971 2.47192C12.5414 2.47192 11.7242 3.28908 11.7242 5.94484C11.7242 8.6006 12.5414 9.41776 15.1971 9.41776C17.8528 9.41776 18.67 8.6006 18.67 5.94484C18.67 3.28908 17.8528 2.47192 15.1971 2.47192Z" stroke="#3F3E44" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <span class="-mr-1 " :class="{'block':showSide, 'hidden':!showSide}">Dashboard</span>
+                    </a>
             </li>
 
             <li x-data="{toggle: false}">
-<<<<<<< HEAD
+
+
+                <!-- <<<<<<< HEAD -->
                 <a href="" aria-label="dashboard" @class(['relative flex items-center gap-3 px-6 py-0 text-Primary font-medium', ' text-customGreen font-semibold'=> request()->routeIs('')]) @mouseenter="toggle = true" @mouseleave="toggle = false"
                     @click="setActiveTab(''); show = false; showManage = false; subActiveItem = ''; setsubTmsActiveItem(''); setsettingsTmsActiveItem('')">
                     <div class=" text-center p-[13px] rounded-full justify-center items-center flex"
                         :class="{'bg-customGreen-100': {{ request()->routeIs('') ? 'true' : 'false' }}, 'bg-none': {{ !request()->routeIs('') ? 'true' : 'false' }}}">
-=======
-                <a href="{{ route('project-main') }}" @if (request()->routeIs('project-main')){ @click.prevent="preventAction = true" }@endif" aria-label="project" @class(['relative flex items-center gap-3 px-6 py-0 text-Primary font-medium', ' text-customGreen font-semibold'=> request()->routeIs('project-main')]) @mouseenter="toggle = true" @mouseleave="toggle = false"
-                   @click="setActiveTab(''); show = false; showManage = false; subActiveItem = ''; setsubTmsActiveItem(''); setsettingsTmsActiveItem('')">
-                    <div class=" text-center p-[13px] rounded-full justify-center items-center flex"
-                         :class="{'bg-customGreen-100': {{ request()->routeIs('project-main') ? 'true' : 'false' }}, 'bg-none': {{ !request()->routeIs('project-main') ? 'true' : 'false' }}}">
->>>>>>> a720d49f2cc11f7c1d4e27e904ea406e920b3c1c
-                        <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M7.51699 3.11139L3.02533 6.61139C2.27533 7.19472 1.66699 8.43639 1.66699 9.37806V15.5531C1.66699 17.4864 3.24199 19.0697 5.17533 19.0697H14.8253C16.7587 19.0697 18.3337 17.4864 18.3337 15.5614V9.49472C18.3337 8.48639 17.6587 7.19472 16.8337 6.61972L11.6837 3.01139C10.517 2.19472 8.64199 2.23639 7.51699 3.11139Z" stroke="#3F3E44" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M10 15.7365V13.2365" stroke="#3F3E44" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
+                        <!-- ======= -->
 
-                    </div>
-                    <span class="-mr-1 " :class="{'block':showSide, 'hidden':!showSide}">Projects</span>
-                </a>
+                        <a href="{{ route('project-main') }}" @if (request()->routeIs('project-main')){ @click.prevent="preventAction = true" }@endif" aria-label="project" @class(['relative flex items-center gap-3 px-6 py-0 text-Primary font-medium', ' text-customGreen font-semibold'=> request()->routeIs('project-main')]) @mouseenter="toggle = true" @mouseleave="toggle = false"
+                            @click="setActiveTab(''); show = false; showManage = false; subActiveItem = ''; setsubTmsActiveItem(''); setsettingsTmsActiveItem('')">
+                            <div class=" text-center p-[13px] rounded-full justify-center items-center flex"
+                                :class="{'bg-customGreen-100': {{ request()->routeIs('project-main') ? 'true' : 'false' }}, 'bg-none': {{ !request()->routeIs('project-main') ? 'true' : 'false' }}}">
+                                <!-- >>>>>>> a720d49f2cc11f7c1d4e27e904ea406e920b3c1c -->
+                                <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7.51699 3.11139L3.02533 6.61139C2.27533 7.19472 1.66699 8.43639 1.66699 9.37806V15.5531C1.66699 17.4864 3.24199 19.0697 5.17533 19.0697H14.8253C16.7587 19.0697 18.3337 17.4864 18.3337 15.5614V9.49472C18.3337 8.48639 17.6587 7.19472 16.8337 6.61972L11.6837 3.01139C10.517 2.19472 8.64199 2.23639 7.51699 3.11139Z" stroke="#3F3E44" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M10 15.7365V13.2365" stroke="#3F3E44" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+
+                            </div>
+                            <span class="-mr-1 " :class="{'block':showSide, 'hidden':!showSide}">Projects</span>
+                        </a>
             </li>
 
 
