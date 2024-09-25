@@ -88,25 +88,95 @@
                                     View Report
                                 </button>
                             </div>
+
                             <!-- View Report modal -->
                             <div id="modal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
-                                <div class="bg-white rounded-lg shadow-lg p-5 w-11/12 max-w-lg">
-                                    <div class="flex justify-between items-center mb-4">
+                                <!-- Background overlay (shadow) -->
+                                <div class="absolute inset-0 bg-gray-900 opacity-80"></div>
+
+                                <!-- Modal content -->
+                                <div class="relative bg-white rounded-lg shadow-lg p-6 flex flex-col items-center justify-center max-w-fit z-10 w-3/4">
+                                    <div class="flex justify-between items-center mb-4 w-full">
                                         <h2 class="text-lg font-semibold text-black">Report</h2>
                                         <button id="closeModal" class="text-gray-500 hover:text-gray-700">
                                             &times; <!-- Close icon -->
                                         </button>
                                     </div>
-                                    <div class="mb-4">
-                                        <p>Your report content goes here...</p>
+
+                                    <!-- Centered Table -->
+                                    <div class="overflow-x-auto w-full">
+                                        <table class="min-w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                            <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
+                                                <tr>
+                                                    <!-- <th scope="col" class="p-4"></th> -->
+                                                    <th scope="col" class="px-6 py-3">Project name</th>
+                                                    <th scope="col" colspan="2" class="px-6 py-3 text-center">Program of Work</th>
+                                                    <th scope="col" colspan="2" class="px-6 py-3">Status of Implementation</th>
+                                                    <th scope="col" class="px-6 py-3">Accomplishment status %</th>
+                                                    <th scope="col" class="px-6 py-3">Project In-charge</th>
+                                                    <th scope="col" class="px-3 py-3">Remarks</th>
+                                                    <!-- <th scope="col" class="px-6 py-3">Parts</th>
+                                                    <th scope="col" class="px-6 py-3">Parts</th>
+                                                    <th scope="col" class="px-6 py-3">Parts</th> -->
+                                                </tr>
+                                            </thead>
+                                            <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
+                                                <tr>
+                                                    <!-- <th scope="col" class="p-4"></th> -->
+                                                    <th scope="col" class="px-6 py-3"></th>
+                                                    <th scope="col" class="px-6 py-3 text-center">Reference No.</th>
+                                                    <th scope="col" class="px-6 py-3 text-center">Date Receive</th>
+                                                    <th scope="col" class="px-6 py-3 text-center">Date Started</th>
+                                                    <th scope="col" class="px-6 py-3 text-center">Date Target Ended</th>
+                                                    <!-- <th scope="col" class="px-6 py-3">Status</th>
+                                                    <th scope="col" class="px-6 py-3">Parts</th>
+                                                    <th scope="col" class="px-6 py-3">Parts</th>
+                                                    <th scope="col" class="px-6 py-3">Parts</th> -->
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="bg-white border-b">
+                                                    <!-- <td class="p-4 align-middle"></td> -->
+                                                    <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap align-middle">Project 1</th>
+                                                    <td class="px-6 py-4 align-middle">20220101</td>
+                                                    <td class="px-6 py-4 align-middle">January 1, 2022</td>
+                                                    <td class="px-6 py-4 align-middle">June 24, 2022</td>
+                                                    <td class="px-6 py-4 text-center align-middle">december 14, 2025</td>
+                                                    <td class="px-6 py-4 text-center align-middle">60%</td>
+                                                    <td class="px-6 py-4 text-center align-middle">Engr. John Batino</td>
+                                                    <td class="px-6 py-4 text-center align-middle">
+                                                        <a href="#" @click.prevent="isModalOpen = true"
+                                                            class="bg-[#FFC5C5] border border-[#DF0404] text-[#DF0404] flex justify-center items-center px-3 py-1 gap-2 h-[29px] w-[84px] rounded-md focus:outline-none focus:ring-2 focus:ring-[#DF0404]">
+                                                            ONGOING
+                                                        </a>
+                                                    </td>
+                                                    <!-- <td class="px-6 py-4 text-center align-middle">
+                                                        <button type="button" @click="isSecondModalOpen = true"
+                                                            class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5">
+                                                            <svg width="12" height="12" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                    d="M16.06 0.588906L17.41 1.93891C18.2 2.71891 18.2 3.98891 17.41 4.76891L4.18 17.9989H0V13.8189L10.4 3.40891L13.23 0.588906C14.01 -0.191094 15.28 -0.191094 16.06 0.588906ZM2 15.9989L3.41 16.0589L13.23 6.22891L11.82 4.81891L2 14.6389V15.9989Z"
+                                                                    fill="#6750A4" />
+                                                            </svg>
+                                                        </button>
+                                                    </td> -->
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
-                                    <div class="flex justify-end">
-                                        <button id="closeModal" class="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700">
-                                            Close
+
+                                    <!-- Footer (Close button) -->
+                                    <div class="flex justify-center mt-4 w-full">
+                                        <button id="closeModal" class="px-4 py-2 mr-4 text-sm font-medium text-black bg-white rounded-lg hover:bg-red-700">
+                                            Cancel
+                                        </button>
+                                        <button id="closeModal" class="px-4 py-2 text-sm font-medium text-white bg-[#249000] rounded-lg hover:bg-blue-400">
+                                            Generate Report
                                         </button>
                                     </div>
                                 </div>
                             </div>
+
 
                             <!-- JavaScript to Handle Modal Toggle -->
                             <script>
@@ -219,9 +289,12 @@
                                         <h1 class="w-[593.33px] h-[28px] font-semibold text-[18px] leading-[28px] text-[#101828]">
                                             Project Status
                                         </h1>
-                                        <button @click="isModalOpen = false" class="text-gray-500 hover:text-gray-700">
+                                    </div>
+                                    <div>
+                                        <button @click="isModalOpen = false" class="text-gray-500 hover:text-gray-700 ml-44">
                                             &times;
                                         </button>
+
                                     </div>
                                     <div class="col-span-2">
                                         <label for="name" class="block mb-2 text-sm font-medium text-black">Personnel In-charge</label>
@@ -352,14 +425,46 @@
                                 </div>
 
                                 <div class="mt-6 flex justify-center">
-                                    <button @click="isSecondModalOpen = false" class="text-black bg-white hover:bg-red-700 mr-2 focus:ring-4 focus:outline-1 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center border border-black">
-                                        Cancel
+                                    <button id="openModalBtn" class="text-black bg-white hover:bg-red-700 mr-2 focus:ring-4 focus:outline-1 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center border border-black">
+                                        Delete
                                     </button>
+
                                     <button class="px-4 py-2 bg-[#249000] text-white rounded-md hover:bg-blue-700">
                                         Save
                                     </button>
                                 </div>
                             </div>
+                            <div id="deleteModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center hidden">
+                                <div class="bg-white p-5 rounded-lg shadow-lg max-w-sm w-full">
+                                    <h2 class="text-lg font-bold mb-4">Are you sure you want to delete this record? </h2>
+                                    <p class="mb-4">This process cannot be recover</p>
+                                    <button id="confirmDelete" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700">Confirm</button>
+                                    <button id="cancelDelete" class="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400 ml-2">Cancel</button>
+                                </div>
+                            </div>
+                            <script>
+                                // Get the button and modal elements
+                                const openModalBtn = document.getElementById('openModalBtn');
+                                const deleteModal = document.getElementById('deleteModal');
+                                const cancelDelete = document.getElementById('cancelDelete');
+
+                                // Open the modal when the delete button is clicked
+                                openModalBtn.addEventListener('click', function() {
+                                    deleteModal.classList.remove('hidden');
+                                });
+
+                                // Close the modal when cancel is clicked
+                                cancelDelete.addEventListener('click', function() {
+                                    deleteModal.classList.add('hidden');
+                                });
+
+                                // Optional: Handle delete confirmation
+                                document.getElementById('confirmDelete').addEventListener('click', function() {
+                                    // Perform delete action here
+                                    deleteModal.classList.add('hidden'); // Close modal after action
+                                });
+                            </script>
+
                         </form>
                     </div>
                 </div>
