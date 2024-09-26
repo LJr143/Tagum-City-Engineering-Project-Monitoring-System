@@ -37,8 +37,8 @@ Route::get('/project-cost', function () {
     return view('Project.project-view-pow');
 })->name('project-cost');
 
-Route::get('/userProfile', function () {
-    return view('userProfile.userProfile');
+Route::get('/account-settings', function () {
+    return view('account-settings.account-settings');
 })->name('userProfile');
 
 Route::get('/adduserModal', function () {
