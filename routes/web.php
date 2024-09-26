@@ -21,7 +21,7 @@ Route::middleware([
 });
 
 Route::get('/dashboard', function () {
-    return view('layouts.Projects.maindashboard');
+    return view('layouts.Projects.dashboard');
 })->name('dashboard');
 
 Route::get('/project-main', function () {
@@ -33,9 +33,13 @@ Route::get('/view-project-pow', function () {
 })->name('view-project-pow');
 
 
-Route::get('/userProfile', function () {
-    return view('userProfile.userProfile');
-});
+Route::get('/project-cost', function () {
+    return view('Project.project-view-pow');
+})->name('project-cost');
+
+Route::get('/account-settings', function () {
+    return view('account-settings.account-settings');
+})->name('userProfile');
 
 Route::get('/adduserModal', function () {
     return view('Modals.add-user-modal');
@@ -53,13 +57,18 @@ Route::get('/material-table-cost', function () {
     return view('layouts.Projects.material-cost-table');
 });
 Route::get('/main', function () {
-    return view('layouts.Projects.maindashboard');
+    return view('layouts.Projects.dashboard');
 });
 
+Route::get('/user-table', function () {
+    return view('User.user-table');
+});
 
 route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
-
+Route::get('/system-logs', function () {
+    return view('System Logs.systemLogs');
+});
 
 
 
