@@ -4,16 +4,16 @@
     <div class="mt-10" :class="{'block':showSide, 'hidden':!showSide}">
         <img src="{{ asset('storage/pmsAssets/pms_logo.png') }}" class="h-30 w-40 ml-1.5" alt="logo">
     </div>
-    {{-- <button @click="showSide = ! showSide; show = false; showManage = false"--}}
-    {{-- :class="{'hover:bg-customGreen-50 focus:bg-customGreen-100':showSide, 'bg-customGreen-100':!showSide}" class="p-3 ml-2 rounded-xl">--}}
-    {{-- <svg class="transform ease-in-out transition" :class="{'rotate-180':!showSide,'rotate-0':showSide}" width="12"--}}
-    {{-- height="10" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
-    {{-- <path d="M7.17742 13.3548L1 7.17742L7.17742 1" stroke="#BA2C2C" stroke-width="1.90074"--}}
-    {{-- stroke-linecap="round" stroke-linejoin="round" />--}}
-    {{-- <path d="M15.731 12.4045L10.5039 7.17743L15.731 1.95038" stroke="#BA2C2C" stroke-opacity="0.45"--}}
-    {{-- stroke-width="1.50476" stroke-linecap="round" stroke-linejoin="round" />--}}
-    {{-- </svg>--}}
-    {{-- </button>--}}
+        <button @click="showSide = ! showSide; show = false; showManage = false"
+                :class="{'hover:bg-customGreen-50 focus:bg-customGreen-100':showSide, 'bg-customGreen-100':!showSide}" class="p-3 ml-2 rounded-xl">
+            <svg class="transform ease-in-out transition" :class="{'rotate-180':!showSide,'rotate-0':showSide}" width="12"
+                 height="10" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.17742 13.3548L1 7.17742L7.17742 1" stroke="rgba(36, 144, 0, 1)" stroke-width="1.90074"
+                      stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M15.731 12.4045L10.5039 7.17743L15.731 1.95038" stroke="rgba(36, 144, 0, 0.8)" stroke-opacity="0.45"
+                      stroke-width="1.50476" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
 </div>
 {{-- NAVIGATION BUTTONS --}}
 <div class="hidden w-full max-w-[240px] lg:flex flex-col justify-between pt-2 pb-10 flex-1 overflow-y-auto">
@@ -137,10 +137,11 @@
         {{-- </ul>--}}
 
 
-        <ul class="mt-20">
-            <li x-data="{toggle: false}" @mouseenter="toggle = true" @mouseleave="toggle = false"
-                :style="toggle ? 'background-color: rgba(36, 144, 0, 0.3);' : ''">
+{{--        <ul class="mt-20">--}}
+{{--            <li x-data="{toggle: false}" @mouseenter="toggle = true" @mouseleave="toggle = false"--}}
+{{--                :style="toggle ? 'background-color: rgba(36, 144, 0, 0.3);' : ''">--}}
 
+<<<<<<< HEAD
                 <a href="#" x-on:click.prevent="document.getElementById('logout-form').submit()" aria-label="dashboard"
                     @class(['relative flex items-center gap-3 px-6 py-0 text-Primary font-medium', 'text-customGreen font-semibold'=> request()->routeIs('')])>
 
@@ -153,13 +154,27 @@
                     </div>
                     <span class="-mr-1 text-red-500" :class="{'block': showSide, 'hidden': !showSide}" style="font-size: 12px">Log out</span>
                 </a>
+=======
+{{--                <a href="#" x-on:click.prevent="document.getElementById('logout-form').submit()" aria-label="dashboard"--}}
+{{--                    @class(['relative flex items-center gap-3 px-6 py-0 text-Primary font-medium', 'text-customGreen font-semibold' => request()->routeIs('')])>--}}
 
-                <!-- Hidden Logout Form -->
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
-            </li>
-        </ul>
+{{--                    <div class="text-center px-[13px] py-[10px] rounded-full justify-center items-center flex"--}}
+{{--                         :class="{'bg-customGreen-100': {{ request()->routeIs('') ? 'true' : 'false' }}, 'bg-none': {{ !request()->routeIs('') ? 'true' : 'false' }}}">--}}
+{{--                        <svg width="15" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
+{{--                            <path d="M5.83325 2.42297C5.17021 2.42297 4.53433 2.68637 4.06548 3.15521C3.59664 3.62405 3.33325 4.25993 3.33325 4.92297V16.5896C3.33325 17.2527 3.59664 17.8886 4.06548 18.3574C4.53433 18.8262 5.17021 19.0896 5.83325 19.0896H14.1666C14.8296 19.0896 15.4655 18.8262 15.9344 18.3574C16.4032 17.8886 16.6666 17.2527 16.6666 16.5896V15.7563C16.6666 15.2961 16.2935 14.923 15.8333 14.923C15.373 14.923 14.9999 15.2961 14.9999 15.7563V16.5896C14.9999 16.8107 14.9121 17.0226 14.7558 17.1789C14.5996 17.3352 14.3876 17.423 14.1666 17.423H5.83325C5.61224 17.423 5.40028 17.3352 5.244 17.1789C5.08772 17.0226 4.99992 16.8107 4.99992 16.5896V4.92297C4.99992 4.70196 5.08772 4.49 5.244 4.33372C5.40028 4.17744 5.61224 4.08964 5.83325 4.08964H14.1666C14.3876 4.08964 14.5996 4.17744 14.7558 4.33372C14.9121 4.49 14.9999 4.70196 14.9999 4.92297V5.75631C14.9999 6.21654 15.373 6.58964 15.8333 6.58964C16.2935 6.58964 16.6666 6.21654 16.6666 5.75631V4.92297C16.6666 4.25993 16.4032 3.62405 15.9344 3.15521C15.4655 2.68637 14.8296 2.42297 14.1666 2.42297H5.83325Z" fill="#FF3B30"/>--}}
+{{--                            <path d="M13.9225 7.66705C13.5971 7.34161 13.0694 7.34161 12.744 7.66705C12.4186 7.99249 12.4186 8.52013 12.744 8.84556L13.8214 9.92297H9.99992C9.53968 9.92297 9.16658 10.2961 9.16658 10.7563C9.16658 11.2165 9.53968 11.5896 9.99992 11.5896H13.8214L12.744 12.6671C12.4186 12.9925 12.4186 13.5201 12.744 13.8456C13.0694 14.171 13.5971 14.171 13.9225 13.8456L16.4225 11.3456C16.7479 11.0201 16.7479 10.4925 16.4225 10.1671L13.9225 7.66705Z" fill="#FF3B30"/>--}}
+{{--                        </svg>--}}
+{{--                    </div>--}}
+{{--                    <span class="-mr-1 text-red-500" :class="{'block': showSide, 'hidden': !showSide}" style="font-size: 12px">Log out</span>--}}
+{{--                </a>--}}
+>>>>>>> 2d6e12cd3b8c2170c9336df6fa8cf0b7bfc0d2c2
+
+{{--                <!-- Hidden Logout Form -->--}}
+{{--                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
+{{--                    @csrf--}}
+{{--                </form>--}}
+{{--            </li>--}}
+{{--        </ul>--}}
 
     </div>
 </div>
