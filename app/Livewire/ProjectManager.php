@@ -1,6 +1,8 @@
 <?php
 
 
+use SebastianBergmann\CodeCoverage\Report\Xml\Project;
+
 class ProjectManager extends Livewire\Component
 {
     public $projectId;

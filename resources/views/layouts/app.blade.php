@@ -9,7 +9,7 @@
 
     <title>Project Monitoring System</title>
 
-    <link rel="shortcut icon" href="{{ asset('storage/pmsAssets/image/pms_logo.png') }}">
+    <link rel="shortcut icon" href="{{ asset('storage/pmsAssets/icon_img.png') }}">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
     <!-- Fonts -->
@@ -69,8 +69,8 @@
          x-on:transaction-removed.window="pushNotification('success', 'Transaction Removed', 'Transaction has been remove successfully.');">
         <!-- Page Heading -->
         @if (isset($header))
-            <header class="bg-white flex  {{ $headerClass }}">
-                <div class=" p-4 sm:px-6 h-[85px] w-full justify-between items-center flex">
+            <header class="flex  {{ $headerClass }}">
+                <div class=" p-4 sm:px-10 h-[85px] w-full justify-between items-center flex">
                     {{ $header }}
                 </div>
             </header>
