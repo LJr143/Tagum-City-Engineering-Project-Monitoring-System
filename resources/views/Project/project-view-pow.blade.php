@@ -1,17 +1,19 @@
-<!doctype html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @vite('resources/css/app.css')
-    <script src="//unpkg.com/alpinejs" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+<x-app-layout mainClass="flex" headerClass="shadow-[0px_1px_2px_-1px_rgba(0,0,0,0.1)] ">
 
-</head>
-<body>
 
-<!-- Main Content -->
-<main>
+    {{-- SIDEBAR --}}
+    <x-slot name="sidebar">
+        <x-sidebar></x-sidebar>
+    </x-slot>
+    {{-- HEADER --}}
+
+    <x-slot name="header">
+        <x-header></x-header>
+    </x-slot>
+
+    {{-- MAIN CONTENT --}}
+    @livewireStyles
+    <x-slot name="main">
         <div class="container mx-auto p-6">
             <!-- Project Header -->
             <div class="flex justify-between items-center mb-6">
@@ -164,7 +166,6 @@
                 </div>
             </div>
         </div>
-</main>
-
-</body>
-</html>
+    </x-slot>
+    @livewireScripts
+</x-app-layout>

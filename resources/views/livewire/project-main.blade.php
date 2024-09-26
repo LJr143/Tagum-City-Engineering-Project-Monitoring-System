@@ -155,6 +155,7 @@
 
     <div class="grid gap-4">
         @for ($i = 0; $i < 6; $i++)
+            <a href="{{ route('view-project-pow') }}" class="flex"> <!-- Add the href with the target route -->
             <div class="bg-white p-4 rounded-lg shadow-md flex justify-between items-center">
                 <div class="flex flex-col">
                     <!-- Project Code -->
@@ -276,6 +277,7 @@
                     </div>
                 </div>
             </div>
+            </a>
         @endfor
     </div>
 

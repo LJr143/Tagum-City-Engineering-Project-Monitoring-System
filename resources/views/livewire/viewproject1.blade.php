@@ -1,4 +1,5 @@
 <div>
+
     <!-- Main content -->
     <div class="flex-1 p-2">
         <main>
@@ -14,8 +15,10 @@
                 </div>
                 <!-- Cards Display -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Card 1 -->
-                    <a href="#"
+                    <!-- Cards -->
+
+                    @for ($i = 0; $i < 6; $i++)
+                    <a href="{{ route('project-cost') }}"
                        class="bg-white p-6 rounded-lg shadow-md block transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
                         <div class="bg-green-600 text-white text-xs px-2 py-1 rounded w-max mb-2">Ref: 12345</div>
                         <h3 class="text-lg font-bold text-black">POW 1</h3>
@@ -32,62 +35,7 @@
                             </div>
                         </div>
                     </a>
-                    <!-- Card 2-->
-                    <a href="#"
-                       class="bg-white p-6 rounded-lg shadow-md block transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
-                        <div class="bg-green-600 text-white text-xs px-2 py-1 rounded w-max mb-2">Ref: 12345</div>
-                        <h3 class="text-lg font-bold text-black">POW 2</h3>
-                        <p class="mt-2  text-gray-600 text-xs">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p> <br>
-                        <div class="my-3 border-t border-gray-300"></div>
-                        <div class="flex items-center space-x-3">
-                            <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center">
-                                <img src="{{ asset('images/pic1.jpg') }}" alt="Engineer Image"
-                                     class="w-12 h-12 rounded-full object-cover">
-                            </div>
-                            <div>
-                                <p class="text-gray-500 text-xs ">Senior Engineer</p>
-                                <p class="text-black">John Doe</p>
-                            </div>
-                        </div>
-                    </a>
-                    <!-- Card 3 -->
-                    <a href="#"
-                       class="bg-white p-6 rounded-lg shadow-md block transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
-                        <div class="bg-green-500 text-white text-xs px-2 py-1 rounded w-max mb-2">Ref: 12345</div>
-                        <h3 class="text-lg font-bold text-black">POW 3</h3>
-                        <p class="mt-2  text-gray-600 text-xs">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p> <br>
-                        <div class="my-3 border-t border-gray-300"></div>
-                        <div class="flex items-center space-x-3">
-                            <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center">
-                                <img src="{{ asset('images/pic1.jpg') }}" alt="Engineer Image"
-                                     class="w-12 h-12 rounded-full object-cover">
-                            </div>
-                            <div>
-                                <p class="text-gray-500 text-xs ">Senior Engineer</p>
-                                <p class="text-black">John Doe</p>
-                            </div>
-                        </div>
-                    </a>
-                    <!-- Card 4 -->
-                    <a href="#"
-                       class="bg-white p-6 rounded-lg shadow-md block transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
-                        <div class="bg-green-500 text-white text-xs px-2 py-1 rounded w-max mb-2">Ref: 12345</div>
-                        <h3 class="text-lg font-bold text-black">POW 4</h3>
-                        <p class="mt-2  text-gray-600 text-xs">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p> <br>
-                        <div class="my-3 border-t border-gray-300"></div>
-                        <div class="flex items-center space-x-3">
-                            <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center">
-                                <img src="{{ asset('images/pic1.jpg') }}" alt="Engineer Image"
-                                     class="w-12 h-12 rounded-full object-cover">
-                            </div>
-                            <div>
-                                <p class="text-gray-500 text-xs ">Senior Engineer</p>
-                                <p class="text-black">John Doe</p>
-                            </div>
-                        </div>
-                    </a>
-
-
+                    @endfor
                 </div>
             </div>
         </main>

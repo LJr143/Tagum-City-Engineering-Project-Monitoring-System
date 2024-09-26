@@ -1,30 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
+<x-app-layout mainClass="flex" headerClass="shadow-[0px_1px_2px_-1px_rgba(0,0,0,0.1)] ">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <title>Responsive Sidebar and Header with Project Card</title>
-    @vite(['resources/css/app.css'])
-</head>
 
-<body class="font-sans antialiased bg-white">
+    <x-slot name="sidebar">
+        <x-sidebar></x-sidebar>
+    </x-slot>
 
-<!-- Sidebar -->
+
+    <x-slot name="header">
+        <x-header></x-header>
+    </x-slot>
+
+    <x-slot name="main">
+
 <div class="flex h-screen bg-white text-gray-800">
-    <!-- Sidebar for Desktop -->
-    <div class="hidden md:flex flex-col w-64 space-y-6 p-4 bg-gray-800 text-white">
-        <h1 class="text-2xl font-bold">Sidebar</h1>
-        <nav>
-            <ul>
-                <li><a href="#" class="block p-2 hover:bg-gray-700 rounded">Home</a></li>
-                <li><a href="#" class="block p-2 hover:bg-gray-700 rounded">About</a></li>
-                <li><a href="#" class="block p-2 hover:bg-gray-700 rounded">Services</a></li>
-                <li><a href="#" class="block p-2 hover:bg-gray-700 rounded">Contact</a></li>
-            </ul>
-        </nav>
-    </div>
 
     <!-- Main Content -->
     <div class="flex-1 p-4">
@@ -209,5 +197,8 @@
     </div>
 </div>
 
-</body>
-</html>
+
+    </x-slot>
+
+
+</x-app-layout>

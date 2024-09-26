@@ -1,24 +1,37 @@
+<x-app-layout mainClass="flex" headerClass="shadow-[0px_1px_2px_-1px_rgba(0,0,0,0.1)] ">
 
 
-<div class="flex">
+    <x-slot name="sidebar">
+        <x-sidebar></x-sidebar>
+    </x-slot>
+
+
+    <x-slot name="header">
+        <x-header></x-header>
+    </x-slot>
+
+    <x-slot name="main">
+
+
+    <div class="flex">
     <!-- Sidebar will occupy space, so adjust the rest of the layout accordingly -->
     <div class="w-full p-4">
         <div class="grid grid-cols-4 gap-4">
             <!-- Project Stats Cards -->
             <div class="bg-white rounded-lg shadow p-4">
-                <h2 class="text-3xl font-bold">{{ $projects['total'] }}</h2>
+                <h2 class="text-3xl font-bold">111</h2>
                 <p>All Projects</p>
             </div>
             <div class="bg-white rounded-lg shadow p-4">
-                <h2 class="text-3xl font-bold">{{ $projects['onProgress'] }}</h2>
+                <h2 class="text-3xl font-bold">123</h2>
                 <p>On Progress</p>
             </div>
             <div class="bg-white rounded-lg shadow p-4">
-                <h2 class="text-3xl font-bold">{{ $projects['pending'] }}</h2>
+                <h2 class="text-3xl font-bold">123}</h2>
                 <p>Pending</p>
             </div>
             <div class="bg-white rounded-lg shadow p-4">
-                <h2 class="text-3xl font-bold">{{ $projects['completed'] }}</h2>
+                <h2 class="text-3xl font-bold">123</h2>
                 <p>Completed</p>
             </div>
         </div>
@@ -103,11 +116,16 @@
             data: {
                 labels: ['Civil Engineer', 'Electrical Engineer', 'Architect'],
                 datasets: [{
-                    data: [{{ $users['civil'] }}, {{ $users['electrical'] }}, {{ $users['architect'] }}],
+                    data: [],
                     backgroundColor: ['#34D399', '#60A5FA', '#FBBF24'],
                 }]
             }
         });
     });
 </script>
+
+    </x-slot>
+
+
+</x-app-layout>
 
