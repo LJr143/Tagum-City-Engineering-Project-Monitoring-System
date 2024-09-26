@@ -58,6 +58,10 @@ Route::get('/viewproject1', function () {
 Route::get('/material-table-cost', function () {
     return view('layouts.Projects.material-cost-table');
 });
+Route::get('/main', function () {
+    return view('layouts.Projects.maindashboard');
+});
+
 
 route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
