@@ -33,10 +33,6 @@ Route::get('/view-project-pow', function () {
 })->name('view-project-pow');
 
 
-Route::get('/project-cost', function () {
-    return view('Project.project-view-pow');
-})->name('project-cost');
-
 Route::get('/userProfile', function () {
     return view('userProfile.userProfile');
 });
