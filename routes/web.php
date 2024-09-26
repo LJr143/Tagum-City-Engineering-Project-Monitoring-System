@@ -37,8 +37,8 @@ Route::get('/project-cost', function () {
     return view('Project.project-view-pow');
 })->name('project-cost');
 
-Route::get('/userProfile', function () {
-    return view('userProfile.userProfile');
+Route::get('/account-settings', function () {
+    return view('account-settings.account-settings');
 })->name('userProfile');
 
 Route::get('/adduserModal', function () {
@@ -60,10 +60,15 @@ Route::get('/main', function () {
     return view('layouts.Projects.dashboard');
 });
 
+Route::get('/user-table', function () {
+    return view('User.user-table');
+});
 
 route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
-
+Route::get('/system-logs', function () {
+    return view('System Logs.systemLogs');
+});
 
 
 

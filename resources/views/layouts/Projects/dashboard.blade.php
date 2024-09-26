@@ -174,8 +174,6 @@
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                             <span class="inline-flex rounded-full px-2 text-xs font-semibold leading-5 text-yellow-800 bg-yellow-100">In Progress</span>
                                         </td>
-                                    </tr>
-                                    <!-- Additional rows... -->
                                     </tbody>
                                 </table>
                             </div>

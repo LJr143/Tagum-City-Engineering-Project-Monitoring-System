@@ -10,7 +10,7 @@
     </x-slot>
 
     <x-slot name="main">
-        <livewire:user-profile />
+        <livewire:account-settings />
     </x-slot>
 </x-app-layout>
 

@@ -4,7 +4,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class UserProfile extends Component
+class AccountSettings extends Component
 {
     use WithFileUploads;
 
@@ -40,7 +40,7 @@ class UserProfile extends Component
 
     public function render()
     {
-        return view('livewire.user-profile', [
+        return view('livewire.account-settings', [
             'profileImageUrl' => $this->profileImage ? $this->profileImage->temporaryUrl() : $this->defaultProfileImage,
         ]);
     }
