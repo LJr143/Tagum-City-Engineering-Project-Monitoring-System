@@ -1,12 +1,16 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('systemlogs', function () {
+    return view('systemlogs');
+})->name('systemlogs');
+Route::get('report', function () {
+    return view('report');
+})->name('report');
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
