@@ -5,6 +5,8 @@
 /public/storage
 /storage/*
 !storage/app/public
+!storage/app/public/*
+!storage/app/public/pmsAssets/*
 /vendor
 .env
 .env.backup

@@ -21,7 +21,7 @@ Route::middleware([
 });
 
 Route::get('/dashboard', function () {
-    return view('layouts.Projects.maindashboard');
+    return view('layouts.Projects.dashboard');
 })->name('dashboard');
 
 Route::get('/project-main', function () {
@@ -39,7 +39,7 @@ Route::get('/project-cost', function () {
 
 Route::get('/userProfile', function () {
     return view('userProfile.userProfile');
-});
+})->name('userProfile');
 
 Route::get('/adduserModal', function () {
     return view('Modals.add-user-modal');
@@ -57,7 +57,7 @@ Route::get('/material-table-cost', function () {
     return view('layouts.Projects.material-cost-table');
 });
 Route::get('/main', function () {
-    return view('layouts.Projects.maindashboard');
+    return view('layouts.Projects.dashboard');
 });
 
 Route::get('/user-table', function () {
