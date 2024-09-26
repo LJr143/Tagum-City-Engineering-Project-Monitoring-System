@@ -285,10 +285,8 @@
 </div>
 
 <script>
-    <script>
-        document.addEventListener('close-modal', function () {
+    document.addEventListener('close-modal', function () {
         Alpine.store('modals').deleteModal = false;
     });
 </script>
 
-</script>
