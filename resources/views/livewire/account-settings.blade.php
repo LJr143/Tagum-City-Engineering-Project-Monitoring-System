@@ -3,7 +3,7 @@
 <div class="mx-auto bg-white p-8 md:p-8 rounded-lg shadow-md overflow-hidden">
     <div class="flex flex-col md:flex-row items-center mb-4">
         <div class="relative w-20 h-20">
-            <img src="{{ $profileImageUrl }}" alt="Profile Image" class="w-full h-full bg-gray-300 rounded-full object-cover"/>
+            <img src="{{ asset('storage/pmsAssets/default.png') }}" alt="Profile Image" class="w-full h-full bg-gray-300 rounded-full object-cover"/>
             <input type="file" wire:model="profileImage" id="imageUpload" accept="image/*" class="hidden"/>
             <label for="imageUpload" class="absolute bottom-0 right-0 bg-black bg-opacity-50 text-white p-1 rounded-full cursor-pointer">
                 <i class="fas fa-camera"></i>

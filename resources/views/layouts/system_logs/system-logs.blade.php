@@ -11,7 +11,7 @@
 
     <x-slot name="main">
 
-        
+
         <h1 class="text-2xl font-semibold ml-5">System Logs</h1>
         <p class="mb-6 ml-5">List of activity within the system</p>
 
@@ -219,7 +219,7 @@
             document.getElementById('download-btn').addEventListener('click', function () {
                 var table = document.getElementById('user-table');
                 var rows = table.querySelectorAll('tr');
-                var csvContent = 'User\n';
+                var csvContent = 'user\n';
 
                 rows.forEach(function (row, rowIndex) {
                     var cols = row.querySelectorAll('td, th');

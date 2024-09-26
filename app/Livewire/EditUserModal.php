@@ -15,7 +15,7 @@ public $age;
 public $position;
 public $role;
 public $positions = ['Manager', 'Developer', 'Designer'];
-public $roles = ['Admin', 'User', 'Guest'];
+public $roles = ['Admin', 'user', 'Guest'];
 public $isModalOpen = false;
 
 protected $rules = [

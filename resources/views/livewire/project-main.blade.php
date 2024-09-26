@@ -120,7 +120,7 @@
 
     <!-- Project Filter -->
     <div x-data="{ selected: 'all' }" class="flex mb-6 bg-gray-200 p-1.5 rounded-full max-w-xl justify-between">
-        <!-- All Projects Button -->
+        <!-- All projects Button -->
         <button
             :class="selected === 'all' ? 'bg-white text-black' : 'bg-gray-100 text-gray-600 hover:text-black'"
             class="flex-grow px-3 py-1 rounded-full mx-1 font-semibold text-sm"

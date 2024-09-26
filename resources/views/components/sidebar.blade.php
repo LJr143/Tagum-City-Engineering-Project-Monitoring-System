@@ -58,10 +58,10 @@
             <li x-data="{toggle: false}"  @mouseenter="toggle = true"
                 @mouseleave="toggle = false"
                 :style="toggle ? 'background-color: rgba(36, 144, 0, 0.3);' : ''">
-                <a href="" aria-label="dashboard" @class(['relative flex items-center gap-3 px-6 py-0 text-Primary font-medium', ' text-customGreen font-semibold'=> request()->routeIs('')]) @mouseenter="toggle = true" @mouseleave="toggle = false"
+                <a href="{{ route('report') }}" aria-label="dashboard" @class(['relative flex items-center gap-3 px-6 py-0 text-Primary font-medium', ' text-customGreen font-semibold'=> request()->routeIs('')]) @mouseenter="toggle = true" @mouseleave="toggle = false"
                    @click="setActiveTab(''); show = false; showManage = false; subActiveItem = ''; setsubTmsActiveItem(''); setsettingsTmsActiveItem('')">
                     <div class=" text-center px-[13px] py-[10px] rounded-full justify-center items-center flex"
-                         :class="{'bg-customGreen-100': {{ request()->routeIs('') ? 'true' : 'false' }}, 'bg-none': {{ !request()->routeIs('') ? 'true' : 'false' }}}">
+                         :class="{'bg-customGreen-100': {{ request()->routeIs('report') ? 'true' : 'false' }}, 'bg-none': {{ !request()->routeIs('report') ? 'true' : 'false' }}}">
                         <svg width="15" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M10.5417 2.33855C10.3908 2.20946 10.1987 2.13853 10 2.13855H4.16671C3.94569 2.13855 3.73373 2.22635 3.57745 2.38263C3.42117 2.53891 3.33337 2.75087 3.33337 2.97188V17.9719C3.33337 18.1929 3.42117 18.4049 3.57745 18.5611C3.73373 18.7174 3.94569 18.8052 4.16671 18.8052H15.8334C16.0544 18.8052 16.2664 18.7174 16.4226 18.5611C16.5789 18.4049 16.6667 18.1929 16.6667 17.9719V7.97188C16.6667 7.85152 16.6406 7.73258 16.5903 7.62325C16.5399 7.51392 16.4665 7.41679 16.375 7.33855L10.5417 2.33855ZM10.8334 4.78022L13.5834 7.13855H10.8334V4.78022ZM15 17.1386H5.00004V3.80522H9.16671V7.97188C9.16671 8.1929 9.25451 8.40486 9.41079 8.56114C9.56707 8.71742 9.77903 8.80522 10 8.80522H15V17.1386Z" fill="#464255"/>
                         </svg>
@@ -70,20 +70,6 @@
                 </a>
             </li>
 
-            <li x-data="{toggle: false}"  @mouseenter="toggle = true"
-                @mouseleave="toggle = false"
-                :style="toggle ? 'background-color: rgba(36, 144, 0, 0.3);' : ''">
-                <a href="" aria-label="dashboard" @class(['relative flex items-center gap-3 px-6 py-0 text-Primary font-medium', ' text-customGreen font-semibold'=> request()->routeIs('')]) @mouseenter="toggle = true" @mouseleave="toggle = false"
-                   @click="setActiveTab(''); show = false; showManage = false; subActiveItem = ''; setsubTmsActiveItem(''); setsettingsTmsActiveItem('')">
-                    <div class=" text-center px-[13px] py-[10px] rounded-full justify-center items-center flex"
-                         :class="{'bg-customGreen-100': {{ request()->routeIs('') ? 'true' : 'false' }}, 'bg-none': {{ !request()->routeIs('') ? 'true' : 'false' }}}">
-                        <svg width="15" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M15 3.80522H15.8333C16.75 3.80522 17.5 4.55522 17.5 5.47188V17.1386C17.5 18.0552 16.75 18.8052 15.8333 18.8052H4.16667C3.24167 18.8052 2.5 18.0552 2.5 17.1386L2.50833 5.47188C2.50833 4.55522 3.24167 3.80522 4.16667 3.80522H5V2.13855H6.66667V3.80522H13.3333V2.13855H15V3.80522ZM4.16667 17.1386H15.8333V7.97188H4.16667V17.1386Z" fill="#464255"/>
-                        </svg>
-                    </div>
-                    <span class="-mr-1 " :class="{'block':showSide, 'hidden':!showSide}" style="font-size: 12px">Calendar</span>
-                </a>
-            </li>
 
             <li x-data="{toggle: false}"  @mouseenter="toggle = true"
                 @mouseleave="toggle = false"
@@ -103,17 +89,18 @@
             <li x-data="{toggle: false}"  @mouseenter="toggle = true"
                 @mouseleave="toggle = false"
                 :style="toggle ? 'background-color: rgba(36, 144, 0, 0.3);' : ''">
-                <a href="" aria-label="dashboard" @class(['relative flex items-center gap-3 px-6 py-0 text-Primary font-medium', ' text-customGreen font-semibold'=> request()->routeIs('')]) @mouseenter="toggle = true" @mouseleave="toggle = false"
+                <a href="{{ route('system_logs') }}" aria-label="dashboard" @class(['relative flex items-center gap-3 px-6 py-0 text-Primary font-medium', ' text-customGreen font-semibold'=> request()->routeIs('')]) @mouseenter="toggle = true" @mouseleave="toggle = false"
                    @click="setActiveTab(''); show = false; showManage = false; subActiveItem = ''; setsubTmsActiveItem(''); setsettingsTmsActiveItem('')">
                     <div class=" text-center px-[13px] py-[10px] rounded-full justify-center items-center flex"
-                         :class="{'bg-customGreen-100': {{ request()->routeIs('') ? 'true' : 'false' }}, 'bg-none': {{ !request()->routeIs('') ? 'true' : 'false' }}}">
-                        <svg width="15" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M11.6667 5.47188C11.6667 5.01165 12.0398 4.63855 12.5 4.63855H16.1458C16.4135 4.63855 16.6648 4.76711 16.8215 4.98413L19.009 8.01443C19.1448 8.20249 19.196 8.43862 19.1504 8.66603L18.4212 12.3024C18.3432 12.6917 18.0012 12.9719 17.6042 12.9719H1.66666C1.20642 12.9719 0.833328 12.5988 0.833328 12.1385V8.80522C0.833328 8.34498 1.20642 7.97188 1.66666 7.97188H3.33333V5.47188C3.33333 5.01165 3.70642 4.63855 4.16666 4.63855H9.99999C10.4602 4.63855 10.8333 5.01165 10.8333 5.47188V7.97188H11.6667V5.47188ZM2.49999 9.63855V11.3052H11.6667V9.63855H2.49999ZM9.16666 7.97188V6.30522H4.99999V7.97188H9.16666ZM16.9213 11.3052H13.3333V6.30522H15.7196L17.4447 8.695L16.9213 11.3052Z" fill="#464255"/>
-                            <path d="M4.99999 17.1385C5.92047 17.1385 6.66666 16.3924 6.66666 15.4719C6.66666 14.5514 5.92047 13.8052 4.99999 13.8052C4.07952 13.8052 3.33333 14.5514 3.33333 15.4719C3.33333 16.3924 4.07952 17.1385 4.99999 17.1385Z" fill="#464255"/>
-                            <path d="M16.6667 15.4719C16.6667 16.3924 15.9205 17.1385 15 17.1385C14.0795 17.1385 13.3333 16.3924 13.3333 15.4719C13.3333 14.5514 14.0795 13.8052 15 13.8052C15.9205 13.8052 16.6667 14.5514 16.6667 15.4719Z" fill="#464255"/>
+                         :class="{'bg-customGreen-100': {{ request()->routeIs('system_logs') ? 'true' : 'false' }}, 'bg-none': {{ !request()->routeIs('system_logs') ? 'true' : 'false' }}}">
+                        <svg width="12.5" height="20" viewBox="0 0 15 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.16667 7.41081C3.70643 7.41081 3.33333 7.7839 3.33333 8.24414C3.33333 8.70438 3.70643 9.07747 4.16667 9.07747H10.8333C11.2936 9.07747 11.6667 8.70438 11.6667 8.24414C11.6667 7.7839 11.2936 7.41081 10.8333 7.41081H4.16667Z" fill="#464255"/>
+                            <path d="M4.16667 10.7441C3.70643 10.7441 3.33333 11.1172 3.33333 11.5775C3.33333 12.0377 3.70643 12.4108 4.16667 12.4108H7.5C7.96024 12.4108 8.33333 12.0377 8.33333 11.5775C8.33333 11.1172 7.96024 10.7441 7.5 10.7441H4.16667Z" fill="#464255"/>
+                            <path d="M4.16667 14.0775C3.70643 14.0775 3.33333 14.4506 3.33333 14.9108C3.33333 15.371 3.70643 15.7441 4.16667 15.7441H10.8333C11.2936 15.7441 11.6667 15.371 11.6667 14.9108C11.6667 14.4506 11.2936 14.0775 10.8333 14.0775H4.16667Z" fill="#464255"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M14.899 4.19213C14.8319 4.02982 14.7335 3.88236 14.6093 3.75822L11.9863 1.13525C11.7365 0.885133 11.3976 0.744452 11.0441 0.744141H1.33333C0.979711 0.744141 0.640573 0.884617 0.390524 1.13466C0.140476 1.38471 0 1.72385 0 2.07747V17.7441C0 17.9192 0.0344879 18.0926 0.101494 18.2544C0.168499 18.4162 0.266711 18.5631 0.390524 18.687C0.514334 18.8108 0.661319 18.909 0.823089 18.976C0.984861 19.043 1.15824 19.0775 1.33333 19.0775H13.6667C13.8418 19.0775 14.0151 19.043 14.1769 18.976C14.3387 18.909 14.4857 18.8108 14.6095 18.687C14.7333 18.5631 14.8315 18.4162 14.8985 18.2544C14.9655 18.0926 15 17.9192 15 17.7441V4.70273L14.1667 4.70247L15 4.70452L15 4.70273C15.0002 4.52755 14.9659 4.35404 14.899 4.19213ZM10 4.49414C10 5.1845 10.5596 5.74414 11.25 5.74414H13.3333V17.4108H1.66667V2.41081H10V4.49414ZM12.5715 4.07747L11.6667 3.17265V4.07747H12.5715Z" fill="#464255"/>
                         </svg>
                     </div>
-                    <span class="-mr-1 " :class="{'block':showSide, 'hidden':!showSide}" style="font-size: 12px">Materials</span>
+                    <span class="-mr-1 " :class="{'block':showSide, 'hidden':!showSide}" style="font-size: 12px">System Logs</span>
                 </a>
             </li>
 
