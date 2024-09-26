@@ -60,10 +60,15 @@ Route::get('/main', function () {
     return view('layouts.Projects.maindashboard');
 });
 
+Route::get('/user-table', function () {
+    return view('User.user-table');
+});
 
 route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
-
+Route::get('/system-logs', function () {
+    return view('System Logs.systemLogs');
+});
 
 
 
