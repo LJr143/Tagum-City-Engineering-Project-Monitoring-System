@@ -349,7 +349,7 @@
                                     <button type="button" @click.prevent="isModalOpen = false" class="text-black bg-white hover:bg-red-700 focus:ring-4 focus:outline-1 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center border border-black">
                                         Cancel
                                     </button>
-                                    <button type="submit"
+                                    <button type="button" id="toggleInvoiceButton"
                                         class="text-white inline-flex items-center bg-[#249000] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                                         GENERATE
                                     </button>
@@ -357,6 +357,164 @@
 
                             </form>
                         </div>
+                        <!-- individual invoice -->
+                        <div>
+                            <!-- Invoice Section (Initially Hidden) -->
+                            <section id="invoiceSection"
+                                class="fixed inset-0 z-50 max-w-4xl mx-auto p-10 bg-white rounded-lg shadow-lg mt-6 hidden overflow-y-auto">
+
+                                <!-- Header Section -->
+                                <div class="flex justify-between items-center border-b pb-8">
+                                    <!-- Logo and Company Name -->
+                                    <div class="flex items-center space-x-4">
+                                        <!-- <img src="your-logo-url.png" alt="Company Logo" class="w-16 h-16"> -->
+                                        <img src="{{ asset('storage/pmsAssets/pms_logo.png') }}" class="h-30 w-40 ml-1.5" alt="logo">
+
+                                    </div>
+                                    <div class="flex justify-center items-center h-full inline-grid grid-rows-3 gap-1">
+                                        <!-- <h1 class="text-2xl font-bold">Your Company Name</h1> -->
+                                        <p class="text-sm text-gray-600 text-center">Republic of the Philippines</p>
+                                        <p class="text-sm text-gray-600 text-center">Province of Davao del Norte</p>
+                                        <p class="text-sm text-gray-600 text-center">City of Tagum</p>
+
+
+                                    </div>
+
+                                    <!-- Invoice Info -->
+                                    <div class="text-right">
+                                        <h2 class="text-xl font-bold uppercase">Invoice</h2>
+                                        <p class="text-sm text-gray-600">Date Generated: <span>date</span></p>
+                                    </div>
+
+                                </div>
+
+                                <!-- Project Details Section -->
+                                <div class="py-8">
+                                    <h2 class="text-lg font-semibold text-gray-700 uppercase text-center">Project Information</h2>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+                                        <!-- Project Name -->
+                                        <div class="space-y-1">
+                                            <h3 class="text-sm text-gray-500">Project Name</h3>
+                                            <p class="text-lg font-medium text-gray-800">project_name</p>
+                                        </div>
+
+                                        <!-- Budget -->
+                                        <div class="space-y-1">
+                                            <h3 class="text-sm text-gray-500">Budget</h3>
+                                            <p class="text-lg font-medium text-gray-800">budget_amount</p>
+                                        </div>
+
+                                        <!-- Date Generated -->
+                                        <div class="space-y-1">
+                                            <h3 class="text-sm text-gray-500">Date Generated</h3>
+                                            <p class="text-lg font-medium text-gray-800">date</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Materials Section -->
+                                <div>
+                                    <h2 class="text-lg font-semibold text-gray-700 uppercase">Materials</h2>
+                                    <div class="overflow-x-auto mt-6">
+                                        <table class="w-full border-collapse text-sm">
+                                            <thead class="bg-gray-100">
+                                                <tr>
+                                                    <th class="p-4 text-left font-medium text-gray-600">Material</th>
+                                                    <th class="p-4 text-right font-medium text-gray-600">Quantity</th>
+                                                    <th class="p-4 text-right font-medium text-gray-600">Price</th>
+                                                    <th class="p-4 text-right font-medium text-gray-600">Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="p-4 border-b text-gray-700">Material Name</td>
+                                                    <td class="p-4 border-b text-right text-gray-700">10</td>
+                                                    <td class="p-4 border-b text-right text-gray-700">$20</td>
+                                                    <td class="p-4 border-b text-right text-gray-700">$200</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <!-- Footer Section -->
+                                <div class="mt-8 text-right">
+                                    <h2 class="text-xl font-bold text-gray-800">Total: total_amount</h2>
+                                    <p class="text-sm text-gray-600">Thank you for your business!</p>
+                                </div>
+
+                                <!-- Print & Download Buttons -->
+                                <div class="mt-4 flex justify-between">
+                                    <button type="button" id="printInvoiceButton"
+                                        class="text-white inline-flex items-center bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                                        Print
+                                    </button>
+
+                                    <button type="button" id="downloadInvoiceButton"
+                                        class="text-white inline-flex items-center bg-green-500 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                                        Download PDF
+                                    </button>
+                                </div>
+
+                                <!-- Close Button -->
+                                <div class="mt-4 text-right">
+                                    <button type="button" id="closeInvoiceButton"
+                                        class="text-white inline-flex items-center bg-red-500 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                                        Close
+                                    </button>
+                                </div>
+                            </section>
+
+                            <!-- JavaScript for Print, Download, and Toggle -->
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+                            <script>
+                                // Toggle Invoice Section
+                                document.getElementById('toggleInvoiceButton').addEventListener('click', function() {
+                                    var invoiceSection = document.getElementById('invoiceSection');
+                                    invoiceSection.classList.remove('hidden');
+                                });
+
+                                document.getElementById('closeInvoiceButton').addEventListener('click', function() {
+                                    var invoiceSection = document.getElementById('invoiceSection');
+                                    invoiceSection.classList.add('hidden');
+                                });
+
+                                // Print Invoice
+                                document.getElementById('printInvoiceButton').addEventListener('click', function() {
+                                    var printContents = document.getElementById('invoiceSection').innerHTML;
+                                    var originalContents = document.body.innerHTML;
+                                    document.body.innerHTML = printContents;
+                                    window.print();
+                                    document.body.innerHTML = originalContents;
+                                    window.location.reload();
+                                });
+
+                                // Download Invoice as PDF
+                                document.getElementById('downloadInvoiceButton').addEventListener('click', function() {
+                                    var element = document.getElementById('invoiceSection');
+                                    html2pdf(element, {
+                                        margin: 1,
+                                        filename: 'invoice.pdf',
+                                        image: {
+                                            type: 'jpeg',
+                                            quality: 0.98
+                                        },
+                                        html2canvas: {
+                                            scale: 2
+                                        },
+                                        jsPDF: {
+                                            unit: 'in',
+                                            format: 'letter',
+                                            orientation: 'portrait'
+                                        }
+                                    });
+                                });
+                            </script>
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
+                        </div>
+
+
                     </div>
 
                     <!-- Second Modal -->
