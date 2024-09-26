@@ -15,6 +15,7 @@
                     </button>
                 </div>
                 <form wire:submit.prevent="saveUser">
+                    @csrf
                     <!-- Name Field -->
                     <div class="mb-4">
                         <label class="block text-gray-700">Name</label>

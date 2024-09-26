@@ -1,4 +1,4 @@
-<x-app-layout mainClass="flex" headerClass="shadow-[0px_1px_2px_-1px_rgba(0,0,0,0.1)] ">
+<x-app-layout mainClass="flex">
 
     <x-slot name="sidebar" class="w-64 bg-gray-200 min-h-screen">
         <x-sidebar></x-sidebar>
