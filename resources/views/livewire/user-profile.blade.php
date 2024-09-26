@@ -1,10 +1,5 @@
-<head>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet"/>
-</head>
 
-<body>
+
 <div class="mx-auto bg-white p-8 md:p-8 rounded-lg shadow-md overflow-hidden">
     <div class="flex flex-col md:flex-row items-center mb-4">
         <div class="relative w-20 h-20">
@@ -29,15 +24,15 @@
             <div class="space-y-2">
                 <div class="flex flex-row items-center">
                     <label class="text-gray-500 text-sm w-32">Name</label>
-                    <input type="text" wire:model="name" class="text-green-600 border border-gray-300 rounded-md focus:outline-none focus:border-green-600 w-3/4 p-2 text-sm">
+                    <input type="text" wire:model="name" class="text-green-600 border border-gray-300 rounded-md focus:outline-none focus:border-green-600 w-3/4 h-8 p-2 text-sm">
                 </div>
                 <div class="flex flex-row items-center">
                     <label class="text-gray-500 text-sm w-32">Birthdate</label>
-                    <input type="date" wire:model="birthdate" class="text-green-600 border border-gray-300 rounded-md focus:outline-none focus:border-green-600 w-3/4 p-2 text-sm">
+                    <input type="date" wire:model="birthdate" class="text-green-600 border border-gray-300 rounded-md focus:outline-none focus:border-green-600 w-3/4 h-8 p-2 text-sm">
                 </div>
                 <div class="flex flex-row items-center mb-2">
                     <label class="text-gray-500 text-sm w-32">Age</label>
-                    <input type="number" wire:model="age" min="1" class="text-green-600 border border-gray-300 rounded-md focus:outline-none focus:border-green-600 w-3/4 p-2 text-sm">
+                    <input type="number" wire:model="age" min="1" class="text-green-600 border border-gray-300 rounded-md focus:outline-none focus:border-green-600 w-3/4 h-8 p-2 text-sm">
                 </div>
             </div>
             <h2 class="text-md font-medium mt-4 mb-2 relative pb-1 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[1px] after:bg-gray-300 w-full">
@@ -46,11 +41,11 @@
             <div class="space-y-2">
                 <div class="flex flex-row items-center">
                     <label class="text-gray-500 text-sm w-32">Phone Number</label>
-                    <input type="tel" wire:model="phoneNumber" class="text-green-600 border border-gray-300 rounded-md focus:outline-none focus:border-green-600 w-3/4 p-2 text-sm">
+                    <input type="tel" wire:model="phoneNumber" class="text-green-600 border border-gray-300 rounded-md focus:outline-none focus:border-green-600 w-3/4 h-8 p-2 text-sm">
                 </div>
                 <div class="flex flex-row items-center">
                     <label class="text-gray-500 text-sm w-32">Email Address</label>
-                    <input type="email" wire:model="email" class="text-green-600 border border-gray-300 rounded-md focus:outline-none focus:border-green-600 w-3/4 p-2 text-sm">
+                    <input type="email" wire:model="email" class="text-green-600 border border-gray-300 rounded-md focus:outline-none focus:border-green-600 w-3/4 h-8 p-2 text-sm">
                 </div>
             </div>
             <button wire:click="saveChanges" class="mt-4 w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition">Save All Changes</button>
@@ -64,11 +59,11 @@
             <div class="space-y-2">
                 <div class="flex flex-row items-center">
                     <label class="text-gray-500 text-sm w-32">User ID</label>
-                    <input type="text" wire:model="userID" class="border border-gray-300 rounded-md focus:outline-none focus:border-green-600 w-3/4 p-2 text-sm">
+                    <input type="text" wire:model="userID" class="border border-gray-300 rounded-md focus:outline-none focus:border-green-600 w-3/4 h-8 p-2 text-sm">
                 </div>
                 <div class="flex flex-row items-center">
                     <label class="text-gray-500 text-sm w-32">Current Password</label>
-                    <input type="password" wire:model="currentPassword" class="border border-gray-300 rounded-md focus:outline-none focus:border-green-600 w-3/4 p-2 text-sm">
+                    <input type="password" wire:model="currentPassword" class="border border-gray-300 rounded-md focus:outline-none focus:border-green-600 w-3/4 h-8 p-2 text-sm">
                 </div>
                 <div>
                     <h3 class="text-gray-500 font-medium text-sm">Password Requirements</h3>
@@ -81,11 +76,11 @@
                 </div>
                 <div class="flex flex-row items-center">
                     <label class="text-gray-500 text-sm w-32">New Password</label>
-                    <input type="password" wire:model="newPassword" class="border border-gray-300 rounded-md focus:outline-none focus:border-green-600 w-3/4 p-2 text-sm">
+                    <input type="password" wire:model="newPassword" class="border border-gray-300 rounded-md focus:outline-none focus:border-green-600 w-3/4 h-8 p-2 text-sm">
                 </div>
                 <div class="flex flex-row items-center">
                     <label class="text-gray-500 text-sm w-32">Re-type New Password</label>
-                    <input type="password" wire:model="confirmNewPassword" class="border border-gray-300 rounded-md focus:outline-none focus:border-green-600 w-3/4 p-2 text-sm">
+                    <input type="password" wire:model="confirmNewPassword" class="border border-gray-300 rounded-md focus:outline-none focus:border-green-600 w-3/4 h-8 p-2 text-sm">
                 </div>
             </div>
             <button wire:click="updateAccount" class="mt-4 w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition">Update Account</button>
@@ -102,11 +97,4 @@
         </div>
     @endif
 
-    <script>
-        function loadFile(event) {
-            var image = document.getElementById('profileImage');
-            image.src = URL.createObjectURL(event.target.files[0]);
-        }
-    </script>
-</body>
-</html>
+
