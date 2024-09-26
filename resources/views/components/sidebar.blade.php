@@ -5,16 +5,16 @@
     <div class="mt-10" :class="{'block':showSide, 'hidden':!showSide}">
         <img src="{{ asset('storage/pmsAssets/pms_logo.png') }}" class="h-30 w-40 ml-1.5" alt="logo">
     </div>
-    {{--    <button @click="showSide = ! showSide; show = false; showManage = false"--}}
-    {{--            :class="{'hover:bg-customGreen-50 focus:bg-customGreen-100':showSide, 'bg-customGreen-100':!showSide}" class="p-3 ml-2 rounded-xl">--}}
-    {{--        <svg class="transform ease-in-out transition" :class="{'rotate-180':!showSide,'rotate-0':showSide}" width="12"--}}
-    {{--             height="10" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
-    {{--            <path d="M7.17742 13.3548L1 7.17742L7.17742 1" stroke="#BA2C2C" stroke-width="1.90074"--}}
-    {{--                  stroke-linecap="round" stroke-linejoin="round" />--}}
-    {{--            <path d="M15.731 12.4045L10.5039 7.17743L15.731 1.95038" stroke="#BA2C2C" stroke-opacity="0.45"--}}
-    {{--                  stroke-width="1.50476" stroke-linecap="round" stroke-linejoin="round" />--}}
-    {{--        </svg>--}}
-    {{--    </button>--}}
+        <button @click="showSide = ! showSide; show = false; showManage = false"
+                :class="{'hover:bg-customGreen-50 focus:bg-customGreen-100':showSide, 'bg-customGreen-100':!showSide}" class="p-3 ml-2 rounded-xl">
+            <svg class="transform ease-in-out transition" :class="{'rotate-180':!showSide,'rotate-0':showSide}" width="12"
+                 height="10" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.17742 13.3548L1 7.17742L7.17742 1" stroke="#BA2C2C" stroke-width="1.90074"
+                      stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M15.731 12.4045L10.5039 7.17743L15.731 1.95038" stroke="#BA2C2C" stroke-opacity="0.45"
+                      stroke-width="1.50476" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
 </div>
 {{-- NAVIGATION BUTTONS --}}
 <div class="hidden w-full max-w-[240px] lg:flex flex-col justify-between pt-2 pb-10 flex-1 overflow-y-auto">
