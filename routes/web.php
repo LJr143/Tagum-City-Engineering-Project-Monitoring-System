@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
@@ -20,9 +21,7 @@ Route::middleware([
 
 });
 
-Route::get('/dashboard', function () {
-    return view('layouts.projects.dashboard');
-})->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::get('/project-main', function () {
     return view('layouts.projects.project-main');

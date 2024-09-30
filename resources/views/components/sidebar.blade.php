@@ -55,20 +55,22 @@
                 </a>
             </li>
 
+
             <li x-data="{toggle: false}"  @mouseenter="toggle = true"
                 @mouseleave="toggle = false"
                 :style="toggle ? 'background-color: rgba(36, 144, 0, 0.3);' : ''">
-                <a href="{{ route('report') }}" aria-label="dashboard" @class(['relative flex items-center gap-3 px-6 py-0 text-Primary font-medium', ' text-customGreen font-semibold'=> request()->routeIs('')]) @mouseenter="toggle = true" @mouseleave="toggle = false"
-                   @click="setActiveTab(''); show = false; showManage = false; subActiveItem = ''; setsubTmsActiveItem(''); setsettingsTmsActiveItem('')">
-                    <div class=" text-center px-[13px] py-[10px] rounded-full justify-center items-center flex"
-                         :class="{'bg-customGreen-100': {{ request()->routeIs('report') ? 'true' : 'false' }}, 'bg-none': {{ !request()->routeIs('report') ? 'true' : 'false' }}}">
-                        <svg width="15" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10.5417 2.33855C10.3908 2.20946 10.1987 2.13853 10 2.13855H4.16671C3.94569 2.13855 3.73373 2.22635 3.57745 2.38263C3.42117 2.53891 3.33337 2.75087 3.33337 2.97188V17.9719C3.33337 18.1929 3.42117 18.4049 3.57745 18.5611C3.73373 18.7174 3.94569 18.8052 4.16671 18.8052H15.8334C16.0544 18.8052 16.2664 18.7174 16.4226 18.5611C16.5789 18.4049 16.6667 18.1929 16.6667 17.9719V7.97188C16.6667 7.85152 16.6406 7.73258 16.5903 7.62325C16.5399 7.51392 16.4665 7.41679 16.375 7.33855L10.5417 2.33855ZM10.8334 4.78022L13.5834 7.13855H10.8334V4.78022ZM15 17.1386H5.00004V3.80522H9.16671V7.97188C9.16671 8.1929 9.25451 8.40486 9.41079 8.56114C9.56707 8.71742 9.77903 8.80522 10 8.80522H15V17.1386Z" fill="#464255"/>
-                        </svg>
-                    </div>
-                    <span class="-mr-1 " :class="{'block':showSide, 'hidden':!showSide}" style="font-size: 12px">Reports</span>
+                <a href="{{ route('report') }}" @if (request()->routeIs('report')){ @click.prevent="preventAction = true" }@endif" aria-label="project" @class(['relative flex items-center gap-3 px-6 py-0 text-Primary font-medium', ' text-customGreen font-semibold'=> request()->routeIs('report')]) @mouseenter="toggle = true" @mouseleave="toggle = false"
+                @click="setActiveTab(''); show = false; showManage = false; subActiveItem = ''; setsubTmsActiveItem(''); setsettingsTmsActiveItem('')">
+                <div class=" text-center px-[13px] py-[10px] rounded-full justify-center items-center flex"
+                     :class="{'bg-customGreen-100': {{ request()->routeIs('report') ? 'true' : 'false' }}, 'bg-none': {{ !request()->routeIs('report') ? 'true' : 'false' }}}">
+                    <svg width="15" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.5417 2.33855C10.3908 2.20946 10.1987 2.13853 10 2.13855H4.16671C3.94569 2.13855 3.73373 2.22635 3.57745 2.38263C3.42117 2.53891 3.33337 2.75087 3.33337 2.97188V17.9719C3.33337 18.1929 3.42117 18.4049 3.57745 18.5611C3.73373 18.7174 3.94569 18.8052 4.16671 18.8052H15.8334C16.0544 18.8052 16.2664 18.7174 16.4226 18.5611C16.5789 18.4049 16.6667 18.1929 16.6667 17.9719V7.97188C16.6667 7.85152 16.6406 7.73258 16.5903 7.62325C16.5399 7.51392 16.4665 7.41679 16.375 7.33855L10.5417 2.33855ZM10.8334 4.78022L13.5834 7.13855H10.8334V4.78022ZM15 17.1386H5.00004V3.80522H9.16671V7.97188C9.16671 8.1929 9.25451 8.40486 9.41079 8.56114C9.56707 8.71742 9.77903 8.80522 10 8.80522H15V17.1386Z" fill="#464255"/>
+                    </svg>
+                </div>
+                <span class="-mr-1 " :class="{'block':showSide, 'hidden':!showSide}" style="font-size: 12px">Reports</span>
                 </a>
             </li>
+
 
 
             <li x-data="{toggle: false}"  @mouseenter="toggle = true"
