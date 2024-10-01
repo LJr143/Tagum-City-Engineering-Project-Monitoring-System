@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Livewire\ProjectMain;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
@@ -19,13 +20,13 @@ Route::middleware([
     'verified',
 ])->group(function () {
 
+
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::get('/project-main', function () {
-    return view('layouts.projects.project-main');
-})->name('project-main');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/project-main', [\App\Http\Controllers\ProjectController::class, 'index'])->name('project-main');
+
 
 Route::get('/view-project-pow', function () {
     return view('layouts.projects.viewproject1');
@@ -53,7 +54,7 @@ Route::get('/main', function () {
 });
 
 
-route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
 Route::get('/system-logs', function () {
     return view('layouts.system_logs.system-logs');
