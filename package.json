@@ -19,6 +19,8 @@
         "@popperjs/core": "^2.11.8",
         "alpinejs": "^3.14.1",
         "bootstrap": "^5.3.3",
-        "chart.js": "^4.4.4"
+        "chart.js": "^4.4.4",
+        "filepond": "^4.31.4",
+        "simple-notify": "^1.0.4"
     }
 }
