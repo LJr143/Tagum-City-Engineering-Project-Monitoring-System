@@ -393,21 +393,21 @@
                                     <h2 class="text-lg font-semibold text-gray-700 uppercase text-center">Project Information</h2>
                                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
                                         <!-- Project Name -->
-                                        <div class="space-y-1">
+                                        <div class="flex items-center space-x-2">
                                             <h3 class="text-sm text-gray-500">Project Name</h3>
-                                            <p class="text-lg font-medium text-gray-800">project_name</p>
+                                            <p class="text-sm mr-2 font-medium text-gray-800">project_name</p>
                                         </div>
 
                                         <!-- Budget -->
-                                        <div class="space-y-1">
+                                        <div class="flex items-center space-x-2">
                                             <h3 class="text-sm text-gray-500">Budget</h3>
-                                            <p class="text-lg font-medium text-gray-800">budget_amount</p>
+                                            <p class="text-sm font-medium text-gray-800">budget_amount</p>
                                         </div>
 
                                         <!-- Date Generated -->
-                                        <div class="space-y-1">
+                                        <div class="flex items-center space-x-2">
                                             <h3 class="text-sm text-gray-500">Date Generated</h3>
-                                            <p class="text-lg font-medium text-gray-800">date</p>
+                                            <p class="text-sm font-medium text-gray-800">date</p>
                                         </div>
                                     </div>
                                 </div>
