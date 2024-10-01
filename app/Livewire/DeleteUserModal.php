@@ -21,7 +21,7 @@ class DeleteUserModal extends Component
     public function deleteUser()
     {
         // Add user deletion logic here
-        session()->flash('message', 'User deleted successfully.');
+        session()->flash('message', 'user deleted successfully.');
 
         $this->closeModal();
     }

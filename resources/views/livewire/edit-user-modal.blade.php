@@ -1,5 +1,5 @@
 <div>
-    <!-- Add/Edit User Button -->
+    <!-- Add/Edit user Button -->
     <button wire:click="openModal" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
         Edit User
     </button>
@@ -17,7 +17,7 @@
                     </button>
                 </div>
                 <form wire:submit.prevent="saveUser">
-                    <!-- User ID Field -->
+                    <!-- user ID Field -->
                     <div class="mb-4">
                         <label class="block text-gray-700">User ID</label>
                         <input type="text" wire:model="userId" placeholder="0101" class="w-full mt-1 p-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="user-id" type="text" value="XXXX" disabled>

@@ -9,7 +9,7 @@ class AccountSettings extends Component
     use WithFileUploads;
 
     public $profileImage;
-    public $defaultProfileImage = 'https://oaidalleapiprodscus.blob.core.windows.net/private/org-LmQ09WWGIGwOeeA4ArnRw0x5/user-uJPET5fjNenSso8wCETWVNOp/img-LAE4As8cAsJhr9Ub7PTU97C7.png';
+    public $defaultProfileImage = 'storage/app/public/pmsAssets/default.png';
     public $name = "Fname MI. Lname";
     public $birthdate = "2000-01-01";
     public $age = 24;

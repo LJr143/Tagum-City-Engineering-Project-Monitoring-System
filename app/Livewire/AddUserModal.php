@@ -13,7 +13,7 @@ public $age;
 public $position;
 public $role;
 public $positions = ['Manager', 'Developer', 'Designer'];
-public $roles = ['Admin', 'User', 'Guest'];
+public $roles = ['Admin', 'user', 'Guest'];
 public $isModalOpen = false;
 
 protected $rules = [
@@ -91,7 +91,7 @@ $this->validate();
 $this->resetFormFields();
 $this->closeModal();
 
-session()->flash('success', 'User added successfully!');
+session()->flash('success', 'user added successfully!');
 }
 
 public function render()
