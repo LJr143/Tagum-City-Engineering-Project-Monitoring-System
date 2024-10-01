@@ -20,11 +20,7 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <script src="//unpkg.com/alpinejs" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.0.1/dist/chart.umd.min.js"></script>
-
-
 
 
     <!-- Styles -->
@@ -62,13 +58,7 @@
         </sidebar>
     @endif
     <div class="h-screen w-full flex flex-col {{ $bodyClass }}"
-         x-on:registered.window="pushNotification('success', 'Admin Created', 'Admin has been create successfully.');"
-         x-on:profile-success.window="pushNotification('success', 'Profile Updates', 'Profile has been update successfully.');"
-         x-on:category-saved.window="pushNotification('success', 'Category Saved', 'Category has been save successfully.');"
-         x-on:category-removed.window="pushNotification('success', 'Category Removed', 'Category has been remove successfully.');"
-         x-on:transaction-created.window="pushNotification('success', 'Transaction Created', 'Transaction has been created successfully.');"
-         x-on:transaction-edited.window="pushNotification('success', 'Transaction Edited', 'Transaction has been edit successfully.');"
-         x-on:transaction-removed.window="pushNotification('success', 'Transaction Removed', 'Transaction has been remove successfully.');">
+         x-on:project-added.window="pushNotification('success', 'Project Created', 'Project has been created successfully.');">
         <!-- Page Heading -->
         @if (isset($header))
             <header class="flex  {{ $headerClass }}">
@@ -91,7 +81,6 @@
 
 
 @stack('modals')
-{{--@livewire('wire-elements-modal')--}}
 @livewireScripts
 @if(session('script'))
     {!! session('script') !!}
@@ -103,6 +92,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<script src="{{ mix('js/app.js') }}"></script>
+
 </body>
 
 </html>

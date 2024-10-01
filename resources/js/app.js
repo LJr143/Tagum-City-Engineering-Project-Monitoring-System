@@ -1,6 +1,7 @@
 import './bootstrap';
-import Alpine from 'alpinejs';
+import "./packages/simple-notify";
+import 'filepond/dist/filepond.min.css';
+import 'filepond/dist/filepond.css';
 
-window.Alpine = Alpine;
 
-Alpine.start();
+
