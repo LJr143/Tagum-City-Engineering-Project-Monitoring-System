@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('address');
             $table->double('project_cost');
             $table->text('description');
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }

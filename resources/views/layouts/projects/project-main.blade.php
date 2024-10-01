@@ -28,15 +28,7 @@
                     :class="selected === 'all' ? 'bg-white text-black' : 'bg-gray-100 text-gray-600 hover:text-black'"
                     class="flex-grow px-3 py-1 rounded-full mx-1 font-semibold text-sm"
                     @click="selected = 'all'">
-                    <span :class="selected === 'all' ? 'text-green-500' : 'text-gray-600'">237</span> All Projects
-                </button>
-
-                <!-- On Progress Button -->
-                <button
-                    :class="selected === 'onProgress' ? 'bg-white text-black' : 'bg-gray-100 text-gray-600 hover:text-black'"
-                    class="flex-grow px-3 py-1 rounded-full mx-1 font-semibold text-sm"
-                    @click="selected = 'onProgress'">
-                    <span :class="selected === 'onProgress' ? 'text-green-500' : 'text-gray-600'">2</span> On Progress
+                    <span :class="selected === 'all' ? 'text-green-500' : 'text-gray-600'">{{$projects->count()}}</span> All Projects
                 </button>
 
                 <!-- Pending Button -->
@@ -44,7 +36,7 @@
                     :class="selected === 'pending' ? 'bg-white text-black' : 'bg-gray-100 text-gray-600 hover:text-black'"
                     class="flex-grow px-3 py-1 rounded-full mx-1 font-semibold text-sm"
                     @click="selected = 'pending'">
-                    <span :class="selected === 'pending' ? 'text-green-500' : 'text-gray-600'">4</span> Pending
+                    <span :class="selected === 'pending' ? 'text-green-500' : 'text-gray-600'">{{$pendingProjects}}</span> Pending
                 </button>
 
                 <!-- Closed Button -->
@@ -52,7 +44,7 @@
                     :class="selected === 'closed' ? 'bg-white text-black' : 'bg-gray-100 text-gray-600 hover:text-black'"
                     class="flex-grow px-3 py-1 rounded-full mx-1 font-semibold text-sm"
                     @click="selected = 'closed'">
-                    <span :class="selected === 'closed' ? 'text-green-500' : 'text-gray-600'">2</span> Closed
+                    <span :class="selected === 'closed' ? 'text-green-500' : 'text-gray-600'">{{$completedProjects}}</span> Completed
                 </button>
             </div>
 
