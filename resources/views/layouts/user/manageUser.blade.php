@@ -11,8 +11,8 @@
 
     <x-slot name="main">
 
-        <h1 class="text-xl font-medium ml-5">User</h1>
-        <p class="mb-6 ml-5 text-sm">List of user within the system</p>
+        <h1 class="text-xl font-medium">User</h1>
+        <p class="mb-6 text-sm">List of user within the system</p>
 
         <div class="container mx-auto bg-white p-6 rounded-lg shadow">
             <div class="flex flex-col md:flex-row justify-between items-center mb-4">

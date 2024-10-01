@@ -56,7 +56,7 @@ Route::get('/system-logs', function () {
 
 Route::get('/report', function () {
     return view('layouts.reports.report');
-})->name('report');
+});
 
 
 Route::get('/user', function () {
