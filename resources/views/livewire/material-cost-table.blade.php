@@ -2,7 +2,7 @@
     <!-- Project Header -->
     <h3 class="text-base pb-3 font-semibold leading-6 text-gray-900">POW 1</h3>
     <div class="flex justify-between items-center mb-6">
-        <span class="bg-green-500 text-xs text-white py-1 px-4 rounded-full">#PRJ2023-03-19879</span>
+        <span class="bg-green-600 text-xs text-white py-1 px-4 rounded-full">#PRJ2023-03-19879</span>
     </div>
 
     <!-- Main Content Grid -->
@@ -15,11 +15,19 @@
 
                 <!-- Filter, Search, Import Inside Card -->
                 <div class="flex items-center justify-between mb-4 space-x-4">
-                    <div class="flex items-center border border-gray-300 bg-white p-1 rounded-lg shadow-sm w-7">
-                        <button class="p-0.5 flex items-center justify-center text-gray-500 hover:text-gray-700 text-xs">
+
+                    <div class="relative">
+                        <button id="filter-btn" class="bg-white-200 border border-gray-200 p-1.5 rounded">
                             <img src="{{ asset('images/img.png') }}" alt="Filter Icon" class="w-3 h-3 object-cover">
                         </button>
+                        <div id="filter-options" class="absolute left-0 mt-2 w-32 bg-white border rounded shadow-lg z-50 hidden">
+                            <button class="block w-full text-left px-2 py-1 text-xs hover:bg-gray-100" data-role="all">All</button>
+                            <button class="block w-full text-left px-2 py-1 text-xs hover:bg-gray-100" data-role="admin">Admin</button>
+                            <button class="block w-full text-left px-2 py-1 text-xs hover:bg-gray-100" data-role="engineer">Engineer</button>
+                            <button class="block w-full text-left px-2 py-1 text-xs hover:bg-gray-100" data-role="viewer">Viewer</button>
+                        </div>
                     </div>
+
                     <div class="flex space-x-2 ml-auto">
                         <input type="text" placeholder="Search..." class="px-2 py-1 border border-gray-300 rounded-lg shadow-sm text-xs w-36">
                         <button class="importFileBtn bg-green-700 text-white rounded-lg px-2 py-1 shadow-md text-xs hover:bg-green-800 transition-colors duration-300">Import File</button>
@@ -81,14 +89,52 @@
                 </div>
 
                 <!-- Pagination -->
-                <div class="flex justify-between items-center mt-4">
-                    <p class="text-xs">Showing 1 to 10 of 100 entries</p>
-                    <div class="text-xs space-x-1">
-                        <button class="px-3 py-1 bg-gray-300 rounded-md">1</button>
-                        <button class="px-3 py-1 bg-gray-300 rounded-md">2</button>
-                        <button class="px-3 py-1 bg-gray-300 rounded-md">3</button>
-                    </div>
+                <div class="flex justify-between items-center mt-2">
+                    <nav class="flex flex-col items-start justify-between p-2 space-y-2 md:flex-row md:items-center md:space-y-0 w-full" aria-label="Table navigation">
+                        <!-- Showing X of Y on the left side -->
+                        <span class="text-xs font-normal text-gray-500 dark:text-gray-400">
+            Showing
+            <span class="font-semibold text-black">1-10</span>
+            of
+            <span class="font-semibold text-black">1000</span>
+        </span>
+                        <!-- Pagination aligned to the right -->
+                        <ul class="inline-flex items-stretch -space-x-px bg-white p-1 rounded-lg shadow-sm border border-gray-300 ml-auto">
+                            <li>
+                                <a href="#" class="flex items-center justify-center h-full py-1 px-2 ml-0 text-xs text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700">
+                                    <span class="sr-only">Previous</span>
+                                    <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="flex items-center justify-center px-2 py-1 text-xs leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">1</a>
+                            </li>
+                            <li>
+                                <a href="#" class="flex items-center justify-center px-2 py-1 text-xs leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">2</a>
+                            </li>
+                            <li>
+                                <a href="#" aria-current="page" class="z-10 flex items-center justify-center px-2 py-1 text-xs leading-tight text-primary-600 bg-primary-50 border-primary-300 hover:bg-primary-100 hover:text-primary-700">3</a>
+                            </li>
+                            <li>
+                                <a href="#" class="flex items-center justify-center px-2 py-1 text-xs leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">...</a>
+                            </li>
+                            <li>
+                                <a href="#" class="flex items-center justify-center px-2 py-1 text-xs leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">100</a>
+                            </li>
+                            <li>
+                                <a href="#" class="flex items-center justify-center h-full py-1 px-2 leading-tight text-xs text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700">
+                                    <span class="sr-only">Next</span>
+                                    <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
+
             </div>
         </div>
 
@@ -105,13 +151,20 @@
             <div class="bg-white shadow-md rounded-lg p-4">
                 <h3 class="text-sm font-semibold mb-4 text-center">Labor Cost</h3>
 
-                <!-- Filter, Search, Import Inside Card -->
                 <div class="flex items-center justify-between mb-4 space-x-4">
-                    <div class="flex items-center border border-gray-300 bg-white p-1 rounded-lg shadow-sm w-7">
-                        <button class="p-0.5 flex items-center justify-center text-gray-500 hover:text-gray-700 text-xs">
+
+                    <div class="relative">
+                        <button id="filter-btn" class="bg-white-200 border border-gray-200 p-1.5 rounded">
                             <img src="{{ asset('images/img.png') }}" alt="Filter Icon" class="w-3 h-3 object-cover">
                         </button>
+                        <div id="filter-options" class="absolute left-0 mt-1 w-32 bg-white border rounded shadow-lg z-50 hidden">
+                            <button class="block w-full text-left px-2 py-1 text-sm hover:bg-gray-100" data-role="all">All</button>
+                            <button class="block w-full text-left px-2 py-1 text-sm hover:bg-gray-100" data-role="admin">Admin</button>
+                            <button class="block w-full text-left px-2 py-1 text-sm hover:bg-gray-100" data-role="engineer">Engineer</button>
+                            <button class="block w-full text-left px-2 py-1 text-sm hover:bg-gray-100" data-role="viewer">Viewer</button>
+                        </div>
                     </div>
+
                     <div class="flex space-x-2 ml-auto">
                         <input type="text" placeholder="Search..." class="px-2 py-1 border border-gray-300 rounded-lg shadow-sm text-xs w-36">
                         <button class="importFileBtn bg-green-700 text-white rounded-lg px-2 py-1 shadow-md text-xs hover:bg-green-800 transition-colors duration-300">Import File</button>
@@ -119,7 +172,6 @@
                 </div>
 
                 <!-- Table for Labor Costs -->
-                <!-- Table for Material Costs -->
                 <div class="inline-block min-w-full py-2 align-middle sm:px-0 lg:px-2"> <!-- Adjusted sm:px and lg:px -->
                     <div class="relative bg-white shadow rounded-lg">
                         <table class="min-w-full table-fixed divide-y divide-gray-300">
@@ -174,36 +226,72 @@
                 </div>
 
                 <!-- Pagination -->
-                <div class="flex justify-between items-center mt-4">
-                    <p class="text-xs">Showing 1 to 10 of 100 entries</p>
-                    <div class="text-xs space-x-1">
-                        <button class="px-3 py-1 bg-gray-300 rounded-md">1</button>
-                        <button class="px-3 py-1 bg-gray-300 rounded-md">2</button>
-                        <button class="px-3 py-1 bg-gray-300 rounded-md">3</button>
-                    </div>
+                <div class="flex justify-between items-center mt-2">
+                    <nav class="flex flex-col items-start justify-between p-2 space-y-2 md:flex-row md:items-center md:space-y-0 w-full" aria-label="Table navigation">
+                        <!-- Showing X of Y on the left side -->
+                        <span class="text-xs font-normal text-gray-500 dark:text-gray-400">
+            Showing
+            <span class="font-semibold text-black">1-10</span>
+            of
+            <span class="font-semibold text-black">1000</span>
+        </span>
+                        <!-- Pagination aligned to the right -->
+                        <ul class="inline-flex items-stretch -space-x-px bg-white p-1 rounded-lg shadow-sm border border-gray-300 ml-auto">
+                            <li>
+                                <a href="#" class="flex items-center justify-center h-full py-1 px-2 ml-0 text-xs text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700">
+                                    <span class="sr-only">Previous</span>
+                                    <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="flex items-center justify-center px-2 py-1 text-xs leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">1</a>
+                            </li>
+                            <li>
+                                <a href="#" class="flex items-center justify-center px-2 py-1 text-xs leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">2</a>
+                            </li>
+                            <li>
+                                <a href="#" aria-current="page" class="z-10 flex items-center justify-center px-2 py-1 text-xs leading-tight text-primary-600 bg-primary-50 border-primary-300 hover:bg-primary-100 hover:text-primary-700">3</a>
+                            </li>
+                            <li>
+                                <a href="#" class="flex items-center justify-center px-2 py-1 text-xs leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">...</a>
+                            </li>
+                            <li>
+                                <a href="#" class="flex items-center justify-center px-2 py-1 text-xs leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">100</a>
+                            </li>
+                            <li>
+                                <a href="#" class="flex items-center justify-center h-full py-1 px-2 leading-tight text-xs text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700">
+                                    <span class="sr-only">Next</span>
+                                    <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
+
+
+
             </div>
         </div>
 
         <!-- Cost Modal -->
-        <div class="bg-white shadow-md rounded-lg p-4 mt-4"> <!-- Keeping mt-4 for top margin -->
-            <h3 class="text-sm font-bold mb-2">Cost Entry</h3> <!-- Reduced bottom margin to mb-2 -->
+        <div class="bg-white shadow-md rounded-lg p-4 mt-4">
+            <h3 class="text-sm font-bold mb-2">Cost Entry</h3>
             <form>
-                <div class="text-xs mb-2"> <!-- Reduced bottom margin to mb-2 -->
-                    <label for="amount" class="block text-gray-700">Material Cost</label>
-                    <input type="text" id="amount" class="w-full text-xs border border-gray-300 rounded-md px-3 py-2" placeholder="Enter Total Material Cost">
+                <div class="text-xs mb-4">
+                    <label for="amount" class="block mb-1 text-gray-700">Material Cost</label>
+                    <input type="text" id="amount" class="w-full text-xs border border-gray-300 rounded-md px-3 py-2" >
                 </div>
-                <div class="text-xs mb-2"> <!-- Reduced bottom margin to mb-2 -->
-                    <label for="payroll" class="block text-gray-700">Payroll Amount</label>
-                    <input type="text" id="payroll" class="w-full text-xs border border-gray-300 rounded-md px-3 py-2" placeholder="Enter Payroll Amount">
+                <div class="text-xs mb-4">
+                    <label for="payroll" class="block mb-1 text-gray-700">Labor Cost Amount</label>
+                    <input type="text" id="payroll" class="w-full text-xs border border-gray-300 rounded-md px-3 py-2" >
                 </div>
-                <div class="text-xs mb-2"> <!-- Reduced bottom margin to mb-2 -->
-                    <label for="payroll" class="block text-gray-700">Payroll Amount</label>
-                    <input type="text" id="payroll" class="w-full text-xs border border-gray-300 rounded-md px-3 py-2" placeholder="Enter Payroll Amount">
-                </div>
-                <div class="text-xs mb-2"> <!-- Reduced bottom margin to mb-2 -->
-                    <label for="payroll" class="block text-gray-700">Payroll Amount</label>
-                    <input type="text" id="payroll" class="w-full text-xs border border-gray-300 rounded-md px-3 py-2" placeholder="Enter Payroll Amount">
+                <div class="text-xs mb-4">
+                    <label for="payroll" class="block mb-1 text-gray-700">Payroll Amount</label>
+                    <input type="text" id="payroll" class="w-full text-xs border border-gray-300 rounded-md px-3 py-2" >
                 </div>
 
                 <!-- Save and Cancel Buttons -->
@@ -254,6 +342,47 @@
 
         <!-- JavaScript to handle file upload and display status -->
         <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const filterBtn = document.getElementById('filter-btn');
+                const filterOptions = document.getElementById('filter-options');
+
+                // Toggle the visibility of filter options
+                filterBtn.addEventListener('click', () => {
+                    filterOptions.classList.toggle('hidden');
+                });
+
+                // Close the filter options when clicking outside
+                document.addEventListener('click', (event) => {
+                    if (!filterOptions.contains(event.target) && !filterBtn.contains(event.target)) {
+                        filterOptions.classList.add('hidden');
+                    }
+                });
+
+                // Handle filter option click
+                filterOptions.querySelectorAll('button').forEach(option => {
+                    option.addEventListener('click', (event) => {
+                        const role = event.target.getAttribute('data-role');
+                        filterContent(role);
+
+                        // Close the filter options after selecting
+                        filterOptions.classList.add('hidden');
+                    });
+                });
+
+                // Function to filter content based on selected role
+                function filterContent(role) {
+                    // Example: Assuming you have rows with a data attribute `data-role`
+                    const rows = document.querySelectorAll('.data-row');
+                    rows.forEach(row => {
+                        if (role === 'all' || row.getAttribute('data-role') === role) {
+                            row.classList.remove('hidden');
+                        } else {
+                            row.classList.add('hidden');
+                        }
+                    });
+                }
+            });
+
             document.addEventListener('DOMContentLoaded', function() {
                 // Select all import buttons
                 const importFileButtons = document.querySelectorAll('.importFileBtn');
