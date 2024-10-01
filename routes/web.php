@@ -59,3 +59,6 @@ Route::get('/report', function () {
 })->name('report');
 
 
+Route::get('/user', function () {
+    return view('layouts.user.manageUser');
+})->name('user');
