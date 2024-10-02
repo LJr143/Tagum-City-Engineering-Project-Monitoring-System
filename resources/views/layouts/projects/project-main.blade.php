@@ -25,7 +25,7 @@
             <div x-data="{ selected: 'all' }" class="flex mb-6 bg-gray-200 p-1.5 rounded-full max-w-xl justify-between">
                 <!-- All projects Button -->
                 <button
-                    :class="selected === 'all' ? 'bg-white text-black' : 'bg-gray-100 text-gray-600 hover:text-black'"
+                    :class="selected === 'all' ? 'bg-white text-black' : 'text-gray-600 hover:text-black'"
                     class="flex-grow px-3 py-1 rounded-full mx-1 font-semibold text-xs"
                     @click="selected = 'all'">
                     <span :class="selected === 'all' ? 'text-green-500' : 'text-gray-600'">{{$projects->count()}}</span> All Projects
@@ -33,7 +33,7 @@
 
                 <!-- Pending Button -->
                 <button
-                    :class="selected === 'pending' ? 'bg-white text-black' : 'bg-gray-100 text-gray-600 hover:text-black'"
+                    :class="selected === 'pending' ? 'bg-white text-black' : 'text-gray-600 hover:text-black'"
                     class="flex-grow px-3 py-1 rounded-full mx-1 font-semibold text-xs"
                     @click="selected = 'pending'">
                     <span :class="selected === 'pending' ? 'text-green-500' : 'text-gray-600'">{{$pendingProjects}}</span> Pending
@@ -41,7 +41,7 @@
 
                 <!-- Closed Button -->
                 <button
-                    :class="selected === 'closed' ? 'bg-white text-black' : 'bg-gray-100 text-gray-600 hover:text-black'"
+                    :class="selected === 'closed' ? 'bg-white text-black' : 'text-gray-600 hover:text-black'"
                     class="flex-grow px-3 py-1 rounded-full mx-1 font-semibold text-xs"
                     @click="selected = 'closed'">
                     <span :class="selected === 'closed' ? 'text-green-500' : 'text-gray-600'">{{$completedProjects}}</span> Completed
@@ -53,7 +53,7 @@
                 <div class="flex space-x-4 mb-4">
                     <!-- Start Date -->
                     <div>
-                        <label for="start-date" class="block text-xs font-medium text-gray-700">Start Date</label>
+                        <label for="start-date" class="block text-xs text-gray-700">Start Date</label>
                         <input
                             type="date"
                             id="start-date"
@@ -64,7 +64,7 @@
 
                     <!-- End Date -->
                     <div>
-                        <label for="end-date" class="block text-xs font-medium text-gray-700">End Date</label>
+                        <label for="end-date" class="block text-xs text-gray-700">End Date</label>
                         <input
                             type="date"
                             id="end-date"
@@ -137,8 +137,8 @@
 
                             <!-- Project Details -->
                             <div class="flex flex-col w-1/4">
-                                <div class="text-green-500 text-xs font-bold mb-2 truncate"># {{ $project->id }}</div>
-                                <h2 class="text-lg font-semibold truncate" title="{{ $project->title }}">{{ $project->title }}</h2>
+                                <div class="text-green-500 text-xs font-bold mb-2 truncate">Project ID # {{ $project->id }}</div>
+                                <h2 class="text-md font-semibold truncate" title="{{ $project->title }}">{{ $project->title }}</h2>
                                 <div class="flex items-center mt-1">
                                     <svg class="mr-3" width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                         <rect width="18" height="16" fill="url(#pattern0_1075_18260)"/>
@@ -169,14 +169,14 @@
 
                             <div class="flex items-center w-1/5">
                                 <div class="text-left truncate">
-                                    <p class="text-gray-500 text-xs font-bold">Project Cost</p>
-                                    <p class="text-lg font-semibold truncate">Php {{ $project->project_cost }}</p>
+                                    <p class="text-gray-500 text-xs">Project Cost</p>
+                                    <p class="text-sm font-semibold truncate">Php {{ $project->project_cost }}</p>
                                 </div>
                             </div>
 
                             <!-- Cost percentage Section -->
                             <div class="flex items-center w-1/4 flex-col mt-2">
-                                <span class="text-black text-xs mb-1">Cost Percentage</span>
+                                <span class="text-gray-500 text-xs mb-1">Cost Percentage</span>
                                 <div class="relative w-48 h-3 bg-gray-200 rounded-full overflow-hidden">
                                     <div class="bg-green-500 h-full" style="width: 60%;"></div>
                                 </div>
@@ -185,7 +185,7 @@
 
                             <!-- Project percentage Section -->
                             <div class="flex items-center w-1/4 flex-col mt-2">
-                                <span class="text-black text-xs mb-1">Project Percentage</span>
+                                <span class="text-gray-500 text-xs mb-1">Project Percentage</span>
                                 <div class="relative w-48 h-3 bg-gray-200 rounded-full overflow-hidden">
                                     <div class="bg-yellow-500 h-full" style="width: 70%;"></div>
                                 </div>
