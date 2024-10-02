@@ -44,6 +44,11 @@ Route::get('/account-settings', function () {
 Route::get('/material-table-cost', function () {
     return view('layouts.Projects.material-cost-table');
 });
+// In your routes/web.php/ gidungag nako para mulahos gikan pow cards to material cost table
+Route::get('/material-table-cost', function () {
+    return view('layouts.Projects.material-cost-table');
+})->name('material-table-cost');
+
 Route::get('/main', function () {
     return view('layouts.Projects.dashboard');
 });
