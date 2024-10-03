@@ -7,7 +7,7 @@
                 <!-- Buttons and image on the right -->
                 <div class="flex flex-col items-end space-y-2 w-full">
                     <div class="flex space-x-2">
-                        <button class="bg-green-600 text-white text-xs px-4 py-2 rounded shadow-md hover:bg-green-700 focus:outline-none flex items-center space-x-2">
+                        <button id="edit-button" class="bg-green-600 text-white text-xs px-4 py-2 rounded shadow-md hover:bg-green-700 focus:outline-none flex items-center space-x-2">
                             <span>Edit</span>
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M21 7L17 3L14 6L8 12V16H12L18 10L21 7Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -16,7 +16,7 @@
                             </svg>
                         </button>
 
-                        <button class="bg-red-500 text-white text-xs px-4 py-2 rounded shadow-md hover:bg-red-600 focus:outline-none flex items-center space-x-2">
+                        <button id="delete-button" class="bg-red-500 text-white text-xs px-4 py-2 rounded shadow-md hover:bg-red-600 focus:outline-none flex items-center space-x-2">
                             <span>Delete</span>
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M10 10V16" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -26,7 +26,6 @@
                                 <path d="M15 6V5C15 3.89543 14.1046 3 13 3H11C9.89543 3 9 3.89543 9 5V6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </button>
-
                     </div>
 
                     <div class="relative flex flex-col items-center space-y-2 mt-4 w-full">
@@ -151,8 +150,86 @@
 
         </main>
     </div>
+    <!-- Modal -->
+    <div id="delete-modal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-lg p-6 w-1/3">
+            <div class="flex items-center mb-2">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M8.4845 2.49512C9.15808 1.32845 10.842 1.32845 11.5156 2.49512L17.7943 13.3701C18.4678 14.5368 17.6259 15.9951 16.2787 15.9951H3.72136C2.37421 15.9951 1.53224 14.5368 2.20582 13.3701L8.4845 2.49512ZM10 5.00012C10.4142 5.00012 10.75 5.33591 10.75 5.75012V9.25012C10.75 9.66434 10.4142 10.0001 10 10.0001C9.58579 10.0001 9.25 9.66434 9.25 9.25012L9.25 5.75012C9.25 5.33591 9.58579 5.00012 10 5.00012ZM10 14.0001C10.5523 14.0001 11 13.5524 11 13.0001C11 12.4478 10.5523 12.0001 10 12.0001C9.44772 12.0001 9 12.4478 9 13.0001C9 13.5524 9.44772 14.0001 10 14.0001Z" fill="#CA383A"/>
+                </svg>
+                <h2 class="text-sm font-semibold text-red-500">Delete Item</h2>
+            </div>
+            <p class="text-xs mb-4">Are you sure you want to remove this item? This process cannot be undone.</p>
+            <div class="flex justify-end">
+                <button id="cancel-button" class="bg-white border border-gray-300 text-gray-700 rounded-md text-xs px-4 py-2 hover:bg-gray-400">
+                    Cancel
+                </button>
+                <button class="bg-red-500 text-white rounded-md px-4 py-2 text-xs hover:bg-red-600 ml-2">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Edit Modal -->
+    <div id="add-card-modal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white p-6 rounded-lg shadow-md max-w-2xl w-full relative z-60">
+            <button id="close-modal" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
 
-    <!-- Modal Section (same as before) -->
+            <h3 class="text-lg font-bold mb-2">Edit POW Card</h3>
+            <form action="#" method="POST" class="space-y-2">
+                @csrf
+
+                <div class="flex flex-col space-y-1">
+                    <label for="pow-id" class="block text-gray-700 text-xs">POW ID</label>
+                    <input type="text" id="pow-id" name="pow_id" class="mt-1 block w-full h-8 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-xs" required readonly>
+                </div>
+
+                <div class="flex flex-col space-y-1">
+                    <label for="reference-number" class="block text-gray-700 text-xs">Reference Number</label>
+                    <input type="text" id="reference-number" name="reference_number" class="mt-1 block w-full h-8 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-xs" required>
+                </div>
+
+                <div class="flex flex-col space-y-1">
+                    <label for="description" class="block text-gray-700 text-xs">Description</label>
+                    <textarea id="description" name="description" rows="4" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-xs p-2" required></textarea>
+                </div>
+
+                <div class="flex space-x-4">
+                    <div class="flex-1">
+                        <label for="start-date" class="block text-xs font-small text-gray-700">Start Date</label>
+                        <input type="date" id="start-date" class="mt-1 block w-full p-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-xs">
+                    </div>
+                    <div class="flex-1">
+                        <label for="end-date" class="block text-xs font-small text-gray-700">End Date</label>
+                        <input type="date" id="end-date" class="mt-1 block w-full p-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-xs">
+                    </div>
+                </div>
+
+                <h3 class="text-xs font-semibold mb-2">Personnel and Other Information</h3>
+
+                <div class="flex flex-col space-y-1">
+                    <label for="name" class="block text-gray-700 text-xs">Name</label>
+                    <input type="text" id="name" name="name" class="mt-1 block w-full p-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-xs" required>
+                </div>
+
+                <div class="flex flex-col space-y-1">
+                    <label for="total_project_cost" class="block text-gray-700 text-xs">Total Project Cost</label>
+                    <input type="text" id="total_project_cost" name="total_project_cost" class="mt-1 block w-full p-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-xs" required>
+                </div>
+
+                <br>
+                <div class="flex justify-between mt-4">
+                    <button type="button" id="cancel-modal" class="border border-gray-300 text-gray-800 bg-white px-3 py-1 rounded hover:bg-gray-100 focus:outline-none text-xs flex-1 mr-2">Cancel</button>
+                    <button type="submit" class="bg-green-500 text-white px-3 py-1 rounded shadow-md hover:bg-green-600 focus:outline-none text-xs flex-1 ml-2">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- add pow modal -->
     <div id="add-card-modal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden z-50">
         <div class="bg-white p-6 rounded-lg shadow-md max-w-2xl w-full relative z-60">
             <button id="close-modal" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
@@ -207,6 +284,42 @@
     </div>
 
     <script>
+
+        // Get the button and modal elements for deleting
+        const deleteButton = document.getElementById('delete-button');
+        const deleteModal = document.getElementById('delete-modal');
+        const cancelDeleteButton = document.getElementById('cancel-button');
+
+        // Show delete modal when delete button is clicked
+        deleteButton.addEventListener('click', function() {
+            deleteModal.classList.remove('hidden');
+        });
+
+        // Hide delete modal when cancel button is clicked
+        cancelDeleteButton.addEventListener('click', function() {
+            deleteModal.classList.add('hidden');
+        });
+
+        // Get modal elements for editing
+        const editButton = document.getElementById('edit-button');
+        const editModal = document.getElementById('add-card-modal');
+        const closeEditModal = document.getElementById('close-modal');
+        const cancelEditModal = document.getElementById('cancel-modal');
+
+        // Show the edit modal when the edit button is clicked
+        editButton.addEventListener('click', () => {
+            editModal.classList.remove('hidden');
+        });
+
+        // Hide the edit modal when the close button or cancel button is clicked
+        closeEditModal.addEventListener('click', () => {
+            editModal.classList.add('hidden');
+        });
+        cancelEditModal.addEventListener('click', () => {
+            editModal.classList.add('hidden');
+        });
+
+
         // Preview uploaded image
         function previewImage(event) {
             const file = event.target.files[0];
