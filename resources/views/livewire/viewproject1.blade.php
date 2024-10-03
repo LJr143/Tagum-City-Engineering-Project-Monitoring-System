@@ -1,19 +1,32 @@
 <div>
-    <!-- Main content with buttons, image, and editable fields -->
+    <!-- Main content-->
     <div class="flex-1 p-5">
         <main>
-            <!-- Edit/Delete buttons and image (side by side buttons, image below) -->
+
             <div class="flex justify-end mb-4">
                 <!-- Buttons and image on the right -->
                 <div class="flex flex-col items-end space-y-2 w-full">
-                    <!-- Buttons side by side -->
                     <div class="flex space-x-2">
-                        <button class="bg-blue-500 text-white text-xs px-4 py-2 rounded shadow-md hover:bg-blue-600 focus:outline-none">
-                            Edit
+                        <button class="bg-green-600 text-white text-xs px-4 py-2 rounded shadow-md hover:bg-green-700 focus:outline-none flex items-center space-x-2">
+                            <span>Edit</span>
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 7L17 3L14 6L8 12V16H12L18 10L21 7Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M14 6L18 10" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M10 4H4V20H20V14" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
                         </button>
-                        <button class="bg-red-500 text-white text-xs px-4 py-2 rounded shadow-md hover:bg-red-600 focus:outline-none">
-                            Delete
+
+                        <button class="bg-red-500 text-white text-xs px-4 py-2 rounded shadow-md hover:bg-red-600 focus:outline-none flex items-center space-x-2">
+                            <span>Delete</span>
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10 10V16" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M14 10V16" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M18 6V18C18 19.1046 17.1046 20 16 20H8C6.89543 20 6 19.1046 6 18V6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M4 6H20" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M15 6V5C15 3.89543 14.1046 3 13 3H11C9.89543 3 9 3.89543 9 5V6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
                         </button>
+
                     </div>
 
                     <div class="relative flex flex-col items-center space-y-2 mt-4 w-full">
@@ -64,8 +77,15 @@
                                 <div class="bg-green-600 text-white text-xs px-2 py-1 rounded w-max mb-2">Ref: 12345</div>
                                 <h3 class="text-lg font-bold text-black">POW 1</h3>
                                 <p class="mt-2 text-gray-600 text-xs">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint...</p>
+
+                                <!-- Progress Bar Section -->
+                                <div class="w-full bg-gray-200 rounded-full h-2.5 mt-3">
+                                    <div class="bg-yellow-600 h-2.5 rounded-full" style="width: 70%;"></div>
+                                </div>
+                                <p class="text-xs text-gray-500 mt-2">Progress: 70%</p>
+
                                 <br>
-                                <div class="my-3 border-t border-gray-300"></div>
+                                <div class="mb-3 border-t border-gray-300"></div>
                                 <div class="flex items-center space-x-3">
                                     <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center">
                                         <img src="{{ asset('images/pic1.jpg') }}" alt="Engineer Image" class="w-12 h-12 rounded-full object-cover">
@@ -77,8 +97,8 @@
                                 </div>
                             </a>
                         @endfor
-
                     </div>
+
                     <!-- Pagination -->
                     <div class="flex justify-between items-center mt-2">
                         <nav class="flex flex-col items-start justify-between p-2 space-y-2 md:flex-row md:items-center md:space-y-0 w-full" aria-label="Table navigation">
@@ -90,9 +110,9 @@
             <span class="font-semibold text-black">1000</span>
         </span>
                             <!-- Pagination aligned to the right -->
-                            <ul class="inline-flex items-stretch -space-x-px bg-white p-1 rounded-lg shadow-sm border border-gray-300 ml-auto">
+                            <ul class="inline-flex items-stretch -space-x-px bg-white p-1 rounded-lg shadow-sm ml-auto">
                                 <li>
-                                    <a href="#" class="flex items-center justify-center h-full py-1 px-2 ml-0 text-xs text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700">
+                                    <a href="#" class="flex items-center justify-center h-full py-1 px-2 ml-0 text-xs text-gray-500 bg-white rounded-l-lg hover:bg-gray-100 hover:text-gray-700">
                                         <span class="sr-only">Previous</span>
                                         <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
@@ -100,22 +120,22 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="flex items-center justify-center px-2 py-1 text-xs leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">1</a>
+                                    <a href="#" class="flex items-center justify-center px-2 py-1 text-xs leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700">1</a>
                                 </li>
                                 <li>
-                                    <a href="#" class="flex items-center justify-center px-2 py-1 text-xs leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">2</a>
+                                    <a href="#" class="flex items-center justify-center px-2 py-1 text-xs leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700">2</a>
                                 </li>
                                 <li>
-                                    <a href="#" aria-current="page" class="z-10 flex items-center justify-center px-2 py-1 text-xs leading-tight text-primary-600 bg-primary-50 border-primary-300 hover:bg-primary-100 hover:text-primary-700">3</a>
+                                    <a href="#" aria-current="page" class="z-10 flex items-center justify-center px-2 py-1 text-xs leading-tight text-primary-600 bg-primary-50 hover:bg-primary-100 hover:text-primary-700">3</a>
                                 </li>
                                 <li>
-                                    <a href="#" class="flex items-center justify-center px-2 py-1 text-xs leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">...</a>
+                                    <a href="#" class="flex items-center justify-center px-2 py-1 text-xs leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700">...</a>
                                 </li>
                                 <li>
-                                    <a href="#" class="flex items-center justify-center px-2 py-1 text-xs leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">100</a>
+                                    <a href="#" class="flex items-center justify-center px-2 py-1 text-xs leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700">100</a>
                                 </li>
                                 <li>
-                                    <a href="#" class="flex items-center justify-center h-full py-1 px-2 leading-tight text-xs text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700">
+                                    <a href="#" class="flex items-center justify-center h-full py-1 px-2 leading-tight text-xs text-gray-500 bg-white rounded-r-lg hover:bg-gray-100 hover:text-gray-700">
                                         <span class="sr-only">Next</span>
                                         <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
@@ -125,6 +145,7 @@
                             </ul>
                         </nav>
                     </div>
+
                 </div>
             </div> <!-- End of Road Construction Card -->
 
