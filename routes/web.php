@@ -2,9 +2,21 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
+
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::middleware(['inactivity.logout'])->group(function () {
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/project-main', [ProjectController::class, 'index'])->name('project-main');
+        Route::get('/view-project-pow/{id}', [ProjectController::class, 'view'])->name('view-project-pow');
+    });
+});
+
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+
+//Route::get('/engineers', [UserController::class, 'getEngineers']);
 
 Route::get('/', function () {
     return view('welcome');
@@ -15,24 +27,6 @@ Route::get('systemlogs', function () {
 Route::get('report', function () {
     return view('report');
 })->name('report');
-Route::middleware([
-    'auth:sanctum',
-    config('stream.auth_session'),
-    'verified',
-])->group(function () {
-
-
-});
-
-
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('/project-main', [ProjectController::class, 'index'])->name('project-main');
-Route::get('/view-project-pow/{id}', [ProjectController::class, 'view'])->name('view-project-pow');
-//Route::get('/engineers', [UserController::class, 'getEngineers']);
-Route::middleware(['auth', 'inactivity.logout'])->group(function () {
-    // Protected routes here
-});
-
 
 Route::get('/users', function () {
     return view('layouts.user.manageUser');
@@ -60,7 +54,7 @@ Route::get('/main', function () {
 });
 
 
-route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+//route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
 Route::get('/system-logs', function () {
     return view('layouts.system_logs.system-logs');

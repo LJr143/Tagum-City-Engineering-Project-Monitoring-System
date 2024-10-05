@@ -69,22 +69,6 @@
                     <span class="-mr-1 " :class="{'block':showSide, 'hidden':!showSide}" style="font-size: 12px">Reports</span>
                 </a>
             </li>
-
-            <li x-data="{toggle: false}"  @mouseenter="toggle = true"
-                @mouseleave="toggle = false"
-                :style="toggle ? 'background-color: rgba(36, 144, 0, 0.3);' : ''">
-                <a href="" aria-label="dashboard" @class(['relative flex items-center gap-3 px-6 py-0 text-Primary font-medium', ' text-customGreen font-semibold'=> request()->routeIs('')]) @mouseenter="toggle = true" @mouseleave="toggle = false"
-                   @click="setActiveTab(''); show = false; showManage = false; subActiveItem = ''; setsubTmsActiveItem(''); setsettingsTmsActiveItem('')">
-                    <div class=" text-center px-[13px] py-[10px] rounded-full justify-center items-center flex"
-                         :class="{'bg-customGreen-100': {{ request()->routeIs('') ? 'true' : 'false' }}, 'bg-none': {{ !request()->routeIs('') ? 'true' : 'false' }}}">
-                        <svg width="15" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M15 3.80522H15.8333C16.75 3.80522 17.5 4.55522 17.5 5.47188V17.1386C17.5 18.0552 16.75 18.8052 15.8333 18.8052H4.16667C3.24167 18.8052 2.5 18.0552 2.5 17.1386L2.50833 5.47188C2.50833 4.55522 3.24167 3.80522 4.16667 3.80522H5V2.13855H6.66667V3.80522H13.3333V2.13855H15V3.80522ZM4.16667 17.1386H15.8333V7.97188H4.16667V17.1386Z" fill="#464255"/>
-                        </svg>
-                    </div>
-                    <span class="-mr-1 " :class="{'block':showSide, 'hidden':!showSide}" style="font-size: 12px">Calendar</span>
-                </a>
-            </li>
-
             <li x-data="{toggle: false}" @mouseenter="toggle = true"
                 @mouseleave="toggle = false"
                 :style="toggle ? 'background-color: rgba(36, 144, 0, 0.3);' : ''">
@@ -118,14 +102,6 @@
             </li>
 
         </ul>
-
-
-{{--                <!-- Hidden Logout Form -->--}}
-{{--                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
-{{--                    @csrf--}}
-{{--                </form>--}}
-{{--            </li>--}}
-{{--        </ul>--}}
 
     </div>
 </div>
