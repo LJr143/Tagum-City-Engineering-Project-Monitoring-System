@@ -1,4 +1,4 @@
-<div x-data="{ open: false }" x-cloak>
+<div x-data="{ open: false }" x-cloak @project-added.window="open = false">
     <div class="flex justify-end">
         <div class="relative ml-2">
             <button @click="open = true" class="bg-green-500 text-white px-3 py-1 rounded-lg text-sm">

@@ -58,7 +58,9 @@
         </sidebar>
     @endif
     <div class="h-screen w-full flex flex-col {{ $bodyClass }}"
-         x-on:project-added.window="pushNotification('success', 'Project Created', 'Project has been created successfully.');">
+         x-on:project-added.window="pushNotification('success', 'Project Created', 'Project has been created successfully.');"
+         x-on:pow-added.window="pushNotification('success', 'POW Created', 'Project has been created successfully.');">
+
         <!-- Page Heading -->
         @if (isset($header))
             <header class="flex  {{ $headerClass }}">

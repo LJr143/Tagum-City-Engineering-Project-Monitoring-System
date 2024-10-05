@@ -15,5 +15,12 @@ class Project extends Model
         'project_cost',
         'description',
     ];
+
+
+    public function pows(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Pow::class);
+    }
+
 }
 
