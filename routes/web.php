@@ -52,7 +52,12 @@ Route::get('/material-table-cost', function () {
 Route::get('/main', function () {
     return view('layouts.Projects.dashboard');
 });
-
+Route::get('/proj-pow-engineer', function () {
+    return view('layouts.Projects.proj-pow-engineer');
+});
+Route::get('/engineer-materialscost-table', function () {
+    return view('layouts.Projects.engineer-materialscost-table');
+});
 
 route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
