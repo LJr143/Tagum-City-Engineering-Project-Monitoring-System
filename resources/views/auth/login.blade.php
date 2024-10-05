@@ -5,7 +5,7 @@
 
         <div style="margin-left: 60px; width: 350px">
             <p class="font-bold mt-10" style="font-size: 25px; color: #249000">WELCOME BACK</p>
-            <p class="text-black" style="font-size: 10px">Don't have an account? <span><a class="text-blue-500" href=""> Create an Account here</a></span></p>
+            <p class="text-black" style="font-size: 10px">Don't have an account? <span><a class="text-blue-500" href="{{ route('register') }}"> Create an Account here</a></span></p>
             <p class="text-black font-bold" style="font-size: 10px">TC-PMS  <span class="font-medium">is a project monitoring system dedicated for the city of Tagum’s office of the city Engineer</span></p>
             <p class="text-black font-bold mt-10" style="color: #249000; font-size: 12px">PLEASE LOGIN TO CONTINUE</p>
 
@@ -49,7 +49,7 @@
                  </div>
 
                  <div class="mt-8">
-                     <x-button class="w-[350px] h-[40px] flex items-center justify-center bg-customGreen text-sm">
+                     <x-button class="w-[350px] h-[40px] flex items-center justify-center bg-[#249000] text-sm">
                          {{ __('Log in') }}
                      </x-button>
                  </div>

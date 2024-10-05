@@ -24,7 +24,7 @@ class AddProject extends Component
     {
         $this->validate();
 
-        // Create a new project using Eloquent Builder
+        //  Create new Project 
         Project::create([
             'title' => $this->title,
             'address' => $this->address,
@@ -32,13 +32,13 @@ class AddProject extends Component
             'description' => $this->description,
         ]);
 
-        // Reset the form fields
+        // Reset form input
         $this->reset();
 
-        // Dispatch the event (optional if you want to use notifications)
+        // Dispatch event
         $this->dispatch('project-added');
 
-        // Redirect with success message
+        // Redirect
         return redirect()->route('project-main')->with('success', 'Project added successfully.');
     }
 

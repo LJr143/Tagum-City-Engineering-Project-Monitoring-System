@@ -14,4 +14,11 @@ class ProjectController extends Controller
       return view('layouts.projects.project-main', compact('projects', 'pendingProjects', 'completedProjects'));
  }
 
+
+    public function view($id)
+    {
+        $project = Project::findOrFail($id);
+        return view('layouts.projects.viewproject1', compact('project'));
+    }
+
 }

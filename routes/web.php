@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
-use App\Livewire\ProjectMain;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
@@ -25,13 +26,17 @@ Route::middleware([
 
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('/project-main', [\App\Http\Controllers\ProjectController::class, 'index'])->name('project-main');
+Route::get('/project-main', [ProjectController::class, 'index'])->name('project-main');
+Route::get('/view-project-pow/{id}', [ProjectController::class, 'view'])->name('view-project-pow');
+//Route::get('/engineers', [UserController::class, 'getEngineers']);
+Route::middleware(['auth', 'inactivity.logout'])->group(function () {
+    // Protected routes here
+});
 
 
-Route::get('/view-project-pow', function () {
-    return view('layouts.projects.viewproject1');
-})->name('view-project-pow');
-
+Route::get('/users', function () {
+    return view('layouts.user.manageUser');
+})->name('user');
 
 Route::get('/project-cost', function () {
     return view('layouts.projects.project-view-pow');
@@ -44,6 +49,7 @@ Route::get('/account-settings', function () {
 Route::get('/material-table-cost', function () {
     return view('layouts.Projects.material-cost-table');
 });
+
 // In your routes/web.php/ gidungag nako para mulahos gikan pow cards to material cost table
 Route::get('/material-table-cost', function () {
     return view('layouts.Projects.material-cost-table');
