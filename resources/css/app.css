@@ -6,7 +6,7 @@
     display: none;
 }
 .transition {
-    transition: width 0.3s ease-in-out; /* Adjust duration as needed */
+    transition: width 0.3s ease-in-out;
 }
 
 
