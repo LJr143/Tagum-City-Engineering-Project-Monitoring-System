@@ -21,4 +21,12 @@ class ProjectController extends Controller
         return view('layouts.projects.viewproject1', compact('project'));
     }
 
+    public function destroy($id)
+    {
+        $project = Project::findOrFail($id);
+        $project->delete();
+
+        return redirect()->route('project-main')->with('message', 'Project deleted successfully.');
+    }
+
 }

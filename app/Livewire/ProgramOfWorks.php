@@ -8,7 +8,9 @@ use Livewire\WithPagination;
 
 class ProgramOfWorks extends Component
 {
-    use WithPagination; // Enable pagination
+    use WithPagination;
+
+    // Enable pagination
 
     public $projectId;
 
@@ -19,8 +21,11 @@ class ProgramOfWorks extends Component
 
     public function render()
     {
+        // Fetch project details and associated pows with pagination
+        $project = Project::findOrFail($this->projectId);
+
         // Fetch cards related to the project with pagination
-        $cards = Project::find($this->projectId)->pows()->paginate(10); // 10 cards per page
+        $cards = $project->pows()->paginate(9); // 9 cards per page
 
         return view('livewire.program-of-works', compact('cards'));
     }

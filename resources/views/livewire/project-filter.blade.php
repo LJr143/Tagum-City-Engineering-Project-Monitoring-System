@@ -73,8 +73,6 @@
                         </svg>
 
 
-
-
                         <!-- Project Details -->
                         <div class="flex flex-col w-1/4">
                             <div class="text-green-500 text-xs font-bold mb-2 truncate">Project ID # {{ $project->id }}</div>

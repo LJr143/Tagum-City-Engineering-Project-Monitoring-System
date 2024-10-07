@@ -14,6 +14,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 });
 
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+Route::delete('/project/{id}', [ProjectController::class, 'destroy'])->name('project.destroy');
+
 
 
 //Route::get('/engineers', [UserController::class, 'getEngineers']);

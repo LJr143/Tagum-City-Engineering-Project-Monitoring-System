@@ -1,8 +1,8 @@
-<div class="h-[85px] justify-between items-center px-1 hidden lg:flex transform ease-in-out transition"
-    :class="{'w-[240px]':showSide, 'w-[100px]':!showSide}">
+<div class="h-[85px] w-[250px] justify-between items-center px-1 hidden lg:flex transition-all duration-300"
+    :class="{'w-[250px]':showSide, 'w-[100px]':!showSide}">
 
     <div class="mt-10" :class="{'block':showSide, 'hidden':!showSide}">
-        <img src="{{ asset('storage/pmsAssets/pms_logo.png') }}" class="h-30 w-40 ml-1.5" alt="logo">
+        <img src="{{ asset('storage/pmsAssets/pms_logo.png') }}" class="h-30 w-25  ml-1.5" alt="logo">
     </div>
         <button @click="showSide = ! showSide; show = false; showManage = false"
                 :class="{'hover:bg-customGreen-50 focus:bg-customGreen-100':showSide, 'bg-customGreen-100':!showSide}" class="p-3 ml-2 rounded-xl">

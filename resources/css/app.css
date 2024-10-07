@@ -5,4 +5,8 @@
 [x-cloak] {
     display: none;
 }
+.transition {
+    transition: width 0.3s ease-in-out; /* Adjust duration as needed */
+}
+
 
