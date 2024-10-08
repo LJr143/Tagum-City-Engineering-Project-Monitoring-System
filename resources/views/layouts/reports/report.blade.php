@@ -163,6 +163,7 @@
                                                 </tr>
                                             </tbody>
                                         </table>
+
                                     </div>
 
                                     <!-- Footer (Close button) -->
@@ -170,11 +171,185 @@
                                         <button id="closeModal" class="px-4 py-2 mr-4 text-sm font-medium text-black bg-white rounded-lg hover:bg-red-700">
                                             Cancel
                                         </button>
-                                        <button id="closeModal" class="px-4 py-2 text-sm font-medium text-white bg-[#249000] rounded-lg hover:bg-blue-400">
+                                        <button id="ReportInvoice" class="px-4 py-2 text-sm font-medium text-white bg-[#249000] rounded-lg hover:bg-blue-400">
                                             Generate Report
                                         </button>
                                     </div>
                                 </div>
+
+                                <div class="">
+                                    <!-- Invoice Section (Initially Hidden) -->
+                                    <section id="invoiceSection2"
+                                        class="fixed inset-0 z-50 w-[95%] max-w-[95%] mx-auto p-10 bg-white rounded-lg shadow-lg mt-6 hidden overflow-y-auto">
+
+                                        <!-- Header Section -->
+                                        <div class="flex justify-between items-center border-b pb-8">
+                                            <!-- Logo and Company Name -->
+                                            <div class="flex items-center space-x-4">
+                                                <img src="{{ asset('storage/pmsAssets/pms_logo.png') }}" class="h-30 w-40 ml-1.5" alt="logo">
+                                            </div>
+                                            <div class="flex justify-center items-center h-full inline-grid grid-rows-3 gap-1">
+                                                <p class="text-sm text-gray-600 text-center">Republic of the Philippines</p>
+                                                <p class="text-sm text-gray-600 text-center">Province of Davao del Norte</p>
+                                                <p class="text-sm text-gray-600 text-center">City of Tagum</p>
+                                            </div>
+
+                                            <!-- Invoice Info -->
+                                            <div class="text-right">
+                                                <h2 class="text-xl font-bold uppercase">Invoice</h2>
+                                                <p class="text-sm text-gray-600">Date Generated: <span>date</span></p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Project Details Section -->
+                                        <div class="py-8">
+                                            <h2 class="text-lg font-semibold text-gray-700 uppercase text-center">Project Information</h2>
+                                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+                                                <div class="flex items-center space-x-2">
+                                                    <h3 class="text-sm text-gray-500">Project Name</h3>
+                                                    <p class="text-sm mr-2 font-medium text-gray-800">project_name</p>
+                                                </div>
+                                                <div class="flex items-center space-x-2">
+                                                    <h3 class="text-sm text-gray-500">Date Generated</h3>
+                                                    <p class="text-sm font-medium text-gray-800">date</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Materials Section -->
+                                        <div>
+                                            <h2 class="text-lg font-semibold text-gray-700 uppercase">Project Details</h2>
+                                            <div class="overflow-x-auto mt-6">
+                                                <table class="w-full border-collapse text-sm">
+                                                    <thead class="bg-gray-100">
+                                                        <tr>
+                                                            <th class="p-4 text-center font-medium text-gray-600">Project name</th>
+                                                            <th colspan="2" class="p-4 text-center font-medium text-gray-600">Program of Work</th>
+                                                            <th colspan="2" class="p-4 text-center font-medium text-gray-600">Status of Implementation</th>
+                                                            <th class="p-4 text-center font-medium text-gray-600">Accomplishment status %</th>
+                                                            <th class="p-4 text-center font-medium text-gray-600">Project In-charge</th>
+                                                            <th class="p-4 text-center font-medium text-gray-600">Remarks</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <thead class="bg-gray-100">
+                                                        <tr>
+                                                            <th class="p-4 text-left font-medium text-gray-600"></th>
+                                                            <th class="p-4 text-center font-medium text-gray-600">Reference No.</th>
+                                                            <th class="p-4 text-center font-medium text-gray-600">Date Receive</th>
+                                                            <th class="p-4 text-center font-medium text-gray-600">Date Started</th>
+                                                            <th class="p-4 text-center font-medium text-gray-600">Date Target Ended</th>
+                                                            <th class="p-4 text-right font-medium text-gray-600"></th>
+                                                            <th class="p-4 text-right font-medium text-gray-600"></th>
+                                                            <th class="p-4 text-right font-medium text-gray-600"></th>
+                                                            <!-- <th class="p-4 text-right font-medium text-gray-600">Remarks</th>
+                                                            <th scope="col" class="px-6 py-3 text-center">Reference No.</th>
+                                                            <th scope="col" class="px-6 py-3 text-center">Date Receive</th>
+                                                            <th scope="col" class="px-6 py-3 text-center">Date Started</th>
+                                                            <th scope="col" class="px-6 py-3 text-center">Date Target Ended</th> -->
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="p-4 border-b text-left text-gray-700">Project name</td>
+                                                            <td class="p-4 border-b text-center text-gray-700">2020001</td>
+                                                            <td class="p-4 border-b text-center text-gray-700">January 8, 2022</td>
+                                                            <td class="p-4 border-b text-center text-gray-700">May 11, 2022</td>
+                                                            <td class="p-4 border-b text-center text-gray-700">September 20, 2025</td>
+                                                            <td class="p-4 border-b text-center text-gray-700">40 %</td>
+                                                            <td class="p-4 border-b text-center text-gray-700">Engr. John Batino</td>
+                                                            <td class="p-4 border-b text-center text-gray-700">ONGOING</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        <!-- Footer Section -->
+                                        <div class="mt-8 text-right">
+                                            <h2 class="text-xl font-bold text-gray-800">Total: total_amount</h2>
+                                            <!-- <p class="text-sm text-gray-600">Thank you for your business!</p> -->
+                                        </div>
+
+                                        <!-- Print & Download Buttons -->
+                                        <div class="mt-4 flex justify-between">
+                                            <button type="button" id="printInvoiceReport"
+                                                class="text-white inline-flex items-center bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                                                Print
+                                            </button>
+
+                                            <button type="button" id="downloadInvoiceReport"
+                                                class="text-white inline-flex items-center bg-green-500 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                                                Download PDF
+                                            </button>
+                                        </div>
+
+                                        <!-- Close Button -->
+                                        <div class="mt-4 text-right">
+                                            <button type="button" id="closeInvoiceReport"
+                                                class="text-white inline-flex items-center bg-red-500 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                                                Close
+                                            </button>
+                                        </div>
+                                    </section>
+
+                                    <!-- JavaScript for Print, Download, and Toggle -->
+                                    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+                                    <script>
+                                        // Toggle Invoice Section
+                                        document.getElementById('ReportInvoice').addEventListener('click', function() {
+                                            var invoiceSection = document.getElementById('invoiceSection2');
+                                            invoiceSection.classList.remove('hidden');
+                                        });
+
+                                        document.getElementById('closeInvoiceReport').addEventListener('click', function() {
+                                            var invoiceSection = document.getElementById('invoiceSection2');
+                                            invoiceSection.classList.add('hidden');
+                                        });
+
+                                        // Print Invoice
+                                        document.getElementById('printInvoiceReport').addEventListener('click', function() {
+                                            var printContents = document.getElementById('invoiceSection2').innerHTML;
+                                            var originalContents = document.body.innerHTML;
+                                            document.body.innerHTML = printContents;
+                                            window.print();
+                                            document.body.innerHTML = originalContents;
+                                            window.location.reload();
+                                        });
+
+                                        // Download Invoice as PDF
+                                        document.getElementById('downloadInvoiceReport').addEventListener('click', function() {
+                                            var element = document.getElementById('invoiceSection2');
+
+                                            // Temporarily make sure the section is visible
+                                            element.classList.remove('hidden');
+
+                                            html2pdf().from(element).set({
+                                                margin: 1,
+                                                filename: 'project report.pdf',
+                                                image: {
+                                                    type: 'jpeg',
+                                                    quality: 0.98
+                                                },
+                                                html2canvas: {
+                                                    scale: 2,
+                                                    logging: true, // Enable console logging for troubleshooting
+                                                    useCORS: true // Enable CORS to allow cross-origin images
+                                                },
+                                                jsPDF: {
+                                                    unit: 'in',
+                                                    format: 'letter',
+                                                    orientation: 'portrait'
+                                                }
+                                            }).save().then(function() {
+                                                // Re-hide the section after the PDF is saved
+                                                element.classList.add('hidden');
+                                            });
+                                        });
+                                    </script>
+                                </div>
+
+
+
                             </div>
 
 
