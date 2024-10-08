@@ -2,7 +2,7 @@
     <div class="flex justify-end">
         <div class="relative ml-2">
             <button @click="open = true" class="bg-green-500 text-white text-xs px-4 py-2 rounded shadow-md hover:bg-green-600 focus:outline-none">
-                Create Project
+                Create Projectt
             </button>
         </div>
     </div>
