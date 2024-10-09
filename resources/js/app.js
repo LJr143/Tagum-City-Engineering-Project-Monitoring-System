@@ -1,5 +1,6 @@
 import './bootstrap';
 import "./packages/simple-notify";
+import * as FilePond from 'filepond';
 import 'filepond/dist/filepond.min.css';
 import 'filepond/dist/filepond.css';
 import 'select2';

@@ -31,7 +31,12 @@
                     <h2 class="text-m font-semibold mb-2">Road Construction</h2>
                     <span class="text-xs text-green-500 bg-green-100 px-2 py-1 rounded">In Progress</span>
                 </div>
-                <p class="text-xs ml-8">Apokon, Tagum City, Philippines with Coordination</p>
+                <p class="text-xs ml-8 text-xs font-semibold">Address:
+                    <span class="ml-2 text-black">Rizal Street, Barangay Magugpo East, Tagum City, Davao del Norte, Philippines</span></p>
+                <p class="text-xs ml-8 text-xs font-semibold">Coordinates:
+                    <span class="ml-2 text-black">(125.8375,-7.4594)</span>
+                </p>
+
                 <p class="ml-8 text-xs text-green-700">Date created:<span class="ml-2 text-black">20/08/2022</span></p>
                 <p class="ml-8 text-xs font-semibold">Project Cost: 1,0000 <span class="ml-4 font-semibold">Engineer: Jane Williams</span></p>
 
@@ -50,20 +55,25 @@
                     <!-- Cards Section -->
                     <div class="flex flex-col space-y-4 mx-8">
                         <div class="flex justify-end mb-4">
-                            <button id="add-card-button" class="bg-green-700 text-white mr-2 text-xs px-4 py-2 rounded shadow-md hover:bg-green-900 focus:outline-none">
-                                Add New POW
-                            </button>
                             <!-- Search input and button -->
-                            <div class="flex items-center space-x-2">
-                                <input type="text" placeholder="Search" id="search-input" class="h-8 px-3 border mr-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-xs" />
+                            <!-- Search bar -->
+                            <div class="flex justify-start mb-4"> <!-- Changed from justify-end to justify-start -->
+                                <!-- Search input and button -->
+                                <div class="relative flex items-center space-x-2 w-full sm:w-1/2 lg:w-1/3"> <!-- Width adjusts based on screen size -->
+                                    <input id="search-input" type="text" placeholder="Search" class="ml-2 pl-10 py-1 border-2 border-gray-300 bg-white h-8 px-5 pr-16 rounded-lg text-xs focus:ring-green-500 focus:border-green-500 w-full sm:w-auto">
+                                    <svg class="h-10 w-4 text-gray-400 dark:text-gray-300 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+                                        <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                    </svg>
+                                </div>
                             </div>
                         </div>
+
+
 
                         <!-- Cards Display -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                             @for ($i = 0; $i < 6; $i++)
-                                <!-- wala ni nako gitarog wala pani na route atong sidebar nga dashobar,prjecs,report lng naa -->
-                                <a href="{{ route('material-table-cost') }}" class="bg-white p-6 rounded-lg shadow-md block transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
+                                <a href="{{ route('view-pow-viewer') }}" class="bg-white p-6 rounded-lg shadow-md block transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
                                     <div class="bg-green-600 text-white text-xs px-2 py-1 rounded w-max mb-2">Ref: 12345</div>
                                     <h3 class="text-lg font-bold text-black">POW 1</h3>
                                     <p class="mt-2 text-gray-600  text-xs">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint...</p>
@@ -93,51 +103,41 @@
                         </div>
 
                         <!-- Pagination -->
-                        <div class="flex justify-between items-center mt-2">
-                            <nav class="flex flex-col items-start justify-between p-2 space-y-2 md:flex-row md:items-center md:space-y-0 w-full" aria-label="Table navigation">
-                                <!-- Showing X of Y on the left side -->
+                        <div class="flex items-center justify-between w-full px-3 mt-4">
+                            <!-- Dropdown -->
+                            <div class="relative">
+                                <select class="text-xs block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                                    <option>3</option>
+                                    <option>6</option>
+                                    <option>9</option>
+                                </select>
+                            </div>
+                            <!-- Pagination Info and Controls -->
+                            <div class="flex items-center space-x-4 text-gray-600 text-xs">
+
                                 <span class="text-xs font-normal text-gray-500 dark:text-gray-400">
-            Showing
-            <span class="font-semibold text-black">1-10</span>
-            of
-            <span class="font-semibold text-black">1000</span>
-        </span>
-                                <!-- Pagination aligned to the right -->
-                                <ul class="inline-flex items-stretch -space-x-px bg-white p-1 rounded-lg shadow-sm ml-auto">
-                                    <li>
-                                        <a href="#" class="flex items-center justify-center h-full py-1 px-2 ml-0 text-xs text-gray-500 bg-white rounded-l-lg hover:bg-gray-100 hover:text-gray-700">
-                                            <span class="sr-only">Previous</span>
-                                            <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                            </svg>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="flex items-center justify-center px-2 py-1 text-xs leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700">1</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="flex items-center justify-center px-2 py-1 text-xs leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700">2</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" aria-current="page" class="z-10 flex items-center justify-center px-2 py-1 text-xs leading-tight text-primary-600 bg-primary-50 hover:bg-primary-100 hover:text-primary-700">3</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="flex items-center justify-center px-2 py-1 text-xs leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700">...</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="flex items-center justify-center px-2 py-1 text-xs leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700">100</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="flex items-center justify-center h-full py-1 px-2 leading-tight text-xs text-gray-500 bg-white rounded-r-lg hover:bg-gray-100 hover:text-gray-700">
-                                            <span class="sr-only">Next</span>
-                                            <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                                            </svg>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
+                        Showing
+                        <span class="font-semibold text-black">1-10</span>
+                        of
+                        <span class="font-semibold text-black">1000</span>
+                            </span>
+
+                                <div class="flex items-center space-x-4 text-xs">
+                                    <a href="#" class="hover:text-black">1</a>
+                                    <a href="#" class="hover:text-black">2</a>
+                                    <a href="#" class="hover:text-black">3</a>
+                                    <a href="#" class="hover:text-black">
+                                        <i class="fas fa-angle-right text-lg"></i>
+                                    </a>
+                                    <a href="#" class="hover:text-black">
+                                        <i class="fas fa-angle-double-right text-lg"></i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+                </div>
+                <!-- End Pagination -->
 
                     </div>
                 </div> <!-- End of Road Construction Card -->

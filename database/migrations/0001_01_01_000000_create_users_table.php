@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('middle_initial')->default('N/A');
+            $table->string('middle_initial')->nullable();
             $table->string('gender');
             $table->date('birth_date');
             $table->string('email')->unique();

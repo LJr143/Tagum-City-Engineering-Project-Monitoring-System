@@ -11,7 +11,10 @@
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
-        "mallardduck/blade-boxicons": "^2.4"
+        "maatwebsite/excel": "^3.1",
+        "mallardduck/blade-boxicons": "^2.4",
+        "openspout/openspout": "^4.26",
+        "power-components/livewire-powergrid": "^5.10"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

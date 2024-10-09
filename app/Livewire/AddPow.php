@@ -2,12 +2,18 @@
 
 namespace App\Livewire;
 
+use App\Imports\MaterialsImport;
 use App\Models\Pow;
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
+use Livewire\WithFileUploads;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AddPow extends Component
 {
+    use WithFileUploads;
+
     public $projectId;
     public $reference_number;
 
@@ -18,6 +24,9 @@ class AddPow extends Component
     public $total_material_cost;
     public $total_labor_cost;
     public $engineers;
+    public $materialsFile;
+
+    public $isUploading = false;
 
     protected $rules = [
         'reference_number' => 'required|string|max:255',
@@ -27,7 +36,9 @@ class AddPow extends Component
         'engineer_id' => 'required|numeric',
         'total_material_cost' => 'required|numeric',
         'total_labor_cost' => 'required|numeric',
+        'materialsFile' => 'required|file|mimes:xlsx,csv',
     ];
+
 
     public function mount($projectId): void
     {
@@ -35,11 +46,16 @@ class AddPow extends Component
         $this->engineers = User::where('role', 'engineer')->get();
     }
 
+
     public function save()
     {
+        // Validate the form including the materials file
         $this->validate();
 
-        // Dump the data before inserting
+        // Set the uploading state to true
+        $this->isUploading = true;
+
+        // Create POW record
         $data = [
             'reference_number' => $this->reference_number,
             'description' => $this->description,
@@ -53,15 +69,44 @@ class AddPow extends Component
 
         $pow = Pow::create($data);
 
+        // Upload materials file and import
+        if ($this->materialsFile) {
+            // The file is required, so this will always run if the validation passes
+            $this->uploadMaterialsFile($this->materialsFile);
+
+            try {
+                Log::info('Starting materials import...');
+                Excel::import(new MaterialsImport($pow->id), $this->materialsFile->getRealPath());
+                Log::info('Materials import completed successfully.');
+                session()->flash('message', 'Materials imported successfully!');
+            } catch (\Exception $e) {
+                Log::error('Materials import failed: ' . $e->getMessage());
+                session()->flash('error', 'Failed to import materials. Please check the log for details.');
+            }
+        }
+
+        // Reset the form and dispatch a success event
         $this->dispatch('pow-added');
         $this->reset();
 
-        return redirect()->route('view-project-pow', ['id' => $pow->project_id])->with('success', 'POW added successfully.');
+        // After processing, set the uploading state to false
+        $this->isUploading = false; // Reset the state
 
+        // Redirect to view the POW
+        return redirect()->route('view-project-pow', ['id' => $pow->project_id])
+            ->with('success', 'POW added successfully.');
     }
 
 
-    public function render()
+    protected function uploadMaterialsFile($file)
+    {
+        $path = $file->store('materials', 'public'); // Store the materials file
+        Log::info('Materials file uploaded successfully.', ['path' => $path]);
+        return $path;
+    }
+
+
+    public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
     {
         return view('livewire.add-pow');
     }
