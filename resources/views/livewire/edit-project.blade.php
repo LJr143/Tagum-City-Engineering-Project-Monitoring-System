@@ -1,4 +1,4 @@
-<div x-data="{ open: false }" x-cloak @project-added.window="open = false">
+<div x-data="{ open: false }" x-cloak @project-edited.window="open = false">
     <div class="flex justify-end">
         <div class="relative ml-2">
             <button @click="open = true" class="flex bg-green-500 text-white text-xs px-4 py-2 rounded shadow-md hover:bg-green-600 focus:outline-none">
@@ -44,7 +44,7 @@
             </button>
 
             <h2 class="text-lg font-bold mb-4">Edit Project</h2>
-            <form wire:submit.prevent="submit" class="text-xs">
+            <form wire:submit.prevent="updateProject" class="text-xs">
                 <div class="grid  gap-6">
                     <!-- Left side (Project Info) -->
                     <div class="col-span-5 space-y-4">
@@ -56,16 +56,12 @@
                             <label class="block text-xs font-medium mb-1">Address</label>
                             <input type="text" wire:model="address" class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
                         </div>
-                        <div class="flex space-x-2">
-                            <div class="flex-1">
-                                <label class="block text-xs font-medium mb-1">Start Date</label>
-                                <input type="date" wire:model="start_date" class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
-                            </div>
-                            <div class="flex-1">
-                                <label class="block text-xs font-medium mb-1">End Date</label>
-                                <input type="date" wire:model="end_date" class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
-                            </div>
+
+                        <div>
+                            <label class="block text-xs font-medium mb-1">Project Cost</label>
+                            <input type="text" wire:model="project_cost" class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
                         </div>
+
                         <div>
                             <label class="block text-xs font-medium mb-1">Description</label>
                             <textarea wire:model="description" class="w-full h-[80px] px-3 py-2 text-xs border border-gray-400 rounded" style="resize: none;" required></textarea>

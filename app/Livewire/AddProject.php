@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Project;
+use App\Services\LogService;
 use Livewire\Component;
 
 class AddProject extends Component
@@ -24,13 +25,19 @@ class AddProject extends Component
     {
         $this->validate();
 
-        //  Create new Project 
+        //  Create new Project
         Project::create([
             'title' => $this->title,
             'address' => $this->address,
             'project_cost' => $this->project_cost,
             'description' => $this->description,
         ]);
+
+        LogService::logAction(
+            'added project',
+            "Added Project with title: {$this->title}",
+            auth()->id()
+        );
 
         // Reset form input
         $this->reset();

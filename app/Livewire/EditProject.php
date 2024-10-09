@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Services\LogService;
 use Livewire\Component;
 use App\Models\Project;
 
@@ -44,7 +45,13 @@ class EditProject extends Component
             'status' => $this->status,
         ]);
 
-        $this->dispatch('project-updated');
+        LogService::logAction(
+            'edited project',
+            "Edited Project with title: {$this->title}",
+            auth()->id()
+        );
+
+        $this->dispatch('project-edited');
 
         return redirect()->route('view-project-pow', ['id' => $this->project])->with('success', 'Project Updated successfully.');
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Imports\MaterialsImport;
 use App\Models\Pow;
 use App\Models\Project;
+use App\Services\LogService;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -35,6 +36,11 @@ class ProjectController extends Controller
     {
         $project = Project::findOrFail($id);
         $project->delete();
+        LogService::logAction(
+            'deleted project',
+            "Deleted project with id: {$id}",
+            auth()->id()
+        );
 
         return redirect()->route('project-main')->with('message', 'Project deleted successfully.');
     }
@@ -44,6 +50,11 @@ class ProjectController extends Controller
         $pow = Pow::findOrFail($id);
         $project_id = $request->input('project_id');
         $pow->delete();
+        LogService::logAction(
+            'deleted POW',
+            "Deleted POW with id: {$id}",
+            auth()->id()
+        );
 
         // Optionally, you can redirect or perform actions based on the project_id
         return redirect()->route('view-project-pow', ['id' => $project_id])

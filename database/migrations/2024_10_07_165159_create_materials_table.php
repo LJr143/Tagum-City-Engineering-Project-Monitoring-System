@@ -21,6 +21,9 @@ return new class extends Migration
             $table->text('item_description');
             $table->double('estimated_unit_cost');
             $table->double('estimated_cost');
+            $table->integer('quantity_use')->default(0);
+            $table->double('spent_cost')->default(0);
+
             $table->timestamps();
         });
     }

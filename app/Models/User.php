@@ -69,4 +69,16 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // In your User model
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isEngineer()
+    {
+        return $this->role === 'engineer';
+    }
+
 }

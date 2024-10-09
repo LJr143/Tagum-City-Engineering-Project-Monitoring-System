@@ -17,9 +17,10 @@ export default {
             colors: {
                 customGreen: '#249000',
             },
+            width: {
+                '50px': '20px',
+            },
         },
-
     },
-
     plugins: [forms, typography],
 };

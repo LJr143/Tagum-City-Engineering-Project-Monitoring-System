@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Imports\MaterialsImport;
 use App\Models\Pow;
 use App\Models\User;
+use App\Services\LogService;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -84,6 +85,12 @@ class AddPow extends Component
                 session()->flash('error', 'Failed to import materials. Please check the log for details.');
             }
         }
+
+        LogService::logAction(
+            'added POW',
+            "Added POW with reference number: {$this->reference_number}",
+            auth()->id()
+        );
 
         // Reset the form and dispatch a success event
         $this->dispatch('pow-added');

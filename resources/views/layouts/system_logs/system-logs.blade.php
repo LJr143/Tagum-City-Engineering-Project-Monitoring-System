@@ -12,150 +12,15 @@
     <x-slot name="main">
 
 
-        <h1 class="text-2xl font-semibold ml-5">System Logs</h1>
-        <p class="mb-6 ml-5">List of activity within the system</p>
+        <h1 class="text-xl font-medium">System Logs</h1>
+        <p class="mb-6 text-sm">List of activity within the system</p>
 
         <div class="container mx-auto bg-white p-6 rounded-lg shadow">
-            <div class="flex flex-col md:flex-row justify-between items-center mb-4">
-                <div class="flex max-w-20 space-x-2 mb-4 md:mb-0">
-                    <button id="download-btn" class="bg-white-200 border border-gray-200 p-2 rounded">
-                        <svg className="w-[24px] h-[24px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 15v2a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-2m-8 1V4m0 12-4-4m4 4 4-4"/>
-                        </svg>
-                    </button>
+            <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
 
-                    <!--  <button class="bg-white-200 border border-gray-200 p-2 rounded"><i class="fas fa-calendar-alt"></i></button> -->
-                    <div class="relative ">
-                        <button id="filter-btn" class="bg-white-200 border border-gray-200 p-2 rounded">
-                            <svg className="w-[24px] h-[24px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="M18.796 4H5.204a1 1 0 0 0-.753 1.659l5.302 6.058a1 1 0 0 1 .247.659v4.874a.5.5 0 0 0 .2.4l3 2.25a.5.5 0 0 0 .8-.4v-7.124a1 1 0 0 1 .247-.659l5.302-6.059c.566-.646.106-1.658-.753-1.658Z"/>
-                            </svg>
-                        </button>
-                        <div id="filter-options" class="absolute left-0 mt-2 w-48 bg-white border rounded shadow-lg hidden">
-                            <button class="block w-full text-left px-4 py-2 hover:bg-gray-100" data-role="all">All</button>
-                            <button class="block w-full text-left px-4 py-2 hover:bg-gray-100" data-role="admin">Admin</button>
-                            <button class="block w-full text-left px-4 py-2 hover:bg-gray-100" data-role="engineer">Engineer</button>
-                            <button class="block w-full text-left px-4 py-2 hover:bg-gray-100" data-role="viewer">Viewer</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex space-x-2 items-center">
-
-                    <div class="relative">
-                        <input id="search-input" type="text" placeholder="Search" class="border border-gray-200 rounded pl-10 pr-4 py-2">
-                        <svg class="h-5 w-5 text-gray-400 dark:text-gray-300 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                        </svg>
-
-                    </div>
-                </div>
+            <livewire:system-logs/>
             </div>
-            <div class="overflow-x-auto">
-                <table id="user-table" class="min-w-full bg-white border border-gray-300">
-                    <thead>
-                    <tr>
 
-                        <th class="py-2 px-4 border-b text-left">User ID </th>
-                        <th class="py-2 px-4 border-b text-left">Name </th>
-                        <th class="py-2 px-4 border-b text-left">Position</th>
-                        <th class="py-2 px-4 border-b text-left">Role</th>
-                        <th class="py-2 px-4 border-b text-left">Timestamp</th>
-                        <th class="py-2 px-4 border-b text-left">Activity</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr data-role="admin">
-                        <td class="py-2 px-4 border-b">0000</td>
-                        <td class="py-2 px-4 border-b">Fname MI. Lname</td>
-                        <td class="py-2 px-4 border-b">Engineer</td>
-                        <td class="py-2 px-4 border-b"><span class="bg-blue-100 text-blue-800 px-2 py-1 rounded">Admin</span></td>
-                        <td class="py-2 px-4 border-b">8/17/2024 03:26:56 PM</td>
-                        <td class="py-2 px-4 border-b">Activity</td>
-                    </tr>
-                    <tr data-role="engineer">
-                        <td class="py-2 px-4 border-b">0000</td>
-                        <td class="py-2 px-4 border-b">Fname MI. Lname</td>
-                        <td class="py-2 px-4 border-b">Engineer</td>
-                        <td class="py-2 px-4 border-b"><span class="bg-green-100 text-green-800 px-2 py-1 rounded">Engineer</span></td>
-                        <td class="py-2 px-4 border-b">8/17/2024 03:26:56 PM</td>
-                        <td class="py-2 px-4 border-b">Activity</td>
-                    </tr>
-                    <tr data-role="engineer">
-                        <td class="py-2 px-4 border-b">0000</td>
-                        <td class="py-2 px-4 border-b">Fname MI. Lname</td>
-                        <td class="py-2 px-4 border-b">Engineer</td>
-                        <td class="py-2 px-4 border-b"><span class="bg-green-100 text-green-800 px-2 py-1 rounded">Engineer</span></td>
-                        <td class="py-2 px-4 border-b">8/17/2024 03:26:56 PM</td>
-                        <td class="py-2 px-4 border-b">Activity</td>
-                    </tr>
-                    <tr data-role="engineer">
-                        <td class="py-2 px-4 border-b">0000</td>
-                        <td class="py-2 px-4 border-b">Fname MI. Lname</td>
-                        <td class="py-2 px-4 border-b">Engineer</td>
-                        <td class="py-2 px-4 border-b"><span class="bg-green-100 text-green-800 px-2 py-1 rounded">Engineer</span></td>
-                        <td class="py-2 px-4 border-b">8/17/2024 03:26:56 PM</td>
-                        <td class="py-2 px-4 border-b">Activity</td>
-                    </tr>
-                    <tr data-role="engineer">
-                        <td class="py-2 px-4 border-b">0000</td>
-                        <td class="py-2 px-4 border-b">Fname MI. Lname</td>
-                        <td class="py-2 px-4 border-b">Engineer</td>
-                        <td class="py-2 px-4 border-b"><span class="bg-green-100 text-green-800 px-2 py-1 rounded">Engineer</span></td>
-                        <td class="py-2 px-4 border-b">8/17/2024 03:26:56 PM</td>
-                        <td class="py-2 px-4 border-b">Activity</td>
-                    </tr>
-                    <tr data-role="viewer">
-                        <td class="py-2 px-4 border-b">0000</td>
-                        <td class="py-2 px-4 border-b">Fname MI. Lname</td>
-                        <td class="py-2 px-4 border-b">Engineer</td>
-                        <td class="py-2 px-4 border-b"><span class="bg-gray-100 text-gray-800 px-2 py-1 rounded">Viewer</span></td>
-                        <td class="py-2 px-4 border-b">8/17/2024 03:26:56 PM</td>
-                        <td class="py-2 px-4 border-b">Activity</td>
-                    </tr>
-                    <tr data-role="viewer">
-                        <td class="py-2 px-4 border-b">0000</td>
-                        <td class="py-2 px-4 border-b">Fname MI. Lname</td>
-                        <td class="py-2 px-4 border-b">Engineer</td>
-                        <td class="py-2 px-4 border-b"><span class="bg-gray-100 text-gray-800 px-2 py-1 rounded">Viewer</span></td>
-                        <td class="py-2 px-4 border-b">8/17/2024 03:26:56 PM</td>
-                        <td class="py-2 px-4 border-b">Activity</td>
-                    </tr>
-                    <tr data-role="viewer">
-                        <td class="py-2 px-4 border-b">0000</td>
-                        <td class="py-2 px-4 border-b">Fname MI. Lname</td>
-                        <td class="py-2 px-4 border-b">Engineer</td>
-                        <td class="py-2 px-4 border-b"><span class="bg-gray-100 text-gray-800 px-2 py-1 rounded">Viewer</span></td>
-                        <td class="py-2 px-4 border-b">8/17/2024 03:26:56 PM</td>
-                        <td class="py-2 px-4 border-b">Activity</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="flex flex-col md:flex-row justify-between items-center mt-4">
-
-                <div class="flex items-center space-x-4 mb-4 md:mb-0">
-                    <label for="rowsPerPage" class="text-gray-700">Rows per page:</label>
-                    <select id="items-per-page" class="border border-gray-300 rounded px-7 py-2">
-                        <option value="5">5</option>
-                        <option value="7" selected>7</option>
-                        <option value="10">10</option>
-                        <option value="15">15</option>
-                    </select>
-                </div>
-                <div class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-2">
-                    <div class="text-gray-600">
-                        Showing 1-10 of 30 items
-                    </div>
-                    <div class="flex space-x-2">
-                        <button id="prev-page" class="text-gray-500"><i class="fas fa-chevron-left"></i></button>
-                        <button id="page-1" class="text-gray-500 pagination-btn">1</button>
-                        <button id="page-2" class="text-gray-500 pagination-btn">2</button>
-                        <button id="page-3" class="text-gray-500 pagination-btn">3</button>
-                        <button id="next-page" class="text-gray-500"><i class="fas fa-chevron-right"></i></button>
-                        <button id="last-page" class="text-gray-500"><i class="fas fa-angle-double-right"></i></button>
-                    </div>
-                </div>
-            </div>
         </div>
 
 

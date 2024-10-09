@@ -81,7 +81,7 @@
                             <!-- Filter, Search, Import Inside Card -->
                             <div class="flex items-center justify-between mb-4 space-x-4">
                                 <div class="flex space-x-2 ml-auto">
-                                    <button id="open-modal" class="bg-green-700 text-white rounded-lg px-2 py-1 shadow-md text-xs hover:bg-green-800 transition-colors duration-300">Add Payroll</button>
+                                    <livewire:add-payroll :pow_id="$pow->id"/>
                                     <input type="text" placeholder="Search..." class="px-2 py-1 border border-gray-300 rounded-md shadow-sm text-xs w-55">
                                 </div>
                             </div>
@@ -163,40 +163,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Modal for Adding Payroll -->
-                <div id="modal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50 hidden">
-                    <div class="bg-white rounded-md shadow-lg p-6 w-1/3">
-                        <!-- Payroll Title -->
-                        <h2 class="text-sm font-semibold mb-4">Add Payroll</h2>
-
-                        <!-- Payroll Title Field -->
-                        <label for="payroll-title" class="text-xs font-semibold mb-2 block">Payroll</label>
-                        <input id="payroll-title" type="text" placeholder="Payroll Title" class="border border-gray-300 text-xs rounded-lg px-4 py-2 w-full mb-4">
-
-                        <!-- Amount and Date Fields -->
-                        <div class="flex space-x-2">
-                            <!-- Amount Field -->
-                            <div class="w-1/2">
-                                <label for="amount" class="text-xs font-semibold mb-2 block">Amount</label>
-                                <input id="amount" type="text" placeholder="Enter Amount" class="border border-gray-300 text-xs rounded-md px-4 py-2 w-full">
-                            </div>
-
-                            <!-- Date Field -->
-                            <div class="w-1/2">
-                                <label for="date" class="text-xs font-semibold mb-2 block">Date</label>
-                                <input id="date" type="date" class="border border-gray-300 text-xs rounded-md px-4 py-2 w-full">
-                            </div>
-                        </div>
-
-                        <!-- Buttons -->
-                        <div class="flex justify-end mt-4">
-                            <button id="close-modal" class="bg-white border border-gray-300 text-gray-700 rounded-md text-xs px-4 py-2 hover:bg-gray-300">
-                                Cancel
-                            </button>
-                            <button class="bg-green-700 text-white rounded-md px-4 py-2 text-xs hover:bg-green-800 ml-2">Add</button>
-                        </div>
-                    </div>
-                </div>
                 <!-- Modal for Delete Item -->
                 <div id="delete-modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-50">
                     <div class="bg-white rounded-lg shadow-lg p-6 w-1/3">
@@ -251,7 +217,6 @@
 
             <livewire:material-cost-table :pow_id="$pow->id" />
         </div>
-
     </x-slot>
     <script>
         // Tab Change Function
@@ -335,8 +300,5 @@
             closeSaveModal();
         }
 
-
     </script>
-
-
 </x-app-layout>

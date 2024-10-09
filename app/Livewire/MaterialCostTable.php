@@ -12,6 +12,7 @@ class MaterialCostTable extends Component
     public $spentCost = 0;
     public $progressPercentage = 0;
     public $targetProgressPercentage = 0;
+    public $isOutOfBudget = false;
 
     // Mount method to initialize component with the pow_id
     public function mount($pow_id): void
@@ -28,14 +29,26 @@ class MaterialCostTable extends Component
         $this->totalMaterialCost = $materials->sum('estimated_cost');
         $this->spentCost = $materials->sum('spent_cost');
 
-        if ($this->totalMaterialCost > 0) {
-            $this->progressPercentage = ($this->spentCost / $this->totalMaterialCost) * 100;
-            // Assuming the expected progress is based on time or milestones, calculate target progress
-            $this->targetProgressPercentage = $this->progressPercentage; // Replace with actual logic for target
+        // Assuming you have a defined project duration in months
+        $projectDurationMonths = 6; // Replace with your project's actual duration
+        $elapsedMonths = 2; // Replace with the actual number of elapsed months
+
+        // Calculate target progress based on elapsed time
+        if ($projectDurationMonths > 0) {
+            $this->targetProgressPercentage = ($elapsedMonths / $projectDurationMonths) * 100;
         } else {
-            $this->progressPercentage = 0;
             $this->targetProgressPercentage = 0;
         }
+
+        // Calculate the current progress percentage
+        if ($this->totalMaterialCost > 0) {
+            $this->progressPercentage = ($this->spentCost / $this->totalMaterialCost) * 100;
+        } else {
+            $this->progressPercentage = 0;
+        }
+
+        // Check if the project is out of budget
+        $this->isOutOfBudget = $this->spentCost > $this->totalMaterialCost;
     }
 
     public function render()

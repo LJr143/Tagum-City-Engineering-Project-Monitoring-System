@@ -15,20 +15,20 @@
         }
 
         .progress {
-            background-color: #4caf50;
+            background-color: #4caf50; /* Actual Progress Color */
             height: 100%;
             border-radius: 10px;
             transition: width 0.5s ease; /* Smooth animation */
         }
 
         .target-progress {
-            background-color: #2196F3;
+            background-color: #2196F3; /* Target Progress Color */
             height: 100%;
             border-radius: 10px;
             position: absolute;
             left: 0;
             top: 0;
-            opacity: 0.7; /* Make it semi-transparent to distinguish it */
+            opacity: 0.7; /* Semi-transparent to distinguish it */
         }
 
         .cost-details p {
@@ -54,6 +54,11 @@
         .not-started {
             color: red;
         }
+
+        .out-of-budget {
+            color: red; /* Indicates out of budget */
+            font-weight: bold;
+        }
     </style>
 
     <h3>Project Cost Status</h3>
@@ -74,7 +79,9 @@
     </div>
 
     <div class="status-indicator">
-        @if ($progressPercentage == 100)
+        @if ($isOutOfBudget)
+            <p>Project Status: <span class="out-of-budget">Out of Budget</span></p>
+        @elseif ($progressPercentage == 100)
             <p>Project Status: <span class="completed">Completed</span></p>
         @elseif ($progressPercentage > 50)
             <p>Project Status: <span class="in-progress">In Progress</span></p>

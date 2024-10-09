@@ -59,7 +59,16 @@
     @endif
     <div class="h-screen w-full flex flex-col {{ $bodyClass }}"
          x-on:project-added.window="pushNotification('success', 'Project Created', 'Project has been created successfully.');"
-         x-on:pow-added.window="pushNotification('success', 'POW Created', 'Project has been created successfully.');">
+         x-on:pow-added.window="pushNotification('success', 'POW Created', 'POW has been created successfully.');"
+         x-on:project-edited.window="pushNotification('success', 'Project Saved', 'Project has been updated successfully.');"
+         x-on:payroll-added.window="pushNotification('success', 'Payroll Saved', 'Payroll has been created successfully.');"
+         x-on:user-added.window="pushNotification('success', 'User Saved', 'User has been created successfully.');"
+         x-on:user-edited.window="pushNotification('success', 'User Saved', 'User has been updated successfully.');"
+         x-on:open-edit-modal.window="pushNotification('success', 'Edit Modal Opened', 'Edit modal opened successfully.');"
+         x-on:user-deleted.window="pushNotification('success', 'User Deleted', 'User deleted successfully.');"
+
+    >
+
 
         <!-- Page Heading -->
         @if (isset($header))
