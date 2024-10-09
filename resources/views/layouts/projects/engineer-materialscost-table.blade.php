@@ -16,15 +16,11 @@
 
                 <div class="container mx-auto p-2">
                     <div class="container mx-auto p-2">
-
                         <!-- Project Header -->
                         <div class="flex flex-col items-end space-y-2 w-full">
                             <div class="flex space-x-2">
-
-
-
                                 <button onclick="openSaveModal()" class="bg-green-600 text-white text-xs px-4 py-2 rounded shadow-md hover:bg-green-700 focus:outline-none flex items-center space-x-2">
-                                    <span>Save</span>
+                                    <span>Save Changes</span>
                                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M21 7L17 3L14 6L8 12V16H12L18 10L21 7Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                         <path d="M14 6L18 10" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -34,12 +30,13 @@
 
                             </div>
                         </div>
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="bg-green-600 text-xs text-white py-1 px-4 rounded-full">#PRJ2023-03-19879</span>
-                        </div>
+                        <div>
+                            <span class="bg-green-600 text-white px-3 py-1 rounded text-xs ">
+                                Ref: #12345
+                            </span>
 
-                        <h3 class="text-base ml-2 pb-3 font-semibold leading-6 mb-4 text-gray-900">POW 1</h3>
-
+                        <h3 class="text-base pb-3 font-semibold leading-6 text-gray-900 mt-3 mb-5">POW 1</h3>
+                    </div>
                         <div>
                             <div class="sm:hidden">
                                 <label for="tabs" class="sr-only">Select a tab</label>
@@ -58,15 +55,16 @@
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-3 gap-6">
+                        <div class="grid grid-cols-4 gap-6">
                             <!-- Material Cost Section -->
-                            <div id="materials" class="col-span-2"> <!-- Adjusted to take 2/3 width -->
+                            <div id="materials" class="col-span-3"> <!-- Adjusted to take 3/4 width -->
                                 <div class="bg-white shadow-md rounded-lg p-4">
                                     <h3 class="text-sm font-semibold mb-2 text-center">Materials</h3>
-                                    <!-- Filter, Search, Import Inside Card -->
+                                    <!-- Filter, Search -->
                                     <div class="flex items-center justify-between mb-4 space-x-4">
-                                        <div class="relative">
-                                            <button id="filter-btn" class="bg-white border border-gray-200 p-1.5 rounded">
+                                        <!-- Filter-->
+                                        <div class="relative md:w-1/4 w-full">
+                                            <button id="filter-btn" class="bg-white border border-gray-200 p-1.5 rounded h-8 ml-2">
                                                 <img src="{{ asset('images/img.png') }}" alt="Filter Icon" class="w-3 h-3 object-cover">
                                             </button>
                                             <div id="filter-options" class="absolute left-0 mt-2 w-32 bg-white border rounded shadow-lg z-50 hidden">
@@ -76,8 +74,16 @@
                                                 <button class="block w-full text-left px-2 py-1 text-xs hover:bg-gray-100" data-role="viewer">Viewer</button>
                                             </div>
                                         </div>
-                                        <div class="flex space-x-2 ml-auto">
-                                            <input type="text" placeholder="Search..." class="px-2 py-1 border border-gray-300 rounded-md shadow-sm text-xs w-64">
+                                        <!-- Search bar -->
+                                        <div class="flex justify-start"> <!-- Changed from justify-end to justify-start -->
+                                            <!-- Search input -->
+
+                                            <div class="relative flex items-center space-x-2 w-full sm:w-2/4 lg:w-1/4"> <!-- Width adjusts based on screen size -->
+                                                <input id="search-input" type="text" placeholder="Search" class="ml-2 pl-10 py-1 border border-gray-300 bg-white h-7 px-5 pr-7 rounded-md text-xs focus:ring-green-500 focus:border-green-500 w-full sm:w-auto">
+                                                <svg class="h-10 w-4 text-gray-400 dark:text-gray-300 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+                                                    <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                                </svg>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -139,62 +145,56 @@
                                             </table>
                                         </div>
                                     </div>
+
                                     <!-- Pagination -->
-                                    <div class="flex justify-between items-center mt-2">
-                                        <nav class="flex flex-col items-start justify-between p-2 space-y-2 md:flex-row md:items-center md:space-y-0 w-full" aria-label="Table navigation">
-                                            <!-- Showing X of Y on the left side -->
-                                            <span class="text-xs font-normal text-gray-500 dark:text-gray-400">
-                        Showing
-                        <span class="font-semibold text-black">1-10</span>
-                        of
-                        <span class="font-semibold text-black">1000</span>
-                    </span>
-                                            <!-- Pagination aligned to the right -->
-                                            <ul class="inline-flex items-stretch -space-x-px bg-white p-1 rounded-lg shadow-sm ml-auto">
-                                                <li>
-                                                    <a href="#" class="flex items-center justify-center h-full py-1 px-2 ml-0 text-xs text-gray-500 bg-white rounded-l-lg hover:bg-gray-100 hover:text-gray-700">
-                                                        <span class="sr-only">Previous</span>
-                                                        <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                                        </svg>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" class="flex items-center justify-center px-2 py-1 text-xs leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700">1</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" class="flex items-center justify-center px-2 py-1 text-xs leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700">2</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" aria-current="page" class="z-10 flex items-center justify-center px-2 py-1 text-xs leading-tight text-primary-600 bg-primary-50 hover:bg-primary-100 hover:text-primary-700">3</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" class="flex items-center justify-center px-2 py-1 text-xs leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700">...</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" class="flex items-center justify-center px-2 py-1 text-xs leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700">100</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" class="flex items-center justify-center h-full py-1 px-2 leading-tight text-xs text-gray-500 bg-white rounded-r-lg hover:bg-gray-100 hover:text-gray-700">
-                                                        <span class="sr-only">Next</span>
-                                                        <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                                                        </svg>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </nav>
+                                    <div class="flex items-center justify-between w-full px-3 mt-4">
+                                        <!-- Dropdown -->
+                                        <div class="relative">
+                                            <select class="text-xs block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                                                <option>3</option>
+                                                <option>6</option>
+                                                <option>9</option>
+                                            </select>
+                                        </div>
+                                        <!-- Pagination Info and Controls -->
+                                        <div class="flex items-center space-x-4 text-gray-600 text-xs">
+
+                                        <span class="text-xs font-normal text-gray-500 dark:text-gray-400">
+                                            Showing
+                                            <span class="font-semibold text-black">1-10</span>
+                                            of
+                                            <span class="font-semibold text-black">1000</span>
+                                        </span>
+
+                                            <div class="flex items-center space-x-4 text-xs">
+                                                <a href="#" class="hover:text-black">1</a>
+                                                <a href="#" class="hover:text-black">2</a>
+                                                <a href="#" class="hover:text-black">3</a>
+                                                <a href="#" class="hover:text-black">
+                                                    <i class="fas fa-angle-right text-lg"></i>
+                                                </a>
+                                                <a href="#" class="hover:text-black">
+                                                    <i class="fas fa-angle-double-right text-lg"></i>
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
+                                    <!-- End Pagination -->
+
                                 </div>
                             </div>
+
+
                             <!-- Labor Cost Section -->
-                            <div id="labor-cost" class="col-span-2 hidden">
+                            <div id="labor-cost" class="col-span-3 hidden">
                                 <div class="bg-white shadow-md rounded-lg p-4">
                                     <h3 class="text-sm font-semibold mb-2 text-center">Labor Cost</h3>
-                                    <!-- Filter, Search, Import Inside Card -->
+                                    <!-- Filter, Search -->
                                     <div class="flex items-center justify-between mb-4 space-x-4">
-                                        <div class="relative">
-                                            <button id="filter-btn" class="bg-white border border-gray-200 p-1.5 rounded">
+
+                                        <!-- Filter-->
+                                        <div class="relative md:w-1/4 w-full">
+                                            <button id="filter-btn" class="bg-white border border-gray-200 p-1.5 rounded h-8 ml-2">
                                                 <img src="{{ asset('images/img.png') }}" alt="Filter Icon" class="w-3 h-3 object-cover">
                                             </button>
                                             <div id="filter-options" class="absolute left-0 mt-2 w-32 bg-white border rounded shadow-lg z-50 hidden">
@@ -204,11 +204,19 @@
                                                 <button class="block w-full text-left px-2 py-1 text-xs hover:bg-gray-100" data-role="viewer">Viewer</button>
                                             </div>
                                         </div>
-                                        <div class="flex space-x-2 ml-auto">
+                                        <!-- Search bar and Button-->
+                                        <div class="flex justify-start"> <!-- Changed from justify-end to justify-start -->
+                                            <!-- Search input -->
                                             <button id="open-modal" class="bg-green-700 text-white rounded-lg px-2 py-1 shadow-md text-xs hover:bg-green-800 transition-colors duration-300">Add Payroll</button>
-                                            <input type="text" placeholder="Search..." class="px-2 py-1 border border-gray-300 rounded-md shadow-sm text-xs w-55">
+                                            <div class="relative flex items-center space-x-2 w-full sm:w-2/4 lg:w-1/4"> <!-- Width adjusts based on screen size -->
+                                                <input id="search-input" type="text" placeholder="Search" class="ml-2 pl-10 py-1 border border-gray-300 bg-white h-7 px-5 pr-7 rounded-md text-xs focus:ring-green-500 focus:border-green-500 w-full sm:w-auto">
+                                                <svg class="h-10 w-4 text-gray-400 dark:text-gray-300 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+                                                    <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                                </svg>
+                                            </div>
                                         </div>
                                     </div>
+                                    <!-- End of filter and search -->
 
                                     <!-- Table for Material Costs -->
                                     <div class="inline-block min-w-full py-2 align-middle sm:px-0 lg:px-2">
@@ -270,102 +278,118 @@
                                             </table>
                                         </div>
                                     </div>
-                                    <div class="flex justify-between items-center mt-2">
-                                        <nav class="flex flex-col items-start justify-between p-2 space-y-2 md:flex-row md:items-center md:space-y-0 w-full" aria-label="Table navigation">
-                                            <!-- Showing X of Y on the left side -->
-                                            <span class="text-xs font-normal text-gray-500 dark:text-gray-400">
-                        Showing
-                        <span class="font-semibold text-black">1-10</span>
-                        of
-                        <span class="font-semibold text-black">1000</span>
-                    </span>
-                                            <!-- Pagination aligned to the right -->
-                                            <ul class="inline-flex items-stretch -space-x-px bg-white p-1 rounded-lg shadow-sm ml-auto">
-                                                <li>
-                                                    <a href="#" class="flex items-center justify-center h-full py-1 px-2 ml-0 text-xs text-gray-500 bg-white rounded-l-lg hover:bg-gray-100 hover:text-gray-700">
-                                                        <span class="sr-only">Previous</span>
-                                                        <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                                        </svg>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" class="flex items-center justify-center px-2 py-1 text-xs leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700">1</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" class="flex items-center justify-center px-2 py-1 text-xs leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700">2</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" aria-current="page" class="z-10 flex items-center justify-center px-2 py-1 text-xs leading-tight text-primary-600 bg-primary-50 hover:bg-primary-100 hover:text-primary-700">3</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" class="flex items-center justify-center px-2 py-1 text-xs leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700">...</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" class="flex items-center justify-center px-2 py-1 text-xs leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700">100</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" class="flex items-center justify-center h-full py-1 px-2 leading-tight text-xs text-gray-500 bg-white rounded-r-lg hover:bg-gray-100 hover:text-gray-700">
-                                                        <span class="sr-only">Next</span>
-                                                        <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                                                        </svg>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </nav>
+                                    <!-- Pagination -->
+                                    <div class="flex items-center justify-between w-full px-3 mt-4">
+                                        <!-- Dropdown -->
+                                        <div class="relative">
+                                            <select class="text-xs block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                                                <option>3</option>
+                                                <option>6</option>
+                                                <option>9</option>
+                                            </select>
+                                        </div>
+                                        <!-- Pagination Info and Controls -->
+                                        <div class="flex items-center space-x-4 text-gray-600 text-xs">
+
+                                <span class="text-xs font-normal text-gray-500 dark:text-gray-400">
+                                    Showing
+                                    <span class="font-semibold text-black">1-10</span>
+                                    of
+                                    <span class="font-semibold text-black">1000</span>
+                                </span>
+
+                                            <div class="flex items-center space-x-4 text-xs">
+                                                <a href="#" class="hover:text-black">1</a>
+                                                <a href="#" class="hover:text-black">2</a>
+                                                <a href="#" class="hover:text-black">3</a>
+                                                <a href="#" class="hover:text-black">
+                                                    <i class="fas fa-angle-right text-lg"></i>
+                                                </a>
+                                                <a href="#" class="hover:text-black">
+                                                    <i class="fas fa-angle-double-right text-lg"></i>
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
+                                    <!-- End Pagination -->
                                 </div>
                             </div>
 
                             <!-- Progress Circle Bar Section -->
-                            <div class="col-span-1">
-                                <div class="bg-white shadow-md rounded-lg p-4 h-full">
-                                    <h3 class="text-sm font-semibold mb-2 text-center">Name Information Progress</h3>
-                                    <div class="flex justify-center items-center">
-                                        <div class="relative">
-                                            <svg class="w-20 h-20" viewBox="0 0 100 100">
-                                                <circle cx="50" cy="50" r="45" stroke="#e0e0e0" stroke-width="10" fill="none"/>
-                                                <circle cx="50" cy="50" r="45" stroke="#4F46E5" stroke-width="10" fill="none" stroke-dasharray="283" stroke-dashoffset="100"></circle>
-                                            </svg>
-                                            <div class="absolute inset-0 flex items-center justify-center">
-                                                <span class="text-lg font-semibold text-gray-700">75%</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <h4 class="text-xs text-center mt-2 text-gray-600">Overall POW Progress</h4>
 
-                                    <!-- Second Circle -->
-                                    <div class="flex justify-center items-center mt-4">
-                                        <div class="relative">
-                                            <svg class="w-20 h-20" viewBox="0 0 100 100">
-                                                <circle cx="50" cy="50" r="45" stroke="#e0e0e0" stroke-width="10" fill="none"/>
-                                                <circle cx="50" cy="50" r="45" stroke="#4F46E5" stroke-width="10" fill="none" stroke-dasharray="283" stroke-dashoffset="60"></circle> <!-- Change stroke-dashoffset for a different progress -->
-                                            </svg>
-                                            <div class="absolute inset-0 flex items-center justify-center">
-                                                <span class="text-lg font-semibold text-gray-700">60%</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <h4 class="text-xs text-center mt-2 text-gray-600">Material Cost Progress</h4>
+                            <div class="bg-white rounded-lg shadow-md p-6">
+                                <h3 class="text-xs font-semibold text-gray-800 mb-6 text-center">PROGRESS INFORMATION</h3>
 
-                                    <!-- Third Circle -->
-                                    <div class="flex justify-center items-center mt-4">
-                                        <div class="relative">
-                                            <svg class="w-20 h-20" viewBox="0 0 100 100">
-                                                <circle cx="50" cy="50" r="45" stroke="#e0e0e0" stroke-width="10" fill="none"/>
-                                                <circle cx="50" cy="50" r="45" stroke="#4F46E5" stroke-width="10" fill="none" stroke-dasharray="283" stroke-dashoffset="80"></circle> <!-- Change stroke-dashoffset for a different progress -->
-                                            </svg>
-                                            <div class="absolute inset-0 flex items-center justify-center">
-                                                <span class="text-lg font-semibold text-gray-700">80%</span>
-                                            </div>
+                                <div class="flex flex-col items-center mb-6 justify-center ">
+                                    <div class="relative w-20 h-20">
+                                        <!-- SVG Progress Circle -->
+                                        <svg class="absolute top-0 left-0 w-full h-full" viewBox="0 0 36 36">
+                                            <!-- Background Circle (Gray) -->
+                                            <path class="text-gray-200" d="M18 2.0845
+                                        a 15.9155 15.9155 0 0 1 0 31.831
+                                        a 15.9155 15.9155 0 0 1 0 -31.831"
+                                                  fill="none" stroke-width="4" stroke="currentColor">
+                                            </path>
+                                            <!-- Foreground Circle (Progress Bar) -->
+                                            <path id="circular-progress-1" class="text-green-500" d="M18 2.0845
+                                        a 15.9155 15.9155 0 0 1 0 31.831
+                                        a 15.9155 15.9155 0 0 1 0 -31.831"
+                                                  fill="none" stroke-width="4" stroke-dasharray="0, 100" stroke="currentColor">
+                                            </path>
+                                        </svg>
+
+                                        <!-- Centered Percentage Text -->
+                                        <div class="absolute inset-0 flex items-center justify-center">
+                                            <span id="progress-text-1" class="text-lg font-semibold text-gray-800">0%</span>
                                         </div>
                                     </div>
-                                    <h4 class="text-xs text-center mt-2 text-gray-600">Labor Cost Progress</h4>
+                                    <p class="text-xs text-gray-500 mt-2 text-center">Overall POW Progress</p>
+                                </div>
+
+                                <div class="flex flex-col items-center mb-6">
+                                    <div class="relative w-20 h-20">
+                                        <svg class="absolute top-0 left-0 w-full h-full" viewBox="0 0 36 36">
+                                            <path class="text-gray-200" d="M18 2.0845
+                                        a 15.9155 15.9155 0 0 1 0 31.831
+                                        a 15.9155 15.9155 0 0 1 0 -31.831"
+                                                  fill="none" stroke-width="4" stroke="currentColor">
+                                            </path>
+                                            <path id="circular-progress-2" class="text-pink-500" d="M18 2.0845
+                                        a 15.9155 15.9155 0 0 1 0 31.831
+                                        a 15.9155 15.9155 0 0 1 0 -31.831"
+                                                  fill="none" stroke-width="4" stroke-dasharray="0, 100" stroke="currentColor">
+                                            </path>
+                                        </svg>
+                                        <div class="absolute inset-0 flex items-center justify-center">
+                                            <span id="progress-text-2" class="text-lg font-semibold text-gray-800">0%</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-center text-xs text-gray-500 mt-2">Material Cost Progress</p>
+                                </div>
+
+                                <div class="flex flex-col items-center mb-6">
+                                    <div class="relative w-20 h-20">
+                                        <svg class="absolute top-0 left-0 w-full h-full" viewBox="0 0 36 36">
+                                            <path class="text-gray-200" d="M18 2.0845
+                                        a 15.9155 15.9155 0 0 1 0 31.831
+                                        a 15.9155 15.9155 0 0 1 0 -31.831"
+                                                  fill="none" stroke-width="4" stroke="currentColor">
+                                            </path>
+                                            <path id="circular-progress-3" class="text-blue-500" d="M18 2.0845
+                                        a 15.9155 15.9155 0 0 1 0 31.831
+                                        a 15.9155 15.9155 0 0 1 0 -31.831"
+                                                  fill="none" stroke-width="4" stroke-dasharray="0, 100" stroke="currentColor">
+                                            </path>
+                                        </svg>
+                                        <div class="absolute inset-0 flex items-center justify-center">
+                                            <span id="progress-text-3" class="text-lg font-semibold text-gray-800">0%</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-center text-xs text-gray-500 mt-2">Labor Cost Progress</p>
                                 </div>
                             </div>
+                            <!-- End of Progress bar -->
                         </div>
-
 
                         <!-- Modal for Edit Item -->
                         <div id="edit-modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-50">
@@ -551,13 +575,28 @@
                             closeSaveModal();
                         }
 
+                        //CIRCULAR PROGRESS BAR
+                        function updateCircularProgress(id, value) {
+                            const circle = document.getElementById(`circular-progress-${id}`);
+                            const text = document.getElementById(`progress-text-${id}`);
+
+                            // Calculate stroke-dasharray for the circular progress
+                            const strokeValue = (value / 100) * 100;
+                            circle.setAttribute('stroke-dasharray', `${strokeValue}, 100`);
+
+                            // Update percentage inside the circle
+                            text.textContent = `${value}%`;
+                        }
+
+                        // Update progress for each bar
+                        updateCircularProgress(1, 80); // Overall POW Progress
+                        updateCircularProgress(2, 50); // Material Cost Progress
+                        updateCircularProgress(3, 100); // Labor Cost Progress
+                        //End for progress bar
 
                     </script>
                 </div>
-
-
-
-
+            </main>
+        </div>
     </x-slot>
-
 </x-app-layout>
