@@ -10,14 +10,12 @@
     </x-slot>
 
     <x-slot name="main">
-
-            <h2 class="text-base font-semibold leading-6 text-gray-900 mb-5">
-                PROJECTS
-            </h2>
-
+        <h2 class="text-base font-semibold leading-6 text-gray-900 mb-5">
+            PROJECTS
+        </h2>
         <livewire:project-filter/>
 
-      <!--   <div class="bg-white p-6 rounded-lg shadow-md"> -->
+        <!--   <div class="bg-white p-6 rounded-lg shadow-md"> -->
         <!-- Search bar -->
         <div class="flex justify-start mb-4"> <!-- Changed from justify-end to justify-start -->
             <!-- Search input and button -->
@@ -29,11 +27,7 @@
             </div>
         </div>
 
-
-
-
         <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 ml-2" id="projectGrid">
-
                 <!-- Project Card for ON PROGRESS -->
              <div class="bg-white p-5 rounded-lg shadow project-card hover:-translate-y-1 transition-transform duration-300 ease-in-out hover:shadow-lg" data-created="2024-08-18">
                  <a href="{{ route('view-specific-project-viewer') }}">
@@ -41,18 +35,16 @@
                   <span class="bg-yellow-200 text-yellow-800 text-xs font-semibold px-2.5 py-0.5 rounded project-status">
                    On Progress
                   </span>
-
                 </div>
                 <img alt="Image of Pandapan Road Embankment" class="w-full h-40 object-cover rounded mb-4" height="400" src="https://storage.googleapis.com/a1aa/image/I9U6O4GmQ1ohP1E1KNpHAfHewtyPG0yxzxWCvzvpezPi8LInA.jpg" width="600"/>
-                    <div>
-                    <span class="bg-green-600 text-white px-3 py-1 rounded text-xs ">
-                        Ref: #PRJ.2023-08-56789
-                    </span>
-                    </div>
+                     <div>
+                         <span class="bg-green-600 text-white px-3 py-1 rounded text-xs ">
+                             Ref: #PRJ.2023-08-56789
+                         </span>
+                     </div>
                     <h3 class="text-lg font-semibold text-black project-title mt-2">
                         Road Construction
                     </h3>
-
                     <p class="text-xs font-semibold text-gray-500 mb-1">
                         <i class="fas fa-calendar-alt mr-1"></i>
                         Created on Aug 18, 2023
@@ -70,7 +62,6 @@
                         <div class="bg-yellow-500 h-2.5 rounded-full" style="width: 25%"></div>
                     </div>
                     <p class="text-xs text-gray-500 mt-2 mb-4 project-percentage">Project Progress: 25%</p>
-
                     <div class="flex items-center justify-between mb-2">
                     <div class="flex items-center">
                         <img alt="Engineer" class="rounded-full mr-2" src="https://placehold.co/30x30"/>
@@ -83,8 +74,8 @@
                             </p>
                         </div>
                     </div>
-                </div>
-                    </a>
+                    </div>
+                 </a>
              </div>
 
             <!-- Project Card for PENDING -->
@@ -104,7 +95,6 @@
                     <h3 class="text-lg font-semibold text-black project-title mt-2">
                         Road Construction
                     </h3>
-
                     <p class="text-xs font-semibold text-gray-500 mb-1">
                         <i class="fas fa-calendar-alt mr-1"></i>
                         Created on Aug 18, 2023
@@ -113,20 +103,20 @@
                         <i class="fas fa-map-marker-alt mr-1 "></i>
                         Rizal Street, Magugpo East, Tagum City
                     </p>
-
                     <p class="text-xs font-semibold text-gray-500 mb-2 mt-2 project-amount">
                         <i class="fas fa-coins mr-1"></i>
                         Project Cost: P 1,000,000.00
                     </p>
+
                     <!-- Progress Bar Section -->
                     <div class="w-full bg-gray-200 rounded-full h-2.5 mt-3">
                         <div class="bg-green-500 h-2.5 rounded-full" style="width: 0%"></div>
                     </div>
                     <p class="text-xs text-gray-500 mt-2 mb-4 project-percentage">Project Progress: 0%</p>
 
-                <div class="flex items-center justify-between mb-2 ">
-                    <div class="flex items-center ">
-                        <img alt="Engineer" class="rounded-full mr-2" src="https://placehold.co/30x30"/>
+                    <div class="flex items-center justify-between mb-2 ">
+                        <div class="flex items-center ">
+                            <img alt="Engineer" class="rounded-full mr-2" src="https://placehold.co/30x30"/>
                         <div>
                             <p class="text-sm font-medium project-engineer">
                                 Jane Williams
@@ -135,11 +125,10 @@
                                 Engineer
                             </p>
                         </div>
+                        </div>
                     </div>
-                </div>
                 </a>
             </div>
-
 
             <!-- Project Card for COMPLETED -->
             <div class="bg-white p-5 rounded-lg shadow project-card hover:-translate-y-1 transition-transform duration-300 ease-in-out hover:shadow-lg" data-created="2024-07-18">
@@ -151,37 +140,35 @@
                 </div>
                     <img alt="Image of Pandapan Road Embankment" class="w-full h-40 object-cover rounded mb-4" height="400" src="https://storage.googleapis.com/a1aa/image/I9U6O4GmQ1ohP1E1KNpHAfHewtyPG0yxzxWCvzvpezPi8LInA.jpg" width="600"/>
                     <div>
-                    <span class="bg-green-600 text-white px-3 py-1 rounded text-xs ">
-                        Ref: #PRJ.2023-08-56789
-                    </span>
-                </div>
-                <h3 class="text-lg font-semibold text-black project-title mt-2">
-                    Road Construction
-                </h3>
+                        <span class="bg-green-600 text-white px-3 py-1 rounded text-xs ">
+                            Ref: #PRJ.2023-08-56789
+                        </span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-black project-title mt-2">
+                        Road Construction
+                    </h3>
+                    <p class="text-xs font-semibold text-gray-500 mb-1">
+                        <i class="fas fa-calendar-alt mr-1"></i>
+                        Created on Aug 18, 2023
+                    </p>
+                    <p class="text-xs font-semibold text-gray-500 mb-2 project-address">
+                        <i class="fas fa-map-marker-alt mr-1 "></i>
+                            Rizal Street, Magugpo East, Tagum City
+                    </p>
+                    <p class="text-xs font-semibold text-gray-500 mb-2 mt-2 project-amount">
+                        <i class="fas fa-coins mr-1"></i>
+                            Project Cost: P 1,000,000.00
+                    </p>
 
-                <p class="text-xs font-semibold text-gray-500 mb-1">
-                    <i class="fas fa-calendar-alt mr-1"></i>
-                    Created on Aug 18, 2023
-                </p>
-                <p class="text-xs font-semibold text-gray-500 mb-2 project-address">
-                    <i class="fas fa-map-marker-alt mr-1 "></i>
-                    Rizal Street, Magugpo East, Tagum City
-                </p>
+                    <!-- Progress Bar Section -->
+                    <div class="w-full bg-gray-200 rounded-full h-2.5 mt-3">
+                        <div class="bg-green-500 h-2.5 rounded-full" style="width: 100%;"></div>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2 mb-4 project-percentage">Project Progress: 100%</p>
 
-                <p class="text-xs font-semibold text-gray-500 mb-2 mt-2 project-amount">
-                    <i class="fas fa-coins mr-1"></i>
-                    Project Cost: P 1,000,000.00
-                </p>
-                <!-- Progress Bar Section -->
-                <div class="w-full bg-gray-200 rounded-full h-2.5 mt-3">
-                    <div class="bg-green-500 h-2.5 rounded-full" style="width: 100%;"></div>
-                </div>
-                <p class="text-xs text-gray-500 mt-2 mb-4 project-percentage">Project Progress: 100%</p>
-
-
-                <div class="flex items-center justify-between mb-2">
-                    <div class="flex items-center">
-                        <img alt="Engineer" class="rounded-full mr-2" src="https://placehold.co/30x30"/>
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center">
+                            <img alt="Engineer" class="rounded-full mr-2" src="https://placehold.co/30x30"/>
                         <div>
                             <p class="text-sm font-medium project-engineer">
                                 Jane Williams
@@ -190,46 +177,43 @@
                                 Engineer
                             </p>
                         </div>
+                        </div>
                     </div>
-                </div>
                 </a>
             </div>
         </div>
 
-                <!-- Pagination -->
-            <div class="flex items-center justify-between w-full px-3 mt-4">
-                <!-- Dropdown -->
-                <div class="relative">
-                    <select class="text-xs block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                        <option>3</option>
-                        <option>6</option>
-                        <option>9</option>
-                    </select>
-                </div>
-                <!-- Pagination Info and Controls -->
-                <div class="flex items-center space-x-4 text-gray-600 text-xs">
-                    <div>
-                        Showing 1-10 of 30 items
-                    </div>
-                    <div class="flex items-center space-x-4 text-xs">
-                        <a href="#" class="hover:text-black">1</a>
-                        <a href="#" class="hover:text-black">2</a>
-                        <a href="#" class="hover:text-black">3</a>
-                        <a href="#" class="hover:text-black">
-                            <i class="fas fa-angle-right text-lg"></i>
-                        </a>
-                        <a href="#" class="hover:text-black">
-                            <i class="fas fa-angle-double-right text-lg"></i>
-                        </a>
-                    </div>
-                </div>
+        <!-- Pagination -->
+        <div class="flex items-center justify-between w-full px-3 mt-4">
+            <!-- Dropdown -->
+            <div class="relative">
+                <select class="text-xs block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                    <option>3</option>
+                    <option>6</option>
+                    <option>9</option>
+                </select>
             </div>
 
-                <!-- End Pagination -->
-
-
+            <!-- Pagination Info and Controls -->
+            <div class="flex items-center space-x-4 text-gray-600 text-xs">
+                <div>
+                    Showing 1-10 of 30 items
+                </div>
+                <div class="flex items-center space-x-4 text-xs">
+                    <a href="#" class="hover:text-black">1</a>
+                    <a href="#" class="hover:text-black">2</a>
+                    <a href="#" class="hover:text-black">3</a>
+                    <a href="#" class="hover:text-black">
+                        <i class="fas fa-angle-right text-lg"></i>
+                    </a>
+                    <a href="#" class="hover:text-black">
+                        <i class="fas fa-angle-double-right text-lg"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- End Pagination -->
         <!-- </div> -->
-
     </x-slot>
 </x-app-layout>
 

@@ -59,12 +59,24 @@ Route::get('/main', function () {
     return view('layouts.Projects.dashboard');
 });
 
+
 Route::get('/proj-pow-engineer', function () {
-    return view('layouts.Projects.proj-pow-engineer');
+    return view('layouts.projects.proj-pow-engineer');
 });
+
+Route::get('/proj-pow-engineer', function () {
+    return view('layouts.projects.proj-pow-engineer');
+})->name('proj-pow-engineer');
+
+
 Route::get('/engineer-materialscost-table', function () {
-    return view('layouts.Projects.engineer-materialscost-table');
+    return view('layouts.projects.engineer-materialscost-table');
 });
+
+Route::get('/engineer-materialscost-table', function () {
+    return view('layouts.projects.engineer-materialscost-table');
+})->name('engineer-materialscost-table');
+
 
 //route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
@@ -104,8 +116,5 @@ Route::get('/view-pow-viewer', function () {
     return view('layouts.viewer.view-pow-viewer');
 })->name('view-pow-viewer');
 
-Route::get('/view-pow-engineer', function () {
-    return view('layouts.engineer.view-pow-engineer');
-})->name('user');
 
 //END FOR VIEWER
