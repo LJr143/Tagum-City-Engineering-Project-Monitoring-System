@@ -1,8 +1,15 @@
-<div x-data="{ open: false }" x-cloak @project-updated.window="open = false">
+<div x-data="{ open: false }" x-cloak @project-added.window="open = false">
     <div class="flex justify-end">
         <div class="relative ml-2">
-            <button @click="open = true" class="bg-green-500 text-white text-xs px-4 py-2 rounded shadow-md hover:bg-green-600 focus:outline-none">
-                Edit
+            <button @click="open = true" class="flex bg-green-500 text-white text-xs px-4 py-2 rounded shadow-md hover:bg-green-600 focus:outline-none">
+                Edit Project
+
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="ml-2">
+                    <path d="M21 7L17 3L14 6L8 12V16H12L18 10L21 7Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M14 6L18 10" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M10 4H4V20H20V14" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+
             </button>
         </div>
     </div>
@@ -27,7 +34,7 @@
             x-transition:leave="transition ease-in duration-200"
             x-transition:leave-start="opacity-100 transform scale-100"
             x-transition:leave-end="opacity-0 transform scale-90"
-            class="bg-white w-full max-w-[850px] p-10 rounded-lg relative"
+            class="bg-white w-full max-w-[700px] p-6 rounded-lg relative"
         >
             <!-- Close Button (X) -->
             <button @click="open = false" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
@@ -36,43 +43,42 @@
                 </svg>
             </button>
 
-            <h2 class="text-lg font-bold mb-2">Edit Project</h2>
-            <form wire:submit.prevent="updateProject">
-                <div class="mb-4">
-                    <label class="block text-sm font-medium mb-1" for="title">Title</label>
-                    <input wire:model="title" type="text" id="title" class="border rounded w-full px-2 py-1" required>
-                    @error('title') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+            <h2 class="text-lg font-bold mb-4">Edit Project</h2>
+            <form wire:submit.prevent="submit" class="text-xs">
+                <div class="grid  gap-6">
+                    <!-- Left side (Project Info) -->
+                    <div class="col-span-5 space-y-4">
+                        <div>
+                            <label class="block text-xs font-medium mb-1">Project Title</label>
+                            <input type="text" wire:model="title" class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium mb-1">Address</label>
+                            <input type="text" wire:model="address" class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
+                        </div>
+                        <div class="flex space-x-2">
+                            <div class="flex-1">
+                                <label class="block text-xs font-medium mb-1">Start Date</label>
+                                <input type="date" wire:model="start_date" class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
+                            </div>
+                            <div class="flex-1">
+                                <label class="block text-xs font-medium mb-1">End Date</label>
+                                <input type="date" wire:model="end_date" class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium mb-1">Description</label>
+                            <textarea wire:model="description" class="w-full h-[80px] px-3 py-2 text-xs border border-gray-400 rounded" style="resize: none;" required></textarea>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="mb-4">
-                    <label class="block text-sm font-medium mb-1" for="description">Description</label>
-                    <textarea wire:model="description" id="description" class="border rounded w-full px-2 py-1" required></textarea>
-                    @error('description') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-                </div>
-
-                <div class="mb-4">
-                    <label class="block text-sm font-medium mb-1" for="address">Address</label>
-                    <input wire:model="address" type="text" id="address" class="border rounded w-full px-2 py-1" required>
-                    @error('address') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-                </div>
-
-                <div class="mb-4">
-                    <label class="block text-sm font-medium mb-1" for="project_cost">Project Cost</label>
-                    <input wire:model="project_cost" type="number" id="project_cost" class="border rounded w-full px-2 py-1" required>
-                    @error('project_cost') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-                </div>
-
-                <div class="mb-4">
-                    <label class="block text-sm font-medium mb-1" for="status">Status</label>
-                    <input wire:model="status" type="text" id="status" class="border rounded w-full px-2 py-1" required>
-                    @error('status') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-                </div>
-
-                <div class="flex justify-end">
-                    <button type="button" @click="open = false" class="bg-gray-300 text-gray-700 px-4 py-2 rounded shadow-md hover:bg-gray-400">
+                <!-- Action Buttons -->
+                <div class="mt-6 flex justify-end space-x-2">
+                    <button @click="open = false" type="button" class="bg-gray-300 text-gray-700 px-4 py-2 rounded shadow-md hover:bg-gray-400 text-xs">
                         Cancel
                     </button>
-                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded shadow-md hover:bg-blue-600 ml-2">
+                    <button type="submit" class="bg-green-500 text-white px-6 py-2 rounded shadow-md hover:bg-green-600 text-xs">
                         Save Changes
                     </button>
                 </div>

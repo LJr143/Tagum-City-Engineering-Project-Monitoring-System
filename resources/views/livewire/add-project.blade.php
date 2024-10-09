@@ -1,7 +1,7 @@
 <div x-data="{ open: false }" x-cloak @project-added.window="open = false">
     <div class="flex justify-end">
         <div class="relative ml-2">
-            <button @click="open = true" class="bg-green-500 text-white px-3 py-1 rounded-lg text-sm">
+            <button @click="open = true" class="bg-green-500 text-white text-xs px-4 py-2 rounded shadow-md hover:bg-green-600 focus:outline-none">
                 Create Project
             </button>
         </div>
@@ -27,7 +27,7 @@
             x-transition:leave="transition ease-in duration-200"
             x-transition:leave-start="opacity-100 transform scale-100"
             x-transition:leave-end="opacity-0 transform scale-90"
-            class="bg-white w-full max-w-[850px] p-10 rounded-lg relative"
+            class="bg-white w-full max-w-[700px] p-6 rounded-lg relative"
         >
             <!-- Close Button (X) -->
             <button @click="open = false" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
@@ -36,40 +36,46 @@
                 </svg>
             </button>
 
-            <h2 class="text-lg font-bold mb-2">Create Project</h2>
-            <form wire:submit.prevent="submit">
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <x-label class="text-[12px]">Title</x-label>
-                        <x-input type="text" wire:model="title" class="w-full px-2 py-1 text-[11px] mb-3" />
-                        @error('title') <span class="text-red-500">{{ $message }}</span> @enderror
-
-                        <x-label class="text-[12px]">Address</x-label>
-                        <x-input type="text" wire:model="address" class="w-full px-2 py-1 text-[11px] mb-3" />
-                        @error('address') <span class="text-red-500">{{ $message }}</span> @enderror
-
-                        <x-label class="text-[12px]">Project Cost</x-label>
-                        <x-input type="number" wire:model="project_cost" class="w-full px-2 py-1 text-[11px] mb-3" />
-                        @error('project_cost') <span class="text-red-500">{{ $message }}</span> @enderror
-
-                        <x-label class="text-[12px]">Project Description</x-label>
-                        <x-textarea wire:model="description" class="w-full h-[200px] px-2 py-1 text-[11px] mb-3" style="resize: none;"></x-textarea>
-                        @error('description') <span class="text-red-500">{{ $message }}</span> @enderror
-                    </div>
-
-                    <div>
-                        <img src="{{ asset('storage/pmsAssets/project_working.png') }}" alt="">
+            <h2 class="text-lg font-bold mb-4">Add Project</h2>
+            <form wire:submit.prevent="submit" class="text-xs">
+                <div class="grid  gap-6">
+                    <!-- Left side (Project Info) -->
+                    <div class="col-span-5 space-y-4">
+                        <div>
+                            <label class="block text-xs font-medium mb-1">Project Title</label>
+                            <input type="text" wire:model="title" class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium mb-1">Address</label>
+                            <input type="text" wire:model="address" class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
+                        </div>
+                        <div class="flex space-x-2">
+                            <div class="flex-1">
+                                <label class="block text-xs font-medium mb-1">Start Date</label>
+                                <input type="date" wire:model="start_date" class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
+                            </div>
+                            <div class="flex-1">
+                                <label class="block text-xs font-medium mb-1">End Date</label>
+                                <input type="date" wire:model="end_date" class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium mb-1">Description</label>
+                            <textarea wire:model="description" class="w-full h-[80px] px-3 py-2 text-xs border border-gray-400 rounded" style="resize: none;" required></textarea>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Action Buttons -->
-                <div class="flex justify-end mt-4">
-                    <button @click="open = false" type="button" class="bg-gray-200 text-gray-700 font-bold px-3 py-1 rounded-lg text-xs mr-2 w-[100px] h-[35px]">Cancel</button>
-                    <button type="submit" class="bg-green-500 text-white font-bold px-3 py-1 rounded-lg text-xs w-[100px] h-[35px]">Add Project</button>
+                <div class="mt-6 flex justify-end space-x-2">
+                    <button @click="open = false" type="button" class="bg-gray-300 text-gray-700 px-4 py-2 rounded shadow-md hover:bg-gray-400 text-xs">
+                        Cancel
+                    </button>
+                    <button type="submit" class="bg-green-500 text-white px-6 py-2 rounded shadow-md hover:bg-green-600 text-xs">
+                        Add Project
+                    </button>
                 </div>
             </form>
         </div>
     </div>
-
-
 </div>
