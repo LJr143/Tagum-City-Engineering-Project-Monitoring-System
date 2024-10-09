@@ -31,8 +31,8 @@
                 @else
                     @foreach ($cards as $index => $card)
                         <!-- Using $index to get the incremental value -->
-                        <a href="{{ route('material-table-cost') }}"
-                           class="bg-white p-6 rounded-lg shadow-md block transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
+                        <a href="{{ route('material-table-cost', ['pow_id' => $card->id, 'index' => $index + 1]) }}"  class="bg-white p-6 rounded-lg shadow-md block transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
+
                             <div class="bg-green-600 text-white text-xs px-2 py-1 rounded w-max mb-2">
                                 Ref: {{ $card->reference_number }}</div>
                             <h3 class="text-lg font-bold text-black">POW {{ $index + 1 }}</h3>

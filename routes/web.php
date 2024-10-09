@@ -10,15 +10,19 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::get('/project-main', [ProjectController::class, 'index'])->name('project-main');
         Route::get('/view-project-pow/{id}', [ProjectController::class, 'view'])->name('view-project-pow');
+        Route::get('/material-table-cost/{pow_id}/{index}', [ProjectController::class, 'viewPowInfo'])->name('material-table-cost');
     });
 });
 
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 Route::delete('/project/{id}', [ProjectController::class, 'destroy'])->name('project.destroy');
-
-
+Route::delete('/pow/{id}', [ProjectController::class, 'destroyPow'])->name('pow.destroy');
+//Route::post('/materials/import', [ProjectController::class, 'import'])->name('materials.import');
+//Route::get('/material-table-cost/{project_id}', [ProjectController::class, 'destroy'])->name('material-table-cost');
 
 //Route::get('/engineers', [UserController::class, 'getEngineers']);
+
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -47,9 +51,9 @@ Route::get('/material-table-cost', function () {
 });
 
 // In your routes/web.php/ gidungag nako para mulahos gikan pow cards to material cost table
-Route::get('/material-table-cost', function () {
-    return view('layouts.Projects.material-cost-table');
-})->name('material-table-cost');
+//Route::get('/material-table-cost', function () {
+//    return view('layouts.Projects.material-cost-table');
+//})->name('material-table-cost');
 
 Route::get('/main', function () {
     return view('layouts.Projects.dashboard');
