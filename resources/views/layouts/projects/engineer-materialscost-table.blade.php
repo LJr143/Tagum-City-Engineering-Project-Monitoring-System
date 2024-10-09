@@ -16,21 +16,13 @@
 
                 <div class="container mx-auto p-2">
                     <div class="container mx-auto p-2">
+
                         <!-- Project Header -->
                         <div class="flex flex-col items-end space-y-2 w-full">
                             <div class="flex space-x-2">
 
 
-                                <button onclick="openDeleteModal()" class="bg-red-500 text-white text-xs px-4 py-2 rounded shadow-md hover:bg-red-600 focus:outline-none flex items-center space-x-2">
-                                    <span>Delete</span>
-                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10 10V16" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M14 10V16" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M18 6V18C18 19.1046 17.1046 20 16 20H8C6.89543 20 6 19.1046 6 18V6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M4 6H20" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M15 6V5C15 3.89543 14.1046 3 13 3H11C9.89543 3 9 3.89543 9 5V6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </button>
+
                                 <button onclick="openSaveModal()" class="bg-green-600 text-white text-xs px-4 py-2 rounded shadow-md hover:bg-green-700 focus:outline-none flex items-center space-x-2">
                                     <span>Save</span>
                                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -42,11 +34,11 @@
 
                             </div>
                         </div>
-                        <h3 class="text-base pb-3 font-semibold leading-6 text-gray-900">POW 1</h3>
-                        <div class="flex justify-between items-center mb-6">
+                        <div class="flex justify-between items-center mb-3">
                             <span class="bg-green-600 text-xs text-white py-1 px-4 rounded-full">#PRJ2023-03-19879</span>
                         </div>
 
+                        <h3 class="text-base ml-2 pb-3 font-semibold leading-6 mb-4 text-gray-900">POW 1</h3>
 
                         <div>
                             <div class="sm:hidden">
@@ -325,6 +317,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <!-- Progress Circle Bar Section -->
                             <div class="col-span-1">
                                 <div class="bg-white shadow-md rounded-lg p-4 h-full">
@@ -371,7 +364,6 @@
                                     <h4 class="text-xs text-center mt-2 text-gray-600">Labor Cost Progress</h4>
                                 </div>
                             </div>
-
                         </div>
 
 
