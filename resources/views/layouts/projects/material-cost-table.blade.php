@@ -46,6 +46,7 @@
 
                     <h3 class="text-base pb-3 font-semibold leading-6 text-gray-900 mt-3 mb-5">POW {{ $index }}</h3>
                 </div>
+                <livewire:material-cost-table :pow_id="$pow->id" />
 
                 <div>
                     <div class="sm:hidden">
@@ -221,7 +222,7 @@
 
             </div>
 
-            <livewire:material-cost-table :pow_id="$pow->id" />
+
         </div>
     </x-slot>
     <script>

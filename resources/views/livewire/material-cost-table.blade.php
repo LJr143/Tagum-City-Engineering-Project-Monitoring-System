@@ -1,4 +1,4 @@
-<div>
+<div class="flex w-full mb-4">
     <style>
         .progress-bar-container {
             margin-top: 20px;
@@ -61,32 +61,48 @@
         }
     </style>
 
-    <h3>Project Cost Status</h3>
 
-    <div class="cost-details">
+
+    <div class="cost-details text-[12px] w-1/2">
+        <h3>Project Cost Status</h3>
         <p>Total Material Cost: <strong>Php{{ number_format($totalMaterialCost, 2) }}</strong></p>
         <p>Total Spent Cost: <strong>Php{{ number_format($spentCost, 2) }}</strong></p>
+
+        <div class="status-indicator text-[12px]">
+            @if ($isOutOfBudget)
+                <p>Project Status: <span class="out-of-budget">Out of Budget</span></p>
+            @elseif ($progressPercentage == 100)
+                <p>Project Status: <span class="completed">Completed</span></p>
+            @elseif ($progressPercentage < 50 && $progressPercentage != 0)
+                <p>Project Status: <span class="in-progress">In Progress</span></p>
+            @else
+                <p>Project Status: <span class="not-started">Not Started</span></p>
+            @endif
+        </div>
     </div>
 
-    <div class="progress-bar-container">
-        <label>Project Progress: {{ number_format($progressPercentage, 2) }}% (Actual) vs Target Progress: {{ number_format($targetProgressPercentage, 2) }}%</label>
-        <div class="progress-bar">
+    <div class="progress-bar-container text-[12px] w-1/2">
+        <label>Project Progress Materials: {{ number_format($progressPercentage, 2) }}% (Actual) vs Target Progress: {{ number_format($targetProgressPercentage, 2) }}%</label>
+        <div class="progress-bar" style="height: 12px">
             <!-- The target progress bar (lighter) -->
             <div class="target-progress" style="width: {{ $targetProgressPercentage }}%;"></div>
             <!-- The actual progress bar (darker) -->
             <div class="progress" style="width: {{ $progressPercentage }}%;"></div>
         </div>
-    </div>
+        <label>Project Progress Labor: {{ number_format($progressPercentage, 2) }}% (Actual) vs Target Progress: {{ number_format($targetProgressPercentage, 2) }}%</label>
+        <div class="progress-bar" style="height: 10px">
+            <!-- The target progress bar (lighter) -->
+            <div class="target-progress" style="width: {{ $targetProgressPercentage }}%;"></div>
+            <!-- The actual progress bar (darker) -->
+            <div class="progress" style="width: {{ $progressPercentage }}%;"></div>
+        </div>
+        <label>Project Progress Overall: {{ number_format($progressPercentage, 2) }}% (Actual) vs Target Progress: {{ number_format($targetProgressPercentage, 2) }}%</label>
+        <div class="progress-bar" style="height: 10px">
+            <!-- The target progress bar (lighter) -->
+            <div class="target-progress" style="width: {{ $targetProgressPercentage }}%;"></div>
+            <!-- The actual progress bar (darker) -->
+            <div class="progress" style="width: {{ $progressPercentage }}%;"></div>
+        </div>
 
-    <div class="status-indicator">
-        @if ($isOutOfBudget)
-            <p>Project Status: <span class="out-of-budget">Out of Budget</span></p>
-        @elseif ($progressPercentage == 100)
-            <p>Project Status: <span class="completed">Completed</span></p>
-        @elseif ($progressPercentage < 50 && $progressPercentage != 0)
-            <p>Project Status: <span class="in-progress">In Progress</span></p>
-        @else
-            <p>Project Status: <span class="not-started">Not Started</span></p>
-        @endif
     </div>
 </div>
