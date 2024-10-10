@@ -69,7 +69,7 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                             @for ($i = 0; $i < 6; $i++)
                                 <!-- wala ni nako gitarog wala pani na route atong sidebar nga dashobar,prjecs,report lng naa -->
-                                <a href="{{ route('engineer-materialscost-table') }}" class="bg-white p-6 rounded-lg shadow-md block transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
+                                <a href="" class="bg-white p-6 rounded-lg shadow-md block transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
                                     <div class="bg-green-600 text-white text-xs px-2 py-1 rounded w-max mb-2">Ref: 12345</div>
                                     <h3 class="text-lg font-bold text-black">POW 1</h3>
                                     <p class="mt-2 text-gray-600  text-xs">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint...</p>

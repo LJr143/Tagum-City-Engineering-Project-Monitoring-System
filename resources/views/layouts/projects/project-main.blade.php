@@ -18,9 +18,10 @@
 
             </header>
 
+            @if (auth()->user()->isAdmin())
             <!-- Modal -->
             <livewire:add-project/>
-
+            @endif
             <livewire:project-filter/>
 
         </div>

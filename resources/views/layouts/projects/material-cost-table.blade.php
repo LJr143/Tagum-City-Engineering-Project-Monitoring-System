@@ -15,7 +15,7 @@
                 <div class="flex flex-col items-end space-y-2 w-full">
                     <div class="flex space-x-2">
 
-
+                        @if (auth()->user()->isAdmin())
                         <button onclick="openDeleteModal()" class="bg-red-500 text-white text-xs px-4 py-2 rounded shadow-md hover:bg-red-600 focus:outline-none flex items-center space-x-2">
                             <span>Delete</span>
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -26,22 +26,26 @@
                                 <path d="M15 6V5C15 3.89543 14.1046 3 13 3H11C9.89543 3 9 3.89543 9 5V6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </button>
-                        <button onclick="openSaveModal()" class="bg-green-600 text-white text-xs px-4 py-2 rounded shadow-md hover:bg-green-700 focus:outline-none flex items-center space-x-2">
-                            <span>Save</span>
-                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M21 7L17 3L14 6L8 12V16H12L18 10L21 7Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M14 6L18 10" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M10 4H4V20H20V14" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-
+{{--                        <button onclick="openSaveModal()" class="bg-green-600 text-white text-xs px-4 py-2 rounded shadow-md hover:bg-green-700 focus:outline-none flex items-center space-x-2">--}}
+{{--                            <span>Save</span>--}}
+{{--                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
+{{--                                <path d="M21 7L17 3L14 6L8 12V16H12L18 10L21 7Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>--}}
+{{--                                <path d="M14 6L18 10" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>--}}
+{{--                                <path d="M10 4H4V20H20V14" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>--}}
+{{--                            </svg>--}}
+{{--                        </button>--}}
+                        @endif
                     </div>
                 </div>
-                <h3 class="text-base pb-3 font-semibold leading-6 text-gray-900">POW {{ $index }}</h3>
-                <div class="flex justify-between items-center mb-6">
-                    <span class="bg-green-600 text-xs text-white py-1 px-4 rounded-full">#{{ $pow->reference_number }}</span>
-                </div>
 
+
+                <div>
+                            <span class="bg-green-600 text-white px-3 py-1 rounded text-xs ">
+                                Ref: #{{ $pow->reference_number }}
+                            </span>
+
+                    <h3 class="text-base pb-3 font-semibold leading-6 text-gray-900 mt-3 mb-5">POW {{ $index }}</h3>
+                </div>
 
                 <div>
                     <div class="sm:hidden">
@@ -65,78 +69,80 @@
 
                 <div class="flex w-full">
                     <!-- Material Cost Section -->
-                    <div id="materials" class="">
+                    <div id="materials" class="w-full">
                         <div class="bg-white shadow-md rounded-lg p-6">
                             <h3 class="text-sm font-semibold mb-4 text-center"> Materials</h3>
-                            <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-[910px]">
+                                <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
                                 <livewire:material-table :pow_id="$pow->id" />
                             </div>
                         </div>
                     </div>
 
                     <!-- Labor Cost Section -->
-                    <div id="labor-cost" class="hidden">
+                    <div id="labor-cost" class="hidden w-full">
                         <div class="bg-white shadow-md rounded-lg p-6">
                             <h3 class="text-sm font-semibold mb-4 text-center">Labor Cost</h3>
                             <!-- Filter, Search, Import Inside Card -->
                             <div class="flex items-center justify-between mb-4 space-x-4">
                                 <div class="flex space-x-2 ml-auto">
+                                    @if (auth()->user()->isEngineer())
                                     <livewire:add-payroll :pow_id="$pow->id"/>
+                                    @endif
                                     <input type="text" placeholder="Search..." class="px-2 py-1 border border-gray-300 rounded-md shadow-sm text-xs w-55">
                                 </div>
                             </div>
                             <!-- Table for Material Costs -->
-                            <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-[910px]">
+                            <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
                                 <livewire:payroll-table :pow_id="$pow->id"/>
                             </div>
                         </div>
                     </div>
                     <!-- Progress Circle Bar Section -->
-                    <div class="col-span-1">
-                        <div class="bg-white shadow-md rounded-lg p-4 h-full">
-                            <h3 class="text-sm font-semibold mb-2 text-center">Name Information Progress</h3>
-                            <div class="flex justify-center items-center">
-                                <div class="relative">
-                                    <svg class="w-20 h-20" viewBox="0 0 100 100">
-                                        <circle cx="50" cy="50" r="45" stroke="#e0e0e0" stroke-width="10" fill="none"/>
-                                        <circle cx="50" cy="50" r="45" stroke="#4F46E5" stroke-width="10" fill="none" stroke-dasharray="283" stroke-dashoffset="100"></circle>
-                                    </svg>
-                                    <div class="absolute inset-0 flex items-center justify-center">
-                                        <span class="text-lg font-semibold text-gray-700">75%</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <h4 class="text-xs text-center mt-2 text-gray-600">Overall POW Progress</h4>
+{{--                    <div class="col-span-1">--}}
+{{--                        <div class="bg-white shadow-md rounded-lg p-4 h-full">--}}
+{{--                            <h3 class="text-sm font-semibold mb-2 text-center">Name Information Progress</h3>--}}
+{{--                            <div class="flex justify-center items-center">--}}
+{{--                                <div class="relative">--}}
+{{--                                    <svg class="w-20 h-20" viewBox="0 0 100 100">--}}
+{{--                                        <circle cx="50" cy="50" r="45" stroke="#e0e0e0" stroke-width="10" fill="none"/>--}}
+{{--                                        <circle cx="50" cy="50" r="45" stroke="#4F46E5" stroke-width="10" fill="none" stroke-dasharray="283" stroke-dashoffset="100"></circle>--}}
+{{--                                    </svg>--}}
+{{--                                    <div class="absolute inset-0 flex items-center justify-center">--}}
+{{--                                        <span class="text-lg font-semibold text-gray-700">75%</span>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <h4 class="text-xs text-center mt-2 text-gray-600">Overall POW Progress</h4>--}}
 
-                            <!-- Second Circle -->
-                            <div class="flex justify-center items-center mt-4">
-                                <div class="relative">
-                                    <svg class="w-20 h-20" viewBox="0 0 100 100">
-                                        <circle cx="50" cy="50" r="45" stroke="#e0e0e0" stroke-width="10" fill="none"/>
-                                        <circle cx="50" cy="50" r="45" stroke="#4F46E5" stroke-width="10" fill="none" stroke-dasharray="283" stroke-dashoffset="60"></circle> <!-- Change stroke-dashoffset for a different progress -->
-                                    </svg>
-                                    <div class="absolute inset-0 flex items-center justify-center">
-                                        <span class="text-lg font-semibold text-gray-700">60%</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <h4 class="text-xs text-center mt-2 text-gray-600">Material Cost Progress</h4>
+{{--                            <!-- Second Circle -->--}}
+{{--                            <div class="flex justify-center items-center mt-4">--}}
+{{--                                <div class="relative">--}}
+{{--                                    <svg class="w-20 h-20" viewBox="0 0 100 100">--}}
+{{--                                        <circle cx="50" cy="50" r="45" stroke="#e0e0e0" stroke-width="10" fill="none"/>--}}
+{{--                                        <circle cx="50" cy="50" r="45" stroke="#4F46E5" stroke-width="10" fill="none" stroke-dasharray="283" stroke-dashoffset="60"></circle> <!-- Change stroke-dashoffset for a different progress -->--}}
+{{--                                    </svg>--}}
+{{--                                    <div class="absolute inset-0 flex items-center justify-center">--}}
+{{--                                        <span class="text-lg font-semibold text-gray-700">60%</span>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <h4 class="text-xs text-center mt-2 text-gray-600">Material Cost Progress</h4>--}}
 
-                            <!-- Third Circle -->
-                            <div class="flex justify-center items-center mt-4">
-                                <div class="relative">
-                                    <svg class="w-20 h-20" viewBox="0 0 100 100">
-                                        <circle cx="50" cy="50" r="45" stroke="#e0e0e0" stroke-width="10" fill="none"/>
-                                        <circle cx="50" cy="50" r="45" stroke="#4F46E5" stroke-width="10" fill="none" stroke-dasharray="283" stroke-dashoffset="80"></circle> <!-- Change stroke-dashoffset for a different progress -->
-                                    </svg>
-                                    <div class="absolute inset-0 flex items-center justify-center">
-                                        <span class="text-lg font-semibold text-gray-700">80%</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <h4 class="text-xs text-center mt-2 text-gray-600">Labor Cost Progress</h4>
-                        </div>
-                    </div>
+{{--                            <!-- Third Circle -->--}}
+{{--                            <div class="flex justify-center items-center mt-4">--}}
+{{--                                <div class="relative">--}}
+{{--                                    <svg class="w-20 h-20" viewBox="0 0 100 100">--}}
+{{--                                        <circle cx="50" cy="50" r="45" stroke="#e0e0e0" stroke-width="10" fill="none"/>--}}
+{{--                                        <circle cx="50" cy="50" r="45" stroke="#4F46E5" stroke-width="10" fill="none" stroke-dasharray="283" stroke-dashoffset="80"></circle> <!-- Change stroke-dashoffset for a different progress -->--}}
+{{--                                    </svg>--}}
+{{--                                    <div class="absolute inset-0 flex items-center justify-center">--}}
+{{--                                        <span class="text-lg font-semibold text-gray-700">80%</span>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <h4 class="text-xs text-center mt-2 text-gray-600">Labor Cost Progress</h4>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                 </div>
 
                 <!-- Modal for Edit Item -->

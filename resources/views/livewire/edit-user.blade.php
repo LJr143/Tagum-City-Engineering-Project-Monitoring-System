@@ -1,4 +1,4 @@
-<div x-data="{ open: false }" x-cloak @open-edit-modal.window="open = true" @user-edited.window="open = false">
+<div class="flex text-left" x-data="{ open: false }" x-cloak @open-edit-modal.window="open = true" @user-edited.window="open = false">
 <div class="flex justify-end">
         <div class="relative ml-2">
             <button @click="open = true" class="flex bg-green-500 text-white text-xs px-4 py-2 rounded shadow-md hover:bg-green-600 focus:outline-none">
@@ -43,11 +43,11 @@
                 </svg>
             </button>
 
-            <h2 class="text-lg font-bold mb-4">Edit Project</h2>
+            <h2 class="text-lg font-bold mb-4">Edit User Information</h2>
             <form wire:submit.prevent="submit" class="text-xs">
             <div class="flex gap-2">
                     <div class="w-2/5">
-                        <div class="flex flex-col space-y-1">
+                        <div class="flex flex-col space-y-2">
                             <label for="first_name" class="block text-gray-700 text-xs">First Name</label>
                             <input type="text" id="first_name" wire:model="first_name"
                                    class="mt-1 block w-full p-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-xs"

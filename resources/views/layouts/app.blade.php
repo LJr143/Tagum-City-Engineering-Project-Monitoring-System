@@ -66,6 +66,7 @@
          x-on:user-edited.window="pushNotification('success', 'User Saved', 'User has been updated successfully.');"
          x-on:open-edit-modal.window="pushNotification('success', 'Edit Modal Opened', 'Edit modal opened successfully.');"
          x-on:user-deleted.window="pushNotification('success', 'User Deleted', 'User deleted successfully.');"
+         x-on:material-edited.window="pushNotification('success', 'Material Edited', 'Material edited successfully.');"
 
     >
 

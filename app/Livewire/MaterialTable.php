@@ -2,8 +2,10 @@
 
 namespace App\Livewire;
 
+use AllowDynamicProperties;
 use App\Models\Material;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\View\View;
 use Livewire\WithPagination;
 use PowerComponents\LivewirePowerGrid\Column;
 use PowerComponents\LivewirePowerGrid\Exportable;
@@ -14,11 +16,12 @@ use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\PowerGridFields;
 use PowerComponents\LivewirePowerGrid\Traits\WithExport;
 
-class MaterialTable extends PowerGridComponent
+#[AllowDynamicProperties] class MaterialTable extends PowerGridComponent
 {
     use WithExport;
     use WithPagination;
 
+    public $selectedUserId;
     public $pow_id;
 
 
@@ -61,6 +64,7 @@ class MaterialTable extends PowerGridComponent
     public function fields(): PowerGridFields
     {
         return PowerGrid::fields()
+            ->add('id')
             ->add('pow')
             ->add('item_no')
             ->add('quantity')
@@ -72,7 +76,8 @@ class MaterialTable extends PowerGridComponent
 
     public function columns(): array
     {
-        return [
+        $columns = [
+            Column::make('Id', 'id')->hidden(),
             Column::make('Item No', 'item_no')->sortable()->searchable(),
             Column::make('Quantity', 'quantity')->sortable()->searchable(),
             Column::make('Unit of Issue', 'unit_of_issue')->sortable()->searchable(),
@@ -80,5 +85,26 @@ class MaterialTable extends PowerGridComponent
             Column::make('Unit Cost', 'estimated_unit_cost')->searchable(),
             Column::make('Total Cost', 'estimated_cost'),
         ];
+
+        if (auth()->user()->isEngineer()) {
+            $columns[] = Column::action('Action')->bodyAttribute('text-center');
+        }
+
+        return $columns;
     }
+
+    public function actionsFromView($row): View
+    {
+        return view('actions-view-material', ['row' => $row]);
+    }
+    public function edit($rowId)
+    {
+        $this->selectedUserId = $rowId;
+        $this->dispatch('open-edit-modal');
+    }
+
+
+
+
+
 }

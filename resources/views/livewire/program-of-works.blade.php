@@ -12,7 +12,9 @@
 {{--                    </button>--}}
 {{--                  --}}
 {{--                </div>--}}
+            @if (auth()->user()->isAdmin())
                 <livewire:add-pow :project-id="$projectId"/>
+            @endif
 
 
 {{--            <!-- Search input and button -->--}}
@@ -38,6 +40,9 @@
                             <h3 class="text-lg font-bold text-black">POW {{ $index + 1 }}</h3>
                             <!-- Incremental value -->
                             <p class="mt-2 text-gray-600 text-xs">{{ $card->description }}</p>
+                            <p class="text-xs font-semibold text-black mt-2">Material Cost: {{ $card->total_material_cost }}</p>
+                            <p class="text-xs font-semibold text-black mt-2">Labor Cost: {{ $card->total_labor_cost }}</p>
+                            <p class="text-xs font-semibold text-black mt-2">Balance: 1,000</p>
                             <br>
                             <div class="my-3 border-t border-gray-300"></div>
                             <div class="flex items-center space-x-3">

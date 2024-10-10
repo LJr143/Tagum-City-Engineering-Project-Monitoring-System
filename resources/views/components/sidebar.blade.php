@@ -69,6 +69,8 @@
                     <span class="-mr-1 " :class="{'block':showSide, 'hidden':!showSide}" style="font-size: 12px">Reports</span>
                 </a>
             </li>
+
+            @if (auth()->user()->isAdmin())
             <li x-data="{toggle: false}" @mouseenter="toggle = true"
                 @mouseleave="toggle = false"
                 :style="toggle ? 'background-color: rgba(36, 144, 0, 0.3);' : ''">
@@ -83,6 +85,7 @@
                     <span class="-mr-1 " :class="{'block':showSide, 'hidden':!showSide}" style="font-size: 12px">Users</span>
                 </a>
             </li>
+
 
             <li x-data="{toggle: false}" @mouseenter="toggle = true"
                 @mouseleave="toggle = false"
@@ -100,6 +103,7 @@
                     <span class="-mr-1 " :class="{'block':showSide, 'hidden':!showSide}" style="font-size: 12px">System Logs</span>
                 </a>
             </li>
+            @endif
 
         </ul>
 

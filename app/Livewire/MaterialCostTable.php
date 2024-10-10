@@ -1,9 +1,10 @@
 <?php
-
 namespace App\Livewire;
 
 use App\Models\Material;
+use App\Models\Pow;
 use Livewire\Component;
+use Carbon\Carbon;
 
 class MaterialCostTable extends Component
 {
@@ -21,7 +22,6 @@ class MaterialCostTable extends Component
         $this->calculateCosts();
     }
 
-    // Calculate the total material cost and spent cost
     public function calculateCosts()
     {
         $materials = Material::where('pow_id', $this->pow_id)->get();
@@ -29,25 +29,34 @@ class MaterialCostTable extends Component
         $this->totalMaterialCost = $materials->sum('estimated_cost');
         $this->spentCost = $materials->sum('spent_cost');
 
-        // Assuming you have a defined project duration in months
-        $projectDurationMonths = 6; // Replace with your project's actual duration
-        $elapsedMonths = 2; // Replace with the actual number of elapsed months
+        $programOfWork = Pow::find($this->pow_id);
 
-        // Calculate target progress based on elapsed time
+        if ($programOfWork && $programOfWork->start_date && $programOfWork->end_date) {
+            $startDate = Carbon::parse($programOfWork->start_date);
+            $endDate = Carbon::parse($programOfWork->end_date);
+
+            $projectDurationMonths = $startDate->diffInMonths($endDate);
+
+            $elapsedMonths = $startDate->diffInMonths(Carbon::now());
+        } else {
+
+            $projectDurationMonths = 6;
+            $elapsedMonths = 2;
+        }
+
+
         if ($projectDurationMonths > 0) {
             $this->targetProgressPercentage = ($elapsedMonths / $projectDurationMonths) * 100;
         } else {
             $this->targetProgressPercentage = 0;
         }
 
-        // Calculate the current progress percentage
         if ($this->totalMaterialCost > 0) {
             $this->progressPercentage = ($this->spentCost / $this->totalMaterialCost) * 100;
         } else {
             $this->progressPercentage = 0;
         }
 
-        // Check if the project is out of budget
         $this->isOutOfBudget = $this->spentCost > $this->totalMaterialCost;
     }
 
@@ -56,3 +65,4 @@ class MaterialCostTable extends Component
         return view('livewire.material-cost-table');
     }
 }
+

@@ -83,7 +83,7 @@
             <p>Project Status: <span class="out-of-budget">Out of Budget</span></p>
         @elseif ($progressPercentage == 100)
             <p>Project Status: <span class="completed">Completed</span></p>
-        @elseif ($progressPercentage > 50)
+        @elseif ($progressPercentage < 50 && $progressPercentage != 0)
             <p>Project Status: <span class="in-progress">In Progress</span></p>
         @else
             <p>Project Status: <span class="not-started">Not Started</span></p>

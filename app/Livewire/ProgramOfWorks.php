@@ -21,12 +21,19 @@ class ProgramOfWorks extends Component
 
     public function render()
     {
-        // Fetch project details and associated pows with pagination
+        // Fetch project details
         $project = Project::findOrFail($this->projectId);
 
-        // Fetch cards related to the project with pagination
-        $cards = $project->pows()->paginate(9); // 9 cards per page
+        // Check if the user is an admin
+        if (auth()->user()->isAdmin()) {
+            // Fetch all cards related to the project if the user is an admin
+            $cards = $project->pows()->paginate(9); // 9 cards per page
+        } else {
+            // Fetch only the cards assigned to the logged-in engineer
+            $cards = $project->pows()->where('engineer_id', auth()->user()->id)->paginate(9); // 9 cards per page
+        }
 
         return view('livewire.program-of-works', compact('cards'));
     }
+
 }

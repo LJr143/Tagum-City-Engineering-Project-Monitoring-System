@@ -13,6 +13,7 @@
                 <div class="flex justify-end mb-4">
                     <div class="flex flex-col items-end space-y-2 w-full">
                         <div class="flex space-x-2">
+                            @if (auth()->user()->isAdmin())
                             <livewire:edit-project :project="$project->id" />
 
                             <!-- Delete Button -->
@@ -28,6 +29,8 @@
                                     </svg>
 
                                 </button>
+
+                            @endif
                         </div>
 
                         <div class="relative flex flex-col items-center space-y-2 mt-4 w-full">

@@ -17,6 +17,8 @@ class Material extends Model
         'item_description',
         'estimated_unit_cost',
         'estimated_cost',
+        'quantity_use',
+        'spent_cost',
     ];
 
 }

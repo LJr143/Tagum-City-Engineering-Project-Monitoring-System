@@ -6,16 +6,19 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
-Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-    Route::middleware(['inactivity.logout'])->group(function () {
-        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-        Route::get('/project-main', [ProjectController::class, 'index'])->name('project-main');
-        Route::get('/view-project-pow/{id}', [ProjectController::class, 'view'])->name('view-project-pow');
-        Route::get('/material-table-cost/{pow_id}/{index}', [ProjectController::class, 'viewPowInfo'])->name('material-table-cost');
-        Route::get('/manage-user', [UserController::class, 'index'])->name('manage-user');
-        Route::get('/system-logs', function () {return view('layouts.system_logs.system-logs');})->name('system-logs');
-    });
+Route::middleware(['auth:sanctum', 'verified', 'inactivity.logout'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/project-main', [ProjectController::class, 'index'])->name('project-main');
+    Route::get('/view-project-pow/{id}', [ProjectController::class, 'view'])->name('view-project-pow');
+    Route::get('/material-table-cost/{pow_id}/{index}', [ProjectController::class, 'viewPowInfo'])->name('material-table-cost');
+
+    // Apply role middleware here
+    Route::get('/manage-user', [UserController::class, 'index'])->middleware('role:admin')->name('manage-user');
+    Route::get('/system-logs', function () {
+        return view('layouts.system_logs.system-logs');
+    })->middleware('role:admin')->name('system-logs');
 });
+
 
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 Route::delete('/project/{id}', [ProjectController::class, 'destroy'])->name('project.destroy');
