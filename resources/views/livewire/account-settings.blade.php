@@ -96,5 +96,4 @@
             </ul>
         </div>
 @endif
-
-
+</div>
