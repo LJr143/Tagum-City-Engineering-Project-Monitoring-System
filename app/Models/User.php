@@ -31,6 +31,7 @@ class User extends Authenticatable
         'birth_date',
         'email',
         'contact_number',
+        'profile_photo_path',
         'position',
         'role',
         'password',
@@ -80,5 +81,4 @@ class User extends Authenticatable
     {
         return $this->role === 'engineer';
     }
-
 }
