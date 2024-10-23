@@ -4,25 +4,9 @@
         <!-- Road Construction title -->
         <h2 class="text-xl font-bold mb-2">POW</h2>
         <div class="flex flex-col space-y-4 mx-8">
-{{--            <div x-data="{ open: false }" class="relative" x-cloak>--}}
-{{--                <div class="flex justify-end mb-4">--}}
-{{--                    <button @click="open = true"--}}
-{{--                            class="bg-green-700 text-white mr-2 text-xs px-4 py-2 rounded shadow-md hover:bg-green-900 focus:outline-none">--}}
-{{--                        Add New POW--}}
-{{--                    </button>--}}
-{{--                  --}}
-{{--                </div>--}}
             @if (auth()->user()->isAdmin())
                 <livewire:add-pow :project-id="$projectId"/>
             @endif
-
-
-{{--            <!-- Search input and button -->--}}
-{{--            <div class="flex items-center space-x-2">--}}
-{{--                <input type="text" placeholder="Search" id="search-input"--}}
-{{--                       wire:model="search"--}}
-{{--                       class="h-8 px-3 border mr-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-xs" />--}}
-{{--            </div>--}}
 
             <!-- Cards Display -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -49,10 +33,6 @@
                                 <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center">
                                     <img src="{{ asset('images/pic1.jpg') }}" alt="Engineer Image"
                                          class="w-12 h-12 rounded-full object-cover">
-                                </div>
-                                <div>
-{{--                                    <p class="text-gray-500 text-xs">{{ $card->engineer->position }}</p>--}}
-{{--                                    <p class="text-black">{{ $card->engineer->first_name }} {{ $card->engineer->last_name }}</p>--}}
                                 </div>
                             </div>
                         </a>

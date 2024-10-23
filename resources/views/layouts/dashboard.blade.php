@@ -132,7 +132,7 @@
                                                     Project Name
                                                 </th>
                                                 <th scope="col"
-                                                    class="min-w-[12rem] py-3.5 px-4 pr-3 text-center text-sm font-semibold text-gray-900">
+                                                    class="min-w-[12rem] py-3.5 px-4 pr-3 text-left text-sm font-semibold text-gray-900">
                                                     Project Incharge
                                                 </th>
                                                 <th scope="col"

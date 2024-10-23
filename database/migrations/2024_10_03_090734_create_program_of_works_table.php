@@ -21,7 +21,7 @@ return new class extends Migration
 //            $table->date('end_date');
 //            $table->unsignedBigInteger('engineer_id');
 //            $table->foreign('engineer_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('total_material_cost');
+            $table->string('total_material_cost')->nullable();
             $table->string('total_labor_cost');
             $table->timestamps();
 
