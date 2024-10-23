@@ -154,7 +154,7 @@
                                                 <tr>
                                                     <td class="whitespace-nowrap py-1 px-4 pr-3 text-xs font-small text-gray-900">{{ $project->title }}</td>
                                                     <td class="whitespace-nowrap px-3 py-1 text-xs text-gray-500">
-                                                        Php {{$project->project_cost}}</td>
+                                                        Php {{$project->total_material_cost}}</td>
                                                     <td class="whitespace-nowrap px-3 py-1 text-xs text-gray-500">
                                                         <div class="flex items-center">
                                                             <div class="relative">
@@ -184,17 +184,16 @@
                                                     <td class="whitespace-nowrap text-sm text-gray-500 text-center">
                                                      <span class="flex items-center justify-center text-center rounded-[5px] capitalize p-2 w-[150px] text-xs font-semibold leading-5
                                                             @if($project->status == 'pending')
-                                                                text-yellow-800 bg-yellow-100
+                                                                text-yellow-800 bg-yellow-500 text-white
                                                             @elseif($project->status == 'completed')
-                                                                text-green-800 bg-green-100
+                                                                text-green-800 bg-green-500 text-white
                                                             @else
-                                                                text-red-800 bg-red-100
+                                                                text-red-800 bg-red-500 text-white
                                                             @endif">
                                                             {{ $project->status }}
                                                         </span>
 
                                                     </td>
-
                                                 </tr>
                                             @endforeach
                                             </tbody>

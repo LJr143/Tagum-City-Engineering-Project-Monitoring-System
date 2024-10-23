@@ -43,9 +43,9 @@ Route::get('report', function () {
     return view('report');
 })->name('report');
 
-Route::get('/users', function () {
-    return view('layouts.user.manageUser');
-})->name('user');
+//Route::get('/users', function () {
+//    return view('layouts.user.manageUser');
+//})->name('user');
 
 Route::get('/project-cost', function () {
     return view('layouts.projects.project-view-pow');
@@ -81,17 +81,17 @@ Route::get('/report', function () {
 })->name('report');
 
 
-Route::get('/user', function () {
-    return view('layouts.user.manageUser');
-})->name('user');
+//Route::get('/user', function () {
+//    return view('layouts.user.manageUser');
+//})->name('user');
 
 
 
 //FOR VIEWER
 
-Route::get('/view-project-viewer', function () {
-    return view('layouts.viewer.view-project-viewer');
-})->name('user');
+//Route::get('/view-project-viewer', function () {
+//    return view('layouts.viewer.view-project-viewer');
+//})->name('user');
 
 Route::get('/view-specific-project-viewer', function () {
     return view('layouts.viewer.view-specific-project-viewer');
@@ -109,8 +109,8 @@ Route::get('/view-pow-viewer', function () {
     return view('layouts.viewer.view-pow-viewer');
 })->name('view-pow-viewer');
 
-Route::get('/view-pow-engineer', function () {
-    return view('layouts.engineer.view-pow-engineer');
-})->name('user');
+//Route::get('/view-pow-engineer', function () {
+//    return view('layouts.engineer.view-pow-engineer');
+//})->name('user');
 
 //END FOR VIEWER
