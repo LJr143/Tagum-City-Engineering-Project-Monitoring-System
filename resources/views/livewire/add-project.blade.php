@@ -1,4 +1,4 @@
-<div x-data="{ open: false }" x-cloak @project-added.window="open = false" wire:ignore>
+<div x-data="{ open: false }" x-cloak @project-added.window="open = false">
     <div class="flex justify-end">
         <div class="relative ml-2">
             <button @click="open = true"
@@ -50,7 +50,7 @@
                 <h2 class="text-lg font-bold mb-4 ml-2">Add Project</h2>
             </div>
 
-            <form wire:submit.prevent="submit" class="text-xs"  wire:ignore>
+            <form wire:submit.prevent="submit" class="text-xs" >
                 <div class="grid  gap-6">
                     <!-- Left side (Project Info) -->
                     <div class="col-span-5 space-y-4">
@@ -74,16 +74,22 @@
                                            class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
                                 </div>
 
-                                <div class="w-1/6">
-                                    <label class="block text-xs font-medium mb-1">X-axis</label>
+                                <div class="w-2/4">
+                                    <label class="block text-xs font-medium mb-1">X-Axis</label>
                                     <input type="text" wire:model="x_axis"
-                                           class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
+                                           class="w-full px-3 py-2 text-xs border border-gray-400 rounded" placeholder="Must contain 'axis'" required>
+                                    @error('x_axis')
+                                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                                    @enderror
                                 </div>
 
-                                <div class="w-1/6">
-                                    <label class="block text-xs font-medium mb-1">Y-axis</label>
+                                <div class="w-2/4">
+                                    <label class="block text-xs font-medium mb-1">Y-Axis</label>
                                     <input type="text" wire:model="y_axis"
-                                           class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
+                                           class="w-full px-3 py-2 text-xs border border-gray-400 rounded" placeholder="Must contain 'axis'" required>
+                                    @error('y_axis')
+                                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -141,7 +147,7 @@
                             </ul>
 
                             @error('projectIncharge_id')
-                            <span class="error">{{ $message }}</span>
+                            <span class="text-red-500 text-xs">{{ $message }}</span>
                             @enderror
                         </div>
 
@@ -159,7 +165,11 @@
                                     <label class="block text-xs font-medium mb-1">End Date</label>
                                     <input type="date" wire:model="end_date"
                                            class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
+                                    @error('end_date')
+                                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                                    @enderror
                                 </div>
+
 
                             </div>
                         </div>
