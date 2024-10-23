@@ -28,12 +28,27 @@ class EditProject extends Component
         'title' => 'required|string|max:255',
         'baranggay' => 'required|string|max:255',
         'street' => 'required|string|max:255',
-        'x_axis' => 'required|string|max:255',
-        'y_axis' => 'required|string|max:255',
-        'projectIncharge_id' => 'required|numeric',
+        'x_axis' => 'required|numeric|between:-180,180',
+        'y_axis' => 'required|numeric|between:-90,90',
+        'projectIncharge_id' => 'required|numeric|exists:users,id',
         'start_date' => 'required|date',
-        'end_date' => 'required|date',
+        'end_date' => 'required|date|after:start_date',// I added after:start_date
         'description' => 'required|string',
+    ];
+    protected $message = [
+        'title.required' => 'The title is required.',
+        'baranggay.required' => 'The baranggay is required.',
+        'street.required' => 'The street is required.',
+        'end_date.required' => 'The end date is required.',
+        'end_date.after' => 'The end date must be after the start date.',
+        'x_axis.required' => 'The X Axis is required.',
+        'x_axis.numeric' => 'The X Axis must be a number.',
+        'x_axis.between' => 'The X Axis must be between -180 and 180.',
+        'y_axis.required' => 'The Y Axis is required.',
+        'y_axis.numeric' => 'The Y Axis must be a number.',
+        'y_axis.between' => 'The Y Axis must be between -90 and 90.',
+        'projectIncharge_id.exists' => 'Please select a valid Project Incharge from the list.',
+        'projectIncharge_id.required' => 'Project Incharge   required.',
     ];
 
     public function mount(Project $project)

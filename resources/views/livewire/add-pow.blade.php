@@ -1,5 +1,5 @@
 <div x-data="{ open: false, isUploading: @entangle('isUploading') }" x-cloak @pow-added.window="open = false"
-     wire:ignore>
+     >
     <div class="flex justify-end mb-4">
         <div class="relative ml-2">
             <button @click="open = true"
@@ -22,12 +22,16 @@
             </button>
 
             <h3 class="text-lg font-bold mb-2">Add New POW Card</h3>
-            <form wire:submit.prevent="save" class="space-y-2" enctype="multipart/form-data" wire:ignore>
+            <form wire:submit.prevent="save" class="space-y-2" enctype="multipart/form-data" >
                 <div class="flex flex-col space-y-1">
                     <label for="reference-number" class="block text-gray-700 text-xs">Reference Number</label>
                     <input type="text" id="reference-number" wire:model="reference_number"
                            class="mt-1 block w-full h-8 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-xs"
                            required>
+                    <!-- Error message for reference_number -->
+                    @error('reference_number')
+                    <span class="text-red-500 ml-2 text-[10px]">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div class="flex flex-col space-y-1">
@@ -109,6 +113,11 @@
                             <input type="text" id="total_labor_cost" wire:model="total_labor_cost"
                                    class="mt-1 block w-full p-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-xs"
                                    required>
+                            <!-- Error message for total_labor_cost -->
+                            @error('total_labor_cost')
+                            <span class="text-red-500 ml-2 text-[10px]">{{ $message }}</span>
+                            @enderror
+
                         </div>
                     </div>
                 </div>
@@ -132,6 +141,10 @@
                         <label for="materialsFile" class="block text-gray-700 text-xs">Upload Material (PR)</label>
                         <input type="file" id="materialsFile" wire:model="materialsFile"
                                class="mt-1 block w-full p-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-xs">
+                        <!-- Error message for materialsFile -->
+                        @error('materialsFile')
+                        <span class="text-red-500 ml-2 text-[10px]">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <!-- Total Material Cost Input -->
@@ -139,6 +152,10 @@
                         <label for="total_material_cost" class="block text-gray-700 text-xs">Total Material Cost</label>
                         <input type="text" id="total_material_cost" wire:model="total_material_cost"
                                class="mt-1 block w-full p-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-xs">
+                        <!-- Error message for total_material_cost -->
+                        @error('total_material_cost')
+                        <span class="text-red-500 ml-2 text-[10px]">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
 
