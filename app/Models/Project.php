@@ -11,8 +11,13 @@ class Project extends Model
 
     protected $fillable = [
         'title',
-        'address',
-        'project_cost',
+        'baranggay',
+        'street',
+        'x_axis',
+        'y_axis',
+        'project_incharge_id',
+        'start_date',
+        'end_date',
         'description',
     ];
 
@@ -20,6 +25,11 @@ class Project extends Model
     public function pows(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Pow::class);
+    }
+
+    public function projectIncharge(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(User::class, 'project_incharge_id');
     }
 
 }

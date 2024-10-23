@@ -14,8 +14,14 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('address');
-            $table->double('project_cost');
+            $table->string('baranggay')->nullable();
+            $table->string('street')->nullable();
+            $table->string('x_axis')->nullable();
+            $table->string('y_axis')->nullable();
+            $table->unsignedBigInteger('project_incharge_id');
+            $table->foreign('project_incharge_id')->references('id')->on('users')->onDelete('cascade');
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->text('description');
             $table->string('status')->default('pending');
             $table->timestamps();

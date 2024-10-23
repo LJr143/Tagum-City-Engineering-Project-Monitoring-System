@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Project;
+use App\Models\User;
 use App\Services\LogService;
 use Livewire\Component;
 
@@ -10,26 +11,52 @@ class AddProject extends Component
 {
 
     public $title;
-    public $address;
-    public $project_cost;
+    public $baranggay;
+    public $street;
+
+    public $start_date;
+    public $end_date;
+    public $x_axis;
+    public $y_axis;
+    public $projectIncharge_id;
     public $description;
+
+    public $projectIncharge;
 
     protected $rules = [
         'title' => 'required|string|max:255',
-        'address' => 'required|string|max:255',
-        'project_cost' => 'required|numeric',
+        'baranggay' => 'required|string|max:255',
+        'street' => 'required|string|max:255',
+        'x_axis' => 'required|string|max:255',
+        'y_axis' => 'required|string|max:255',
+        'projectIncharge_id' => 'required|numeric',
+        'start_date' => 'required|date',
+        'end_date' => 'required|date',
         'description' => 'required|string',
     ];
 
+    public function mount(): void
+    {
+        $this->projectIncharge = User::where('role', 'project incharge')->get();
+    }
+
     public function submit()
     {
-        $this->validate();
+        try {
+            $this->validate();
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            dd($e->errors()); // Check if validation fails
+        }
 
-        //  Create new Project
         Project::create([
             'title' => $this->title,
-            'address' => $this->address,
-            'project_cost' => $this->project_cost,
+            'baranggay' => $this->baranggay,
+            'street' => $this->street,
+            'x_axis' => $this->x_axis,
+            'y_axis' => $this->y_axis,
+            'start_date' => $this->start_date,
+            'end_date' => $this->end_date,
+            'project_incharge_id' => $this->projectIncharge_id,
             'description' => $this->description,
         ]);
 
@@ -48,7 +75,6 @@ class AddProject extends Component
         // Redirect
         return redirect()->route('project-main')->with('success', 'Project added successfully.');
     }
-
 
 
 }

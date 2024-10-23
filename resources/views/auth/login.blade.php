@@ -1,11 +1,11 @@
 <x-guest-layout>
 
     <div class="h-full mt-10" style="margin-left: 50px" >
-        <img src="{{ asset('storage/pmsAssets/pms_logo.png') }}" alt="" style="width: 180px">
+        <img src="{{ asset('storage/pmsAssets/pms_logo.png') }}" alt="" style="width: 200px">
 
         <div style="margin-left: 60px; width: 350px">
             <p class="font-bold mt-10" style="font-size: 25px; color: #249000">WELCOME BACK</p>
-            <p class="text-black" style="font-size: 10px">Don't have an account? <span><a class="text-blue-500" href="{{ route('register') }}"> Create an Account here</a></span></p>
+{{--            <p class="text-black" style="font-size: 10px">Don't have an account? <span><a class="text-blue-500" href="{{ route('register') }}"> Create an Account here</a></span></p>--}}
             <p class="text-black font-bold" style="font-size: 10px">TC-PMS  <span class="font-medium">is a project monitoring system dedicated for the city of Tagum’s office of the city Engineer</span></p>
             <p class="text-black font-bold mt-10" style="color: #249000; font-size: 12px">PLEASE LOGIN TO CONTINUE</p>
 
@@ -24,8 +24,8 @@
                  @csrf
 
                  <div>
-                     <x-label for="email" value="{{ __('Email') }}" />
-                     <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                     <x-label for="username" value="{{ __('Username') }}" />
+                     <x-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')" required autofocus autocomplete="username" />
                  </div>
 
                  <div class="mt-4">
@@ -38,13 +38,13 @@
                          <x-checkbox id="remember_me" name="remember" />
                          <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
                      </label>
-                     <div>
-                         @if (Route::has('password.request'))
-                             <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                                 {{ __('Forgot your password?') }}
-                             </a>
-                         @endif
-                     </div>
+{{--                     <div>--}}
+{{--                         @if (Route::has('password.request'))--}}
+{{--                             <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">--}}
+{{--                                 {{ __('Forgot your password?') }}--}}
+{{--                             </a>--}}
+{{--                         @endif--}}
+{{--                     </div>--}}
 
                  </div>
 

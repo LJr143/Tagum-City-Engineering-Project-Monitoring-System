@@ -19,8 +19,8 @@ class AddPow extends Component
     public $reference_number;
 
     public $description;
-    public $start_date;
-    public $end_date;
+//    public $start_date;
+//    public $end_date;
     public $engineer_id;
     public $total_material_cost;
     public $total_labor_cost;
@@ -32,12 +32,14 @@ class AddPow extends Component
     protected $rules = [
         'reference_number' => 'required|string|max:255',
         'description' => 'required|string',
-        'start_date' => 'required|date',
-        'end_date' => 'required|date',
-        'engineer_id' => 'required|numeric',
-        'total_material_cost' => 'required|numeric',
+//        'start_date' => 'required|date',
+//        'end_date' => 'required|date',
+//        'engineer_id' => 'required|numeric',
+//        'total_material_cost' => 'required|numeric',
         'total_labor_cost' => 'required|numeric',
-        'materialsFile' => 'required|file|mimes:xlsx,csv',
+        'total_material_cost' => 'numeric',
+        'materialsFile' => 'file|mimes:xlsx,csv',
+
     ];
 
 
@@ -47,11 +49,17 @@ class AddPow extends Component
         $this->engineers = User::where('role', 'engineer')->get();
     }
 
-
     public function save()
     {
-        // Validate the form including the materials file
-        $this->validate();
+        // Validate the form without requiring the materials file
+        $this->validate([
+            'reference_number' => 'required|string|max:255',
+            'description' => 'required|string',
+            'total_material_cost' => 'nullable|numeric',
+            'total_labor_cost' => 'required|numeric',
+            'projectId' => 'required|exists:projects,id',
+            'materialsFile' => 'nullable|file|mimes:xlsx,csv', // Optional file upload
+        ]);
 
         // Set the uploading state to true
         $this->isUploading = true;
@@ -60,9 +68,6 @@ class AddPow extends Component
         $data = [
             'reference_number' => $this->reference_number,
             'description' => $this->description,
-            'start_date' => $this->start_date,
-            'end_date' => $this->end_date,
-            'engineer_id' => $this->engineer_id,
             'total_material_cost' => $this->total_material_cost,
             'total_labor_cost' => $this->total_labor_cost,
             'project_id' => $this->projectId,
@@ -70,15 +75,21 @@ class AddPow extends Component
 
         $pow = Pow::create($data);
 
-        // Upload materials file and import
+        // Handle materials file upload if provided
         if ($this->materialsFile) {
-            // The file is required, so this will always run if the validation passes
-            $this->uploadMaterialsFile($this->materialsFile);
-
             try {
+                // Upload and import the materials file
+                $this->uploadMaterialsFile($this->materialsFile);
+
                 Log::info('Starting materials import...');
-                Excel::import(new MaterialsImport($pow->id), $this->materialsFile->getRealPath());
+                $import = new MaterialsImport($pow->id);
+                Excel::import($import, $this->materialsFile->getRealPath());
                 Log::info('Materials import completed successfully.');
+                // Get the total material cost from the import
+                $totalMaterialCost = $import->getTotalCost();
+                // Update the POW record with the total material cost
+                $pow->total_material_cost = $totalMaterialCost;
+                $pow->save();
                 session()->flash('message', 'Materials imported successfully!');
             } catch (\Exception $e) {
                 Log::error('Materials import failed: ' . $e->getMessage());
@@ -92,12 +103,12 @@ class AddPow extends Component
             auth()->id()
         );
 
-        // Reset the form and dispatch a success event
+        // Reset the form and dispatch success event
         $this->dispatch('pow-added');
         $this->reset();
 
-        // After processing, set the uploading state to false
-        $this->isUploading = false; // Reset the state
+        // Set the uploading state back to false
+        $this->isUploading = false;
 
         // Redirect to view the POW
         return redirect()->route('view-project-pow', ['id' => $pow->project_id])
@@ -107,11 +118,10 @@ class AddPow extends Component
 
     protected function uploadMaterialsFile($file)
     {
-        $path = $file->store('materials', 'public'); // Store the materials file
+        $path = $file->store('materials', 'public');
         Log::info('Materials file uploaded successfully.', ['path' => $path]);
         return $path;
     }
-
 
     public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
     {

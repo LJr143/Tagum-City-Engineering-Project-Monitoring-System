@@ -2,7 +2,7 @@
     <!-- Card containing Road Construction content -->
     <div class="bg-white p-6 rounded-lg shadow-md">
         <!-- Road Construction title -->
-        <h2 class="text-xl font-semibold mb-2">POW</h2>
+        <h2 class="text-xl font-bold mb-2">POW</h2>
         <div class="flex flex-col space-y-4 mx-8">
 {{--            <div x-data="{ open: false }" class="relative" x-cloak>--}}
 {{--                <div class="flex justify-end mb-4">--}}
@@ -27,7 +27,7 @@
             <!-- Cards Display -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @if ($cards->isEmpty())
-                    <div class="text-center text-gray-500">
+                    <div class="text-center text-gray-500 text-[12px]">
                         No program of work for this project.
                     </div>
                 @else
@@ -51,8 +51,8 @@
                                          class="w-12 h-12 rounded-full object-cover">
                                 </div>
                                 <div>
-                                    <p class="text-gray-500 text-xs">{{ $card->engineer->position }}</p>
-                                    <p class="text-black">{{ $card->engineer->first_name }} {{ $card->engineer->last_name }}</p>
+{{--                                    <p class="text-gray-500 text-xs">{{ $card->engineer->position }}</p>--}}
+{{--                                    <p class="text-black">{{ $card->engineer->first_name }} {{ $card->engineer->last_name }}</p>--}}
                                 </div>
                             </div>
                         </a>

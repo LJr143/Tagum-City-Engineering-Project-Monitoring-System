@@ -11,6 +11,8 @@ class MaterialsImport implements ToModel
     private static int $rowCount = 0; // Counter to track the number of rows processed
     private int $powId; // Store the pow_id to associate with materials
 
+    private float $totalCost = 0;
+
     // Constructor to initialize pow_id
     public function __construct(int $powId)
     {
@@ -54,6 +56,8 @@ class MaterialsImport implements ToModel
             'estimated_cost' => (float) $row[6], // Cast to float for decimal values
         ]);
 
+        $this->totalCost += (float)$row[6];
+
         // Log the imported row
         Log::info('Imported material successfully', [
             'pow_id' => $material->pow_id,
@@ -66,5 +70,10 @@ class MaterialsImport implements ToModel
         ]);
 
         return $material; // Return the newly created instance
+    }
+
+    public function getTotalCost(): float
+    {
+        return $this->totalCost;
     }
 }
