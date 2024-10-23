@@ -91,8 +91,7 @@
     @foreach($projects as $project)
         <div class="grid gap-2 p-2">
             <a href="{{ route('view-project-pow', ['id' => $project->id]) }}" class="flex w-full">
-                <div
-                    class="w-full bg-white h-[100px] flex rounded shadow-md items-center p-5 zoom-container overflow-hidden">
+                <div class="w-full bg-white h-[100px] flex rounded shadow-md items-center p-5 zoom-container overflow-hidden">
                     <div class="flex">
                         <div class="flex items-center">
                             <div class="w-12 h-12 overflow-hidden rounded-full border-2 border-black">
@@ -101,18 +100,16 @@
                             </div>
                         </div>
                         <div class="flex items-center">
-                            <div class="ml-5  block item-center">
+                            <div class="ml-5 block item-center">
                                 <p class="font-bold text-[8px] text-green-500">Project Id: {{$project->id}}</p>
-                                <p class="font-bold truncate" title="{{ $project->title }}">{{ $project->title }}</p>
-                                <p class="text-[8px]"><span
-                                        class="font-bold">Location :</span> {{ $project->baranggay }} {{ $project->street }} {{ $project->x_axis }} {{ $project->y_axis }}
+                                <p class="font-bold truncate" title="{{ $project->title }}" style="max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    {{ $project->title }}
                                 </p>
-                                <p class="text-[8px]"><span
-                                        class="font-bold">Start Date :</span> {{$project->start_date}} &nbsp; <span
-                                        class="font-bold">End Date :</span> {{$project->end_date}}</p>
-                                <p class="text-[8px] text-green-500"><span
-                                        class="font-bold">Project Incharge : </span> {{$project->projectIncharge->first_name}} {{$project->projectIncharge->last_name}}
+                                <p class="text-[8px]" style="max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    <span class="font-bold">Location :</span> {{ $project->baranggay }} {{ $project->street }} {{ $project->x_axis }} {{ $project->y_axis }}
                                 </p>
+                                <p class="text-[8px]"><span class="font-bold">Start Date :</span> {{$project->start_date}} &nbsp; <span class="font-bold">End Date :</span> {{$project->end_date}}</p>
+                                <p class="text-[8px] text-green-500"><span class="font-bold">Project Incharge : </span> {{$project->projectIncharge->first_name}} {{$project->projectIncharge->last_name}}</p>
                             </div>
                         </div>
                         <div class="ml-5 flex items-center">
@@ -124,7 +121,6 @@
                                         <div class="progress" style="width: 20%;"></div>
                                     </div>
                                 </div>
-
                             </div>
 
                             <div class="ml-5">
@@ -150,14 +146,11 @@
 
                         <div class="flex ml-10">
                             <div class="flex items-center">
-                                <div class="ml-5  flex item-center justify-content-center">
+                                <div class="ml-5 flex item-center justify-content-center">
                                     <div>
-                                        <p class="text-[10px]"><span class="font-bold">Total Project Cost : Php </span>
-                                            1000000</p>
-                                        <p class="text-[10px]"><span class="font-bold">Total Material Cost : Php </span>
-                                            10000</p>
-                                        <p class="text-[10px]"><span class="font-bold">Total Labor Cost : Php </span>
-                                            10000</p>
+                                        <p class="text-[10px]"><span class="font-bold">Total Project Cost : Php </span> 1000000</p>
+                                        <p class="text-[10px]"><span class="font-bold">Total Material Cost : Php </span> 10000</p>
+                                        <p class="text-[10px]"><span class="font-bold">Total Labor Cost : Php </span> 10000</p>
                                     </div>
                                 </div>
                             </div>
@@ -165,21 +158,28 @@
 
                         <div class="flex ml-10">
                             <div class="flex items-center">
-                                <div class="ml-5  flex item-center justify-content-center">
+                                <div class="ml-5 flex item-center justify-content-center">
                                     <div>
-                                        <p class="text-[10px]"><span class="font-bold">Status : </span>
-                                            {{ $project->status }} </p>
+                                        <div class="status-div text-[10px] font-bold rounded-2xl px-3 py-2 w-32 text-center
+                                        @if($project->status === 'completed') bg-green-500 text-white
+                                        @elseif($project->status === 'pending') bg-yellow-500 text-white
+                                        @elseif($project->status === 'suspended') bg-red-500 text-white
+                                        @endif">
+                                            {{ $project->status }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </a>
         </div>
     @endforeach
 
-    @if ($projects->isEmpty())
+
+@if ($projects->isEmpty())
     @else
         {{-- Pagination Links --}}
         <div class="w-full py-5 flex justify-center items-center">
