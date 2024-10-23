@@ -41,7 +41,17 @@ class AddPow extends Component
         'materialsFile' => 'file|mimes:xlsx,csv',
 
     ];
+    //   new error message sweet
+    protected $message = [
+        'reference_number.required' => 'The reference number is required.',
+        'total_labor_cost.required' => 'The total labor cost is required.',
+        'total_labor_cost.integer' => 'The total labor cost must be a valid integer.',
+        'materialsFile.required' => 'A file is required.',
+        'materialsFile.file' => 'The uploaded file must be a valid file.',
+        'materialsFile.mimes' => 'The file must be a type of: xlsx, csv.',
+        'total_material_cost.numeric' => 'The total material cost must be a numeric value.',
 
+    ];
 
     public function mount($projectId): void
     {

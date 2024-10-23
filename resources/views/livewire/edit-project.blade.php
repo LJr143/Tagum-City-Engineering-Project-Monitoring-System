@@ -1,4 +1,4 @@
-<div x-data="{ open: false }" x-cloak @project-edited.window="open = false" wire:ignore>
+<div x-data="{ open: false }" x-cloak @project-edited.window="open = false" >
     <div class="flex justify-end">
         <div class="relative ml-2">
             <button @click="open = true"
@@ -50,7 +50,7 @@
             </button>
 
             <h2 class="text-lg font-bold mb-4">Edit Project</h2>
-            <form wire:submit.prevent="updateProject" class="text-xs" wire:ignore>
+            <form wire:submit.prevent="updateProject" class="text-xs" >
                 <div class="grid  gap-6">
                     <!-- Left side (Project Info) -->
                     <div class="col-span-5 space-y-4">
@@ -78,15 +78,24 @@
                                     <label class="block text-xs font-medium mb-1">X-axis</label>
                                     <input type="text" wire:model="x_axis"
                                            class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
+                                    <!-- Error message for x_axis -->
+                                    @error('x_axis')
+                                    <span class="text-red-500 ml-1 text-[9px]">{{ $message }}</span>
+                                    @enderror
                                 </div>
 
                                 <div class="w-1/6">
                                     <label class="block text-xs font-medium mb-1">Y-axis</label>
                                     <input type="text" wire:model="y_axis"
                                            class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
+                                    <!-- Error message for y_axis -->
+                                    @error('y_axis')
+                                    <span class="text-red-500 ml-1 text-[9px]">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
+
                         <div x-data="{
         open: false,
         search: '{{ $currentProjectInchargeName ?? '' }}',  // Initialize with current name if available
@@ -143,9 +152,11 @@
                             </ul>
 
                             @error('projectIncharge_id')
-                            <span class="error">{{ $message }}</span>
+                            <span class="text-red-500 ml-2 text-[10px]">{{ $message }}</span>
                             @enderror
+
                         </div>
+
                         <div>
                             <label class="block text-xs font-medium mb-1">Target Completion</label>
                             <div class="flex gap-2 border-2 p-2 rounded">
@@ -153,12 +164,18 @@
                                     <label class="block text-xs font-medium mb-1">Start Date</label>
                                     <input type="date" wire:model="start_date"
                                            class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
+                                    <!-- Error message for start_date -->
+                                    @error('start_date')
+                                    <span class="text-red-500 ml-2 text-[10px]">{{ $message }}</span>
+                                    @enderror
                                 </div>
-
                                 <div class="w-2/4">
                                     <label class="block text-xs font-medium mb-1">End Date</label>
                                     <input type="date" wire:model="end_date"
                                            class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
+                                    @error('end_date')
+                                    <span class="text-red-500 ml-2 text-[10px]">{{ $message }}</span>
+                                    @enderror
                                 </div>
 
                             </div>
