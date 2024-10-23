@@ -43,7 +43,7 @@
 
     {{-- Modal Warning --}}
     @if ($totalMaterialCost == 0)
-        <div id="warningModal" class="modal show">  <!-- Added 'show' class directly here -->
+        <div id="warningModal" class="modal show">
             <div class="modal-content">
                 <span class="close" onclick="closeModal()">&times;</span>
                 <strong>Warning:</strong> Please add materials, the total material cost is zero.
@@ -53,21 +53,53 @@
 
     <div class="cost-details text-[12px] w-1/2">
         <p>Total Material Cost: <strong>Php{{ number_format($totalMaterialCost, 2) }}</strong></p>
-        <p>Total Labor Cost: <strong>Php</strong></p>  <!-- Adjust variable for labor cost -->
-        <p>Total Indirect Cost: <strong>Php</strong></p>  <!-- Adjust variable for indirect cost -->
-        <p>Total Project Spent Cost: <strong>Php{{ number_format($spentCost, 2) }}</strong></p>
+        <p>Total Labor Cost: <strong>Php</strong></p>
+        <p>Total Indirect Cost: <strong>Php</strong></p>
+        <p>Total Project Spent Cost: <strong>Php</strong></p>
 
-        <div class="status-indicator text-[12px]">
-            @if ($isOutOfBudget)
-                <p>Project Status: <span class="out-of-budget">Out of Budget</span></p>
-            @elseif ($progressPercentage == 100)
-                <p>Project Status: <span class="completed">Completed</span></p>
-            @elseif ($progressPercentage < 50 && $progressPercentage != 0)
-                <p>Project Status: <span class="in-progress">In Progress</span></p>
-            @else
-                <p>Project Status: <span class="not-started">Not Started</span></p>
-            @endif
+{{--        <div class="status-indicator text-[12px]">--}}
+{{--            @if ($isOutOfBudget)--}}
+{{--                <p>Project Status: <span class="out-of-budget">Out of Budget</span></p>--}}
+{{--            @elseif ($progressPercentage == 100)--}}
+{{--                <p>Project Status: <span class="completed">Completed</span></p>--}}
+{{--            @elseif ($progressPercentage < 50 && $progressPercentage != 0)--}}
+{{--                <p>Project Status: <span class="in-progress">In Progress</span></p>--}}
+{{--            @else--}}
+{{--                <p>Project Status: <span class="not-started">Not Started</span></p>--}}
+{{--            @endif--}}
+{{--        </div>--}}
+    </div>
+    <div class="progress-bar-container text-[12px] w-1/2 mt-[-10px]">
+{{--        <label>Project Progress Overall:% (Actual) vs Target Progress: %</label>--}}
+{{--        <div class="progress-bar mb-2" style="height: 20px">--}}
+{{--            <!-- The target progress bar (lighter) -->--}}
+{{--            <div class="target-progress" style=""></div>--}}
+{{--            <!-- The actual progress bar (darker) -->--}}
+{{--            <div class="progress" style=""></div>--}}
+{{--        </div>--}}
+        <label class="mt-0">
+            Project Progress Materials:
+            Used Amount Php. {{ number_format($totalMaterialCost - $remainingMaterialCost, 2) }}
+        </label>
+        <div class="progress-bar" style="height: 8px">
+            <!-- The target progress bar (lighter) -->
+            <div class="target-progress" style="width: {{$usedPercentage}}%"></div>
         </div>
+        <label>Project Progress Labor:% (Actual) vs Target Progress: %</label>
+        <div class="progress-bar" style="height: 10px">
+            <!-- The target progress bar (lighter) -->
+            <div class="target-progress" style=""></div>
+            <!-- The actual progress bar (darker) -->
+            <div class="progress" style=""></div>
+        </div>
+        <label>Project Progress Indirect:% (Actual) vs Target Progress: %</label>
+        <div class="progress-bar" style="height: 10px">
+            <!-- The target progress bar (lighter) -->
+            <div class="target-progress" style=""></div>
+            <!-- The actual progress bar (darker) -->
+            <div class="progress" style=""></div>
+        </div>
+
     </div>
 
     <script>
@@ -89,3 +121,5 @@
         });
     </script>
 </div>
+
+
