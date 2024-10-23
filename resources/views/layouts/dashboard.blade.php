@@ -132,8 +132,20 @@
                                                     Project Name
                                                 </th>
                                                 <th scope="col"
+                                                    class="min-w-[12rem] py-3.5 px-4 pr-3 text-center text-sm font-semibold text-gray-900">
+                                                    Project Incharge
+                                                </th>
+                                                <th scope="col"
                                                     class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                                    Project Cost
+                                                    Material Cost
+                                                </th>
+                                                <th scope="col"
+                                                    class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                    Labor Cost
+                                                </th>
+                                                <th scope="col"
+                                                    class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                    Indirect Cost
                                                 </th>
                                                 <th scope="col"
                                                     class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
@@ -153,8 +165,13 @@
                                             @foreach($projects as $project)
                                                 <tr>
                                                     <td class="whitespace-nowrap py-1 px-4 pr-3 text-xs font-small text-gray-900">{{ $project->title }}</td>
+                                                    <td class="whitespace-nowrap py-1 px-4 pr-3 text-xs font-small text-gray-900">{{ $project->projectIncharge->first_name }} {{ $project->projectIncharge->last_name }}</td>
                                                     <td class="whitespace-nowrap px-3 py-1 text-xs text-gray-500">
                                                         Php {{$project->total_material_cost}}</td>
+                                                    <td class="whitespace-nowrap px-3 py-1 text-xs text-gray-500">
+                                                        Php {{$project->total_labor_cost}}</td>
+                                                    <td class="whitespace-nowrap px-3 py-1 text-xs text-gray-500">
+                                                        Php {{$project->total_labor_cost}}</td>
                                                     <td class="whitespace-nowrap px-3 py-1 text-xs text-gray-500">
                                                         <div class="flex items-center">
                                                             <div class="relative">

@@ -1,7 +1,6 @@
 <div class="flex w-full mb-4">
     <style>
         .progress-bar-container {
-            margin-top: 20px;
             width: 100%;
         }
 
@@ -22,7 +21,7 @@
         }
 
         .target-progress {
-            background-color: #2196F3; /* Target Progress Color */
+            background-color: #13aa05; /* Target Progress Color */
             height: 100%;
             border-radius: 10px;
             position: absolute;
@@ -64,9 +63,12 @@
 
 
     <div class="cost-details text-[12px] w-1/2">
-        <h3>Project Cost Status</h3>
+{{--        <h3>Project Cost Status</h3>--}}
         <p>Total Material Cost: <strong>Php{{ number_format($totalMaterialCost, 2) }}</strong></p>
-        <p>Total Spent Cost: <strong>Php{{ number_format($spentCost, 2) }}</strong></p>
+        <p>Total Labor Cost: <strong>Php{{ number_format($totalMaterialCost, 2) }}</strong></p>
+        <p>Total Indirect Cost: <strong>Php{{ number_format($totalMaterialCost, 2) }}</strong></p>
+        <p>Total  Project Spent Cost: <strong>Php{{ number_format($spentCost, 2) }}</strong></p>
+
 
         <div class="status-indicator text-[12px]">
             @if ($isOutOfBudget)
@@ -81,8 +83,15 @@
         </div>
     </div>
 
-    <div class="progress-bar-container text-[12px] w-1/2">
-        <label>Project Progress Materials: {{ number_format($progressPercentage, 2) }}% (Actual) vs Target Progress: {{ number_format($targetProgressPercentage, 2) }}%</label>
+    <div class="progress-bar-container text-[12px] w-1/2 ">
+        <label>Project Progress Overall: {{ number_format($progressPercentage, 2) }}% (Actual) vs Target Progress: {{ number_format($targetProgressPercentage, 2) }}%</label>
+        <div class="progress-bar mb-2" style="height: 20px">
+            <!-- The target progress bar (lighter) -->
+            <div class="target-progress" style="width: {{ $targetProgressPercentage }}%;"></div>
+            <!-- The actual progress bar (darker) -->
+            <div class="progress" style="width: {{ $progressPercentage }}%;"></div>
+        </div>
+        <label class="mt-0">Project Progress Materials: {{ number_format($progressPercentage, 2) }}% (Actual) vs Target Progress: {{ number_format($targetProgressPercentage, 2) }}%</label>
         <div class="progress-bar" style="height: 12px">
             <!-- The target progress bar (lighter) -->
             <div class="target-progress" style="width: {{ $targetProgressPercentage }}%;"></div>
@@ -96,7 +105,7 @@
             <!-- The actual progress bar (darker) -->
             <div class="progress" style="width: {{ $progressPercentage }}%;"></div>
         </div>
-        <label>Project Progress Overall: {{ number_format($progressPercentage, 2) }}% (Actual) vs Target Progress: {{ number_format($targetProgressPercentage, 2) }}%</label>
+        <label>Project Progress Indirect: {{ number_format($progressPercentage, 2) }}% (Actual) vs Target Progress: {{ number_format($targetProgressPercentage, 2) }}%</label>
         <div class="progress-bar" style="height: 10px">
             <!-- The target progress bar (lighter) -->
             <div class="target-progress" style="width: {{ $targetProgressPercentage }}%;"></div>

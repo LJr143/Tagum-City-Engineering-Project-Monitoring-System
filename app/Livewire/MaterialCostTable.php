@@ -3,6 +3,7 @@ namespace App\Livewire;
 
 use App\Models\Material;
 use App\Models\Pow;
+use App\Models\Project;
 use Livewire\Component;
 use Carbon\Carbon;
 
@@ -26,7 +27,7 @@ class MaterialCostTable extends Component
     {
         $materials = Material::where('pow_id', $this->pow_id)->get();
 
-        $this->totalMaterialCost = $materials->sum('estimated_cost');
+//        $this->totalMaterialCost
         $this->spentCost = $materials->sum('spent_cost');
 
         $programOfWork = Pow::find($this->pow_id);
