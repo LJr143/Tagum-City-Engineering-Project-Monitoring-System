@@ -1,72 +1,61 @@
 <div class="flex w-full mb-4">
     <style>
-        .progress-bar-container {
-            margin-top: 20px;
-            width: 100%;
-        }
-
-        .progress-bar {
-            background-color: #e0e0e0;
-            width: 100%;
-            height: 30px;
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .progress {
-            background-color: #4caf50; /* Actual Progress Color */
-            height: 100%;
-            border-radius: 10px;
-            transition: width 0.5s ease; /* Smooth animation */
-        }
-
-        .target-progress {
-            background-color: #2196F3; /* Target Progress Color */
-            height: 100%;
-            border-radius: 10px;
-            position: absolute;
+        /* Styles remain the same */
+        .modal {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            z-index: 1;
             left: 0;
             top: 0;
-            opacity: 0.7; /* Semi-transparent to distinguish it */
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
 
-        .cost-details p {
-            margin: 5px 0;
+        .modal-content {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 20px;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+            width: 300px;
+            text-align: center;
         }
 
-        .status-indicator p {
-            margin-top: 10px;
-        }
-
-        .status-indicator span {
+        .close {
+            color: #721c24;
+            float: right;
+            font-size: 28px;
             font-weight: bold;
+            cursor: pointer;
         }
 
-        .completed {
-            color: green;
-        }
-
-        .in-progress {
-            color: orange;
-        }
-
-        .not-started {
-            color: red;
-        }
-
-        .out-of-budget {
-            color: red; /* Indicates out of budget */
-            font-weight: bold;
+        .modal.show {
+            display: flex;
+            opacity: 1;
         }
     </style>
 
-
+    {{-- Modal Warning --}}
+    @if ($totalMaterialCost == 0)
+        <div id="warningModal" class="modal show">  <!-- Added 'show' class directly here -->
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <strong>Warning:</strong> Please add materials, the total material cost is zero.
+            </div>
+        </div>
+    @endif
 
     <div class="cost-details text-[12px] w-1/2">
-        <h3>Project Cost Status</h3>
         <p>Total Material Cost: <strong>Php{{ number_format($totalMaterialCost, 2) }}</strong></p>
-        <p>Total Spent Cost: <strong>Php{{ number_format($spentCost, 2) }}</strong></p>
+        <p>Total Labor Cost: <strong>Php</strong></p>  <!-- Adjust variable for labor cost -->
+        <p>Total Indirect Cost: <strong>Php</strong></p>  <!-- Adjust variable for indirect cost -->
+        <p>Total Project Spent Cost: <strong>Php{{ number_format($spentCost, 2) }}</strong></p>
 
         <div class="status-indicator text-[12px]">
             @if ($isOutOfBudget)
@@ -81,28 +70,22 @@
         </div>
     </div>
 
-    <div class="progress-bar-container text-[12px] w-1/2">
-        <label>Project Progress Materials: {{ number_format($progressPercentage, 2) }}% (Actual) vs Target Progress: {{ number_format($targetProgressPercentage, 2) }}%</label>
-        <div class="progress-bar" style="height: 12px">
-            <!-- The target progress bar (lighter) -->
-            <div class="target-progress" style="width: {{ $targetProgressPercentage }}%;"></div>
-            <!-- The actual progress bar (darker) -->
-            <div class="progress" style="width: {{ $progressPercentage }}%;"></div>
-        </div>
-        <label>Project Progress Labor: {{ number_format($progressPercentage, 2) }}% (Actual) vs Target Progress: {{ number_format($targetProgressPercentage, 2) }}%</label>
-        <div class="progress-bar" style="height: 10px">
-            <!-- The target progress bar (lighter) -->
-            <div class="target-progress" style="width: {{ $targetProgressPercentage }}%;"></div>
-            <!-- The actual progress bar (darker) -->
-            <div class="progress" style="width: {{ $progressPercentage }}%;"></div>
-        </div>
-        <label>Project Progress Overall: {{ number_format($progressPercentage, 2) }}% (Actual) vs Target Progress: {{ number_format($targetProgressPercentage, 2) }}%</label>
-        <div class="progress-bar" style="height: 10px">
-            <!-- The target progress bar (lighter) -->
-            <div class="target-progress" style="width: {{ $targetProgressPercentage }}%;"></div>
-            <!-- The actual progress bar (darker) -->
-            <div class="progress" style="width: {{ $progressPercentage }}%;"></div>
-        </div>
+    <script>
+        // Close modal function
+        function closeModal() {
+            const modal = document.getElementById('warningModal');
+            if (modal) {
+                modal.classList.remove('show');
+                modal.style.display = 'none'; // Hide the modal after closing
+            }
+        }
 
-    </div>
+        // Automatically show the modal if it's present
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('warningModal');
+            if (modal && modal.classList.contains('show')) {
+                modal.style.display = 'flex'; // Ensure it's displayed as flex
+            }
+        });
+    </script>
 </div>
