@@ -28,10 +28,23 @@
                      <x-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')" required autofocus autocomplete="username" />
                  </div>
 
-                 <div class="mt-4">
+                 <div class="mt-4 relative">
                      <x-label for="password" value="{{ __('Password') }}" />
-                     <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
+                     <div class="relative">
+                         <x-input id="password" class="block mt-1 w-full pr-10" type="password" name="password" required autocomplete="current-password" />
+
+                         <!-- Password eye -->
+                         <button type="button" id="toggle-password" class="absolute inset-y-0 right-0 flex items-center pr-3">
+                             <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-5 w-5 text-gray-400">
+                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5c-7.5 0-10.5 7.5-10.5 7.5S4.5 16.5 12 16.5s10.5-7.5 10.5-7.5S19.5 4.5 12 4.5z" />
+                                 <path stroke-linecap="round" stroke-linejoin="round" d="M17.5 12c0 1.5-1 3-3 3s-3-1.5-3-3 1-3 3-3 3 1.5 3 3z" />
+                                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.5 2.5l19 19" />
+                             </svg>
+                         </button>
+                     </div>
                  </div>
+
+
 
                  <div class="flex mt-4 justify-between">
                      <label for="remember_me" class="flex items-center">
@@ -55,10 +68,34 @@
                  </div>
              </form>
          </div>
-
-
         </div>
     </div>
+    <script>
+        document.getElementById('toggle-password').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const eyeIcon = document.getElementById('eye-icon');
 
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text'; // Show password
+                eyeIcon.innerHTML = `<!-- Open Eye SVG -->`;
+                eyeIcon.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-5 w-5 text-gray-400">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5c-7.5 0-10.5 7.5-10.5 7.5S4.5 16.5 12 16.5s10.5-7.5 10.5-7.5S19.5 4.5 12 4.5z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 15.5a3 3 0 100-6 3 3 0 000 6z" />
+            </svg>`;
+            } else {
+                passwordInput.type = 'password'; // Hide password
+                eyeIcon.innerHTML = `<!-- Closed Eye with Slash SVG -->`;
+                eyeIcon.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-5 w-5 text-gray-400">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5c-7.5 0-10.5 7.5-10.5 7.5S4.5 16.5 12 16.5s10.5-7.5 10.5-7.5S19.5 4.5 12 4.5z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.5 12c0 1.5-1 3-3 3s-3-1.5-3-3 1-3 3-3 3 1.5 3 3z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.5 2.5l19 19" />
+            </svg>`;
+            }
+        });
+
+    </script>
 
 </x-guest-layout>

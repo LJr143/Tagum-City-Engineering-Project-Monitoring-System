@@ -50,31 +50,52 @@
 
             <h2 class="text-lg font-bold mb-4">Set Progress for {{ $project->title }}</h2>
             <form wire:submit.prevent="saveProgress">
-                <div>
-                    <label>Available Dates (15th and 30th):</label>
-                    <ul class="mt-2">
-                        @foreach($availableDates as $date)
-                            <li class="flex items-center space-x-2 mb-2">
-                                <span>{{ $date }}</span>
-                                <input type="number" wire:model.lazy="progress.{{ $loop->index }}.percentage"
-                                           placeholder="Set Percentage" min="0" max="100" class="border rounded px-2 py-1 w-24">
-                                    <input type="hidden" wire:model="progress.{{ $loop->index }}.date" value="{{ $date }}">
-                                </li>
+                <div class="gap-2 border-2 p-2 rounded">
+                    <label class="block text-xs font-medium">Available Dates (15th and 30th):</label>
+                    <div class="overflow-x-auto mt-2">
+                        <table class="min-w-full border-collapse">
+                            <thead>
+                            <tr class="bg-gray-100">
+                                <th class="text-left text-xs font-medium px-2 py-1 border-b">Date</th>
+                                <th class="text-left text-xs font-medium px-2 py-1 border-b">Set Percentage</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($availableDates as $date)
+                                <tr class="hover:bg-gray-50">
+                                    <td class="text-xs px-2 py-1 border-b">{{ $date }}</td>
+                                    <td class="text-xs px-2 py-1 border-b">
+                                        <input type="number" wire:model.lazy="progress.{{ $loop->index }}.percentage"
+                                               placeholder="Set Percentage" min="0" max="100" class="text-xs border border-gray-400 rounded px-2 py-1 w-24">
+                                        <input type="hidden" wire:model="progress.{{ $loop->index }}.date" value="{{ $date }}">
+                                    </td>
+                                </tr>
                             @endforeach
-                        </ul>
+                            </tbody>
+                        </table>
                     </div>
+                </div>
 
+                <div class="mt-2 gap-2 border-2 p-2 rounded ">
+                    <h3 class="font-bold text-sm">Saved Progress</h3>
+                    <ul class="text-xs">
+                        @foreach($progress as $item)
+                            <li>{{ $item['date'] }}: {{ $item['percentage'] }}%</li>
+                        @endforeach
+                    </ul>
+
+                </div>
                     <div x-data="{ showCustomDate: @entangle('showCustomDate') }">
-                        <div class="mt-4">
-                            <button type="button" @click="showCustomDate = !showCustomDate" class="text-blue-500 hover:underline">
+                        <div class="mt-2 gap-2 border-2 p-2 rounded ">
+                            <button type="button" @click="showCustomDate = !showCustomDate" class="ml-2 text-blue-500 text-xs font-medium hover:underline">
                                 Add Custom Date
                             </button>
 
                             <div x-show="showCustomDate" class="mt-2">
-                                <input type="date" wire:model="customDate" class="border rounded px-2 py-1 mr-2">
+                                <input type="date" wire:model="customDate" class="text-xs border border-gray-400 rounded px-2 py-1 mr-2">
                                 <input type="number" wire:model="customPercentage" placeholder="Set Percentage" min="0" max="100"
-                                       class="border rounded px-2 py-1 w-24">
-                                <button type="button" wire:click="addCustomProgress" class="text-green-500 hover:underline">
+                                       class="text-xs border border-gray-400 rounded px-2 py-1 w-24">
+                                <button type="button" wire:click="addCustomProgress" class="text-green-500 text-xs hover:underline">
                                     Add
                                 </button>
                             </div>
@@ -93,14 +114,7 @@
                         </button>
                     </div>
                 </form>
-            <div class="mt-6">
-                <h3 class="font-bold">Saved Progress</h3>
-                <ul>
-                    @foreach($progress as $item)
-                        <li>{{ $item['date'] }}: {{ $item['percentage'] }}%</li>
-                    @endforeach
-                </ul>
-            </div>
+
         </div>
 
     </div>
