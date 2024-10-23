@@ -86,7 +86,7 @@
                             <!-- Filter, Search, Import Inside Card -->
                             <div class="flex items-center justify-between mb-4 space-x-4">
                                 <div class="flex space-x-2 ml-auto">
-                                    @if (auth()->user()->isEngineer())
+                                    @if (auth()->user()->isEncoder())
                                     <livewire:add-payroll :pow_id="$pow->id"/>
                                     @endif
                                     <input type="text" placeholder="Search..." class="px-2 py-1 border border-gray-300 rounded-md shadow-sm text-xs w-55">

@@ -86,7 +86,7 @@ use PowerComponents\LivewirePowerGrid\Traits\WithExport;
             Column::make('Total Cost', 'estimated_cost'),
         ];
 
-        if (auth()->user()->isEngineer()) {
+        if (auth()->user()->isEncoder()) {
             $columns[] = Column::action('Action')->bodyAttribute('text-center');
         }
 

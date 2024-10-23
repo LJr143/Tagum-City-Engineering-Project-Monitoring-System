@@ -4,31 +4,36 @@ namespace App\Livewire;
 
 use App\Models\Project;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ProjectFilter extends Component
 {
-    public $projects;
+    use WithPagination;
+
     public $selectedStatus = 'all';
+    public $searchTerm = '';
     public $startDate;
     public $endDate;
 
     public $totalProjects;
-
     public $pendingProjects;
     public $completedProjects;
+    public $suspendedProjects;
+
+    protected $paginationTheme = 'tailwind'; // or 'bootstrap' if needed
 
     public function mount()
     {
-        // Initial load of projects
-        $this->projects = Project::all();
-        $this->totalProjects = count($this->projects);
+        // Load project counts
+        $this->totalProjects = Project::count();
         $this->pendingProjects = Project::where('status', 'pending')->count();
         $this->completedProjects = Project::where('status', 'completed')->count();
+        $this->suspendedProjects = Project::where('status', 'suspended')->count();
     }
 
     public function filterProjects()
     {
-        $query = Project::query();
+        $query = Project::with('projectIncharge');
 
         if ($this->selectedStatus !== 'all') {
             $query->where('status', $this->selectedStatus);
@@ -42,11 +47,24 @@ class ProjectFilter extends Component
             $query->whereDate('created_at', '<=', $this->endDate);
         }
 
-        $this->projects = $query->get();
+        if ($this->searchTerm) {
+            $query->where('title', 'like', '%' . $this->searchTerm . '%');
+        }
+
+        return $query->paginate(10); // Paginate results
+    }
+
+    public function updatingSearchTerm()
+    {
+        // Reset pagination when search term changes
+        $this->resetPage();
     }
 
     public function render()
     {
-        return view('livewire.project-filter');
+        // Filter and paginate projects
+        $projects = $this->filterProjects();
+
+        return view('livewire.project-filter', compact('projects'));
     }
 }

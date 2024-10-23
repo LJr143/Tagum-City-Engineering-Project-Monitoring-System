@@ -34,7 +34,7 @@ class UserFactory extends Factory
             'birth_date' => fake()->date(),
             'contact_number' => fake()->phoneNumber(),
             'position' => fake()->jobTitle(),
-            'role' => fake()->randomElement(['admin', 'staff', 'engineer']),
+            'role' => fake()->randomElement(['admin', 'encoder', 'project incharge']),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'two_factor_secret' => null,

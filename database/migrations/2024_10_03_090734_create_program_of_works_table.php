@@ -17,10 +17,10 @@ return new class extends Migration
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
             $table->string('reference_number');
             $table->string('description');
-            $table->date('start_date');
-            $table->date('end_date');
-            $table->unsignedBigInteger('engineer_id');
-            $table->foreign('engineer_id')->references('id')->on('users')->onDelete('cascade');
+//            $table->date('start_date');
+//            $table->date('end_date');
+//            $table->unsignedBigInteger('engineer_id');
+//            $table->foreign('engineer_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('total_material_cost');
             $table->string('total_labor_cost');
             $table->timestamps();

@@ -24,6 +24,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'username',
         'first_name',
         'last_name',
         'middle_initial',
@@ -70,15 +71,16 @@ class User extends Authenticatable
         ];
     }
 
-    // In your User model
+    // Check admin role of access
     public function isAdmin()
     {
         return $this->role === 'admin';
     }
 
-    public function isEngineer()
+    //Check encoder role of access
+    public function isEncoder()
     {
-        return $this->role === 'engineer';
+        return $this->role === 'encoder';
     }
 
 }

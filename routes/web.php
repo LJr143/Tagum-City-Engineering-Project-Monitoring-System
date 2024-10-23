@@ -36,7 +36,7 @@ Route::delete('/pow/{id}', [ProjectController::class, 'destroyPow'])->name('pow.
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('report', function () {
