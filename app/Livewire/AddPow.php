@@ -64,14 +64,17 @@ class AddPow extends Component
 
         // Create POW record
         $data = [
+            'project_id' => $this->projectId,
             'reference_number' => $this->reference_number,
             'description' => $this->description,
             'total_material_cost' => $this->total_material_cost,
             'total_labor_cost' => $this->total_labor_cost,
-            'project_id' => $this->projectId,
+
         ];
 
         $pow = Pow::create($data);
+
+
 
         // Handle materials file upload if provided
         if ($this->materialsFile) {

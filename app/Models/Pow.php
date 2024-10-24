@@ -34,4 +34,9 @@ class Pow extends Model
         return $this->belongsTo(User::class, 'engineer_id');
     }
 
+    public function indirectCosts(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(IndirectCost::class, 'pow_id', 'id'); // Adjust as necessary
+    }
+
 }

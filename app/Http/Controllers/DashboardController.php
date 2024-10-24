@@ -10,12 +10,17 @@ class DashboardController extends Controller
     public function index()
     {
         // Load related pows to avoid N+1 query issue.
-        $projects = Project::with('pows')->paginate(10);
+        $projects = Project::with(['pows', 'pows.indirectCosts'])->paginate(10);
 
-        // Calculate the total material cost for each project.
+        // Calculate the total costs for each project.
         foreach ($projects as $project) {
             $project->total_material_cost = $project->pows->sum('total_material_cost');
             $project->total_labor_cost = $project->pows->sum('total_labor_cost');
+            $project->total_indirect_costs = $project->pows
+                ->flatMap(function ($pow) {
+                    return $pow->indirectCosts; // Flatten the indirect costs
+                })
+                ->sum('amount'); // Sum the amounts
         }
 
         // Additional stats for the dashboard.
