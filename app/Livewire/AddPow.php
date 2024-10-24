@@ -37,6 +37,7 @@ class AddPow extends Component
         'materialsFile' => 'nullable|file|mimes:xlsx,csv',
         'indirect_costs.*.description' => 'required|string|max:255',
         'indirect_costs.*.amount' => 'required|numeric|min:0',
+        'indirect_costs' => 'required|min:0',
     ];
 
     protected $message= [
@@ -48,6 +49,7 @@ class AddPow extends Component
         'materialsFile.mimes' => 'The file must be a type of: xlsx, csv.',
         'indirect_costs.*.description.required' => 'Description is required for each indirect cost.',
         'indirect_costs.*.amount.required' => 'Amount is required for each indirect cost.',
+        'indirect_costs' => 'Indirect cost is required',
     ];
 
     public function mount($projectId): void

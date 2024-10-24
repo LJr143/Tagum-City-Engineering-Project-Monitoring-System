@@ -164,7 +164,12 @@
                             Add Indirect Cost
                         </button>
                     </div>
-
+                    <!-- Error message for indirect costs -->
+                    @error('indirect_costs')
+                    <div class="text-red-600 text-[10px] mt-1">
+                        {{ $message }}
+                    </div>
+                    @enderror
                 </div>
 
                 <!-- Modal -->
