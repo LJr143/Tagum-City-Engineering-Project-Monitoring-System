@@ -85,7 +85,7 @@ class ProjectFilter extends Component
      */
     public function updatingSearchTerm()
     {
-        $this->resetPage(); // Reset pagination when search term changes
+        $this->resetPage();
     }
 
     /**
@@ -94,7 +94,7 @@ class ProjectFilter extends Component
     public function searchProjects($term)
     {
         $this->searchTerm = $term;
-        $this->resetPage(); // Reset to the first page after search
+        $this->resetPage();
     }
 
     /**

@@ -1,10 +1,14 @@
-
-
 <div class="mx-auto bg-white p-8 md:p-8 rounded-lg shadow-md overflow-hidden">
     <div class="flex flex-col md:flex-row items-center mb-4">
         <div class="relative w-20 h-20">
-            <img src="{{ asset('storage/pmsAssets/default.png') }}" alt="Profile Image" class="w-full h-full bg-gray-300 rounded-full object-cover"/>
-            <input type="file" wire:model="profileImage" id="imageUpload" accept="image/*" class="hidden"/>
+            @if ($profilePhotoPath)
+            <div class="profile-image mt-3">
+                <img src="{{ asset('storage/' . $profilePhotoPath) }}" alt="Profile Image" width="200" />
+            </div>
+            @else
+            <img src="{{ asset('storage/pmsAssets/default.png') }}" alt="Profile Image" class="w-full h-full bg-gray-300 rounded-full object-cover" />
+            @endif
+            <input type="file" wire:model="profileImage" id="imageUpload" accept="image/*" class="hidden" />
             <label for="imageUpload" class="absolute bottom-0 right-0 bg-black bg-opacity-50 text-white p-1 rounded-full cursor-pointer">
                 <i class="fas fa-camera"></i>
             </label>
@@ -30,10 +34,10 @@
                     <label class="text-gray-500 text-sm w-32">Birthdate</label>
                     <input type="date" wire:model="birthdate" class="text-green-600 border border-gray-300 rounded-md focus:outline-none focus:border-green-600 w-3/4 h-8 p-2 text-sm">
                 </div>
-                <div class="flex flex-row items-center mb-2">
+                <!-- <div class="flex flex-row items-center mb-2">
                     <label class="text-gray-500 text-sm w-32">Age</label>
                     <input type="number" wire:model="age" min="1" class="text-green-600 border border-gray-300 rounded-md focus:outline-none focus:border-green-600 w-3/4 h-8 p-2 text-sm">
-                </div>
+                </div> -->
             </div>
             <h2 class="text-md font-medium mt-4 mb-2 relative pb-1 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[1px] after:bg-gray-300 w-full">
                 Contact Information
@@ -88,13 +92,12 @@
     </div>
 
     @if ($errors->any())
-        <div class="bg-red-100 text-red-700 p-4 rounded-lg shadow-md mt-4">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-@endif
-
-
+    <div class="bg-red-100 text-red-700 p-4 rounded-lg shadow-md mt-4">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+</div>
