@@ -192,11 +192,21 @@
                                            class="w-1/2 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-xs"
                                            required>
 
+                                    <!-- Error Message for Description -->
+                                    @error('indirect_costs.' . $index . '.description')
+                                    <span class="text-red-500 text-[10px]">{{ $message }}</span>
+                                    @enderror
+
                                     <input type="number" name="indirect_costs[{{ $index }}][amount]"
                                            wire:model.defer="indirect_costs.{{ $index }}.amount"
                                            placeholder="Amount"
                                            class="w-1/3 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-xs"
                                            required>
+
+                                    <!-- Error Message for Amount -->
+                                    @error('indirect_costs.' . $index . '.amount')
+                                    <span class="text-red-500 text-[10px]">{{ $message }}</span>
+                                    @enderror
 
                                     @if ($index > 0)
                                         <!-- Remove Field Button -->
@@ -214,13 +224,13 @@
 
                             <!-- Add Field Button -->
                             <button type="button" wire:click="addCost"
-                                    class="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600">
+                                    class="bg-blue-500 text-white text-[14px] px-2 py-1 rounded hover:bg-blue-600">
                                 + Add Field
                             </button>
 
                             <!-- Submit Button -->
                             <button type="button"
-                                    class="bg-green-500 text-white px-3 py-1 rounded shadow-md hover:bg-green-600"
+                                    class="bg-green-500 text-white text-[14px] px-3 py-1 rounded shadow-md hover:bg-green-600"
                                     @click="indirectOpen = false; ">
                                 Save
                             </button>

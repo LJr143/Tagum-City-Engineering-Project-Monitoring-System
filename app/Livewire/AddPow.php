@@ -39,9 +39,11 @@ class AddPow extends Component
         'indirect_costs.*.amount' => 'required|numeric|min:0',
     ];
 
-    protected $messages = [
+    protected $message= [
         'reference_number.required' => 'The reference number is required.',
         'total_labor_cost.required' => 'The total labor cost is required.',
+        'total_labor_cost.numeric' => 'The total labor cost must be numeric.',
+        'total_material_cost.numeric' => 'The total material cost must be numeric.',
         'materialsFile.file' => 'The uploaded file must be a valid file.',
         'materialsFile.mimes' => 'The file must be a type of: xlsx, csv.',
         'indirect_costs.*.description.required' => 'Description is required for each indirect cost.',
