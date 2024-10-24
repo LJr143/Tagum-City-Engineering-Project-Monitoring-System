@@ -15,6 +15,7 @@ class DashboardController extends Controller
         // Calculate the total material cost for each project.
         foreach ($projects as $project) {
             $project->total_material_cost = $project->pows->sum('total_material_cost');
+            $project->total_labor_cost = $project->pows->sum('total_labor_cost');
         }
 
         // Additional stats for the dashboard.

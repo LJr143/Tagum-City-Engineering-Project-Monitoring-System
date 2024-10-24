@@ -1,21 +1,21 @@
 <?php
+
 namespace App\Livewire;
 
 use App\Models\Material;
 use App\Models\Pow;
 use Livewire\Component;
-use Carbon\Carbon;
 
 class MaterialCostTable extends Component
 {
     public $pow_id;
     public $totalMaterialCost = 0;
-    public $spentCost = 0;
-    public $progressPercentage = 0;
-    public $targetProgressPercentage = 0;
-    public $isOutOfBudget = false;
+    public $materialSpentCost = 0;
+    public $remainingMaterialCost = 0;
+    public $usedPercentage = 0;
 
-    // Mount method to initialize component with the pow_id
+    public $isOutOfBudget;
+
     public function mount($pow_id): void
     {
         $this->pow_id = $pow_id;
@@ -24,45 +24,30 @@ class MaterialCostTable extends Component
 
     public function calculateCosts()
     {
+        // Fetch materials associated with the POW
         $materials = Material::where('pow_id', $this->pow_id)->get();
 
+        // Calculate total material and spent cost
         $this->totalMaterialCost = $materials->sum('estimated_cost');
-        $this->spentCost = $materials->sum('spent_cost');
+        $this->materialSpentCost = $materials->sum('spent_cost');
 
-        $programOfWork = Pow::find($this->pow_id);
-
-        if ($programOfWork && $programOfWork->start_date && $programOfWork->end_date) {
-            $startDate = Carbon::parse($programOfWork->start_date);
-            $endDate = Carbon::parse($programOfWork->end_date);
-
-            $projectDurationMonths = $startDate->diffInMonths($endDate);
-
-            $elapsedMonths = $startDate->diffInMonths(Carbon::now());
-        } else {
-
-            $projectDurationMonths = 6;
-            $elapsedMonths = 2;
-        }
-
-
-        if ($projectDurationMonths > 0) {
-            $this->targetProgressPercentage = ($elapsedMonths / $projectDurationMonths) * 100;
-        } else {
-            $this->targetProgressPercentage = 0;
-        }
-
+        // Avoid division by zero by checking if the total material cost is greater than 0
         if ($this->totalMaterialCost > 0) {
-            $this->progressPercentage = ($this->spentCost / $this->totalMaterialCost) * 100;
+            $this->remainingMaterialCost = $this->totalMaterialCost - $this->materialSpentCost;
+            $this->usedPercentage = ($this->materialSpentCost / $this->totalMaterialCost) * 100;
         } else {
-            $this->progressPercentage = 0;
+            // If totalMaterialCost is zero, handle gracefully
+            $this->remainingMaterialCost = 0;
+            $this->usedPercentage = 0;
         }
-
-        $this->isOutOfBudget = $this->spentCost > $this->totalMaterialCost;
     }
+
 
     public function render()
     {
-        return view('livewire.material-cost-table');
+        return view('livewire.material-cost-table', [
+            'usedPercentage' => $this->usedPercentage,
+            'remainingMaterialCost' => $this->remainingMaterialCost,
+        ]);
     }
 }
-
