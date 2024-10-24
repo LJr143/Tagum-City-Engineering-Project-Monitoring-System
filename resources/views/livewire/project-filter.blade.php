@@ -148,9 +148,11 @@
                             <div class="flex items-center">
                                 <div class="ml-5 flex item-center justify-content-center">
                                     <div>
-                                        <p class="text-[10px]"><span class="font-bold">Total Project Cost : Php </span> 1000000</p>
-                                        <p class="text-[10px]"><span class="font-bold">Total Material Cost : Php </span> 10000</p>
-                                        <p class="text-[10px]"><span class="font-bold">Total Labor Cost : Php </span> 10000</p>
+                                        <p class="text-[10px]"><span class="font-bold">Total Project Cost : Php </span> {{ number_format($project->total_project_cost)  }}</p>
+                                        <p class="text-[10px]"><span class="font-bold">Total Material Cost : Php </span>
+                                            {{number_format($project->total_material_cost)}}</p>
+                                        <p class="text-[10px]"><span class="font-bold">Total Labor Cost : Php </span>
+                                            {{number_format($project->total_labor_cost)}}</p>
                                     </div>
                                 </div>
                             </div>

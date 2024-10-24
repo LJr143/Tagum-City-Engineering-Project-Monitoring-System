@@ -44,7 +44,7 @@ class ProjectFilter extends Component
      */
     public function filterProjects()
     {
-        $query = Project::with('projectIncharge');
+        $query = Project::with('pows.indirectCosts'); // Load pows and their indirect costs
 
         if ($this->selectedStatus !== 'all') {
             $query->where('status', $this->selectedStatus);
@@ -62,7 +62,22 @@ class ProjectFilter extends Component
             $query->where('title', 'like', '%' . $this->searchTerm . '%');
         }
 
-        return $query->paginate(10); // Paginate results
+        // Paginate the results and include total costs
+        $projects = $query->paginate(10); // Paginate results
+
+        // Calculate total costs for each project
+        foreach ($projects as $project) {
+            $project->total_material_cost = $project->pows->sum('total_material_cost');
+            $project->total_labor_cost = $project->pows->sum('total_labor_cost');
+            $project->total_indirect_cost = $project->pows->flatMap(function ($pow) {
+                return $pow->indirectCosts; // Get all indirect costs for the pows
+            })->sum('amount'); // Sum the indirect cost amounts
+
+            // Calculate total project cost
+            $project->total_project_cost = $project->total_material_cost + $project->total_labor_cost + $project->total_indirect_cost;
+        }
+
+        return $projects; // Return the paginated results
     }
 
     /**

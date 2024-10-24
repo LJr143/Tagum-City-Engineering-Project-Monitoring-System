@@ -171,7 +171,7 @@
                                                     <td class="whitespace-nowrap px-3 py-1 text-xs text-gray-500">
                                                         Php {{$project->total_labor_cost}}</td>
                                                     <td class="whitespace-nowrap px-3 py-1 text-xs text-gray-500">
-                                                        Php {{$project->total_labor_cost}}</td>
+                                                        Php {{ number_format($project->total_indirect_costs , 2)}}</td>
                                                     <td class="whitespace-nowrap px-3 py-1 text-xs text-gray-500">
                                                         <div class="flex items-center">
                                                             <div class="relative">

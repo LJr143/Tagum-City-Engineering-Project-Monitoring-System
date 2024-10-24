@@ -46,6 +46,7 @@
                         <select id="tabs" name="tabs" onchange="changeTab(event)" class="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                             <option value="materials">Materials</option>
                             <option value="labor-cost">Labor Cost</option>
+                            <option value="indirect-cost">Indirect Cost</option>
                         </select>
                     </div>
                     <div class="hidden sm:block mb-4">
@@ -53,6 +54,7 @@
                             <nav class="-mb-px flex space-x-8" aria-label="Tabs">
                                 <a id="materials-tab" href="#" onclick="changeTabTo('materials')" class="border-green-600 text-green-600 whitespace-nowrap border-b-2 pb-1 px-1 text-xs font-medium" aria-current="page">Materials</a>
                                 <a id="labor-cost-tab" href="#" onclick="changeTabTo('labor-cost')" class="text-gray-500 hover:border-green-600 hover:text-green-600 whitespace-nowrap border-b-2 pb-1 px-1 text-xs font-medium">Labor Cost</a>
+                                <a id="indirect-cost-tab" href="#" onclick="changeTabTo('indirect-cost')" class="text-gray-500 hover:border-green-600 hover:text-green-600 whitespace-nowrap border-b-2 pb-1 px-1 text-xs font-medium">Indirect Cost</a>
                             </nav>
                         </div>
                     </div>
@@ -87,6 +89,16 @@
                             <!-- Table for Material Costs -->
                             <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
                                 <livewire:payroll-table :pow_id="$pow->id"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Material Cost Section -->
+                    <div id="indirect-cost" class="hidden w-full">
+                        <div class="bg-white shadow-md rounded-lg p-6">
+                            <h3 class="text-sm font-semibold mb-4 text-center"> Indirect Cost</h3>
+                            <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
+                                <livewire:material-table :pow_id="$pow->id" />
                             </div>
                         </div>
                     </div>
@@ -181,12 +193,15 @@
         function changeTabTo(tab) {
             document.getElementById('materials').style.display = tab === 'materials' ? 'block' : 'none';
             document.getElementById('labor-cost').style.display = tab === 'labor-cost' ? 'block' : 'none';
+            document.getElementById('indirect-cost').style.display = tab === 'indirect-cost' ? 'block' : 'none';
 
             // Highlight active tab
             document.getElementById('materials-tab').classList.toggle('border-green-600', tab === 'materials');
             document.getElementById('materials-tab').classList.toggle('text-green-600', tab === 'materials');
             document.getElementById('labor-cost-tab').classList.toggle('border-green-600', tab === 'labor-cost');
             document.getElementById('labor-cost-tab').classList.toggle('text-green-600', tab === 'labor-cost');
+            document.getElementById('indirect-cost-tab').classList.toggle('border-green-600', tab === 'indirect-cost');
+            document.getElementById('indirect-cost-tab').classList.toggle('text-green-600', tab === 'indirect-cost');
         }
 
         // Modal Management Functions
