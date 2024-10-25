@@ -88,6 +88,9 @@
         <div>
         </div>
     </div>
+
+    <!-- updated area  -->
+
     @foreach($projects as $project)
         <div class="grid gap-2 p-2">
             <a href="{{ route('view-project-pow', ['id' => $project->id]) }}" class="flex w-full">

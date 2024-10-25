@@ -105,3 +105,5 @@ class ProjectFilter extends Component
         return view('livewire.project-filter', compact('projects'));
     }
 }
+
+//updated area
