@@ -126,33 +126,26 @@
                                     <div class="relative bg-white shadow rounded-lg">
                                         <table class="min-w-full table-fixed divide-y divide-gray-300">
                                             <thead>
-                                            <tr class="">
-                                                <th scope="col"
-                                                    class="min-w-[12rem] py-3.5 px-4 pr-3 text-left text-sm font-semibold text-gray-900">
+                                            <tr>
+                                                <th scope="col" class="min-w-[12rem] py-3.5 px-4 pr-3 text-left text-sm font-semibold text-gray-900">
                                                     Project Name
                                                 </th>
-                                                <th scope="col"
-                                                    class="min-w-[12rem] py-3.5 px-4 pr-3 text-left text-sm font-semibold text-gray-900">
+                                                <th scope="col" class="min-w-[12rem] py-3.5 px-4 pr-3 text-left text-sm font-semibold text-gray-900">
                                                     Project Incharge
                                                 </th>
-                                                <th scope="col"
-                                                    class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                                     Material Cost
                                                 </th>
-                                                <th scope="col"
-                                                    class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                                     Labor Cost
                                                 </th>
-                                                <th scope="col"
-                                                    class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                                     Indirect Cost
                                                 </th>
-                                                <th scope="col"
-                                                    class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                                     Progress
                                                 </th>
-                                                <th scope="col"
-                                                    class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                                     Status
                                                 </th>
                                                 <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-3">
@@ -167,52 +160,37 @@
                                                     <td class="whitespace-nowrap py-1 px-4 pr-3 text-xs font-small text-gray-900">{{ $project->title }}</td>
                                                     <td class="whitespace-nowrap py-1 px-4 pr-3 text-xs font-small text-gray-900">{{ $project->projectIncharge->first_name }} {{ $project->projectIncharge->last_name }}</td>
                                                     <td class="whitespace-nowrap px-3 py-1 text-xs text-gray-500">
-                                                        Php {{$project->total_material_cost}}</td>
+                                                        Php {{ $project->total_material_cost }}
+                                                    </td>
                                                     <td class="whitespace-nowrap px-3 py-1 text-xs text-gray-500">
-                                                        Php {{$project->total_labor_cost}}</td>
+                                                        Php {{ $project->total_labor_cost }}
+                                                    </td>
                                                     <td class="whitespace-nowrap px-3 py-1 text-xs text-gray-500">
-                                                        Php {{ number_format($project->total_indirect_costs , 2)}}</td>
+                                                        Php {{ $project->total_indirect_costs }}
+                                                    </td>
                                                     <td class="whitespace-nowrap px-3 py-1 text-xs text-gray-500">
                                                         <div class="flex items-center">
                                                             <div class="relative">
                                                                 <svg class="w-10 h-10" viewBox="0 0 36 36">
-                                                                    <path
-                                                                        class="text-gray-300"
-                                                                        stroke-width="3"
-                                                                        stroke="currentColor"
-                                                                        fill="none"
-                                                                        d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831"
-                                                                    />
-                                                                    <path
-                                                                        class="text-green-600"
-                                                                        stroke-width="3"
-                                                                        stroke-linecap="round"
-                                                                        stroke="currentColor"
-                                                                        fill="none"
-                                                                        d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831"
-                                                                        stroke-dasharray="0 100"
-                                                                    />
+                                                                    <path class="text-gray-300" stroke-width="3" stroke="currentColor" fill="none" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831" />
+                                                                    <path class="text-green-600" stroke-width="3" stroke-linecap="round" stroke="currentColor" fill="none" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831" stroke-dasharray="0 100" />
                                                                 </svg>
-                                                                <span
-                                                                    class="absolute left-0 top-0 w-full h-full flex items-center justify-center text-sm text-gray-900">0%</span>
+                                                                <span class="absolute left-0 top-0 w-full h-full flex items-center justify-center text-sm text-gray-900">0%</span>
                                                             </div>
                                                         </div>
                                                     </td>
                                                     <td class="whitespace-nowrap text-sm text-gray-500 text-center">
-                                                     <span class="flex items-center justify-center text-center rounded-[5px] capitalize p-2 w-[150px] text-xs font-semibold leading-5
-                                                            @if($project->status == 'pending')
-                                                                text-yellow-800 bg-yellow-500 text-white
-                                                            @elseif($project->status == 'completed')
-                                                                text-green-800 bg-green-500 text-white
-                                                            @else
-                                                                text-red-800 bg-red-500 text-white
-                                                            @endif">
-                                                            {{ $project->status }}
-                                                        </span>
-
+                                <span class="flex items-center justify-center text-center rounded-[5px] capitalize p-2 w-[150px] text-xs font-semibold leading-5
+                                    @if($project->status == 'pending') text-yellow-800 bg-yellow-500 text-white
+                                    @elseif($project->status == 'completed') text-green-800 bg-green-500 text-white
+                                    @else text-red-800 bg-red-500 text-white
+                                    @endif">
+                                    {{ $project->status }}
+                                </span>
                                                     </td>
                                                 </tr>
                                             @endforeach
+
                                             </tbody>
                                         </table>
 
@@ -229,6 +207,8 @@
                                 </div>
                             </div>
                         </div>
+
+
                     </div>
                 </div>
             </div>

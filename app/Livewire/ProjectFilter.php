@@ -20,17 +20,13 @@ class ProjectFilter extends Component
     public $completedProjects;
     public $suspendedProjects;
 
-    protected $paginationTheme = 'tailwind'; // or 'bootstrap' if needed
+    protected $paginationTheme = 'tailwind';
 
     public function mount()
     {
-        // Load project counts
         $this->loadProjectCounts();
     }
 
-    /**
-     * Load counts for different project statuses.
-     */
     private function loadProjectCounts()
     {
         $this->totalProjects = Project::count();
@@ -39,12 +35,9 @@ class ProjectFilter extends Component
         $this->suspendedProjects = Project::where('status', 'suspended')->count();
     }
 
-    /**
-     * Filters the projects based on status, date range, and search term.
-     */
     public function filterProjects()
     {
-        $query = Project::with('pows.indirectCosts'); // Load pows and their indirect costs
+        $query = Project::with('pows.indirectCosts');
 
         if ($this->selectedStatus !== 'all') {
             $query->where('status', $this->selectedStatus);
@@ -62,44 +55,50 @@ class ProjectFilter extends Component
             $query->where('title', 'like', '%' . $this->searchTerm . '%');
         }
 
-        // Paginate the results and include total costs
-        $projects = $query->paginate(10); // Paginate results
+        $projects = $query->paginate(10);
 
-        // Calculate total costs for each project
         foreach ($projects as $project) {
             $project->total_material_cost = $project->pows->sum('total_material_cost');
             $project->total_labor_cost = $project->pows->sum('total_labor_cost');
             $project->total_indirect_cost = $project->pows->flatMap(function ($pow) {
-                return $pow->indirectCosts; // Get all indirect costs for the pows
-            })->sum('amount'); // Sum the indirect cost amounts
+                return $pow->indirectCosts;
+            })->sum('amount');
 
-            // Calculate total project cost
             $project->total_project_cost = $project->total_material_cost + $project->total_labor_cost + $project->total_indirect_cost;
+
+            // Format costs using formatCost method
+            $project->formatted_total_project_cost = $this->formatCost($project->total_project_cost);
+            $project->formatted_total_material_cost = $this->formatCost($project->total_material_cost);
+            $project->formatted_total_labor_cost = $this->formatCost($project->total_labor_cost);
         }
 
-        return $projects; // Return the paginated results
+        return $projects;
     }
 
-    /**
-     * Handle search term updates to reset pagination.
-     */
+    public function formatCost($number)
+    {
+        if ($number >= 1000000000) {
+            return number_format($number / 1000000000, 2) . 'B';
+        } elseif ($number >= 1000000) {
+            return number_format($number / 1000000, 2) . 'M';
+        } elseif ($number >= 1000) {
+            return number_format($number / 1000, 2) . 'K';
+        } else {
+            return number_format($number);
+        }
+    }
+
     public function updatingSearchTerm()
     {
-        $this->resetPage(); // Reset pagination when search term changes
+        $this->resetPage();
     }
 
-    /**
-     * Public method to handle project search triggered from the frontend.
-     */
     public function searchProjects($term)
     {
         $this->searchTerm = $term;
-        $this->resetPage(); // Reset to the first page after search
+        $this->resetPage();
     }
 
-    /**
-     * Render the component with filtered and paginated projects.
-     */
     public function render()
     {
         $projects = $this->filterProjects();
