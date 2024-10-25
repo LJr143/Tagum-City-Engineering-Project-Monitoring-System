@@ -1,15 +1,22 @@
 <div>
     <!-- Card containing Road Construction content -->
-    <div class="bg-white p-6 rounded-lg shadow-md">
-        <!-- Road Construction title -->
-        <h2 class="text-xl font-bold mb-2">POW</h2>
-        <div class="flex flex-col space-y-4 mx-8">
-            @if (auth()->user()->isAdmin())
-                <livewire:add-pow :project-id="$projectId"/>
-            @endif
+    <!-- <div class="bg-white p-6 rounded-lg shadow-md"> -->
+       <!-- Road Construction title -->
 
+
+        <div class="flex flex-col space-y-2">
+            <div class="flex flex-row justify-between items-center mb-2">
+                <h2 class="text-xl font-bold mb-2">POW</h2>
+                <div class="relative w-full md:w-auto">
+                    @if (auth()->user()->isAdmin())
+                        <livewire:add-pow :project-id="$projectId"/>
+                    @endif
+                </div>
+            </div>
+
+            <div class="space-y-4">
             <!-- Cards Display -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
                 @if ($cards->isEmpty())
                     <div class="text-center text-gray-500 text-[12px]">
                         No program of work for this project.
@@ -17,24 +24,32 @@
                 @else
                     @foreach ($cards as $index => $card)
                         <!-- Using $index to get the incremental value -->
-                        <a href="{{ route('material-table-cost', ['pow_id' => $card->id, 'index' => $index + 1]) }}"  class="bg-white p-6 rounded-lg shadow-md block transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
-
-                            <div class="bg-green-600 text-white text-xs px-2 py-1 rounded w-max mb-2">
-                                Ref: {{ $card->reference_number }}</div>
-                            <h3 class="text-lg font-bold text-black">POW {{ $index + 1 }}</h3>
-                            <!-- Incremental value -->
-                            <p class="mt-2 text-gray-600 text-xs">{{ $card->description }}</p>
-                            <p class="text-xs font-semibold text-black mt-2">Material Cost: {{ $card->total_material_cost }}</p>
-                            <p class="text-xs font-semibold text-black mt-2">Labor Cost: {{ $card->total_labor_cost }}</p>
-                            <p class="text-xs font-semibold text-black mt-2">Balance: 1,000</p>
-                            <br>
-                            <div class="my-3 border-t border-gray-300"></div>
-                            <div class="flex items-center space-x-3">
-                                <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center">
-                                    <img src="{{ asset('images/pic1.jpg') }}" alt="Engineer Image"
-                                         class="w-12 h-12 rounded-full object-cover">
+                        <a href="{{ route('material-table-cost', ['pow_id' => $card->id, 'index' => $index + 1]) }}"  class="bg-white p-4 rounded-lg shadow-md flex flex-col md:flex-row items-center zoom-container overflow-hidden">
+                            <div class="flex-1 mb-4 md:mb-0">
+                                <div class="bg-green-600 text-white text-[10px] px-2 py-1 rounded w-max mb-1">
+                                    Ref: {{ $card->reference_number }}
                                 </div>
+                                <p class="font-bold ">POW {{ $index + 1 }}</p>
+                                <!-- Incremental value -->
+                                <p class="text-[10px] text-gray-500 md:truncate w-full md:w-48">{{ $card->description }}</p>
                             </div>
+                            <div class="flex-1 text-center md:text-left mb-4 md:mb-0">
+                                <p class="text-[12px] font-bold">Php {{ $card->total_material_cost }}</p>
+                                <p class="text-gray-600 text-[10px]">Material Cost</p>
+                            </div>
+                            <div class="flex-1 text-center md:text-left mb-4 md:mb-0">
+                                <p class="text-[12px] font-bold">Php {{ $card->total_labor_cost }}</p>
+                                <p class="text-gray-600 text-[10px]">Labor Cost</p>
+                            </div>
+                            <div class="flex-1 text-center md:text-left mb-4 md:mb-0">
+                                <p class="text-[12px] font-bold">Php 1,000.00</p>
+                                <p class="text-gray-600 text-[10px]">Indirect Cost</p>
+                            </div>
+                            <div class="flex-1 text-center md:text-left mb-4 md:mb-0 ">
+                                <p class="text-[12px] font-bold">Php 1,000.00</p>
+                                <p class="text-gray-600 text-[10px]">Total Project Spent</p>
+                            </div>
+
                         </a>
                     @endforeach
                 @endif
