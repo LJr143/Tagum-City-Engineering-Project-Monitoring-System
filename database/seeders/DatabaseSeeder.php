@@ -33,5 +33,14 @@ class DatabaseSeeder extends Seeder
             'role' => 'encoder',
             'password' => 'password',
         ]);
+
+        User::factory()->create([
+            'username' => 'projectIncharge@example',
+            'first_name' => 'Project',
+            'last_name' => 'Incharge',
+            'email' => 'projectIncharge@example.com',
+            'role' => 'project incharge',
+            'password' => 'password',
+        ]);
     }
 }

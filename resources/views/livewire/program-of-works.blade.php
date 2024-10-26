@@ -8,7 +8,7 @@
             <div class="flex flex-row justify-between items-center mb-2">
                 <h2 class="text-xl font-bold mb-2">POW</h2>
                 <div class="relative w-full md:w-auto">
-                    @if (auth()->user()->isAdmin())
+                    @if (auth()->user()->isAdmin() || auth()->user()->isEncoder())
                         <livewire:add-pow :project-id="$projectId"/>
                     @endif
                 </div>
@@ -34,20 +34,20 @@
                                 <p class="text-[10px] text-gray-500 md:truncate w-full md:w-48">{{ $card->description }}</p>
                             </div>
                             <div class="flex-1 text-center md:text-left mb-4 md:mb-0">
-                                <p class="text-[12px] font-bold">Php {{ $card->total_material_cost }}</p>
+                                <p class="text-[12px] font-bold">Php {{ number_format($card->total_material_cost, 2 )}}</p>
                                 <p class="text-gray-600 text-[10px]">Material Cost</p>
                             </div>
                             <div class="flex-1 text-center md:text-left mb-4 md:mb-0">
-                                <p class="text-[12px] font-bold">Php {{ $card->total_labor_cost }}</p>
+                                <p class="text-[12px] font-bold">Php {{ number_format($card->total_labor_cost, 2) }}</p>
                                 <p class="text-gray-600 text-[10px]">Labor Cost</p>
                             </div>
                             <div class="flex-1 text-center md:text-left mb-4 md:mb-0">
-                                <p class="text-[12px] font-bold">Php 1,000.00</p>
+                                <p class="text-[12px] font-bold">Php {{ number_format($totalIndirectCost, 2) }}</p>
                                 <p class="text-gray-600 text-[10px]">Indirect Cost</p>
                             </div>
                             <div class="flex-1 text-center md:text-left mb-4 md:mb-0 ">
-                                <p class="text-[12px] font-bold">Php 1,000.00</p>
-                                <p class="text-gray-600 text-[10px]">Total Project Spent</p>
+                                <p class="text-[12px] font-bold">Php {{ number_format($card->total_material_cost + $card->total_labor_cost + $totalIndirectCost), 2 }}</p>
+                                <p class="text-gray-600 text-[10px]">Total Project Cost</p>
                             </div>
 
                         </a>
