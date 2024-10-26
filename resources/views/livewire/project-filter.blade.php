@@ -88,6 +88,9 @@
         <div>
         </div>
     </div>
+
+    <!-- updated area  -->
+
     @foreach($projects as $project)
         <div class="grid gap-2 p-2">
             <a href="{{ route('view-project-pow', ['id' => $project->id]) }}" class="flex w-full">
@@ -148,11 +151,9 @@
                             <div class="flex items-center">
                                 <div class="ml-5 flex item-center justify-content-center">
                                     <div>
-                                        <p class="text-[10px]"><span class="font-bold">Total Project Cost : Php </span> {{ number_format($project->total_project_cost)  }}</p>
-                                        <p class="text-[10px]"><span class="font-bold">Total Material Cost : Php </span>
-                                            {{number_format($project->total_material_cost)}}</p>
-                                        <p class="text-[10px]"><span class="font-bold">Total Labor Cost : Php </span>
-                                            {{number_format($project->total_labor_cost)}}</p>
+                                        <p class="text-[10px]"><span class="font-bold">Total Project Cost : Php </span> {{$project->formatted_total_project_cost }}</p>
+                                        <p class="text-[10px]"><span class="font-bold">Total Material Cost : Php </span> {{$project->formatted_total_material_cost}}</p>
+                                        <p class="text-[10px]"><span class="font-bold">Total Labor Cost : Php </span> {{$project->formatted_total_labor_cost}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -163,10 +164,10 @@
                                 <div class="ml-5 flex item-center justify-content-center">
                                     <div>
                                         <div class="status-div text-[10px] font-bold rounded-2xl px-3 py-2 w-32 text-center
-                                        @if($project->status === 'completed') bg-green-500 text-white
-                                        @elseif($project->status === 'pending') bg-yellow-500 text-white
-                                        @elseif($project->status === 'suspended') bg-red-500 text-white
-                                        @endif">
+                                    @if($project->status === 'completed') bg-green-500 text-white
+                                    @elseif($project->status === 'pending') bg-yellow-500 text-white
+                                    @elseif($project->status === 'suspended') bg-red-500 text-white
+                                    @endif">
                                             {{ $project->status }}
                                         </div>
                                     </div>
@@ -179,6 +180,7 @@
             </a>
         </div>
     @endforeach
+
 
 
 @if ($projects->isEmpty())
