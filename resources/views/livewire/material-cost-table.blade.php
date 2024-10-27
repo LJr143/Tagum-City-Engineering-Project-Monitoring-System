@@ -17,16 +17,6 @@
             transition: opacity 0.5s ease;
         }
 
-        /*.modal-content {*/
-        /*    background-color: #f8d7da;*/
-        /*    color: #721c24;*/
-        /*    padding: 20px;*/
-        /*    border: 1px solid #f5c6cb;*/
-        /*    border-radius: 5px;*/
-        /*    width: 300px;*/
-        /*    text-align: center;*/
-        /*}*/
-
         .close {
             color: #721c24;
             float: right;
@@ -90,14 +80,44 @@
 {{--        </div>--}}
     </div>
     <div class="progress-bar-container text-[12px] w-1/2 mt-[-10px]">
-{{--        <label>Project Progress Overall:% (Actual) vs Target Progress: %</label>--}}
-{{--        <div class="progress-bar mb-2" style="height: 20px">--}}
-{{--            <!-- The target progress bar (lighter) -->--}}
-{{--            <div class="target-progress" style=""></div>--}}
-{{--            <!-- The actual progress bar (darker) -->--}}
-{{--            <div class="progress" style=""></div>--}}
-{{--        </div>--}}
-        <label class="mt-0"> 
+
+        <div class="project-progress-container">
+            <label>Overall Project Progress Actual Progress: {{ number_format($overallProgress, 2) }}%</label>
+
+            <div class="progress-bar" style="height: 20px; background-color: #e0e0e0; position: relative;">
+                @foreach($projectConfigurations as $config)
+                    <div
+                        class="deadline-marker"
+                        style="
+                position: absolute;
+                left: {{ $config->percentage }}%;
+                top: -10px;
+                width: 2px;
+                height: 30px;
+                background-color: #1cf604;
+                cursor: pointer;
+            ">
+            <span class="tooltip text-[6px]">
+                {{ $config->progress_date }} - {{ $config->percentage }}%
+            </span>
+                    </div>
+                @endforeach
+
+                <div
+                    class="actual-progress"
+                    style="
+            width: {{ $overallProgress }}%;
+            background-color: #5cb85c;
+            height: 100%;
+            position: absolute;
+            left: 0;
+        ">
+                </div>
+            </div>
+        </div>
+
+
+        <label class="mt-0">
             Project Progress Materials:
             Used Amount Php. {{ number_format($totalMaterialCost - $remainingMaterialCost, 2) }}
         </label>
@@ -105,12 +125,12 @@
             <div class="target-progress" style="width: {{$usedPercentage}}%"></div>
         </div>
         <label>Project Progress Labor: Used Amount Php. {{ number_format($totalLaborCost - $remainingLaborCost, 2) }}</label>
-        <div class="progress-bar" style="height: 10px">
+        <div class="progress-bar" style="height: 8px">
             <div class="target-progress" style="width: {{ $usedLaborCost }}%"></div>
             <div class="progress" style="width: 0px"></div>
         </div>
         <label>Project Progress Indirect: Used Amount Php. {{ number_format($totalIndirectCost - $remainingIndirectCost, 2) }}</label>
-        <div class="progress-bar" style="height: 10px">
+        <div class="progress-bar" style="height: 8px">
             <div class="target-progress" style="width: {{ $usedIndirectCost }}"></div>
             <div class="progress" style="width: 0px"></div>
         </div>

@@ -27,6 +27,7 @@
                             </svg>
                         </button>
                         @endif
+
                     </div>
                 </div>
 
@@ -66,7 +67,8 @@
                     <!-- Material Cost Section -->
                     <div id="materials" class="w-full">
                         <div class="bg-white shadow-md rounded-lg p-6">
-                            <h3 class="text-sm font-semibold mb-4 text-center"> Materials</h3>
+                            <h3 class="text-sm font-semibold mb-2 text-center"> Materials</h3>
+                                <div class="mb-2"><livewire:add-manual-material :pow_id="$pow->id"/></div>
                                 <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
                                 <livewire:material-table :pow_id="$pow->id" />
                             </div>
@@ -96,7 +98,8 @@
                     <!-- Material Cost Section -->
                     <div id="indirect-cost" class="hidden w-full">
                         <div class="bg-white shadow-md rounded-lg p-6">
-                            <h3 class="text-sm font-semibold mb-4 text-center"> Indirect Cost</h3>
+                            <h3 class="text-sm font-semibold mb-2 text-center"> Indirect Cost</h3>
+                            <div class="mb-2"><livewire:add-manual-indirect-cost :pow_id="$pow->id"/></div>
                             <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
                                 <livewire:material-table :pow_id="$pow->id" />
                             </div>

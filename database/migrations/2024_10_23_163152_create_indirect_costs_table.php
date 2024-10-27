@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('pow_id')->constrained('program_of_works')->onDelete('cascade');
             $table->string('description');
             $table->decimal('amount', 15, 2);
+            $table->double('spent_cost')->default(0);
             $table->timestamps();
         });
     }

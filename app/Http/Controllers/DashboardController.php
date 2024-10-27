@@ -7,20 +7,33 @@ use App\Models\User;
 
 class DashboardController extends Controller
 {
+    // Helper function to format large numbers into short form
+    private function formatNumberShort($number, $precision = 1)
+    {
+        if ($number >= 1000000000) {
+            return round($number / 1000000000, $precision ) . 'B';
+        } elseif ($number >= 1000000) {
+            return round($number / 1000000, $precision) . 'M';
+        } elseif ($number >= 1000) {
+            return round($number / 1000, $precision) . 'K';
+        }
+        return $number;
+    }
+
     public function index()
     {
         // Load related pows to avoid N+1 query issue.
         $projects = Project::with(['pows', 'pows.indirectCosts'])->paginate(10);
 
-        // Calculate the total costs for each project.
+        // Calculate the total costs for each project and apply formatting.
         foreach ($projects as $project) {
-            $project->total_material_cost = $project->pows->sum('total_material_cost');
-            $project->total_labor_cost = $project->pows->sum('total_labor_cost');
-            $project->total_indirect_costs = $project->pows
-                ->flatMap(function ($pow) {
+            $project->total_material_cost = $this->formatNumberShort($project->pows->sum('total_material_cost'));
+            $project->total_labor_cost = $this->formatNumberShort($project->pows->sum('total_labor_cost'));
+            $project->total_indirect_costs = $this->formatNumberShort(
+                $project->pows->flatMap(function ($pow) {
                     return $pow->indirectCosts; // Flatten the indirect costs
-                })
-                ->sum('amount'); // Sum the amounts
+                })->sum('amount')
+            );
         }
 
         // Additional stats for the dashboard.
@@ -42,3 +55,5 @@ class DashboardController extends Controller
         ));
     }
 }
+
+//updated area
