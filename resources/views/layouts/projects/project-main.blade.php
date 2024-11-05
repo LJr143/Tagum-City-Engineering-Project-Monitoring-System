@@ -13,15 +13,15 @@
 
         <div>
             <!-- Header -->
-            <header class="flex flex-row justify-between items-center mb-4">
-                <h1 class="text-base font-semibold leading-6 text-gray-900">Projects</h1>
-                @if (auth()->user()->isAdmin())
-                    <!-- Modal -->
-                    <livewire:add-project/>
-                @endif
+            <header class="flex justify-between items-center">
+                <h1 class="text-xl font-bold">Projects</h1>
+
             </header>
 
-
+            @if (auth()->user()->isAdmin())
+            <!-- Modal -->
+            <livewire:add-project/>
+            @endif
             <livewire:project-filter/>
 
         </div>
