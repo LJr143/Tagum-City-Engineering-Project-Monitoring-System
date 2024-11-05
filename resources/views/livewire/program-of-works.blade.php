@@ -65,4 +65,3 @@
             @endif
         </div> <!-- End of Road Construction Card -->
     </div>
-</div>
