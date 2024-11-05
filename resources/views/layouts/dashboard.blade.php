@@ -12,7 +12,7 @@
 
     <x-slot name="main">
 
-        <div class="flex h-screen text-gray-800">
+        <div class="container mx-auto">
 
             <!-- Main Content -->
             <div class="flex-1 p-4">
@@ -106,135 +106,117 @@
                     </div>
                 </dl>
 
-                <!-- Project Card Section -->
-                <div class="mt-8">
-                    <div class="relative overflow-hidden rounded-lg bg-white px-4 pb-8 pt-5 shadow sm:px-6 sm:pt-6">
-                        <h1 class="text-base font-semibold leading-6 text-gray-900">Projects</h1>
-                        <p class="mt-2 text-xs text-gray-700">A list of all the projects, including their name, the
-                            person in charge, cost, and progress status.</p>
-                        <div class="mt-4 flex justify-end">
-                            <a href="{{ route('project-main') }}"
-                               class="block rounded-md bg-green-600 px-3 py-1 text-center text-xs font-small text-white shadow-sm hover:bg-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
-                                View All
-                            </a>
-                        </div>
 
-                        <!-- projects Table -->
-                        <div class="mt-8 flow-root">
-                            <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                                    <div class="relative bg-white shadow-lg rounded-lg overflow-hidden">
-                                        <table class="min-w-full divide-y divide-gray-300 table-auto">
-                                            <thead class="bg-gray-50">
-                                            <tr>
-                                                <th scope="col" class="min-w-[12rem] py-3.5 px-4 text-left text-sm font-semibold text-gray-900">
-                                                    Project Name
-                                                </th>
-                                                <th scope="col" class="min-w-[12rem] py-3.5 px-4 text-left text-sm font-semibold text-gray-900">
-                                                    Project Incharge
-                                                </th>
-                                                <th scope="col" class="py-3.5 px-4 text-left text-sm font-semibold text-gray-900">
-                                                    Material Cost
-                                                </th>
-                                                <th scope="col" class="py-3.5 px-4 text-left text-sm font-semibold text-gray-900">
-                                                    Labor Cost
-                                                </th>
-                                                <th scope="col" class="py-3.5 px-4 text-left text-sm font-semibold text-gray-900">
-                                                    Indirect Cost
-                                                </th>
-                                                <th scope="col" class="py-3.5 px-4 text-left text-sm font-semibold text-gray-900">
-                                                    Progress
-                                                </th>
-                                                <th scope="col" class="py-3.5 px-4 text-left text-sm font-semibold text-gray-900">
-                                                    Status
-                                                </th>
-                                            </tr>
-                                            </thead>
-                                            <tbody class="divide-y divide-gray-200 bg-white">
-                                            @foreach($projects as $project)
-                                                <tr>
-                                                    <td class="whitespace-nowrap py-1 px-4 text-xs font-small text-gray-900" title="{{ $project->title }}">
-                                                        {{ \Illuminate\Support\Str::limit($project->title, 20, '...') }}
-                                                    </td>
-                                                    <td class="whitespace-nowrap py-1 px-4 text-xs font-small text-gray-900">
-                                                        {{ $project->projectIncharge->first_name }} {{ $project->projectIncharge->last_name }}
-                                                    </td>
-                                                    <td class="whitespace-nowrap px-4 py-1 text-xs text-gray-500">
-                                                        Php {{ $project->total_material_cost }}
-                                                    </td>
-                                                    <td class="whitespace-nowrap px-4 py-1 text-xs text-gray-500">
-                                                        Php {{ $project->total_labor_cost }}
-                                                    </td>
-                                                    <td class="whitespace-nowrap px-4 py-1 text-xs text-gray-500">
-                                                        Php {{ $project->total_indirect_costs }}
-                                                    </td>
-                                                    <td class="whitespace-nowrap px-4 py-1 text-xs text-gray-500">
-                                                        <div class="flex items-center justify-center">
-                                                            <div class="relative">
-                                                                <svg class="w-10 h-10" viewBox="0 0 36 36">
-                                                                    <!-- Background Circle -->
-                                                                    <path
-                                                                        class="text-gray-300"
-                                                                        stroke-width="3"
-                                                                        stroke="currentColor"
-                                                                        fill="none"
-                                                                        d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831"
-                                                                    />
-                                                                    <!-- Progress Circle -->
-                                                                    <path
-                                                                        class="text-green-600"
-                                                                        stroke-width="3"
-                                                                        stroke-linecap="round"
-                                                                        stroke="currentColor"
-                                                                        fill="none"
-                                                                        d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831"
-                                                                        stroke-dasharray="{{ number_format($project->overall_progress, 2) }}, 100"
-                                                                    />
-                                                                </svg>
+        <!-- Project Card Section -->
+        <div class="mt-8 w-full mx-auto bg-white p-6 rounded-lg shadow-md">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-base font-semibold leading-6 text-gray-900">Projects</h2>
+                <a href="{{ route('project-main') }}"
+                   class="block rounded-md bg-green-600 px-3 py-1 text-center text-xs font-small text-white shadow-sm hover:bg-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
+                    View All
+                </a>
+            </div>
+            <p class="mb-4 text-xs text-gray-700">A list of all the projects, including their name, the person in charge, cost, and progress status.</p>
 
-                                                                <!-- Percentage Label -->
-                                                                <span class="absolute left-0 top-0 w-full h-full flex items-center justify-center text-[8px] text-gray-900">
-    {{ number_format($project->overall_progress, 2) }}%
-</span>
 
-                                                            </div>
-                                                        </div>
 
-                                                    </td>
-                                                    <td class="whitespace-nowrap text-sm text-gray-500 text-center">
-                                    <span class="flex items-center justify-center rounded-lg p-2 w-[150px] text-xs font-semibold leading-5
-                                        @if($project->status == 'pending') text-yellow-800 bg-yellow-500 text-white
-                                        @elseif($project->status == 'completed') text-green-800 bg-green-500 text-white
-                                        @else text-red-800 bg-red-500 text-white
-                                        @endif">
-                                        {{ $project->status }}
-                                    </span>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                            </tbody>
-                                        </table>
 
-                                        @if ($projects->isEmpty())
-                                            <div class="p-4 text-center text-gray-500">No projects found.</div>
-                                        @else
-                                            {{-- Pagination Links --}}
-                                            <div class="w-full py-5 flex justify-center items-center">
-                                                {{ $projects->links() }}
-                                            </div>
 
-                                        @endif
+
+
+
+
+            <!-- updated area -->
+
+            <!-- projects Table -->
+            <div class="overflow-x-auto bg-white shadow rounded-lg">
+                <table class="min-w-full table-fixed divide-y divide-gray-300">
+                    <thead>
+                    <tr>
+                        <th scope="col" class=" py-3.5 px-4 pr-3 text-left text-sm font-semibold text-gray-900">
+                            Project Name
+                        </th>
+                        <th scope="col" class=" py-3.5 px-4 pr-3 text-left text-sm font-semibold text-gray-900">
+                            Project Incharge
+                        </th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                            Material Cost
+                        </th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                            Labor Cost
+                        </th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                            Indirect Cost
+                        </th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                            Progress
+                        </th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                            Status
+                        </th>
+                        <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-3">
+                            <span class="sr-only">Status</span>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 bg-white">
+
+                    @foreach($projects as $project)
+                        <tr>
+                            <td class=" py-1 px-4 pr-3 text-xs font-small text-gray-900">{{ $project->title }}</td>
+                            <td class=" py-1 px-4 pr-3 text-xs font-small text-gray-900">{{ $project->projectIncharge->first_name }} {{ $project->projectIncharge->last_name }}</td>
+                            <td class="whitespace-nowrap px-3 py-1 text-xs text-gray-500">
+                                Php {{ $project->total_material_cost }}
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-1 text-xs text-gray-500">
+                                Php {{ $project->total_labor_cost }}
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-1 text-xs text-gray-500">
+                                Php {{ $project->total_indirect_costs }}
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-1 text-xs text-gray-500">
+                                <div class="flex items-center">
+                                    <div class="relative">
+                                        <svg class="w-10 h-10" viewBox="0 0 36 36">
+                                            <path class="text-gray-300" stroke-width="3" stroke="currentColor" fill="none" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831" />
+                                            <path class="text-green-600" stroke-width="3" stroke-linecap="round" stroke="currentColor" fill="none" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831" stroke-dasharray="0 100" />
+                                        </svg>
+                                        <span class="absolute left-0 top-0 w-full h-full flex items-center justify-center text-sm text-gray-900">0%</span>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            </td>
+                            <td class="whitespace-nowrap text-sm text-gray-500 text-center">
+                                <span class="flex items-center justify-center text-center rounded-[5px] capitalize p-2 w-[150px] text-xs font-semibold leading-5
+                                    @if($project->status == 'pending') text-yellow-800 bg-yellow-500 text-white
+                                    @elseif($project->status == 'completed') text-green-800 bg-green-500 text-white
+                                    @else text-red-800 bg-red-500 text-white
+                                    @endif">
+                                    {{ $project->status }}
+                                </span>
+                            </td>
+                        </tr>
+                    @endforeach
 
-
-
-                    </div>
-                </div>
+                    </tbody>
+                </table>
             </div>
+
+                @if ($projects->isEmpty())
+                    <!-- No pagination if no cards -->
+                @else
+                    {{-- Pagination Links --}}
+                    <div class="flex flex-col md:flex-row w-full py-5 flex justify-center items-center">
+                        {{ $projects->links('livewire.pagination.tailwind-pagination') }} <!-- Render pagination links -->
+                    </div>
+                @endif
+
         </div>
+
+        </div>
+
+
+</div>
+
 
 
     </x-slot>
