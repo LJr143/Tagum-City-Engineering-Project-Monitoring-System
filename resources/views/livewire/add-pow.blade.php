@@ -1,4 +1,4 @@
-<div x-data="{ open: false, isUploading: @entangle('isUploading'), indirectOpen: false }" x-cloak
+<div x-data="{ open: false, isUploading: @entangle('isUploading'), indirectOpen: false , directOpen: false}" x-cloak
      @pow-added.window="open = false"
 >
     <div class="flex justify-end mb-4">
@@ -36,77 +36,23 @@
                 </div>
 
                 <div class="flex flex-col space-y-1">
+                    <label for="source-of-funds" class="block text-gray-700 text-xs">Source of Funds</label>
+                    <input type="text" id="source-of-funds" wire:model="source_of_funds"
+                           class="mt-1 block w-full h-8 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-xs"
+                           required>
+                    <!-- Error message for source_of_funds -->
+                    @error('source_of_funds')
+                    <span class="text-red-500 ml-2 text-[10px]">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="flex flex-col space-y-1">
                     <label for="description" class="block text-gray-700 text-xs">Description</label>
                     <textarea id="description" wire:model="description" rows="4"
                               class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-xs p-2"
                               required></textarea>
                 </div>
-
-                {{--                    <div class="flex space-x-4">--}}
-                {{--                        <div class="flex-1">--}}
-                {{--                            <label for="start-date" class="block text-xs font-small text-gray-700">Start Date</label>--}}
-                {{--                            <input type="date" id="start-date" wire:model="start_date"--}}
-                {{--                                   class="mt-1 block w-full p-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-xs">--}}
-                {{--                        </div>--}}
-                {{--                        <div class="flex-1">--}}
-                {{--                            <label for="end-date" class="block text-xs font-small text-gray-700">End Date</label>--}}
-                {{--                            <input type="date" id="end-date" wire:model="end_date"--}}
-                {{--                                   class="mt-1 block w-full p-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-xs">--}}
-                {{--                        </div>--}}
-                {{--                    </div>--}}
-
                 <h3 class="text-xs font-semibold mb-2 mt-5">Direct and Indirect Cost Information</h3>
-
-                <!-- Engineer Select Field -->
-                {{--                    <div x-data="{--}}
-                {{--            open: true,--}}
-                {{--            search: '',--}}
-                {{--            filteredEngineers: [],--}}
-                {{--            selectEngineer(engineer) {--}}
-                {{--                @this.set('engineer_id', engineer.id);--}}
-                {{--                this.search = `${engineer.first_name} ${engineer.middle_initial ? engineer.middle_initial + ' ' : ''}${engineer.last_name}`;--}}
-                {{--                this.open = false;--}}
-                {{--            }--}}
-                {{--        }" class="relative">--}}
-                {{--                        <label for="engineer_id" class="block text-gray-700 text-xs">Engineer</label>--}}
-                {{--                        <input--}}
-                {{--                            type="text"--}}
-                {{--                            id="engineer_id"--}}
-                {{--                            x-model="search"--}}
-                {{--                            @focus="open = true"--}}
-                {{--                            @input.debounce.300ms="filteredEngineers = @js($engineers).filter(engineer => {--}}
-                {{--                const fullName = `${engineer.first_name} ${engineer.middle_initial ? engineer.middle_initial + ' ' : ''}${engineer.last_name}`;--}}
-                {{--                return fullName.toLowerCase().includes(search.toLowerCase());--}}
-                {{--            })"--}}
-                {{--                            @keydown.escape.window="open = false"--}}
-                {{--                            @click="open = true"--}}
-                {{--                            class="mt-1 block w-full p-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-xs"--}}
-                {{--                            placeholder="Search for an Engineer"--}}
-                {{--                            autocomplete="off"--}}
-                {{--                            required--}}
-                {{--                        />--}}
-
-                {{--                        <ul--}}
-                {{--                            x-show="open && (filteredEngineers.length > 0 || search.length > 0)"--}}
-                {{--                            @click.away="open = false"--}}
-                {{--                            class="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg sm:text-xs"--}}
-                {{--                            x-transition--}}
-                {{--                        >--}}
-                {{--                            <template x-for="engineer in filteredEngineers" :key="engineer.id">--}}
-                {{--                                <li--}}
-                {{--                                    @click.stop="selectEngineer(engineer)"--}}
-                {{--                                    class="cursor-pointer hover:bg-indigo-500 hover:text-white p-2"--}}
-                {{--                                >--}}
-                {{--                                    <span x-text="`${engineer.first_name} ${engineer.middle_initial ? engineer.middle_initial + ' ' : ''}${engineer.last_name}`"></span>--}}
-                {{--                                </li>--}}
-                {{--                            </template>--}}
-                {{--                            <li x-show="!filteredEngineers.length && search.length > 0" class="p-2 text-gray-500">No engineers found</li>--}}
-                {{--                        </ul>--}}
-
-                {{--                        @error('engineer_id') <span class="error">{{ $message }}</span> @enderror--}}
-                {{--                    </div>--}}
-
-
                 <div class="flex gap-4">
                     <div class="w-full">
                         <div class="flex flex-col space-y-1">
@@ -158,7 +104,14 @@
                         <span class="text-red-500 ml-2 text-[10px]">{{ $message }}</span>
                         @enderror
                     </div>
+
                     <div class="flex justify-end mt-4 w-full">
+                        <button type="button" @click="directOpen = true"
+                                class="bg-blue-700 text-white text-xs px-4 py-2 w-full rounded shadow-md hover:bg-blue-900">
+                            Add Direct Costs
+                        </button>
+                    </div>
+                    <div class="flex justify-end mt-2 w-full">
                         <button type="button" @click="indirectOpen = true"
                                 class="bg-blue-700 text-white text-xs px-4 py-2 w-full rounded shadow-md hover:bg-blue-900">
                             Add Indirect Cost
@@ -167,7 +120,67 @@
 
                 </div>
 
-                <!-- Modal -->
+                <!-- Modal Direct Costs -->
+                <div x-show="directOpen" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
+                    <div class="bg-white p-6 rounded-lg shadow-md max-w-2xl w-full relative">
+                        <!-- Close button -->
+                        <button @click="directOpen = false" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+
+                        <h3 class="text-lg font-bold mb-2">Add Direct Costs</h3>
+
+                        <!-- Form -->
+                        <div class="space-y-4">
+                            <!-- Display Fields Dynamically -->
+                            @foreach ($direct_costs as $index => $cost)
+                                <div class="flex gap-2 items-center">
+                                    <input type="text" name="direct_costs[{{ $index }}][description]"
+                                           wire:model.defer="direct_costs.{{ $index }}.description"
+                                           placeholder="Description"
+                                           class="w-1/2 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-xs"
+                                           >
+
+                                    <input type="number" name="direct_costs[{{ $index }}][amount]"
+                                           wire:model.defer="direct_costs.{{ $index }}.amount"
+                                           placeholder="Amount"
+                                           class="w-1/3 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-xs"
+                                           >
+
+                                    @if ($index > 0)
+                                        <!-- Remove Field Button -->
+                                        <button type="button" wire:click="removeCost('direct',{{ $index }})"
+                                                class="text-red-500 hover:text-red-700">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                                 xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                      d="M6 18L18 6M6 6l12 12"></path>
+                                            </svg>
+                                        </button>
+                                    @endif
+                                </div>
+                            @endforeach
+
+                            <!-- Add Field Button -->
+                            <button type="button" wire:click="addCost('direct')"
+                                    class="bg-blue-500 text-white text-[12px] px-2 py-1 rounded hover:bg-blue-600">
+                                + Add Field
+                            </button>
+
+                            <!-- Submit Button -->
+                            <button type="button"
+                                    class="bg-green-500 text-white text-[12px] px-3 py-1 rounded shadow-md hover:bg-green-600"
+                                    @click="directOpen = false; ">
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal Indirect Cost -->
                 <div x-show="indirectOpen" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
                     <div class="bg-white p-6 rounded-lg shadow-md max-w-2xl w-full relative">
                         <!-- Close button -->
@@ -190,17 +203,17 @@
                                            wire:model.defer="indirect_costs.{{ $index }}.description"
                                            placeholder="Description"
                                            class="w-1/2 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-xs"
-                                           required>
+                                           >
 
                                     <input type="number" name="indirect_costs[{{ $index }}][amount]"
                                            wire:model.defer="indirect_costs.{{ $index }}.amount"
                                            placeholder="Amount"
                                            class="w-1/3 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-xs"
-                                           required>
+                                           >
 
                                     @if ($index > 0)
                                         <!-- Remove Field Button -->
-                                        <button type="button" wire:click="removeCost({{ $index }})"
+                                        <button type="button" wire:click="removeCost('indirect', {{ $index }})"
                                                 class="text-red-500 hover:text-red-700">
                                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                                  xmlns="http://www.w3.org/2000/svg">
@@ -213,14 +226,14 @@
                             @endforeach
 
                             <!-- Add Field Button -->
-                            <button type="button" wire:click="addCost"
-                                    class="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600">
+                            <button type="button" wire:click="addCost('indirect')"
+                                    class="bg-blue-500 text-white text-[12px] px-2 py-1 rounded hover:bg-blue-600">
                                 + Add Field
                             </button>
 
                             <!-- Submit Button -->
                             <button type="button"
-                                    class="bg-green-500 text-white px-3 py-1 rounded shadow-md hover:bg-green-600"
+                                    class="bg-green-500 text-white text-[12px] px-3 py-1 rounded shadow-md hover:bg-green-600"
                                     @click="indirectOpen = false; ">
                                 Save
                             </button>

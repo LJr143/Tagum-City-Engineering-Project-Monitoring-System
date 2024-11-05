@@ -135,7 +135,9 @@
             <div class="progress" style="width: 0px"></div>
         </div>
 
+
     </div>
+
 
     <script>
         // Close modal function

@@ -120,8 +120,8 @@
                                 <div class="progress-bar-container text-[12px] w-1/2 ">
                                     <label class="text-[10px] font-bold">Overall Project Progress:</label>
                                     <div class="progress-bar" style="height: 8px">
-                                        <div class="target-progress" style="width: 10%;"></div>
-                                        <div class="progress" style="width: 20%;"></div>
+                                        <div class="target-progress" style="width: {{ number_format($project->overall_progress_percentage, 2) }}%;"></div>
+                                        <div class="progress" style="width: {{ number_format($project->overall_progress_percentage, 2) }}%;"></div>
                                     </div>
                                 </div>
                             </div>
@@ -130,8 +130,8 @@
                                 <div class="progress-bar-container text-[12px] w-1/2">
                                     <label class="text-[10px] font-bold">Material Cost Percentage:</label>
                                     <div class="progress-bar" style="height: 8px">
-                                        <div class="target-progress" style="width: 10%;"></div>
-                                        <div class="progress" style="width: 20%;"></div>
+                                        <div class="target-progress" style="width: {{ number_format($project->material_usage_percentage, 2) }}%;"></div>
+                                        <div class="progress" style="width: {{ number_format($project->material_usage_percentage, 2) }}%;"></div>
                                     </div>
                                 </div>
                             </div>
@@ -140,8 +140,8 @@
                                 <div class="progress-bar-container text-[12px] w-1/2">
                                     <label class="text-[10px] font-bold">Labor Cost Percentage:</label>
                                     <div class="progress-bar" style="height: 8px">
-                                        <div class="target-progress" style="width: 10%;"></div>
-                                        <div class="progress" style="width: 20%;"></div>
+                                        <div class="target-progress" style="width: {{ number_format($project->labor_usage_percentage, 2) }}%;"></div>
+                                        <div class="progress" style="width: {{ number_format($project->labor_usage_percentage, 2) }}%;"></div>
                                     </div>
                                 </div>
                             </div>

@@ -18,7 +18,7 @@
 
             </header>
 
-            @if (auth()->user()->isAdmin())
+            @if (auth()->user()->isAdmin() || auth()->user()->isEncoder())
             <!-- Modal -->
             <livewire:add-project/>
             @endif

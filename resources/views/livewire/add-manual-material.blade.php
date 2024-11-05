@@ -42,7 +42,7 @@
 
             <form wire:submit.prevent="submit" class="text-xs">
                 <div class="grid gap-6">
-                    <div>
+                    <div class="hidden">
                         <label class="block text-xs font-medium mb-1">POW ID</label>
                         <input type="number" wire:model="pow_id"
                                class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>

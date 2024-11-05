@@ -119,96 +119,116 @@
                             </a>
                         </div>
 
-                        <!-- updated area -->
-
                         <!-- projects Table -->
                         <div class="mt-8 flow-root">
                             <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                 <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                                    <div class="relative bg-white shadow rounded-lg">
-                                        <table class="min-w-full table-fixed divide-y divide-gray-300">
-                                            <thead>
+                                    <div class="relative bg-white shadow-lg rounded-lg overflow-hidden">
+                                        <table class="min-w-full divide-y divide-gray-300 table-auto">
+                                            <thead class="bg-gray-50">
                                             <tr>
-                                                <th scope="col" class="min-w-[12rem] py-3.5 px-4 pr-3 text-left text-sm font-semibold text-gray-900">
+                                                <th scope="col" class="min-w-[12rem] py-3.5 px-4 text-left text-sm font-semibold text-gray-900">
                                                     Project Name
                                                 </th>
-                                                <th scope="col" class="min-w-[12rem] py-3.5 px-4 pr-3 text-left text-sm font-semibold text-gray-900">
+                                                <th scope="col" class="min-w-[12rem] py-3.5 px-4 text-left text-sm font-semibold text-gray-900">
                                                     Project Incharge
                                                 </th>
-                                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                <th scope="col" class="py-3.5 px-4 text-left text-sm font-semibold text-gray-900">
                                                     Material Cost
                                                 </th>
-                                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                <th scope="col" class="py-3.5 px-4 text-left text-sm font-semibold text-gray-900">
                                                     Labor Cost
                                                 </th>
-                                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                <th scope="col" class="py-3.5 px-4 text-left text-sm font-semibold text-gray-900">
                                                     Indirect Cost
                                                 </th>
-                                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                <th scope="col" class="py-3.5 px-4 text-left text-sm font-semibold text-gray-900">
                                                     Progress
                                                 </th>
-                                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                <th scope="col" class="py-3.5 px-4 text-left text-sm font-semibold text-gray-900">
                                                     Status
-                                                </th>
-                                                <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-3">
-                                                    <span class="sr-only">Status</span>
                                                 </th>
                                             </tr>
                                             </thead>
                                             <tbody class="divide-y divide-gray-200 bg-white">
-
                                             @foreach($projects as $project)
                                                 <tr>
-                                                    <td class="whitespace-nowrap py-1 px-4 pr-3 text-xs font-small text-gray-900">{{ $project->title }}</td>
-                                                    <td class="whitespace-nowrap py-1 px-4 pr-3 text-xs font-small text-gray-900">{{ $project->projectIncharge->first_name }} {{ $project->projectIncharge->last_name }}</td>
-                                                    <td class="whitespace-nowrap px-3 py-1 text-xs text-gray-500">
+                                                    <td class="whitespace-nowrap py-1 px-4 text-xs font-small text-gray-900" title="{{ $project->title }}">
+                                                        {{ \Illuminate\Support\Str::limit($project->title, 20, '...') }}
+                                                    </td>
+                                                    <td class="whitespace-nowrap py-1 px-4 text-xs font-small text-gray-900">
+                                                        {{ $project->projectIncharge->first_name }} {{ $project->projectIncharge->last_name }}
+                                                    </td>
+                                                    <td class="whitespace-nowrap px-4 py-1 text-xs text-gray-500">
                                                         Php {{ $project->total_material_cost }}
                                                     </td>
-                                                    <td class="whitespace-nowrap px-3 py-1 text-xs text-gray-500">
+                                                    <td class="whitespace-nowrap px-4 py-1 text-xs text-gray-500">
                                                         Php {{ $project->total_labor_cost }}
                                                     </td>
-                                                    <td class="whitespace-nowrap px-3 py-1 text-xs text-gray-500">
+                                                    <td class="whitespace-nowrap px-4 py-1 text-xs text-gray-500">
                                                         Php {{ $project->total_indirect_costs }}
                                                     </td>
-                                                    <td class="whitespace-nowrap px-3 py-1 text-xs text-gray-500">
-                                                        <div class="flex items-center">
+                                                    <td class="whitespace-nowrap px-4 py-1 text-xs text-gray-500">
+                                                        <div class="flex items-center justify-center">
                                                             <div class="relative">
                                                                 <svg class="w-10 h-10" viewBox="0 0 36 36">
-                                                                    <path class="text-gray-300" stroke-width="3" stroke="currentColor" fill="none" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831" />
-                                                                    <path class="text-green-600" stroke-width="3" stroke-linecap="round" stroke="currentColor" fill="none" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831" stroke-dasharray="0 100" />
+                                                                    <!-- Background Circle -->
+                                                                    <path
+                                                                        class="text-gray-300"
+                                                                        stroke-width="3"
+                                                                        stroke="currentColor"
+                                                                        fill="none"
+                                                                        d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831"
+                                                                    />
+                                                                    <!-- Progress Circle -->
+                                                                    <path
+                                                                        class="text-green-600"
+                                                                        stroke-width="3"
+                                                                        stroke-linecap="round"
+                                                                        stroke="currentColor"
+                                                                        fill="none"
+                                                                        d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831"
+                                                                        stroke-dasharray="{{ number_format($project->overall_progress, 2) }}, 100"
+                                                                    />
                                                                 </svg>
-                                                                <span class="absolute left-0 top-0 w-full h-full flex items-center justify-center text-sm text-gray-900">0%</span>
+
+                                                                <!-- Percentage Label -->
+                                                                <span class="absolute left-0 top-0 w-full h-full flex items-center justify-center text-[8px] text-gray-900">
+    {{ number_format($project->overall_progress, 2) }}%
+</span>
+
                                                             </div>
                                                         </div>
+
                                                     </td>
                                                     <td class="whitespace-nowrap text-sm text-gray-500 text-center">
-                                <span class="flex items-center justify-center text-center rounded-[5px] capitalize p-2 w-[150px] text-xs font-semibold leading-5
-                                    @if($project->status == 'pending') text-yellow-800 bg-yellow-500 text-white
-                                    @elseif($project->status == 'completed') text-green-800 bg-green-500 text-white
-                                    @else text-red-800 bg-red-500 text-white
-                                    @endif">
-                                    {{ $project->status }}
-                                </span>
+                                    <span class="flex items-center justify-center rounded-lg p-2 w-[150px] text-xs font-semibold leading-5
+                                        @if($project->status == 'pending') text-yellow-800 bg-yellow-500 text-white
+                                        @elseif($project->status == 'completed') text-green-800 bg-green-500 text-white
+                                        @else text-red-800 bg-red-500 text-white
+                                        @endif">
+                                        {{ $project->status }}
+                                    </span>
                                                     </td>
                                                 </tr>
                                             @endforeach
-
                                             </tbody>
                                         </table>
 
                                         @if ($projects->isEmpty())
-                                            <!-- No pagination if no cards -->
+                                            <div class="p-4 text-center text-gray-500">No projects found.</div>
                                         @else
                                             {{-- Pagination Links --}}
                                             <div class="w-full py-5 flex justify-center items-center">
-                                                {{ $projects->links('livewire.pagination.tailwind-pagination') }} <!-- Render pagination links -->
+                                                {{ $projects->links() }}
                                             </div>
-                                        @endif
 
+                                        @endif
                                     </div>
                                 </div>
                             </div>
                         </div>
+
 
 
                     </div>

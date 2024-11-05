@@ -6,111 +6,69 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
-Route::middleware(['auth:sanctum', 'verified', 'inactivity.logout'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/project-main', [ProjectController::class, 'index'])->name('project-main');
-    Route::get('/view-project-pow/{id}', [ProjectController::class, 'view'])->name('view-project-pow');
-    Route::get('/material-table-cost/{pow_id}/{index}', [ProjectController::class, 'viewPowInfo'])->name('material-table-cost');
-
-    // Apply role middleware here
-    Route::get('/manage-user', [UserController::class, 'index'])->middleware('role:admin')->name('manage-user');
-    Route::get('/system-logs', function () {
-        return view('layouts.system_logs.system-logs');
-    })->middleware('role:admin')->name('system-logs');
-});
-
-
-Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
-Route::delete('/project/{id}', [ProjectController::class, 'destroy'])->name('project.destroy');
-Route::delete('/pow/{id}', [ProjectController::class, 'destroyPow'])->name('pow.destroy');
-
-
-
-
-
-
-//Route::post('/materials/import', [ProjectController::class, 'import'])->name('materials.import');
-//Route::get('/material-table-cost/{project_id}', [ProjectController::class, 'destroy'])->name('material-table-cost');
-//Route::get('/engineers', [UserController::class, 'getEngineers']);
-
-
-
+// Public Route
 Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('report', function () {
-    return view('report');
-})->name('report');
+// Authenticated Routes
+Route::middleware(['auth:sanctum', 'verified', 'inactivity.logout'])->group(function () {
 
-//Route::get('/users', function () {
-//    return view('layouts.user.manageUser');
-//})->name('user');
+    // Dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::get('/project-cost', function () {
-    return view('layouts.projects.project-view-pow');
-})->name('project-cost');
+    // User Profile
+    Route::get('/account-settings', function () {
+        return view('layouts.account-settings.account-settings');
+    })->name('userProfile');
 
-Route::get('/account-settings', function () {
-    return view('layouts.account-settings.account-settings');
-})->name('userProfile');
+    // Project Management
+    Route::prefix('project')->group(function () {
+        Route::get('/main', [ProjectController::class, 'index'])->name('project-main');
+        Route::get('/view-pow/{id}', [ProjectController::class, 'view'])->name('view-project-pow');
+        Route::get('/material-table-cost/{pow_id}/{index}', [ProjectController::class, 'viewPowInfo'])->name('material-table-cost');
+        Route::delete('/{id}', [ProjectController::class, 'destroy'])->name('project.destroy');
+        Route::delete('/pow/{id}', [ProjectController::class, 'destroyPow'])->name('pow.destroy');
+        Route::get('/material-table-cost', function () {
+            return view('layouts.Projects.material-cost-table');
+        });
+    });
 
-Route::get('/material-table-cost', function () {
-    return view('layouts.Projects.material-cost-table');
+    // User Management (Admin)
+    Route::middleware('role:admin')->group(function () {
+        Route::get('/manage-user', [UserController::class, 'index'])->name('manage-user');
+
+        //System Configuration
+        Route::get('/system-configuration', function (){
+            return view('layouts.system configuration.system_configuration');
+        })->name('system-configuration');
+
+        // System Logs
+        Route::get('/system-logs', function () {
+            return view('layouts.system_logs.system-logs');
+        })->name('system-logs');
+
+        // Report
+        Route::get('/report', function () {
+            return view('layouts.reports.admin-report');
+        })->name('report');
+    });
+
+    // Logout
+    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });
 
-// In your routes/web.php/ gidungag nako para mulahos gikan pow cards to material cost table
-//Route::get('/material-table-cost', function () {
-//    return view('layouts.Projects.material-cost-table');
-//})->name('material-table-cost');
+// Viewer Routes
+Route::prefix('viewer')->group(function () {
+    Route::get('/project', function () {
+        return view('layouts.viewer.view-project-viewer');
+    });
 
-Route::get('/main', function () {
-    return view('layouts.Projects.dashboard');
+    Route::get('/specific-project', function () {
+        return view('layouts.viewer.view-specific-project-viewer');
+    })->name('view-specific-project-viewer');
+
+    Route::get('/pow', function () {
+        return view('layouts.viewer.view-pow-viewer');
+    })->name('view-pow-viewer');
 });
-
-Route::get('/proj-pow-engineer', function () {
-    return view('layouts.Projects.proj-pow-engineer');
-});
-Route::get('/engineer-materialscost-table', function () {
-    return view('layouts.Projects.engineer-materialscost-table');
-});
-
-
-Route::get('/report', function () {
-    return view('layouts.reports.report');
-})->name('report');
-
-
-//Route::get('/user', function () {
-//    return view('layouts.user.manageUser');
-//})->name('user');
-
-
-
-//FOR VIEWER
-
-//Route::get('/view-project-viewer', function () {
-//    return view('layouts.viewer.view-project-viewer');
-//})->name('user');
-
-Route::get('/view-specific-project-viewer', function () {
-    return view('layouts.viewer.view-specific-project-viewer');
-});
-
-Route::get('/view-specific-project-viewer', function () {
-    return view('layouts.viewer.view-specific-project-viewer');
-})->name('view-specific-project-viewer');
-
-Route::get('/view-pow-viewer', function () {
-    return view('layouts.viewer.view-pow-viewer');
-});
-
-Route::get('/view-pow-viewer', function () {
-    return view('layouts.viewer.view-pow-viewer');
-})->name('view-pow-viewer');
-
-//Route::get('/view-pow-engineer', function () {
-//    return view('layouts.engineer.view-pow-engineer');
-//})->name('user');
-
-//END FOR VIEWER
