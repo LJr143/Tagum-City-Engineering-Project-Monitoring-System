@@ -126,40 +126,37 @@
                             <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                 <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                                     <div class="relative bg-white shadow rounded-lg">
-                                        <table class="min-w-full table-fixed divide-y divide-gray-300">
+                                        <table class="min-w-full table-fixed divide-y divide-gray-300 w-full">
                                             <thead>
                                             <tr>
-                                                <th scope="col" class="min-w-[12rem] py-3.5 px-4 pr-3 text-left text-sm font-semibold text-gray-900">
+                                                <th scope="col" class="py-3.5 px-4 text-left text-sm font-semibold text-gray-900">
                                                     Project Name
                                                 </th>
-                                                <th scope="col" class="min-w-[12rem] py-3.5 px-4 pr-3 text-left text-sm font-semibold text-gray-900">
+                                                <th scope="col" class="py-3.5 px-4 text-left text-sm font-semibold text-gray-900">
                                                     Project Incharge
                                                 </th>
-                                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                <th scope="col" class="py-3.5 px-4 text-left text-sm font-semibold text-gray-900">
                                                     Material Cost
                                                 </th>
-                                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                <th scope="col" class="py-3.5 px-4 text-left text-sm font-semibold text-gray-900">
                                                     Labor Cost
                                                 </th>
-                                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                <th scope="col" class="py-3.5 px-4 text-left text-sm font-semibold text-gray-900">
                                                     Indirect Cost
                                                 </th>
-                                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                <th scope="col" class="py-3.5 px-4 text-left text-sm font-semibold text-gray-900">
                                                     Progress
                                                 </th>
-                                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                <th scope="col" class="py-3.5 px-4 text-left text-sm font-semibold text-gray-900">
                                                     Status
-                                                </th>
-                                                <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-3">
-                                                    <span class="sr-only">Status</span>
                                                 </th>
                                             </tr>
                                             </thead>
                                             <tbody class="divide-y divide-gray-200 bg-white">
 
                                             @foreach($projects as $project)
-                                                <tr>
-                                                    <td class="whitespace-nowrap py-1 px-4 pr-3 text-xs font-small text-gray-900">{{ $project->title }}</td>
+                                                <tr >
+                                                    <td class="whitespace py-1 px-4 pr-3 text-xs font-small text-gray-900">{{ $project->title }}</td>
                                                     <td class="whitespace-nowrap py-1 px-4 pr-3 text-xs font-small text-gray-900">{{ $project->projectIncharge->first_name }} {{ $project->projectIncharge->last_name }}</td>
                                                     <td class="whitespace-nowrap px-3 py-1 text-xs text-gray-500">
                                                         Php {{ $project->total_material_cost }}
