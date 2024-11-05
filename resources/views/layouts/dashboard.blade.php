@@ -12,7 +12,7 @@
 
     <x-slot name="main">
 
-        <div class="flex h-screen text-gray-800">
+        <div class="container mx-auto">
 
             <!-- Main Content -->
             <div class="flex-1 p-4">
@@ -106,28 +106,28 @@
                     </div>
                 </dl>
 
+
                 <!-- Project Card Section -->
-                <div class="mt-8">
-                    <div class="relative overflow-hidden rounded-lg bg-white px-4 pb-8 pt-5 shadow sm:px-6 sm:pt-6">
-                        <h1 class="text-base font-semibold leading-6 text-gray-900">Projects</h1>
-                        <p class="mt-2 text-xs text-gray-700">A list of all the projects, including their name, the
-                            person in charge, cost, and progress status.</p>
-                        <div class="mt-4 flex justify-end">
-                            <a href="{{ route('project-main') }}"
-                               class="block rounded-md bg-green-600 px-3 py-1 text-center text-xs font-small text-white shadow-sm hover:bg-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
-                                View All
-                            </a>
-                        </div>
+                <div class="mt-8 w-full mx-auto bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-base font-semibold leading-6 text-gray-900">Projects</h2>
+                        <a href="{{ route('project-main') }}"
+                           class="block rounded-md bg-green-600 px-3 py-1 text-center text-xs font-small text-white shadow-sm hover:bg-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
+                            View All
+                        </a>
+                    </div>
+                    <p class="mb-4 text-xs text-gray-700">A list of all the projects, including their name, the person in charge, cost, and progress status.</p>
+
+
+
 
                         <!-- updated area -->
 
-                        <!-- projects Table -->
-                        <div class="mt-8 flow-root">
-                            <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                                    <div class="relative bg-white shadow rounded-lg">
-                                        <table class="min-w-full table-fixed divide-y divide-gray-300 w-full">
-                                            <thead>
+                    <!-- projects Table -->
+                    <div class="overflow-x-auto bg-white shadow rounded-lg">
+                        <table class="min-w-full  divide-y divide-gray-300">
+
+                        <thead>
                                             <tr>
                                                 <th scope="col" class="py-3.5 px-4 text-left text-sm font-semibold text-gray-900">
                                                     Project Name
@@ -192,6 +192,7 @@
 
                                             </tbody>
                                         </table>
+                    </div>
 
                                         @if ($projects->isEmpty())
                                             <!-- No pagination if no cards -->
@@ -205,13 +206,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
 
-                    </div>
-                </div>
-            </div>
-        </div>
 
 
     </x-slot>
