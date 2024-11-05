@@ -83,4 +83,14 @@ class User extends Authenticatable
     {
         return $this->role === 'encoder';
     }
+
+    public function isProjectIncharge()
+    {
+        return $this->role === 'project incharge';
+    }
+
+    public function projects(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Project::class, 'project_incharge_id');
+    }
 }

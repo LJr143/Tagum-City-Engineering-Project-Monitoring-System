@@ -87,7 +87,6 @@
 
                 if (passwordInput.type === 'password') {
                     passwordInput.type = 'text'; // Show password
-                    eyeIcon.innerHTML = <!-- Open Eye SVG -->;
                     eyeIcon.innerHTML = `
                     <svg width="31" height="20" viewBox="0 0 31 20" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <rect width="31" height="20" fill="url(#pattern0_1429_9124)"/>
@@ -100,7 +99,6 @@
                         </svg>`;
                 } else {
                     passwordInput.type = 'password'; // Hide password
-                    eyeIcon.innerHTML =  <!-- Closed Eye with Slash SVG -->;
                     eyeIcon.innerHTML = `
                 <svg width="31" height="20" viewBox="0 0 31 20" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <rect width="31" height="20" fill="url(#pattern0_1429_9125)"/>

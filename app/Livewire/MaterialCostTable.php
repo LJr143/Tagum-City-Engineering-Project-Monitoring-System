@@ -9,7 +9,7 @@ use App\Models\IndirectCost;
 use App\Models\ProjectConfiguration;
 use Livewire\Component;
 
-class MaterialCostTable extends Component
+class MaterialCostTable extends ProgressInformation
 {
     public $pow_id;
     public $pow;
@@ -36,73 +36,12 @@ class MaterialCostTable extends Component
     {
         $this->pow_id = $pow_id;
         $this->fetchPowInfo();
-        $this->fetchProjectConfigurations(); // Fetch deadlines and milestones.
+        $this->fetchProjectConfigurations();
         $this->calculateCosts();
         $this->calculateOverallProgress();
     }
 
-    public function fetchPowInfo()
-    {
-        $this->pow = Pow::find($this->pow_id);
-
-        if (!$this->pow) {
-            $this->pow = null;
-            return;
-        }
-
-        // Fetch total indirect costs.
-        $this->totalIndirectCost = IndirectCost::where('pow_id', $this->pow_id)->sum('amount');
-    }
-
-    public function fetchProjectConfigurations()
-    {
-        // Fetch the milestones (with dates and target percentages).
-        $this->projectConfigurations = ProjectConfiguration::where('project_id', $this->pow->project_id)
-            ->orderBy('progress_date', 'asc')
-            ->get();
-    }
-
-    public function calculateCosts()
-    {
-        $materials = Material::where('pow_id', $this->pow_id)->get();
-        $labor = Payroll::where('pow_id', $this->pow_id)->get();
-
-        $this->totalMaterialCost = $materials->sum('estimated_cost');
-        $this->materialSpentCost = $materials->sum('spent_cost');
-
-        $this->totalLaborCost = $this->pow->total_labor_cost;
-        $this->laborSpentCost = $labor->sum('payroll_amount');
-
-        $this->indirectSpentCost = IndirectCost::where('pow_id', $this->pow_id)->sum('spent_cost');
-
-        // Calculate remaining costs and used percentages.
-        $this->remainingMaterialCost = max(0, $this->totalMaterialCost - $this->materialSpentCost);
-        $this->usedPercentage = $this->totalMaterialCost > 0
-            ? ($this->materialSpentCost / $this->totalMaterialCost) * 100
-            : 0;
-
-        $this->remainingLaborCost = max(0, $this->totalLaborCost - $this->laborSpentCost);
-        $this->usedLaborCost = $this->totalLaborCost > 0
-            ? ($this->laborSpentCost / $this->totalLaborCost) * 100
-            : 0;
-
-        $this->remainingIndirectCost = max(0, $this->totalIndirectCost - $this->indirectSpentCost);
-        $this->usedIndirectCost = $this->totalIndirectCost > 0
-            ? ($this->indirectSpentCost / $this->totalIndirectCost) * 100
-            : 0;
-    }
-
-    public function calculateOverallProgress()
-    {
-        $totalSpentCost = $this->materialSpentCost + $this->laborSpentCost + $this->indirectSpentCost;
-        $totalProjectCost = $this->totalMaterialCost + $this->totalLaborCost + $this->totalIndirectCost;
-
-        $this->overallProgress = $totalProjectCost > 0
-            ? ($totalSpentCost / $totalProjectCost) * 100
-            : 0;
-    }
-
-    public function render()
+    public function render(): \Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
         return view('livewire.material-cost-table', [
             'usedPercentage' => $this->usedPercentage,

@@ -74,9 +74,22 @@
 }
 
 .out-of-budget {
-    color: red; /* Indicates out of budget */
+    color: red;
     font-weight: bold;
 }
+
+select {
+    color: #9B9B9B;
+    padding: .7rem 1rem;
+    font-size: 15px;
+    border-radius: 8px;
+}
+
+select option {
+    color: #9B9B9B;
+}
+
+
 
 
 

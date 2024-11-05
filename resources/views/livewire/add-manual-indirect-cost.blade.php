@@ -40,7 +40,7 @@
 
             <h2 class="text-lg font-bold mb-4">Add Indirect Costs</h2>
 
-            <form wire:submit.prevent="saveIndirectCosts" class="text-xs space-y-4">
+            <form wire:submit.prevent="saveIndirectCosts" class="space-y-4 text-[12px]">
                 <!-- Display Fields Dynamically -->
                 @foreach ($indirect_costs as $index => $cost)
                     <div class="flex gap-2 items-center">
@@ -72,18 +72,18 @@
 
                 <!-- Add Field Button -->
                 <button type="button" wire:click="addCost"
-                        class="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600">
+                        class="bg-blue-500 text-white text-[12px] px-2 py-1 rounded hover:bg-blue-600">
                     + Add Field
                 </button>
 
                 <!-- Action Buttons -->
                 <div class="mt-6 flex justify-end space-x-2">
                     <button @click="indirectOpen = false" type="button"
-                            class="bg-gray-300 text-gray-700 px-4 py-2 rounded shadow-md hover:bg-gray-400 text-xs">
+                            class="bg-gray-300 text-gray-700 text-[12px] px-4 py-2 rounded shadow-md hover:bg-gray-400 text-xs">
                         Cancel
                     </button>
                     <button type="submit"
-                            class="bg-green-500 text-white px-6 py-2 rounded shadow-md hover:bg-green-600 text-xs">
+                            class="bg-green-500 text-white px-6 py-2 rounded shadow-md hover:bg-green-600 text-[12px]">
                         Save
                     </button>
                 </div>

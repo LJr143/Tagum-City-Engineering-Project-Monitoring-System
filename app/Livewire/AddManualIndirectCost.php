@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class AddManualIndirectCost extends Component
 {
-    public $indirect_costs = [];
+    public $indirect_costs = [['description' => '', 'amount' => '']];
     public $pow_id;
 
     public function mount($pow_id): void

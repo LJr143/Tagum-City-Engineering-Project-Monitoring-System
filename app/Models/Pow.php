@@ -15,6 +15,7 @@ class Pow extends Model
     // Specify which attributes can be mass assigned
     protected $fillable = [
         'reference_number',
+        'source_of_funds',
         'description',
         'start_date',
         'end_date',
@@ -38,5 +39,16 @@ class Pow extends Model
     {
         return $this->hasMany(IndirectCost::class, 'pow_id', 'id'); // Adjust as necessary
     }
+
+    public function materials()
+    {
+        return $this->hasMany(Material::class);
+    }
+
+    public function payroll()
+    {
+        return $this->hasMany(Payroll::class);
+    }
+
 
 }

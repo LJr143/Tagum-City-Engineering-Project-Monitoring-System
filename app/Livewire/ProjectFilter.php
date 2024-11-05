@@ -35,41 +35,69 @@ class ProjectFilter extends Component
         $this->suspendedProjects = Project::where('status', 'suspended')->count();
     }
 
-    public function filterProjects()
-    {
-        $query = Project::with('pows.indirectCosts');
+        public function filterProjects()
+        {
+            $query = Project::with('pows.indirectCosts', 'pows.materials', 'pows.payroll');
 
-        if ($this->selectedStatus !== 'all') {
-            $query->where('status', $this->selectedStatus);
-        }
+            $user = auth()->user();
 
-        if ($this->startDate) {
-            $query->whereDate('start_date', '>=', $this->startDate);
-        }
+            if ($user && $user->isProjectIncharge()) {
+                $query->where('project_incharge_id', $user->id);
+            }
 
-        if ($this->endDate) {
-            $query->whereDate('end_date', '<=', $this->endDate);
-        }
 
-        if ($this->searchTerm) {
-            $query->where('title', 'like', '%' . $this->searchTerm . '%');
-        }
+            if ($this->selectedStatus !== 'all') {
+                $query->where('status', $this->selectedStatus);
+            }
 
-        $projects = $query->paginate(10);
+            if ($this->startDate) {
+                $query->whereDate('start_date', '>=', $this->startDate);
+            }
 
-        foreach ($projects as $project) {
-            $project->total_material_cost = $project->pows->sum('total_material_cost');
-            $project->total_labor_cost = $project->pows->sum('total_labor_cost');
-            $project->total_indirect_cost = $project->pows->flatMap(function ($pow) {
+            if ($this->endDate) {
+                $query->whereDate('end_date', '<=', $this->endDate);
+            }
+
+            if ($this->searchTerm) {
+                $query->where('title', 'like', '%' . $this->searchTerm . '%');
+            }
+
+            $projects = $query->paginate(10);
+
+            foreach ($projects as $project) {
+            $totalMaterialCost = $project->pows->sum('total_material_cost');
+            $totalLaborCost = $project->pows->sum('total_labor_cost');
+            $totalIndirectCost = $project->pows->flatMap(function ($pow) {
                 return $pow->indirectCosts;
             })->sum('amount');
 
-            $project->total_project_cost = $project->total_material_cost + $project->total_labor_cost + $project->total_indirect_cost;
+            $materialSpentCost = $project->pows->flatMap(function ($pow) {
+                return $pow->materials;
+            })->sum('spent_cost');
 
-            // Format costs using formatCost method
+            $laborSpentCost = $project->pows->flatMap(function ($pow) {
+                return $pow->payroll;
+            })->sum('payroll_amount');
+
+            $project->total_project_cost = $totalMaterialCost + $totalLaborCost + $totalIndirectCost;
+
+            $totalSpentCost = $materialSpentCost + $laborSpentCost + $totalIndirectCost; // Add indirect costs if applicable
+
+            $project->overall_progress_percentage = $project->total_project_cost > 0
+                ? ($totalSpentCost / $project->total_project_cost) * 100
+                : 0;
+
+            $project->material_usage_percentage = $totalMaterialCost > 0
+                ? ($materialSpentCost / $totalMaterialCost) * 100
+                : 0;
+
+            $project->labor_usage_percentage = $totalLaborCost > 0
+                ? ($laborSpentCost / $totalLaborCost) * 100
+                : 0;
+
             $project->formatted_total_project_cost = $this->formatCost($project->total_project_cost);
-            $project->formatted_total_material_cost = $this->formatCost($project->total_material_cost);
-            $project->formatted_total_labor_cost = $this->formatCost($project->total_labor_cost);
+            $project->formatted_total_material_cost = $this->formatCost($totalMaterialCost);
+            $project->formatted_total_labor_cost = $this->formatCost($totalLaborCost);
         }
 
         return $projects;
@@ -105,5 +133,3 @@ class ProjectFilter extends Component
         return view('livewire.project-filter', compact('projects'));
     }
 }
-
-//updated area

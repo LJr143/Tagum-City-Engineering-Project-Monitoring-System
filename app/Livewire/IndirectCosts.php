@@ -6,7 +6,7 @@ use Livewire\Component;
 
 class IndirectCosts extends Component
 {
-    public $indirect_costs = [['description' => '', 'amount' => '']]; // Initialize with one field
+    public $indirect_costs = [['description' => '', 'amount' => '']];
 
     public function addCost()
     {

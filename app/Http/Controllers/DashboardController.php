@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth; // Ensure you import the Auth facade
 
 class DashboardController extends Controller
 {
@@ -11,7 +12,7 @@ class DashboardController extends Controller
     private function formatNumberShort($number, $precision = 1)
     {
         if ($number >= 1000000000) {
-            return round($number / 1000000000, $precision ) . 'B';
+            return round($number / 1000000000, $precision) . 'B';
         } elseif ($number >= 1000000) {
             return round($number / 1000000, $precision) . 'M';
         } elseif ($number >= 1000) {
@@ -22,8 +23,15 @@ class DashboardController extends Controller
 
     public function index()
     {
-        // Load related pows to avoid N+1 query issue.
-        $projects = Project::with(['pows', 'pows.indirectCosts'])->paginate(10);
+        // Get the authenticated user
+        $user = Auth::user();
+
+        // Load only associated projects for the project in-charge
+        $projects = Project::with(['pows', 'pows.indirectCosts'])
+            ->when($user->isProjectIncharge(), function ($query) use ($user) {
+                return $query->where('project_incharge_id', $user->id); // Filter by in-charge ID
+            })
+            ->paginate(10);
 
         // Calculate the total costs for each project and apply formatting.
         foreach ($projects as $project) {
@@ -36,13 +44,25 @@ class DashboardController extends Controller
             );
         }
 
-        // Additional stats for the dashboard.
-        $user = User::first();
+        // Additional stats for the dashboard
         $totalUsers = User::count();
-        $totalProjects = Project::count();
-        $pendingProjects = Project::where('status', 'pending')->count();
-        $completedProjects = Project::where('status', 'completed')->count();
-        $suspendedProjects = Project::where('status', 'suspended')->count();
+
+        // Calculate project statistics based on the in-charge ID
+        $totalProjects = Project::when($user->isProjectIncharge(), function ($query) use ($user) {
+            return $query->where('project_incharge_id', $user->id);
+        })->count();
+
+        $pendingProjects = Project::when($user->isProjectIncharge(), function ($query) use ($user) {
+            return $query->where('project_incharge_id', $user->id);
+        })->where('status', 'pending')->count();
+
+        $completedProjects = Project::when($user->isProjectIncharge(), function ($query) use ($user) {
+            return $query->where('project_incharge_id', $user->id);
+        })->where('status', 'completed')->count();
+
+        $suspendedProjects = Project::when($user->isProjectIncharge(), function ($query) use ($user) {
+            return $query->where('project_incharge_id', $user->id);
+        })->where('status', 'suspended')->count();
 
         return view('layouts.dashboard', compact(
             'user',
@@ -55,5 +75,3 @@ class DashboardController extends Controller
         ));
     }
 }
-
-//updated area
