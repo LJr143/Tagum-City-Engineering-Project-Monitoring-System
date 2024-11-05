@@ -2,10 +2,12 @@
 
 namespace App\Livewire;
 
+use App\Models\DirectCost;
 use App\Models\IndirectCost;
 use App\Models\Material;
 use App\Models\Payroll;
 use App\Models\Pow;
+use App\Models\Project;
 use App\Models\ProjectConfiguration;
 use Livewire\Component;
 
@@ -13,7 +15,7 @@ class ProgressInformation extends Component
 {
     public $pow_id;
     public $pow;
-    public $projectConfigurations = [];
+    public $projectConfigurations = []; // Store milestones with deadlines and percentages.
 
     public $totalLaborCost = 0;
     public $totalMaterialCost = 0;
@@ -21,16 +23,24 @@ class ProgressInformation extends Component
     public $laborSpentCost = 0;
     public $indirectSpentCost = 0;
 
+    public $projectMaterialCost = 0;
+    public $directSpentCost = 0;
+
     public $remainingMaterialCost = 0;
     public $remainingLaborCost = 0;
     public $remainingIndirectCost = 0;
+    public $remainingDirectCost = 0;
 
     public $usedLaborCost = 0;
     public $usedIndirectCost = 0;
+    public $usedDirectCost = 0;
     public $usedPercentage = 0;
     public $totalIndirectCost = 0;
 
+    public $totalDirectCost = 0;
+
     public $overallProgress = 0;
+
 
     public function mount($pow_id): void
     {
@@ -52,6 +62,9 @@ class ProgressInformation extends Component
 
         // Fetch total indirect costs.
         $this->totalIndirectCost = IndirectCost::where('pow_id', $this->pow_id)->sum('amount');
+        $this->totalDirectCost = DirectCost::where('pow_id', $this->pow_id)->sum('amount');
+
+
     }
 
     public function fetchProjectConfigurations()
@@ -74,6 +87,7 @@ class ProgressInformation extends Component
         $this->laborSpentCost = $labor->sum('payroll_amount');
 
         $this->indirectSpentCost = IndirectCost::where('pow_id', $this->pow_id)->sum('spent_cost');
+        $this->directSpentCost = DirectCost::where('pow_id', $this->pow_id)->sum('spent_cost');
 
         // Calculate remaining costs and used percentages.
         $this->remainingMaterialCost = max(0, $this->totalMaterialCost - $this->materialSpentCost);
@@ -89,6 +103,11 @@ class ProgressInformation extends Component
         $this->remainingIndirectCost = max(0, $this->totalIndirectCost - $this->indirectSpentCost);
         $this->usedIndirectCost = $this->totalIndirectCost > 0
             ? ($this->indirectSpentCost / $this->totalIndirectCost) * 100
+            : 0;
+
+        $this->remainingDirectCost = max(0, $this->totalDirectCost - $this->directSpentCost);
+        $this->usedDirectCost = $this->totalDirectCost > 0
+            ? ($this->directSpentCost / $this->totalDirectCost) * 100
             : 0;
     }
 

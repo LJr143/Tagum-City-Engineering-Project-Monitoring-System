@@ -79,12 +79,12 @@
                                class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
                         @error('estimated_unit_cost') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                     </div>
-                    <div>
-                        <label class="block text-xs font-medium mb-1">Estimated Cost</label>
-                        <input type="number" step="0.01" wire:model="estimated_cost"
-                               class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
-                        @error('estimated_cost') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-                    </div>
+{{--                    <div>--}}
+{{--                        <label class="block text-xs font-medium mb-1">Estimated Cost</label>--}}
+{{--                        <input type="number" step="0.01" wire:model="estimated_cost"--}}
+{{--                               class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>--}}
+{{--                        @error('estimated_cost') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror--}}
+{{--                    </div>--}}
                 </div>
                 <!-- Action Buttons -->
                 <div class="mt-6 flex justify-end space-x-2">

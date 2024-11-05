@@ -2,7 +2,7 @@
     <div class="flex justify-end">
         <div class="relative ml-2">
             <button @click="indirectOpen = true"
-                    class="bg-blue-500 text-white text-xs px-4 py-2 rounded shadow-md hover:bg-blue-600 focus:outline-none">
+                    class="bg-green-500 text-white text-xs px-4 py-2 rounded shadow-md hover:bg-blue-600 focus:outline-none">
                 Add Indirect Cost
             </button>
         </div>

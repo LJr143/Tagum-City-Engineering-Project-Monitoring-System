@@ -55,15 +55,15 @@
                     </div>
                 </div>
 
-                <div class="ml-8 flex justify-between items-center">
+                <div class=" flex justify-between items-center">
                     <h2 class="text-m font-semibold mb-2 text-green-500">{{ $project->title }}</h2>
                     <span class="text-xs text-green-500 bg-green-100 px-2 py-1 rounded">{{ $project->status }}</span>
                 </div>
-                <p class="text-xs ml-8"><span
+                <p class="text-xs"><span
                         class="font-bold">Address : </span> {{ $project->baranggay }} {{$project->street}}</p>
-                <p class="ml-8 text-xs font-bold">Date created :<span
+                <p class="text-xs font-bold">Date created :<span
                         class="ml-2 text-black font-normal">{{ $project->created_at }}</span></p>
-                <p class="ml-8 text-xs"><span
+                <p class="text-xs"><span
                         class="font-bold">Project Incharge:</span> {{ $project->projectIncharge->first_name }} {{ $project->projectIncharge->last_name }}
                 </p>
                 {{--                <p class="ml-8 text-xs mt-2 font-bold">Project Cost Details : </p>--}}
@@ -71,7 +71,7 @@
                 {{--                <p class=" ml-10 text-xs mt-2 font-bold">Total Material Cost : </p>--}}
                 {{--                <p class=" ml-10 text-xs mt-2 font-bold">Total Labor Cost : </p>--}}
 
-                <div class="ml-8 mt-7 mb-10">
+                <div class="mt-7 mb-10">
                     <h2 class="text-sm font-semibold mb-2">Description</h2>
                     <p class="text-xs">{{ $project->description }}</p>
                 </div>

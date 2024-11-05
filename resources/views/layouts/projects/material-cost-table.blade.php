@@ -39,9 +39,6 @@
                 <livewire:material-cost-table :pow_id="$pow->id" />
 
 
-
-
-
                 <div>
                     <div class="sm:hidden">
                         <label for="tabs" class="sr-only">Select a tab</label>
