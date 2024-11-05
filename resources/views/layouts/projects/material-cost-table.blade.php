@@ -9,14 +9,20 @@
     </x-slot>
 
     <x-slot name="main">
-        <div class="container mx-auto p-2">
-            <div class="container mx-auto p-2">
-                <!-- Project Header -->
-                <div class="flex flex-col items-end space-y-2 w-full">
-                    <div class="flex space-x-2">
+        <div class="container mx-auto p-6">
 
-                        @if (auth()->user()->isAdmin())
-                        <button onclick="openDeleteModal()" class="bg-red-500 text-white text-xs px-4 py-2 rounded shadow-md hover:bg-red-600 focus:outline-none flex items-center space-x-2">
+                <!-- Project Header -->
+                <div class="flex  justify-between items-center mb-6">
+                    <div class="mb-4 md:mb-0">
+                        <h3 class="text-base font-semibold leading-6 text-gray-900">POW {{ $index }}</h3>
+                        <span class="inline-block  bg-green-600 text-white px-3 py-1 rounded text-xs  ">
+                            Ref: #{{ $pow->reference_number }}
+                        </span>
+
+                    </div>
+
+                    @if (auth()->user()->isAdmin())
+                        <button onclick="openDeleteModal()" class="bg-red-500 text-white text-[10px] sm:text-xs px-2 sm:px-4 py-1 sm:py-2 rounded shadow-md hover:bg-red-600 focus:outline-none flex items-center space-x-2">
                             <span>Delete</span>
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M10 10V16" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -26,20 +32,15 @@
                                 <path d="M15 6V5C15 3.89543 14.1046 3 13 3H11C9.89543 3 9 3.89543 9 5V6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </button>
-                        @endif
-
-                    </div>
+                    @endif
                 </div>
 
 
-                <div>
-                            <span class="bg-green-600 text-white px-3 py-1 rounded text-xs ">
-                                Ref: #{{ $pow->reference_number }}
-                            </span>
-
-                    <h3 class="text-base pb-3 font-semibold leading-6 text-gray-900 mt-3 mb-5">POW {{ $index }}</h3>
-                </div>
                 <livewire:material-cost-table :pow_id="$pow->id" />
+
+
+
+
 
                 <div>
                     <div class="sm:hidden">
@@ -103,7 +104,7 @@
                             </div>
                         </div>
                     </div>
-                    <livewire:progress-information :pow_id="$pow->id"/>
+
                 </div>
 
                 <!-- Modal for Edit Item -->
@@ -181,7 +182,7 @@
                 </div>
 
             </div>
-        </div>
+
     </x-slot>
     <script>
         // Tab Change Function

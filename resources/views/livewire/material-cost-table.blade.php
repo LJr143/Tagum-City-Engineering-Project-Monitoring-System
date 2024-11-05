@@ -1,4 +1,4 @@
-<div class="flex w-full mb-4">
+<div >
     <style>
         /* Styles remain the same */
         .modal {
@@ -33,25 +33,19 @@
 
     {{-- Modal Warning --}}
     @if ($totalMaterialCost == 0)
-        <div id="warningModal"
-             class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-modal show z-50">
-            <div class="modal-content bg-white rounded-lg shadow-lg p-6 w-1/3">
+        <div id="warningModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-modal z-50">
+            <div class="modal-content bg-white rounded-lg shadow-lg p-6 w-full max-w-md mx-4 sm:mx-6 md:mx-8 lg:mx-10 xl:mx-12">
                 <div class="flex items-center mb-2">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"
-                         class="mr-2">
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                              d="M8.4845 2.49512C9.15808 1.32845 10.842 1.32845 11.5156 2.49512L17.7943 13.3701C18.4678 14.5368 17.6259 15.9951 16.2787 15.9951H3.72136C2.37421 15.9951 1.53224 14.5368 2.20582 13.3701L8.4845 2.49512ZM10 5.00012C10.4142 5.00012 10.75 5.33591 10.75 5.75012V9.25012C10.75 9.66434 10.4142 10.0001 10 10.0001C9.58579 10.0001 9.25 9.66434 9.25 9.25012L9.25 5.75012C9.25 5.33591 9.58579 5.00012 10 5.00012ZM10 14.0001C10.5523 14.0001 11 13.5524 11 13.0001C11 12.4478 10.5523 12.0001 10 12.0001C9.44772 12.0001 9 12.4478 9 13.0001C9 13.5524 9.44772 14.0001 10 14.0001Z"
-                              fill="#CA383A"/>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8.4845 2.49512C9.15808 1.32845 10.842 1.32845 11.5156 2.49512L17.7943 13.3701C18.4678 14.5368 17.6259 15.9951 16.2787 15.9951H3.72136C2.37421 15.9951 1.53224 14.5368 2.20582 13.3701L8.4845 2.49512ZM10 5.00012C10.4142 5.00012 10.75 5.33591 10.75 5.75012V9.25012C10.75 9.66434 10.4142 10.0001 10 10.0001C9.58579 10.0001 9.25 9.66434 9.25 9.25012L9.25 5.75012C9.25 5.33591 9.58579 5.00012 10 5.00012ZM10 14.0001C10.5523 14.0001 11 13.5524 11 13.0001C11 12.4478 10.5523 12.0001 10 12.0001C9.44772 12.0001 9 12.4478 9 13.0001C9 13.5524 9.44772 14.0001 10 14.0001Z" fill="#CA383A"/>
                     </svg>
                     <h2 class="text-sm font-semibold text-red-500">Warning!</h2>
                 </div>
                 <p class="text-xs mb-4">Please add the Information of Materials for monitoring and updating.</p>
                 <div class="flex justify-end">
-                    <button id="delete-cancel-button" onclick="closeModal()"
-                            class="bg-white border border-gray-300 text-gray-700 rounded-md text-xs px-4 py-2 hover:bg-gray-400">
+                    <button id="delete-cancel-button" onclick="closeModal()" class="bg-white border border-gray-300 text-gray-700 rounded-md text-xs px-4 py-2 hover:bg-gray-200">
                         Okay
                     </button>
-
                 </div>
             </div>
         </div>
@@ -59,84 +53,199 @@
 
 
 
-
-
-    <div class="cost-details text-[12px] w-1/2">
-        <p>Total Material Cost: <strong>Php{{ number_format($pow->total_material_cost, 2) }}</strong></p>
-        <p>Total Labor Cost: <strong>Php {{number_format($pow->total_labor_cost, 2)}}</strong></p>
-        <p>Total Indirect Cost: <strong>Php {{number_format($totalIndirectCost, 2)}}</strong></p>
-        <p>Total Project Spent Cost: <strong>Php {{ number_format($totalProjectSpentCost, 2) }}</strong></p>
-
-{{--        <div class="status-indicator text-[12px]">--}}
-{{--            @if ($isOutOfBudget)--}}
-{{--                <p>Project Status: <span class="out-of-budget">Out of Budget</span></p>--}}
-{{--            @elseif ($progressPercentage == 100)--}}
-{{--                <p>Project Status: <span class="completed">Completed</span></p>--}}
-{{--            @elseif ($progressPercentage < 50 && $progressPercentage != 0)--}}
-{{--                <p>Project Status: <span class="in-progress">In Progress</span></p>--}}
-{{--            @else--}}
-{{--                <p>Project Status: <span class="not-started">Not Started</span></p>--}}
-{{--            @endif--}}
-{{--        </div>--}}
-    </div>
-    <div class="progress-bar-container text-[12px] w-1/2 mt-[-10px]">
-
-        <div class="project-progress-container">
-            <label>Overall Project Progress Actual Progress: {{ number_format($overallProgress, 2) }}%</label>
-
-            <div class="progress-bar" style="height: 20px; background-color: #e0e0e0; position: relative;">
-                @foreach($projectConfigurations as $config)
-                    <div
-                        class="deadline-marker"
-                        style="
-                position: absolute;
-                left: {{ $config->percentage }}%;
-                top: -10px;
-                width: 2px;
-                height: 30px;
-                background-color: #1cf604;
-                cursor: pointer;
-            ">
-            <span class="tooltip text-[6px]">
-                {{ $config->progress_date }} - {{ $config->percentage }}%
-            </span>
+    <div class="bg-white p-4 rounded shadow mb-5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="flex flex-col sm:flex-row items-center">
+                <div class="relative w-20 h-20 mb-4 sm:mb-0 sm:mr-4">
+                    <!-- SVG Progress Circle -->
+                    <svg class="absolute top-0 left-0 w-full h-full" viewBox="0 0 36 36">
+                        <!-- Background Circle (Gray) -->
+                        <path class="text-gray-200" d="M18 2.0845
+                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                              fill="none" stroke-width="4" stroke="currentColor"></path>
+                        <!-- Foreground Circle (Progress Bar) -->
+                        <path id="circular-progress-2" class="text-yellow-500" d="M18 2.0845
+                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                              fill="none" stroke-width="4" stroke-dasharray="100, 100"
+                              stroke-dashoffset="{{ 100 - min(max($usedPercentage, 0), 100) }}" stroke="currentColor"></path>
+                    </svg>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <span class="text-xs font-semibold text-gray-800">{{number_format($usedPercentage,2)}}%</span>
                     </div>
-                @endforeach
+                </div>
+                <div class="text-center sm:text-left">
+                    <p class="text-[10px] text-gray-500">Total Material Cost</p>
+                    <p class="text-[10px] font-bold text-gray-500 mb-2">Php {{ number_format($pow->total_material_cost, 2) }}</p>
 
-                <div
-                    class="actual-progress"
-                    style="
-            width: {{ $overallProgress }}%;
-            background-color: #5cb85c;
-            height: 100%;
-            position: absolute;
-            left: 0;
-        ">
+                    <p class="text-[10px] text-gray-500">Project Progress Materials </p>
+                    <p class="text-[10px] text-gray-500">Used Amount</p>
+                    <p class="text-[10px] font-bold text-gray-500 ">{{ number_format($totalMaterialCost - $remainingMaterialCost, 2) }}</p>
+                    <div class="flex items-center w-full mb-3">
+                        <div class=" progress-bar w-full bg-gray-200 h-2 rounded" style="height: 8px">
+                            <div class="target-progress bg-green-500 h-2 rounded" style="width: {{$usedPercentage}}%;"></div>
+                        </div>
+                        <!-- <span class="text-green-500 font-semibold ml-4">{{$usedPercentage}}%</span> -->
+                    </div>
+
+
+                    <p class="text-[10px] text-gray-500">Material Used Percentage</p>
+                    <p class="text-[10px] font-bold text-gray-500 mb-1">{{number_format($usedPercentage,2)}}%</p>
+                </div>
+
+
+            </div>
+            <div class="flex flex-col sm:flex-row items-center">
+                <div class="relative w-20 h-20 mb-4 sm:mb-0 sm:mr-4">
+                    <!-- SVG Progress Circle -->
+                    <svg class="absolute top-0 left-0 w-full h-full" viewBox="0 0 36 36">
+                        <!-- Background Circle (Gray) -->
+                        <path class="text-gray-200" d="M18 2.0845
+                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                              fill="none" stroke-width="4" stroke="currentColor"></path>
+                        <!-- Foreground Circle (Progress Bar) -->
+                        <path id="circular-progress-3" class="text-purple-500" d="M18 2.0845
+                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                              fill="none" stroke-width="4" stroke-dasharray="{{number_format($usedLaborCost, 2)}}, 100" stroke="currentColor"></path>
+                    </svg>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <span class="text-xs font-semibold text-gray-800">{{number_format($usedLaborCost, 2)}}%</span>
+                    </div>
+                </div>
+                <div class="text-center sm:text-left">
+                    <p class="text-[10px] text-gray-500">Total Labor Cost</p>
+                    <p class="text-[10px] font-bold text-gray-500 mb-2">Php {{number_format($pow->total_labor_cost, 2)}}</p>
+
+                    <p class="text-[10px] text-gray-500">Project Progress Labor </p>
+                    <p class="text-[10px] text-gray-500">Used Amount</p>
+                    <p class="text-[10px] font-bold text-gray-500">{{ number_format($totalLaborCost - $remainingLaborCost, 2) }}</p>
+                    <div class="flex items-center w-full mb-3">
+                        <div class=" progress-bar w-full bg-gray-200 h-2 rounded" style="height: 8px">
+                            <div class="target-progress bg-green-500 h-2 rounded" style="width: {{ $usedLaborCost }}%;"></div>
+                        </div>
+                        <!-- <span class="text-green-500 font-semibold ml-4">{{ $usedLaborCost }}%</span> -->
+                    </div>
+
+
+                        <p class="text-[10px] text-gray-500">Labor Used Percentage</p>
+                    <p class="text-[10px] font-bold text-gray-500 mb-1">{{number_format($usedLaborCost, 2)}}%</p>
+
+                </div>
+            </div>
+
+
+            <div class="flex flex-col sm:flex-row items-center">
+                <div class="relative w-20 h-20 mb-4 sm:mb-0 sm:mr-4">
+                    <!-- SVG Progress Circle -->
+                    <svg class="absolute top-0 left-0 w-full h-full" viewBox="0 0 36 36">
+                        <!-- Background Circle (Gray) -->
+                        <path class="text-gray-200" d="M18 2.0845
+                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                              fill="none" stroke-width="4" stroke="currentColor"></path>
+                        <!-- Foreground Circle (Progress Bar) -->
+                        <path id="circular-progress-4" class="text-teal-500" d="M18 2.0845
+                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                              fill="none" stroke-width="4" stroke-dasharray="{{number_format($usedIndirectCost,2)}}, 100" stroke="currentColor"></path>
+                    </svg>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <span class="text-xs font-semibold text-gray-800">{{number_format($usedIndirectCost,2)}}%</span>
+                    </div>
+                </div>
+
+                <div class="text-center sm:text-left">
+                    <p class="text-[10px] text-gray-500">Total Indirect Cost</p>
+                    <p class="text-[10px] font-bold text-gray-500 mb-2">Php {{number_format($totalIndirectCost, 2)}}</p>
+
+                    <p class="text-[10px] text-gray-500">Project Progress Indirect </p>
+                    <p class="text-[10px] text-gray-500">Used Amount</p>
+                    <p class="text-[10px] font-bold text-gray-500">Php {{ number_format($totalIndirectCost - $remainingIndirectCost, 2) }}</p>
+                    <div class="flex items-center w-full mb-3">
+                        <div class=" progress-bar w-full bg-gray-200 h-2 rounded" style="height: 8px">
+                            <div class="target-progress bg-green-500 h-2 rounded" style="width: {{ $usedIndirectCost }}%;"></div>
+                        </div>
+                        <!-- <span class="text-green-500 font-semibold ml-4">{{ $usedIndirectCost }}%</span> -->
+                    </div>
+
+                    <p class="text-[10px] text-gray-500">Indirect Used Percentage</p>
+                    <p class="text-[10px] font-bold text-gray-500 mb-1">{{number_format($usedIndirectCost,2)}}%</p>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center">
+                <div class="relative w-20 h-20 mb-4 sm:mb-0 sm:mr-4">
+                    <!-- SVG Progress Circle -->
+                    <svg class="absolute top-0 left-0 w-full h-full" viewBox="0 0 36 36">
+                        <!-- Background Circle (Gray) -->
+                        <path class="text-gray-200" d="M18 2.0845
+                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                              fill="none" stroke-width="4" stroke="currentColor"></path>
+                        <!-- Foreground Circle (Progress Bar) -->
+                        <path id="circular-progress-1" class="text-pink-500" d="M18 2.0845
+                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                              fill="none" stroke-width="4" stroke-dasharray="81, 100" stroke="currentColor"></path>
+                    </svg>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <span class="text-xs font-semibold text-gray-800">81%</span>
+                    </div>
+                </div>
+                <div class="text-center sm:text-left">
+                    <p class="text-[10px] text-gray-500">Other Direct Cost</p>
+                    <p class="text-[10px] font-bold text-gray-500 mb-2">Php 22,222.00</p>
+                    <p class="text-[9px] text-gray-500">Project Progress Other Direct </p>
+                    <p class="text-[10px] text-gray-500">Used Amount</p>
+                    <p class="text-[10px] font-bold text-gray-500 mb-2">Php 22,222.00</p>
+                    <p class="text-[9px] text-gray-500">Other Direct Used Percentage</p>
+                    <p class="text-[10px] font-bold text-gray-500 mb-1">81%</p>
                 </div>
             </div>
         </div>
-
-
-        <label class="mt-0">
-            Project Progress Materials:
-            Used Amount Php. {{ number_format($totalMaterialCost - $remainingMaterialCost, 2) }}
-        </label>
-        <div class="progress-bar" style="height: 8px">
-            <div class="target-progress" style="width: {{$usedPercentage}}%"></div>
-        </div>
-        <label>Project Progress Labor: Used Amount Php. {{ number_format($totalLaborCost - $remainingLaborCost, 2) }}</label>
-        <div class="progress-bar" style="height: 8px">
-            <div class="target-progress" style="width: {{ $usedLaborCost }}%"></div>
-            <div class="progress" style="width: 0px"></div>
-        </div>
-        <label>Project Progress Indirect: Used Amount Php. {{ number_format($totalIndirectCost - $remainingIndirectCost, 2) }}</label>
-        <div class="progress-bar" style="height: 8px">
-            <div class="target-progress" style="width: {{ $usedIndirectCost }}"></div>
-            <div class="progress" style="width: 0px"></div>
-        </div>
-
-
     </div>
+
+
+
+    <div class="bg-white p-4 rounded shadow mb-3">
+        <div class="w-full progress-bar-container text-[12px]">
+            <div class="flex flex-col justify-between items-start project-progress-container ">
+
+                <span class="text-gray-700 text-[12px] ">Total Project Spent Cost: <span class="font-bold"> Php {{ number_format($totalProjectSpentCost, 2) }}</span></span>
+                <span class="text-gray-700 text-[12px] ">Overall Project Progress Actual Progress: <span class="font-bold"> {{ number_format($overallProgress, 2) }}%</span></span>
+                <div class="progress-bar" style="height: 15px; background-color: #E0E0E0; position: relative;">
+                    @foreach($projectConfigurations as $config)
+                        <div
+                            class="deadline-marker z-40 bg-red-600"
+                            style="
+                        position: absolute;
+                        left: {{ $config->percentage }}%;
+                        top: -7px;
+                        width: 2px;
+                        height: 30px;
+                        cursor: pointer; ">
+                        <span class="tooltip text-[8px] inline-block whitespace-nowrap">
+                            {{ $config->progress_date }} - {{ $config->percentage }}%
+                        </span>
+                        </div>
+                    @endforeach
+
+                    <div
+                        class="actual-progress bg-yellow-200"
+                        style="
+                    width: {{ $overallProgress }}%;
+                    height: 100%;
+                    position: absolute;
+                    left: 0;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
     <script>
