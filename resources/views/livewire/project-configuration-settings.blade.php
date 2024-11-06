@@ -2,7 +2,7 @@
     <div class="flex justify-end">
         <div class="relative ml-2 w-full">
             <button @click="open = true"
-                    class="flex bg-green-500 text-white text-xs px-6 py-2 rounded shadow-md hover:bg-green-600 focus:outline-none">
+                    class="flex bg-green-500 text-white text-xs px-4 py-2 rounded shadow-md hover:bg-green-600 focus:outline-none w-full sm:w-auto">
                 Set Up Project Progress Indicator
 
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -14,7 +14,6 @@
                     <path d="M10 4H4V20H20V14" stroke="white" stroke-width="1.5" stroke-linecap="round"
                           stroke-linejoin="round"/>
                 </svg>
-
             </button>
         </div>
     </div>
@@ -39,7 +38,7 @@
             x-transition:leave="transition ease-in duration-200"
             x-transition:leave-start="opacity-100 transform scale-100"
             x-transition:leave-end="opacity-0 transform scale-90"
-            class="bg-white w-full max-w-[900px] p-6 rounded-lg relative"
+            class="bg-white w-full max-w-[90%] sm:max-w-[900px] p-4 sm:p-6 rounded-lg relative"
         >
             <button @click="open = false" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
@@ -49,7 +48,7 @@
             </button>
 
             <h2 class="text-lg font-bold mb-4">Project Configuration Settings</h2>
-            <form wire:submit.prevent="saveProgress" class="grid grid-cols-2 gap-4">
+            <form wire:submit.prevent="saveProgress" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <!-- Column 1 -->
 
                 <!-- Custom Date Section -->
@@ -59,8 +58,8 @@
                     </button>
 
                     <div x-show="showCustomDate" class="mt-2">
-                        <input type="date" wire:model="customDate" class="text-xs border border-gray-400 rounded px-2 py-1 mr-2">
-                        <input type="number" wire:model="customPercentage" placeholder="Set Percentage" min="0" max="100" class="text-xs border border-gray-400 rounded px-2 py-1 w-24">
+                        <input type="date" wire:model="customDate" class="text-xs border border-gray-400 rounded px-2 py-1 mr-2 w-full sm:w-auto">
+                        <input type="number" wire:model="customPercentage" placeholder="Set Percentage" min="0" max="100" class="text-xs border border-gray-400 rounded px-2 py-1 w-full sm:w-24 mt-2 sm:mt-0">
                         <button type="button" wire:click="addCustomProgress" class="text-green-500 text-xs hover:underline mt-2">
                             Add
                         </button>
@@ -84,7 +83,7 @@
                                     <td class="text-xs px-2 py-1 border-b">{{ $date }}</td>
                                     <td class="text-xs px-2 py-1 border-b">
                                         <input type="number" wire:model.lazy="progress.{{ $loop->index }}.percentage"
-                                               placeholder="Set Percentage" min="0" max="100" class="text-xs border border-gray-400 rounded px-2 py-1 w-24">
+                                               placeholder="Set Percentage" min="0" max="100" class="text-xs border border-gray-400 rounded px-2 py-1 w-full sm:w-24">
                                         <input type="hidden" wire:model="progress.{{ $loop->index }}.date" value="{{ $date }}">
                                     </td>
                                 </tr>
@@ -117,9 +116,6 @@
                         <input type="date" wire:model="newEndDate" class="text-xs border border-gray-400 rounded px-2 py-1 mr-2 w-full">
                         <label class="block text-xs font-medium mt-2">Upload Extension Order (PDF):</label>
                         <input type="file" wire:model="extensionOrderFile" accept="application/pdf" class="text-xs border border-gray-400 rounded px-2 py-1 mr-2 w-full">
-{{--                        <button type="button" wire:click="extendProjectEndDate" class="text-green-500 text-xs hover:underline mt-2">--}}
-{{--                            Save New End Date--}}
-{{--                        </button>--}}
                     </div>
                 </div>
 
@@ -143,13 +139,13 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="mt-6 flex justify-end space-x-2 justify-content-end">
+                <div class="mt-6 flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-2">
                     <button type="button" @click="open = false"
-                            class="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400 text-xs w-[70px] h-[35px]">
+                            class="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400 text-xs w-full sm:w-[70px] h-[35px]">
                         Cancel
                     </button>
                     <button type="submit"
-                            class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 text-xs  w-[150px] h-[35px]">
+                            class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 text-xs w-full sm:w-[150px] h-[35px]">
                         Save Changes
                     </button>
                 </div>
@@ -159,6 +155,7 @@
 
     </div>
 </div>
+
 
 @script
 <script>
