@@ -39,7 +39,7 @@
             x-transition:leave="transition ease-in duration-200"
             x-transition:leave-start="opacity-100 transform scale-100"
             x-transition:leave-end="opacity-0 transform scale-90"
-            class="bg-white w-full max-w-[1200px] p-6 rounded-lg relative"
+            class="bg-white w-full max-w-[900px] p-6 rounded-lg relative"
         >
             <button @click="open = false" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
@@ -108,7 +108,7 @@
 
                 <!-- Extend Project Section -->
                 <div class="border-2 p-2 rounded">
-                    <button type="button" @click="extendProject = !extendProject" class="text-blue-500 text-xs font-medium hover:underline">
+                    <button type="button" @click="extendProject = !extendProject" class="text-red-500 text-xs font-medium hover:underline">
                         Extend Project
                     </button>
 
@@ -117,15 +117,15 @@
                         <input type="date" wire:model="newEndDate" class="text-xs border border-gray-400 rounded px-2 py-1 mr-2 w-full">
                         <label class="block text-xs font-medium mt-2">Upload Extension Order (PDF):</label>
                         <input type="file" wire:model="extensionOrderFile" accept="application/pdf" class="text-xs border border-gray-400 rounded px-2 py-1 mr-2 w-full">
-                        <button type="button" wire:click="extendProjectEndDate" class="text-green-500 text-xs hover:underline mt-2">
-                            Save New End Date
-                        </button>
+{{--                        <button type="button" wire:click="extendProjectEndDate" class="text-green-500 text-xs hover:underline mt-2">--}}
+{{--                            Save New End Date--}}
+{{--                        </button>--}}
                     </div>
                 </div>
 
                 <!-- Past Deadlines Table -->
                 <div class="border-2 p-2 rounded overflow-y-auto" style="max-height: 200px;">
-                    <h3 class="font-bold text-sm">Past Deadlines</h3>
+                    <h3 class="font-bold text-sm">Project Extension History</h3>
                     <table class="min-w-full border-collapse mt-2">
                         <thead>
                         <tr class="bg-gray-100">
@@ -143,17 +143,17 @@
                         </tbody>
                     </table>
                 </div>
-                    <div class="mt-6 flex justify-end space-x-2">
-                        <button type="button" @click="open = false"
-                                class="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400 text-xs">
-                            Cancel
-                        </button>
-                        <button type="submit"
-                                class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 text-xs">
-                            Save Progress
-                        </button>
-                    </div>
-                </form>
+                <div class="mt-6 flex justify-end space-x-2 justify-content-end">
+                    <button type="button" @click="open = false"
+                            class="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400 text-xs w-[70px] h-[35px]">
+                        Cancel
+                    </button>
+                    <button type="submit"
+                            class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 text-xs  w-[150px] h-[35px]">
+                        Save Changes
+                    </button>
+                </div>
+            </form>
 
         </div>
 
