@@ -24,11 +24,15 @@ class MaterialCostTable extends ProgressInformation
     public $remainingMaterialCost = 0;
     public $remainingLaborCost = 0;
     public $remainingIndirectCost = 0;
+    public $remainingDirectCost = 0;
 
     public $usedLaborCost = 0;
     public $usedIndirectCost = 0;
+    public $usedDirectCost = 0;
     public $usedPercentage = 0;
     public $totalIndirectCost = 0;
+
+    public $totalDirectCost = 0;
 
     public $overallProgress = 0;
 
@@ -47,13 +51,16 @@ class MaterialCostTable extends ProgressInformation
             'usedPercentage' => $this->usedPercentage,
             'remainingMaterialCost' => $this->remainingMaterialCost,
             'totalIndirectCost' => $this->totalIndirectCost,
+            'totalDirectCost' => $this->totalDirectCost,
             'remainingLaborCost' => $this->remainingLaborCost,
             'usedLaborCost' => $this->usedLaborCost,
             'remainingIndirectCost' => $this->remainingIndirectCost,
+            'remainingDirectCost' => $this->remainingDirectCost,
             'usedIndirectCost' => $this->usedIndirectCost,
+            'usedDirectCost' => $this->usedDirectCost,
             'overallProgress' => $this->overallProgress,
             'projectConfigurations' => $this->projectConfigurations,
-            'totalProjectSpentCost' => $this->materialSpentCost + $this->laborSpentCost + $this->indirectSpentCost,
+            'totalProjectSpentCost' => $this->materialSpentCost + $this->laborSpentCost + $this->indirectSpentCost + $this->directSpentCost,
         ]);
     }
 }

@@ -9,14 +9,20 @@
     </x-slot>
 
     <x-slot name="main">
-        <div class="container mx-auto p-2">
-            <div class="container mx-auto p-2">
-                <!-- Project Header -->
-                <div class="flex flex-col items-end space-y-2 w-full">
-                    <div class="flex space-x-2">
+        <div class="container mx-auto p-6">
 
-                        @if (auth()->user()->isAdmin())
-                        <button onclick="openDeleteModal()" class="bg-red-500 text-white text-xs px-4 py-2 rounded shadow-md hover:bg-red-600 focus:outline-none flex items-center space-x-2">
+                <!-- Project Header -->
+                <div class="flex  justify-between items-center mb-6">
+                    <div class="mb-4 md:mb-0">
+                        <h3 class="text-base font-semibold leading-6 text-gray-900 mb-2">Program of Work {{ $index }}</h3>
+                        <span class="inline-block  bg-green-600 text-white px-3 py-1 rounded text-xs  ">
+                            Ref: #{{ $pow->reference_number }}
+                        </span>
+
+                    </div>
+
+                    @if (auth()->user()->isAdmin())
+                        <button onclick="openDeleteModal()" class="bg-red-500 text-white text-[10px] sm:text-xs px-2 sm:px-4 py-1 sm:py-2 rounded shadow-md hover:bg-red-600 focus:outline-none flex items-center space-x-2">
                             <span>Delete</span>
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M10 10V16" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -26,20 +32,12 @@
                                 <path d="M15 6V5C15 3.89543 14.1046 3 13 3H11C9.89543 3 9 3.89543 9 5V6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </button>
-                        @endif
-
-                    </div>
+                    @endif
                 </div>
 
 
-                <div>
-                            <span class="bg-green-600 text-white px-3 py-1 rounded text-xs ">
-                                Ref: #{{ $pow->reference_number }}
-                            </span>
-
-                    <h3 class="text-base pb-3 font-semibold leading-6 text-gray-900 mt-3 mb-5">POW {{ $index }}</h3>
-                </div>
                 <livewire:material-cost-table :pow_id="$pow->id" />
+
 
                 <div>
                     <div class="sm:hidden">
@@ -48,6 +46,7 @@
                             <option value="materials">Materials</option>
                             <option value="labor-cost">Labor Cost</option>
                             <option value="indirect-cost">Indirect Cost</option>
+                            <option value="other-direct-cost">Other Direct Cost</option>
                         </select>
                     </div>
                     <div class="hidden sm:block mb-4">
@@ -56,6 +55,7 @@
                                 <a id="materials-tab" href="#" onclick="changeTabTo('materials')" class="border-green-600 text-green-600 whitespace-nowrap border-b-2 pb-1 px-1 text-xs font-medium" aria-current="page">Materials</a>
                                 <a id="labor-cost-tab" href="#" onclick="changeTabTo('labor-cost')" class="text-gray-500 hover:border-green-600 hover:text-green-600 whitespace-nowrap border-b-2 pb-1 px-1 text-xs font-medium">Labor Cost</a>
                                 <a id="indirect-cost-tab" href="#" onclick="changeTabTo('indirect-cost')" class="text-gray-500 hover:border-green-600 hover:text-green-600 whitespace-nowrap border-b-2 pb-1 px-1 text-xs font-medium">Indirect Cost</a>
+                                <a id="other-direct-cost-tab" href="#" onclick="changeTabTo('other-direct-cost')" class="text-gray-500 hover:border-green-600 hover:text-green-600 whitespace-nowrap border-b-2 pb-1 px-1 text-xs font-medium">Other Direct Cost</a>
                             </nav>
                         </div>
                     </div>
@@ -103,7 +103,17 @@
                             </div>
                         </div>
                     </div>
-                    <livewire:progress-information :pow_id="$pow->id"/>
+
+                    <div id="other-direct-cost" class="hidden w-full">
+                        <div class="bg-white shadow-md rounded-lg p-6">
+                            <h3 class="text-sm font-semibold mb-2 text-center"> Other Direct Cost</h3>
+                            <div class="mb-2"><livewire:add-manual-direct-cost :pow_id="$pow->id"/></div>
+                            <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
+                                <livewire:other-direct-cost-table :pow_id="$pow->id" />
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
                 <!-- Modal for Edit Item -->
@@ -181,7 +191,7 @@
                 </div>
 
             </div>
-        </div>
+
     </x-slot>
     <script>
         // Tab Change Function
@@ -194,6 +204,7 @@
             document.getElementById('materials').style.display = tab === 'materials' ? 'block' : 'none';
             document.getElementById('labor-cost').style.display = tab === 'labor-cost' ? 'block' : 'none';
             document.getElementById('indirect-cost').style.display = tab === 'indirect-cost' ? 'block' : 'none';
+            document.getElementById('other-direct-cost').style.display = tab === 'other-direct-cost' ? 'block' : 'none';
 
             // Highlight active tab
             document.getElementById('materials-tab').classList.toggle('border-green-600', tab === 'materials');
@@ -202,6 +213,8 @@
             document.getElementById('labor-cost-tab').classList.toggle('text-green-600', tab === 'labor-cost');
             document.getElementById('indirect-cost-tab').classList.toggle('border-green-600', tab === 'indirect-cost');
             document.getElementById('indirect-cost-tab').classList.toggle('text-green-600', tab === 'indirect-cost');
+            document.getElementById('other-direct-cost-tab').classList.toggle('border-green-600', tab === 'other-direct-cost');
+            document.getElementById('other-direct-cost-tab').classList.toggle('text-green-600', tab === 'other-direct-cost');
         }
 
         // Modal Management Functions

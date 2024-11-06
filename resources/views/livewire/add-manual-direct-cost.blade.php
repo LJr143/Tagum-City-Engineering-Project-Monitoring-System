@@ -1,16 +1,16 @@
-<div x-data="{ indirectOpen: @entangle('indirectOpen') }" x-cloak @cost-added.window="indirectOpen = false">
+<div x-data="{ directOpen: @entangle('directOpen') }" x-cloak @cost-added.window="directOpen = false">
     <div class="flex justify-end">
         <div class="relative ml-2">
-            <button @click="indirectOpen = true"
+            <button @click="directOpen = true"
                     class="bg-green-500 text-white text-xs px-4 py-2 rounded shadow-md hover:bg-blue-600 focus:outline-none">
-                Add Indirect Cost
+                Add Direct Cost
             </button>
         </div>
     </div>
 
     <!-- Modal -->
     <div
-        x-show="indirectOpen"
+        x-show="directOpen"
         x-transition:enter="transition ease-out duration-300"
         x-transition:enter-start="opacity-0"
         x-transition:enter-end="opacity-100"
@@ -21,7 +21,7 @@
     >
         <!-- Modal Content -->
         <div
-            x-show="indirectOpen"
+            x-show="directOpen"
             x-transition:enter="transition ease-out duration-300"
             x-transition:enter-start="opacity-0 transform scale-90"
             x-transition:enter-end="opacity-100 transform scale-100"
@@ -31,27 +31,27 @@
             class="bg-white w-full max-w-[700px] p-6 rounded-lg relative"
         >
             <!-- Close Button (X) -->
-            <button @click="indirectOpen = false" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
+            <button @click="directOpen = false" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
                      stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                 </svg>
             </button>
 
-            <h2 class="text-lg font-bold mb-4">Add Indirect Costs</h2>
+            <h2 class="text-lg font-bold mb-4">Add Direct Costs</h2>
 
-            <form wire:submit.prevent="saveIndirectCosts" class="space-y-4 text-[12px]">
+            <form wire:submit.prevent="saveDirectCosts" class="space-y-4 text-[12px]">
                 <!-- Display Fields Dynamically -->
-                @foreach ($indirect_costs as $index => $cost)
+                @foreach ($direct_costs as $index => $cost)
                     <div class="flex gap-2 items-center">
-                        <input type="text" name="indirect_costs[{{ $index }}][description]"
-                               wire:model.defer="indirect_costs.{{ $index }}.description"
+                        <input type="text" name="direct_costs[{{ $index }}][description]"
+                               wire:model.defer="direct_costs.{{ $index }}.description"
                                placeholder="Description"
                                class="w-1/2 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-xs"
                                required>
 
-                        <input type="number" name="indirect_costs[{{ $index }}][amount]"
-                               wire:model.defer="indirect_costs.{{ $index }}.amount"
+                        <input type="number" name="direct_costs[{{ $index }}][amount]"
+                               wire:model.defer="direct_costs.{{ $index }}.amount"
                                placeholder="Amount"
                                class="w-1/3 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-xs"
                                required>
@@ -78,7 +78,7 @@
 
                 <!-- Action Buttons -->
                 <div class="mt-6 flex justify-end space-x-2">
-                    <button @click="indirectOpen = false" type="button"
+                    <button @click="directOpen = false" type="button"
                             class="bg-gray-300 text-gray-700 text-[12px] px-4 py-2 rounded shadow-md hover:bg-gray-400 text-xs">
                         Cancel
                     </button>

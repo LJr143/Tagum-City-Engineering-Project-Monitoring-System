@@ -18,7 +18,7 @@
     </button>
 </div>
 {{-- NAVIGATION BUTTONS --}}
-<div class="hidden w-full max-w-[240px] lg:flex flex-col justify-between pt-2 pb-10 flex-1 overflow-y-auto">
+<div class="hidden w-full max-w-[240px] lg:flex flex-col h-full justify-between pt-2 pb-10 flex-1 overflow-y-auto">
     <div class="text-sm">
         <ul class="mt-10 space-y-1 tracking-wide">
             <li x-data="{toggle: false}" @mouseenter="toggle = true"

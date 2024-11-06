@@ -23,7 +23,6 @@ class AddManualMaterial extends Component
         'unit_of_issue' => 'required|string|max:50',
         'item_description' => 'required|string|max:255',
         'estimated_unit_cost' => 'required|numeric',
-        'estimated_cost' => 'required|numeric',
     ];
     public function mount($pow_id): void
     {
@@ -40,7 +39,7 @@ class AddManualMaterial extends Component
              'unit_of_issue' => $this->unit_of_issue,
              'item_description' => $this->item_description,
              'estimated_unit_cost' => $this->estimated_unit_cost,
-             'estimated_cost' => $this->estimated_cost,
+             'estimated_cost' => $this->quantity * $this->estimated_unit_cost,
          ]);
 
         $this->reset();

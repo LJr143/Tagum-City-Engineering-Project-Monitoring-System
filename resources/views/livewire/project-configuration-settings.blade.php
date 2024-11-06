@@ -48,11 +48,11 @@
                 </svg>
             </button>
 
-            <h2 class="text-lg font-bold mb-4">Set Progress for {{ $project->title }}</h2>
+            <h2 class="text-lg font-bold mb-4">Project Configuration Settings</h2>
             <form wire:submit.prevent="saveProgress">
                 <div class="gap-2 border-2 p-2 rounded">
                     <label class="block text-xs font-medium">Available Dates (15th and 30th):</label>
-                    <div class="overflow-x-auto mt-2">
+                    <div class="overflow-x-auto overflow-y-auto mt-2" style="max-height: 200px; max-width: 500px;">
                         <table class="min-w-full border-collapse">
                             <thead>
                             <tr class="bg-gray-100">
@@ -76,16 +76,16 @@
                     </div>
                 </div>
 
-                <div class="mt-2 gap-2 border-2 p-2 rounded ">
+                <div class="mt-2 gap-2 border-2 p-2 rounded overflow-y-auto" style="max-height: 200px; max-width: 500px;">
                     <h3 class="font-bold text-sm">Saved Progress</h3>
                     <ul class="text-xs">
                         @foreach($progress as $item)
                             <li>{{ $item['date'] }}: {{ $item['percentage'] }}%</li>
                         @endforeach
                     </ul>
-
                 </div>
-                    <div x-data="{ showCustomDate: @entangle('showCustomDate') }">
+
+                <div x-data="{ showCustomDate: @entangle('showCustomDate') }">
                         <div class="mt-2 gap-2 border-2 p-2 rounded ">
                             <button type="button" @click="showCustomDate = !showCustomDate" class="ml-2 text-blue-500 text-xs font-medium hover:underline">
                                 Add Custom Date
