@@ -14,7 +14,7 @@
             </label>
         </div>
         <div class="ml-0 md:ml-4 text-center md:text-left">
-            <h1 class="text-lg font-medium">{{ $name }}</h1>
+            <h1 class="text-lg font-medium">{{ $first_name }} {{ $middle_initial }} {{ $last_name }}</h1>
             <p class="text-gray-500 text-xs">Administrator</p>
         </div>
     </div>
@@ -27,8 +27,16 @@
             </h2>
             <div class="space-y-2">
                 <div class="flex flex-row items-center">
-                    <label class="text-gray-500 text-sm w-32">Name</label>
-                    <input type="text" wire:model="name" class="text-green-600 border border-gray-300 rounded-md focus:outline-none focus:border-green-600 w-3/4 h-8 p-2 text-sm">
+                    <label class="text-gray-500 text-sm w-32">First Name</label>
+                    <input type="text" wire:model="first_name" class="text-green-600 border border-gray-300 rounded-md focus:outline-none focus:border-green-600 w-3/4 h-8 p-2 text-sm">
+                </div>
+                <div class="flex flex-row items-center">
+                    <label class="text-gray-500 text-sm w-32">Middle Name</label>
+                    <input type="text" wire:model="middle_initial" class="text-green-600 border border-gray-300 rounded-md focus:outline-none focus:border-green-600 w-3/4 h-8 p-2 text-sm">
+                </div>
+                <div class="flex flex-row items-center">
+                    <label class="text-gray-500 text-sm w-32">Last Name</label>
+                    <input type="text" wire:model="last_name" class="text-green-600 border border-gray-300 rounded-md focus:outline-none focus:border-green-600 w-3/4 h-8 p-2 text-sm">
                 </div>
                 <div class="flex flex-row items-center">
                     <label class="text-gray-500 text-sm w-32">Birthdate</label>
