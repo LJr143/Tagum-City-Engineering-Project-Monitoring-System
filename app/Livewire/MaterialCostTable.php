@@ -13,7 +13,7 @@ class MaterialCostTable extends ProgressInformation
 {
     public $pow_id;
     public $pow;
-    public $projectConfigurations = []; // Store milestones with deadlines and percentages.
+    public $projectConfigurations = [];
 
     public $totalLaborCost = 0;
     public $totalMaterialCost = 0;

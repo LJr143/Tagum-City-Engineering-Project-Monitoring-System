@@ -57,7 +57,11 @@
 
                 <div class=" flex justify-between items-center">
                     <h2 class="text-m font-semibold mb-2 text-green-500">{{ $project->title }}</h2>
-                    <span class="text-xs text-green-500 bg-green-100 px-2 py-1 rounded">{{ $project->status }}</span>
+                    <span
+                        class="text-xs text-green-500 bg-green-100 px-2 py-1 rounded {{ $project->status == 'suspended' ? 'text-red-500 bg-red-100' : '' }}">
+    {{ $project->status }}
+</span>
+
                 </div>
                 <p class="text-xs"><span
                         class="font-bold">Address : </span> {{ $project->baranggay }} {{$project->street}}</p>

@@ -61,6 +61,39 @@ class ProjectController extends Controller
             ->with('message', 'Pow deleted successfully.');
     }
 
+    public function suspend(Request $request)
+    {
+        // Validate the incoming request data
+        $request->validate([
+            'project_id' => 'required|exists:projects,id',
+        ]);
+
+        // Find the project and update its status
+        $project = Project::find($request->project_id);
+        $project->status = 'suspended';
+        $project->save();
+
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'Project has been suspended successfully.');
+    }
+
+    public function resume(Request $request)
+    {
+        // Validate the incoming request data
+        $request->validate([
+            'project_id' => 'required|exists:projects,id',
+        ]);
+
+        // Find the project and update its status
+        $project = Project::find($request->project_id);
+        $project->status = 'pending'; // or any other status you prefer for resumed projects
+        $project->save();
+
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'Project has been resumed successfully.');
+    }
+
+
 
 
 }
