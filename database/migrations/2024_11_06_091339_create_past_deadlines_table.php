@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('past_deadlines', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('project_id')->constrained('project')->onDelete('cascade');
+            $table->foreignId('project_id')->constrained('projects')->onDelete('cascade');
             $table->date('date');
             $table->string('set_by');
             $table->timestamps();
