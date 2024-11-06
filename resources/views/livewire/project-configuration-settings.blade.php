@@ -1,4 +1,4 @@
-<div x-data="{ open: false, showCustomDate: false }" x-cloak>
+<div x-data="{ open: false, showCustomDate: false, extendProject: false }" x-cloak>
     <div class="flex justify-end">
         <div class="relative ml-2 w-full">
             <button @click="open = true"
@@ -39,7 +39,7 @@
             x-transition:leave="transition ease-in duration-200"
             x-transition:leave-start="opacity-100 transform scale-100"
             x-transition:leave-end="opacity-0 transform scale-90"
-            class="bg-white w-full max-w-lg p-6 rounded-lg relative"
+            class="bg-white w-full max-w-[1200px] p-6 rounded-lg relative"
         >
             <button @click="open = false" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
@@ -100,7 +100,46 @@
                                 </button>
                             </div>
                         </div>
+                </div>
+
+                <div class="mt-4 gap-2 border-2 p-2 rounded">
+                    <button type="button" @click="extendProject = !extendProject" class="ml-2 text-blue-500 text-xs font-medium hover:underline">
+                        Extend Project
+                    </button>
+
+                    <div x-show="extendProject" class="mt-2">
+                        <label class="block text-xs font-medium">New Project End Date:</label>
+                        <input type="date" wire:model="newEndDate" class="text-xs border border-gray-400 rounded px-2 py-1 mr-2 w-full">
+
+                        <!-- PDF Upload Input -->
+                        <label class="block text-xs font-medium mt-2">Upload Extension Order (PDF):</label>
+                        <input type="file" wire:model="extensionOrderFile" accept="application/pdf" class="text-xs border border-gray-400 rounded px-2 py-1 mr-2 w-full">
+
+                        <button type="button" wire:click="extendProjectEndDate" class="text-green-500 text-xs hover:underline mt-2">
+                            Save New End Date
+                        </button>
                     </div>
+                </div>
+
+                <div class="mt-4 gap-2 border-2 p-2 rounded overflow-y-auto" style="max-height: 200px;">
+                    <h3 class="font-bold text-sm">Past Deadlines</h3>
+                    <table class="min-w-full border-collapse mt-2">
+                        <thead>
+                        <tr class="bg-gray-100">
+                            <th class="text-left text-xs font-medium px-2 py-1 border-b">Deadline Date</th>
+                            <th class="text-left text-xs font-medium px-2 py-1 border-b">Set By</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($pastDeadlines as $deadline)
+                            <tr class="hover:bg-gray-50">
+                                <td class="text-xs px-2 py-1 border-b">{{ $deadline->date }}</td>
+                                <td class="text-xs px-2 py-1 border-b">{{ $deadline->set_by }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
 
 
                     <div class="mt-6 flex justify-end space-x-2">

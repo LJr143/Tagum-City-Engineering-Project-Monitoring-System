@@ -2,19 +2,26 @@
 
 namespace App\Livewire;
 
+use App\Models\PastDeadline;
 use Livewire\Component;
 use App\Models\Project;
 use App\Models\ProjectConfiguration;
 use Carbon\Carbon;
+use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class ProjectConfigurationSettings extends Component
 {
+    use WithFileUploads;
     public $projectId;
     public $project;
     public $progress = [];
     public $customDate;
     public $customPercentage;
     public $showCustomDate = false;
+
+    public $newEndDate;
+    public $extensionOrderFile;
+    public $pastDeadlines = [];
 
 
     public function mount($projectId)
@@ -98,13 +105,32 @@ class ProjectConfigurationSettings extends Component
         $this->dispatch('progress-saved');
     }
 
-
-    public function render()
+    public function extendProjectEndDate()
     {
-        $availableDates = $this->getAvailableDates();
-        $configurations = ProjectConfiguration::where('project_id', $this->projectId)->get();
-        return view('livewire.project-configuration-settings', compact('availableDates', 'configurations'));
+        $this->validate([
+            'newEndDate' => 'required|date',
+            'extensionOrderFile' => 'required|file|mimes:pdf|max:2048', // 2MB max size
+        ]);
+
+        $project = Project::find($this->projectId);
+
+        PastDeadline::create([
+            'project_id' => $this->projectId,
+            'date' => $project->end_date,
+            'set_by' => auth()->user()->id
+        ]);
+
+        $filePath = $this->extensionOrderFile->storeAs('extensions', 'extension_order_' . $this->projectId . '_' . time() . '.pdf');
+
+        $project->update(['end_date' => $this->newEndDate]);
+
+        $this->reset('newEndDate', 'extensionOrderFile');
+
+        $this->pastDeadlines = PastDeadline::where('project_id', $this->projectId)->get();
+
+        $this->dispatch('project-extended', ['filePath' => $filePath]);
     }
+
 
     private function getAvailableDates()
     {
@@ -121,5 +147,13 @@ class ProjectConfigurationSettings extends Component
         }
 
         return $dates;
+    }
+
+
+    public function render()
+    {
+        $availableDates = $this->getAvailableDates();
+        $configurations = ProjectConfiguration::where('project_id', $this->projectId)->get();
+        return view('livewire.project-configuration-settings', compact('availableDates', 'configurations'));
     }
 }
