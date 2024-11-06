@@ -80,7 +80,7 @@
             </div>
         </div>
 
-        <!-- Modal for Delete Confirmation -->
+        <!-- Modal For Delete Confirmation -->
         <div id="delete-modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-50">
             <div class="bg-white rounded-lg shadow-lg p-4 sm:p-6 w-full max-w-xs sm:max-w-md md:w-1/3 mx-2">
                 <div class="flex items-center mb-2">

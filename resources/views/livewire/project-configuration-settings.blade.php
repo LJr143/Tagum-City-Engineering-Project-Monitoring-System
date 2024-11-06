@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modals -->
     <div
         x-show="open"
         x-transition:enter="transition ease-out duration-300"
