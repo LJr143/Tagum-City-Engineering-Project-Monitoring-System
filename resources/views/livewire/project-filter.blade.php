@@ -154,7 +154,8 @@
                         </div>
                     <div class="text-right ml-5 mb-4 sm:mb-0">
                         <p class="text-[10px]"><span class="font-bold mr-2">Total Project Cost: Php</span> {{$project->formatted_total_project_cost}}</p>
-                        <p class="text-[10px]"><span class="font-bold mr-2">Total Material Cost: Php</span> {{$project->formatted_total_material_cost}}</p>
+                        <p class="text-[10px] {{ $project->pows->sum('total_material_cost') != $project->pows->flatMap(function ($pow) {
+                return $pow->materials;})->sum('estimated_cost') ? 'text-red-500' : '' }}"><span class="font-bold mr-2">Total Material Cost: Php</span> {{$project->formatted_total_material_cost}}</p>
                         <p class="text-[10px]"><span class="font-bold mr-2">Total Labor Cost: Php</span> {{$project->formatted_total_labor_cost}}</p>
                     </div>
 

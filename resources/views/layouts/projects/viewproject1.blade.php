@@ -66,11 +66,6 @@
                 <p class="text-xs"><span
                         class="font-bold">Project Incharge:</span> {{ $project->projectIncharge->first_name }} {{ $project->projectIncharge->last_name }}
                 </p>
-                {{--                <p class="ml-8 text-xs mt-2 font-bold">Project Cost Details : </p>--}}
-                {{--                <p class=" ml-10 text-xs mt-2 font-bold">Total Project Cost : </p>--}}
-                {{--                <p class=" ml-10 text-xs mt-2 font-bold">Total Material Cost : </p>--}}
-                {{--                <p class=" ml-10 text-xs mt-2 font-bold">Total Labor Cost : </p>--}}
-
                 <div class="mt-7 mb-10">
                     <h2 class="text-sm font-semibold mb-2">Description</h2>
                     <p class="text-xs">{{ $project->description }}</p>

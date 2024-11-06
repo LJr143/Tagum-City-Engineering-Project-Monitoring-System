@@ -49,7 +49,10 @@
                 </div>
             </div>
         </div>
+
     @elseif($totalMaterialCost != $pow->total_material_cost)
+
+        @if($totalMaterialCost > $pow->total_material_cost)
         <div id="warningModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-modal z-50">
             <div class="modal-content bg-white rounded-lg shadow-lg p-6 w-full max-w-md mx-4 sm:mx-6 md:mx-8 lg:mx-10 xl:mx-12">
                 <div class="flex items-center mb-2">
@@ -58,7 +61,7 @@
                     </svg>
                     <h2 class="text-sm font-semibold text-red-500">Warning!</h2>
                 </div>
-                <p class="text-xs mb-4">Inputted Material Cost is not equal to the current total material cost. Please Fix Immediately to Avoid Miscalculation and Incorrect Data.</p>
+                <p class="text-xs mb-4">Total Material Cost Exceeds the Inputted Amount. Please Fix Immediately to Avoid Miscalculation and Incorrect Data.</p>
                 <div class="flex justify-end">
                     <button id="delete-cancel-button" onclick="closeModal()" class="bg-white border border-gray-300 text-gray-700 rounded-md text-xs px-4 py-2 hover:bg-gray-200">
                         Okay
@@ -66,6 +69,25 @@
                 </div>
             </div>
         </div>
+        @else
+            <div id="warningModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-modal z-50">
+                <div class="modal-content bg-white rounded-lg shadow-lg p-6 w-full max-w-md mx-4 sm:mx-6 md:mx-8 lg:mx-10 xl:mx-12">
+                    <div class="flex items-center mb-2">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M8.4845 2.49512C9.15808 1.32845 10.842 1.32845 11.5156 2.49512L17.7943 13.3701C18.4678 14.5368 17.6259 15.9951 16.2787 15.9951H3.72136C2.37421 15.9951 1.53224 14.5368 2.20582 13.3701L8.4845 2.49512ZM10 5.00012C10.4142 5.00012 10.75 5.33591 10.75 5.75012V9.25012C10.75 9.66434 10.4142 10.0001 10 10.0001C9.58579 10.0001 9.25 9.66434 9.25 9.25012L9.25 5.75012C9.25 5.33591 9.58579 5.00012 10 5.00012ZM10 14.0001C10.5523 14.0001 11 13.5524 11 13.0001C11 12.4478 10.5523 12.0001 10 12.0001C9.44772 12.0001 9 12.4478 9 13.0001C9 13.5524 9.44772 14.0001 10 14.0001Z" fill="#CA383A"/>
+                        </svg>
+                        <h2 class="text-sm font-semibold text-red-500">Warning!</h2>
+                    </div>
+                    <p class="text-xs mb-4">Inputted Material Cost is not equal to the current total material cost. Please Fix Immediately to Avoid Miscalculation and Incorrect Data.</p>
+                    <div class="flex justify-end">
+                        <button id="delete-cancel-button" onclick="closeModal()" class="bg-white border border-gray-300 text-gray-700 rounded-md text-xs px-4 py-2 hover:bg-gray-200">
+                            Okay
+                        </button>
+                    </div>
+                </div>
+            </div>
+    @endif
+
     @endif
 
 
@@ -94,8 +116,9 @@
                 </div>
                 <div class="text-center sm:text-left">
                     <p class="text-[10px] text-gray-500">Total Material Cost</p>
-                    <p class="text-[10px] font-bold text-gray-500 mb-2">Php {{ number_format($pow->total_material_cost, 2) }}</p>
-
+                    <p class="text-[10px] font-bold text-gray-500 mb-2 {{ $totalMaterialCost != $pow->total_material_cost ? 'text-red-500' : '' }}">
+                        Php {{ number_format($pow->total_material_cost, 2) }}
+                    </p>
                     <p class="text-[10px] text-gray-500">Project Progress Materials </p>
                     <p class="text-[10px] text-gray-500">Used Amount</p>
                     <p class="text-[10px] font-bold text-gray-500 ">{{ number_format($totalMaterialCost - $remainingMaterialCost, 2) }}</p>

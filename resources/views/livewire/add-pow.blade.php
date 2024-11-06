@@ -78,7 +78,7 @@
                         </label>
                         <label class="flex items-center space-x-2">
                             <input type="radio" name="upload_option" x-model="uploadFile" value="manual"
-                                   class="text-indigo-600">
+                                   class="text-indigo-600" >
                             <span class="text-gray-700 text-sm">Enter Total Material Cost</span>
                         </label>
                     </div>
