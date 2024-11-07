@@ -1,14 +1,69 @@
 <div class="mx-auto bg-white p-8 md:p-8 rounded-lg shadow-md overflow-hidden">
-    <div class="flex flex-col md:flex-row items-center mb-4">
-        <div class="relative w-20 h-20">
-            @if ($profilePhotoPath)
-            <div class="profile-image mt-3">
-                <img src="{{ asset('storage/' . $profilePhotoPath) }}" alt="Profile Image" width="200" />
+    @if (session()->has('message') || session()->has('error'))
+    <div x-data="{ open: true, timer: null, progressWidth: 100 }"
+        x-init="
+                timer = setInterval(() => {
+                    if (progressWidth > 0) {
+                        progressWidth -= 1; // decrease width every interval
+                    } else {
+                        clearInterval(timer);
+                        open = false;  // Close the modal when width reaches 0
+                    }
+                }, 100);
+            "
+        x-show="open"
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0 scale-90"
+        x-transition:enter-end="opacity-100 scale-100"
+        x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100 scale-100"
+        x-transition:leave-end="opacity-0 scale-90"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+
+        <div class="bg-white rounded-lg shadow-lg p-6 w-11/12 md:w-1/3 relative">
+            <!-- Progress Bar -->
+            <div class="absolute top-0 left-0 h-1 bg-green-600"
+                :style="{ width: progressWidth + '%' }">
             </div>
+
+            <!-- Modal Content -->
+            <div class="flex justify-between items-center">
+                <h2 class="text-lg font-semibold text-green-600">
+                    @if (session()->has('message'))
+                    Success
+                    @else
+                    Error
+                    @endif
+                </h2>
+                <button @click="open = false; clearInterval(timer)" class="text-gray-500 hover:text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="mt-4">
+                <p>
+                    @if (session()->has('message'))
+                    {{ session('message') }}
+                    @else
+                    {{ session('error') }}
+                    @endif
+                </p>
+            </div>
+            <div class="mt-6 text-right">
+                <button @click="open = false; clearInterval(timer)" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Close</button>
+            </div>
+        </div>
+    </div>
+    @endif
+    <div class="flex flex-col md:flex-row items-center mb-4">
+        <div class="relative w-20 h-20 rounded-full overflow-hidden bg-gray-300">
+            @if ($profilePhotoPath)
+            <img src="{{ asset('storage/' . $profilePhotoPath) }}" alt="Profile Image" class="w-full h-full object-cover">
             @else
-            <img src="{{ asset('storage/pmsAssets/default.png') }}" alt="Profile Image" class="w-full h-full bg-gray-300 rounded-full object-cover" />
+            <img src="{{ asset('storage/pmsAssets/default.png') }}" alt="Profile Image" class="w-full h-full object-cover">
             @endif
-            <input type="file" wire:model="profileImage" id="imageUpload" accept="image/*" class="hidden" />
+            <input type="file" wire:model="profileImage" id="imageUpload" accept="image/*" class="hidden">
             <label for="imageUpload" class="absolute bottom-0 right-0 bg-black bg-opacity-50 text-white p-1 rounded-full cursor-pointer">
                 <i class="fas fa-camera"></i>
             </label>
