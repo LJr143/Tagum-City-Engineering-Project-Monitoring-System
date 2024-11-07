@@ -15,7 +15,7 @@
         </div>
         <div class="ml-0 md:ml-4 text-center md:text-left">
             <h1 class="text-lg font-medium">{{ $first_name }} {{ $middle_initial }} {{ $last_name }}</h1>
-            <p class="text-gray-500 text-xs">Administrator</p>
+            <p class="text-gray-500 text-xs">{{$role}}</p>
         </div>
     </div>
 

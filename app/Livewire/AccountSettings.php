@@ -118,6 +118,7 @@ class AccountSettings extends Component
     public $phoneNumber;
     public $email;
     public $userID;
+    public $role;
     public $currentPassword;
     public $newPassword;
     public $confirmNewPassword;
@@ -148,6 +149,9 @@ class AccountSettings extends Component
         $this->phoneNumber = $user->contact_number;
         $this->email = $user->email;
         $this->profilePhotoPath = User::find($this->userID)->profile_photo_path;
+
+        $xsd = User::where('id', '=', Auth::user()->id)->pluck('role');
+        $this->role = $xsd[0];
     }
 
     // Calculate age from birthdate
@@ -180,6 +184,7 @@ class AccountSettings extends Component
         $user->birth_date = $this->birthdate;
         $user->contact_number = $this->phoneNumber;
         $user->email = $this->email;
+
 
         $user->save();
 
