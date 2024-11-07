@@ -37,20 +37,21 @@ class AddManualDirectCost extends Component
         ]);
 
         foreach ($this->direct_costs as $cost) {
-            // Include pow_id when creating each IndirectCost
             DirectCost::create([
-                'pow_id' => $this->pow_id, // Adding pow_id to each entry
+                'pow_id' => $this->pow_id,
                 'description' => $cost['description'],
                 'amount' => $cost['amount'],
+                'remaining_cost' => $cost['amount'],
             ]);
         }
 
-        // Reset the indirect costs array
+        // Reset the direct costs array
         $this->reset('direct_costs');
 
         // Dispatch an event to indicate the costs have been saved
         $this->dispatch('indirectCostsSaved');
     }
+
 
     public function render()
     {

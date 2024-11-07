@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Imports\MaterialsImport;
+use App\Models\DirectCost;
 use App\Models\Pow;
 use App\Models\Project;
 use App\Services\LogService;
@@ -11,7 +12,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ProjectController extends Controller
 {
- public function index(){
+    public function index(){
       $projects = Project::all();
       $pendingProjects = Project::where('status', 'pending')->count();
       $completedProjects = Project::where('status', 'completed')->count();
@@ -19,17 +20,20 @@ class ProjectController extends Controller
       return view('layouts.projects.project-main', compact('projects', 'pendingProjects', 'completedProjects'));
  }
 
-
     public function view($id)
     {
         $project = Project::findOrFail($id);
+
         return view('layouts.projects.viewproject1', compact('project'));
     }
 
     public function viewPowInfo($id,  $index)
     {
         $pow = Pow::findOrFail($id);
-        return view('layouts.Projects.material-cost-table', compact('pow', 'index'));
+        $contingencyBalance = $pow
+            ? $pow->directCosts()->where('description', 'contingencies')->value('remaining_cost')
+            : null;
+        return view('layouts.Projects.material-cost-table', compact('pow', 'index', 'contingencyBalance'));
     }
 
     public function destroy($id)
@@ -92,6 +96,49 @@ class ProjectController extends Controller
         // Redirect back with a success message
         return redirect()->back()->with('success', 'Project has been resumed successfully.');
     }
+
+
+    public function realignContingency(Request $request)
+    {
+        $request->validate([
+            'project_id' => 'required|exists:projects,id',
+            'realign_amount' => 'required|numeric|min:0',
+            'destination' => 'required|in:material,labor',
+        ]);
+
+        $project = Project::findOrFail($request->project_id);
+        $pow = $project->pows()->first();
+
+        if ($pow) {
+            $realignAmount = $request->realign_amount;
+
+            $directCost = $pow->directCosts()->where('description', 'contingencies')->first();
+
+            if ($directCost) {
+                if ($directCost->remaining_cost >= $realignAmount) {
+                    if ($request->destination == 'material') {
+                        $pow->total_material_cost += $realignAmount;
+                    } else {
+                        $pow->total_labor_cost += $realignAmount;
+                    }
+
+                    $directCost->remaining_cost -= $realignAmount;
+                    $directCost->save();
+
+                    $pow->save();
+
+                    return redirect()->back()->with('status', 'Contingency fund realigned successfully!');
+                } else {
+                    return redirect()->back()->withErrors('Insufficient contingency funds for realignment.');
+                }
+            } else {
+                return redirect()->back()->withErrors('Contingency cost not found.');
+            }
+        }
+
+        return redirect()->back()->withErrors('POW not found for the specified project.');
+    }
+
 
 
 
