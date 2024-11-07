@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('direct_costs', function (Blueprint $table) {
+        Schema::create('system_configurations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pow_id')->constrained('program_of_works')->onDelete('cascade');
-            $table->string('description');
-            $table->decimal('amount', 15, 2);
-            $table->double('spent_cost')->default(0);
-            $table->double('remaining_cost')->default(0);
+            $table->string('name');
+            $table->string('type');
+            $table->integer('value');
+            $table->string('color')->default('yellow');
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('direct_costs');
+        Schema::dropIfExists('system_configurations');
     }
 };

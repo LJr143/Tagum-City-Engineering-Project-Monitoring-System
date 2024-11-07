@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
+use App\Livewire\DelayConfiguration;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
@@ -32,6 +33,12 @@ Route::middleware(['auth:sanctum', 'verified', 'inactivity.logout'])->group(func
         Route::get('/material-table-cost', function () {
             return view('layouts.Projects.material-cost-table');
         });
+
+        Route::post('/projects/suspend', [ProjectController::class, 'suspend'])->name('projects.suspend');
+        Route::post('/projects/resume', [ProjectController::class, 'resume'])->name('projects.resume');
+        Route::post('/projects/realign', [ProjectController::class, 'realignContingency'])->name('projects.realign');
+
+
     });
 
     // User Management (Admin)

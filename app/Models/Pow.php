@@ -23,11 +23,12 @@ class Pow extends Model
         'total_material_cost',
         'total_labor_cost',
         'project_id',
+
     ];
 
     public function project(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Project::class);
+        return $this->belongsTo(Project::class, 'project_id', 'id');
     }
 
     public function engineer(): \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -48,6 +49,11 @@ class Pow extends Model
     public function payroll()
     {
         return $this->hasMany(Payroll::class);
+    }
+
+    public function directCosts()
+    {
+        return $this->hasMany(DirectCost::class);
     }
 
 

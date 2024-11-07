@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('direct_costs', function (Blueprint $table) {
+        Schema::create('past_deadlines', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pow_id')->constrained('program_of_works')->onDelete('cascade');
-            $table->string('description');
-            $table->decimal('amount', 15, 2);
-            $table->double('spent_cost')->default(0);
-            $table->double('remaining_cost')->default(0);
+            $table->foreignId('project_id')->constrained('projects')->onDelete('cascade');
+            $table->date('date');
+            $table->string('set_by');
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('direct_costs');
+        Schema::dropIfExists('past_deadlines');
     }
 };

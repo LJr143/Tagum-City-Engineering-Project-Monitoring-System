@@ -20,6 +20,8 @@ class ProjectFilter extends Component
     public $completedProjects;
     public $suspendedProjects;
 
+    public $totalMaterialCostTable = 0;
+
     protected $paginationTheme = 'tailwind';
 
     public function mount()
