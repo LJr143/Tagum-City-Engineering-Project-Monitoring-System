@@ -29,7 +29,7 @@ class Project extends Model
 
     public function projectIncharge(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(User::class, 'project_incharge_id');
+        return $this->belongsTo(User::class, 'project_incharge_id', 'id');
     }
 
     public function delayConfigurations()

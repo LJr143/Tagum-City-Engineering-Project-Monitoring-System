@@ -167,7 +167,7 @@
                                         <div class="status-div text-[10px] font-bold rounded-2xl px-3 py-2 w-32 text-center
                                     @if($project->status === 'completed') bg-green-500 text-white
                                     @elseif($project->status === 'pending') bg-yellow-500 text-white
-                                    @elseif($project->status === 'suspended') bg-red-500 text-white
+                                    @elseif($project->status === 'suspended' || $project->status == 'terminated') bg-red-500 text-white
                                     @endif">
                                             {{ $project->status }}
                                         </div>

@@ -26,11 +26,11 @@
         </div>
 
         <div class="flex justify-center items-center">
-            <svg width="3" height="12" viewBox="0 0 3 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg  class="mr-2" width="3" height="12" viewBox="0 0 3 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <line x1="1.5" y1="1.5" x2="1.5" y2="22.5" stroke="#36D600" stroke-width="3" stroke-linecap="round" />
             </svg>
 
-            <div class="w-[50px] h-[50px] rounded-full overflow-hidden">
+            <div class="w-[40px] h-[40px] ml-2 mr-2 rounded-full overflow-hidden">
                 <img
                     class="w-full h-full object-cover"
                     src="{{ asset('storage/' . (auth()->user()->profile_photo_path ?? 'pmsAssets/default.png')) }}"

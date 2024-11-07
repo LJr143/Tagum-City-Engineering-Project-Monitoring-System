@@ -223,8 +223,45 @@
     <!-- Second Row -->
     <div class="grid grid-cols-1 md:grid-cols-1 gap-4 w-full">
         <div class="border p-4 rounded">
-            <p>Project Warning Configuration</p>
-        </div>
+            <p class="text-[12px] font-semibold">Terminated Projects</p>
 
+            <!-- Display Flash Message -->
+            @if (session()->has('status'))
+                <div class="p-4 mb-4 bg-green-100 text-green-800 rounded-md">
+                    {{ session('status') }}
+                </div>
+            @endif
+
+            <!-- Table for Terminated Projects -->
+            <div class="overflow-x-auto mt-4">
+                <table class="min-w-full table-auto border-collapse">
+                    <thead class="bg-gray-100">
+                    <tr>
+                        <th class="px-4 py-2 text-left border-b">Project Name</th>
+                        <th class="px-4 py-2 text-left border-b">Address</th>
+                        <th class="px-4 py-2 text-center border-b">Project Incharge</th>
+                        <th class="px-4 py-2 text-center border-b">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($terminatedProjects as $project)
+                        <tr class="text-[12px]">
+                            <td class="px-4 py-2 border-b">{{ $project->title }}</td>
+                            <td class="px-4 py-2 border-b text-gray-500">{{ $project->baranggay }}</td>
+                            <td class="px-4 py-2 border-b text-gray-500">{{ $project->projectIncharge->first_name }} {{ $project->projectIncharge->inital }} {{ $project->projectIncharge->last_name }}</td>
+                            <td class="px-4 py-2 border-b text-center">
+                                <button
+                                    wire:click="changeProjectStatus({{ $project->id }})"
+                                    class="bg-blue-500 text-white rounded-md px-4 py-2 text-xs hover:bg-blue-700">
+                                    Change Status
+                                </button>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
+
 </div>

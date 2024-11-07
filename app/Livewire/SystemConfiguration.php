@@ -8,6 +8,13 @@ class SystemConfiguration extends Component
     public $warning = [['name' => '', 'percentage' => '', 'color' => '#FF0000']];
     public $termination = [['name' => '', 'percentage' => '', 'color' => '#FF0000']];
 
+    public $terminatedProjects;
+
+    public function mount()
+    {
+        $this->terminatedProjects = \App\Models\Project::where('status', 'terminated')->get();
+    }
+
     public function addWarning(): void
     {
         $this->warning[] = ['name' => '','percentage' => '', 'color' => '#FF0000'];
@@ -53,6 +60,7 @@ class SystemConfiguration extends Component
     }
 
     public function saveTermination(): void
+
     {
         $this->validate([
             'termination.*.name' => 'required|string|max:255',
@@ -81,6 +89,20 @@ class SystemConfiguration extends Component
         }
     }
 
+    public function changeProjectStatus($projectId)
+    {
+        // Find the project by ID
+        $project = \App\Models\Project::find($projectId);
+
+        if ($project) {
+            // Change the status of the project (toggle to 'pending' for example)
+            $project->status = 'pending';
+            $project->save();
+
+            // Optionally, you can refresh the list of terminated projects after status change
+            $this->terminatedProjects = \App\Models\Project::where('status', 'terminated')->get();
+        }
+    }
 
 
     public function render()
