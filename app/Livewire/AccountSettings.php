@@ -132,7 +132,7 @@ class AccountSettings extends Component
             'birthdate' => 'required|date',
             'phoneNumber' => 'nullable|string|max:20',
             'email' => 'required|email|max:255|unique:users,email,' . $this->userID,
-            'profileImage' => 'nullable|image|max:1024',
+            'profileImage' => 'nullable|image|max:10240',
             'newPassword' => 'nullable|min:8|same:confirmNewPassword',
         ];
     }
