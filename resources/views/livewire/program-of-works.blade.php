@@ -34,7 +34,7 @@
                                 <p class="text-[10px] text-gray-500 md:truncate w-full md:w-48">{{ $card->description }}</p>
                             </div>
                             <div class="flex-1 text-center md:text-left mb-4 md:mb-0">
-                                <p class="text-[12px] font-bold">Php {{ number_format($card->total_material_cost, 2 )}}</p>
+                                <p class="text-[12px] font-bold {{ $totalMaterialCost != $card->total_material_cost ? 'text-red-500' : '' }}" >Php {{ number_format($card->total_material_cost, 2 )}}</p>
                                 <p class="text-gray-600 text-[10px]">Material Cost</p>
                             </div>
                             <div class="flex-1 text-center md:text-left mb-4 md:mb-0">

@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\IndirectCost;
+use App\Models\Material;
 use App\Models\Pow;
 use App\Models\Project;
 use Livewire\Component;
@@ -15,6 +16,8 @@ class ProgramOfWorks extends Component
     public $pow;
     public $projectId;
     public $totalIndirectCost = 0;
+
+    public $totalMaterialCost = 0;
 
     public function mount($projectId)
     {
@@ -35,6 +38,7 @@ class ProgramOfWorks extends Component
 
         // Calculate the total indirect cost for this POW
         $this->totalIndirectCost = IndirectCost::where('pow_id', $this->pow->id)->sum('amount');
+        $this->totalMaterialCost = Material::where('pow_id', $this->pow->id)->sum('estimated_cost');
     }
 
     public function render()
@@ -49,6 +53,7 @@ class ProgramOfWorks extends Component
         return view('livewire.program-of-works', [
             'cards' => $cards,
             'totalIndirectCost' => $this->totalIndirectCost,
+            'totalMaterialCost' => $this->totalMaterialCost,
         ]);
     }
 }

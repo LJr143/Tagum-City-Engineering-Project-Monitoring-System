@@ -27,7 +27,7 @@ class Pow extends Model
 
     public function project(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Project::class);
+        return $this->belongsTo(Project::class, 'project_id', 'id');
     }
 
     public function engineer(): \Illuminate\Database\Eloquent\Relations\BelongsTo

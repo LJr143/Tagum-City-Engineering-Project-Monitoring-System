@@ -32,6 +32,11 @@ Route::middleware(['auth:sanctum', 'verified', 'inactivity.logout'])->group(func
         Route::get('/material-table-cost', function () {
             return view('layouts.Projects.material-cost-table');
         });
+
+        Route::post('/projects/suspend', [ProjectController::class, 'suspend'])->name('projects.suspend');
+        Route::post('/projects/resume', [ProjectController::class, 'resume'])->name('projects.resume');
+
+
     });
 
     // User Management (Admin)

@@ -38,7 +38,7 @@
                 </svg>
             </button>
 
-            <div class="flex">
+            <div class="flex items-center flex-wrap">
                 <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect width="24" height="24" transform="translate(1 1)" fill="white"/>
                     <path
@@ -47,8 +47,9 @@
                     <path d="M13 9L13 17" stroke="#1FBE11" stroke-width="1.2" stroke-linecap="round"/>
                     <path d="M17 13L9 13" stroke="#1FBE11" stroke-width="1.2" stroke-linecap="round"/>
                 </svg>
-                <h2 class="text-lg font-bold mb-4 ml-2">Add Project</h2>
+                <h2 class="text-lg font-bold mb-4 ml-2 text-center sm:text-left w-full sm:w-auto">Add Project</h2>
             </div>
+
 
             <form wire:submit.prevent="submit" class="text-xs" >
                 <div class="grid  gap-6">
@@ -62,19 +63,20 @@
                         <div class="col-span-5 space-y-4">
                             <label class="block text-xs font-medium mb-1">Project Address</label>
                             <div class="flex gap-2 border-2 p-2 rounded">
-                                <div class="w-2/6">
+                                <div class="w-full sm:w-2/6">
                                     <label class="block text-xs font-medium mb-1">Baranggay</label>
                                     <input type="text" wire:model="baranggay"
                                            class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
                                 </div>
 
-                                <div class="w-2/6">
+
+                                <div class="w-full sm:w-2/6">
                                     <label class="block text-xs font-medium mb-1">Street</label>
                                     <input type="text" wire:model="street"
                                            class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
                                 </div>
 
-                                <div class="w-2/4">
+                                <div class="w-full sm:w-2/4">
                                     <label class="block text-xs font-medium mb-1">X-Axis</label>
                                     <input type="text" wire:model="x_axis"
                                            class="w-full px-3 py-2 text-xs border border-gray-400 rounded" placeholder="Must contain 'axis'" required>
@@ -83,7 +85,8 @@
                                     @enderror
                                 </div>
 
-                                <div class="w-2/4">
+
+                                <div class="w-full sm:w-2/4">
                                     <label class="block text-xs font-medium mb-1">Y-Axis</label>
                                     <input type="text" wire:model="y_axis"
                                            class="w-full px-3 py-2 text-xs border border-gray-400 rounded" placeholder="Must contain 'axis'" required>
@@ -154,14 +157,15 @@
 
                         <div>
                             <label class="block text-xs font-medium mb-1">Target Completion</label>
-                            <div class="flex gap-2 border-2 p-2 rounded">
-                                <div class="w-2/4">
+                            <div class="flex flex-wrap border-2 p-2 rounded">
+                                <!-- Start Date Input Field -->
+                                <div class="w-full sm:w-2/4">
                                     <label class="block text-xs font-medium mb-1">Start Date</label>
                                     <input type="date" wire:model="start_date"
                                            class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
                                 </div>
-
-                                <div class="w-2/4">
+                                <!-- End Date Input Field -->
+                                <div class="w-full sm:w-2/4">
                                     <label class="block text-xs font-medium mb-1">End Date</label>
                                     <input type="date" wire:model="end_date"
                                            class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
@@ -169,8 +173,6 @@
                                     <span class="text-red-500 text-xs">{{ $message }}</span>
                                     @enderror
                                 </div>
-
-
                             </div>
                         </div>
                         <div>
