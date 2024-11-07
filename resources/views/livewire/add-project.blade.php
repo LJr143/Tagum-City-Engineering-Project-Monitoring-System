@@ -2,12 +2,14 @@
     <div class="flex justify-end">
         <div class="relative ml-2">
             <button @click="open = true"
-                    class="bg-green-500 text-white text-xs px-4 py-2 rounded shadow-md hover:bg-green-600 focus:outline-none">
+                    class="bg-green-500 text-white text-xs px-4 py-2 rounded shadow-md hover:bg-green-600 focus:outline-none sm:px-3 sm:py-1 sm:text-[10px] md:text-xs md:px-4 md:py-2">
                 Create Project
             </button>
         </div>
     </div>
 
+
+    <!-- Modal -->
     <!-- Modal -->
     <div
         x-show="open"
@@ -17,7 +19,7 @@
         x-transition:leave="transition ease-in duration-200"
         x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
-        class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+        class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 px-4"
     >
         <!-- Modal Content -->
         <div
@@ -28,9 +30,8 @@
             x-transition:leave="transition ease-in duration-200"
             x-transition:leave-start="opacity-100 transform scale-100"
             x-transition:leave-end="opacity-0 transform scale-90"
-            class="bg-white p-4 md:p-6 rounded-lg shadow-lg w-full max-w-lg md:max-w-[700px] overflow-y-auto max-h-full md:max-h-screen"
+            class="bg-white p-4 md:p-4 rounded-lg shadow-lg w-full max-w-md md:max-w-[600px] max-h-[60vh] sm:max-h-[50vh] md:max-h-none overflow-y-auto sm:overflow-visible"
         >
-
             <div class="flex justify-between items-center mb-4 border-b border-gray-300 pb-2">
                 <div class="flex items-center">
                     <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -50,42 +51,39 @@
                 </button>
             </div>
 
-            <form wire:submit.prevent="submit" class="text-xs" >
+            <form wire:submit.prevent="submit" class="text-xs">
                 <div class="mb-3">
                     <label class="block text-xs font-medium mb-1">Project Title</label>
-                    <input wire:model="title" type="text" placeholder="Enter Project Title" class="w-full border border-gray-400 px-3 py-2  rounded p-2 text-xs  focus:ring-2 focus:ring-green-500 focus:border-green-500" required>
+                    <input wire:model="title" type="text" placeholder="Enter Project Title" class="w-full border border-gray-400 px-3 py-2 rounded p-2 text-xs focus:ring-2 focus:ring-green-500 focus:border-green-500" required>
                 </div>
 
-                <div class="mb-1 border-gray-300 pb-1 ">
+                <div class="mb-1 border-gray-300 pb-1">
                     <label class="block text-xs font-medium mb-1">Project Address</label>
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-2 mb-1 border-2 p-2 rounded">
                         <div>
                             <label class="block text-xs font-medium mb-1">Street</label>
-                            <input wire:model="street" type="text" placeholder="Select Street" class="w-full border border-gray-400 px-3 py-2 text-xs rounded p-2   focus:ring-2 focus:ring-green-500 focus:border-green-500" required>
+                            <input wire:model="street" type="text" placeholder="Select Street" class="w-full border border-gray-400 px-3 py-2 text-xs rounded p-2 focus:ring-2 focus:ring-green-500 focus:border-green-500" required>
                         </div>
                         <div>
                             <label class="block text-xs font-medium mb-1">Barangay</label>
-                            <input wire:model="baranggay" type="text" placeholder="Select Barangay" class="w-full border border-gray-400 px-3 py-2 text-xs rounded p-2  focus:ring-2 focus:ring-green-500 focus:border-green-500" required>
+                            <input wire:model="baranggay" type="text" placeholder="Select Barangay" class="w-full border border-gray-400 px-3 py-2 text-xs rounded p-2 focus:ring-2 focus:ring-green-500 focus:border-green-500" required>
                         </div>
                         <div>
                             <label class="block text-xs font-medium mb-1">X-Axis</label>
-                            <input wire:model="x_axis" type="text" placeholder="Must contain “axis”" class="w-full border border-gray-400 px-3 py-2 text-xs rounded p-2   focus:ring-2 focus:ring-green-500 focus:border-green-500" required>
+                            <input wire:model="x_axis" type="text" placeholder="Must contain “axis”" class="w-full border border-gray-400 px-3 py-2 text-xs rounded p-2 focus:ring-2 focus:ring-green-500 focus:border-green-500" required>
                             @error('x_axis')
                             <span class="text-red-500 text-xs">{{ $message }}</span>
                             @enderror
                         </div>
                         <div>
                             <label class="block text-xs font-medium mb-1">Y-Axis</label>
-                            <input type="text" placeholder="Must contain “axis”" class="w-full border border-gray-400 px-3 py-2 text-xs rounded p-2   focus:ring-2 focus:ring-green-500 focus:border-green-500" required>
+                            <input wire:model="y_axis" type="text" placeholder="Must contain “axis”" class="w-full border border-gray-400 px-3 py-2 text-xs rounded p-2 focus:ring-2 focus:ring-green-500 focus:border-green-500" required>
                             @error('y_axis')
                             <span class="text-red-500 text-xs">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
                 </div>
-
-
-
 
                 <div x-data="{
                                 open: true,
@@ -98,83 +96,74 @@
                                 }
                             }" class="relative pb-3">
 
-                            <label for="projectIncharge_id" class="block text-xs font-medium mb-1">Project In-Charge</label>
+                    <label for="projectIncharge_id" class="block text-xs font-medium mb-1">Project In-Charge</label>
 
-                            <input
-                                type="text"
-                                id="projectIncharge_id"
-                                x-model="search"
-                                @focus="open = true"
-                                @input.debounce.300ms="
+                    <input
+                        type="text"
+                        id="projectIncharge_id"
+                        x-model="search"
+                        @focus="open = true"
+                        @input.debounce.300ms="
                                     filteredProjectIncharge = @js($projectIncharge).filter(projectIncharge => {
                                         const fullName = `${projectIncharge.first_name} ${projectIncharge.middle_initial ? projectIncharge.middle_initial + ' ' : ''}${projectIncharge.last_name}`;
                                         return fullName.toLowerCase().includes(search.toLowerCase());
                                     })
                                 "
-                                @keydown.escape.window="open = false"
-                                @click="open = true"
-                                class="w-full px-3 py-2 text-xs border border-gray-400 rounded focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                                placeholder="Search Project In-Charge"
-                                autocomplete="off"
-                                required
-                            />
+                        @keydown.escape.window="open = false"
+                        @click="open = true"
+                        class="w-full px-3 py-2 text-xs border border-gray-400 rounded focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                        placeholder="Search Project In-Charge"
+                        autocomplete="off"
+                        required
+                    />
 
-                            <ul
-                                x-show="open && filteredProjectIncharge.length > 0"
-                                @click.away="open = false"
-                                class="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg sm:text-xs"
-                                x-transition
+                    <ul
+                        x-show="open && filteredProjectIncharge.length > 0"
+                        @click.away="open = false"
+                        class="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg sm:text-xs"
+                        x-transition
+                    >
+                        <template x-for="projectIncharge in filteredProjectIncharge" :key="projectIncharge.id">
+                            <li
+                                @click.stop="selectProjectIncharge(projectIncharge)"
+                                class="cursor-pointer hover:bg-indigo-500 hover:text-white p-2"
                             >
-                                <template x-for="projectIncharge in filteredProjectIncharge" :key="projectIncharge.id">
-                                    <li
-                                        @click.stop="selectProjectIncharge(projectIncharge)"
-                                        class="cursor-pointer hover:bg-indigo-500 hover:text-white p-2"
-                                    >
-                                        <span x-text="`${projectIncharge.first_name} ${projectIncharge.middle_initial ? projectIncharge.middle_initial + ' ' : ''}${projectIncharge.last_name}`"></span>
-                                    </li>
-                                </template>
+                                <span x-text="`${projectIncharge.first_name} ${projectIncharge.middle_initial ? projectIncharge.middle_initial + ' ' : ''}${projectIncharge.last_name}`"></span>
+                            </li>
+                        </template>
 
-                                <li x-show="!filteredProjectIncharge.length && search.length > 0"
-                                    class="p-2 text-gray-500">
-                                    No result found
-                                </li>
-                            </ul>
+                        <li x-show="!filteredProjectIncharge.length && search.length > 0"
+                            class="p-2 text-gray-500">
+                            No result found
+                        </li>
+                    </ul>
 
-                            @error('projectIncharge_id')
+                    @error('projectIncharge_id')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <!-- Target Completion Section (Scrollable) -->
+                <div>
+                    <label class="block text-xs font-medium mb-1">Target Completion</label>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 border-2 p-2 rounded">
+                        <div class="relative mb-3">
+                            <label class="block text-xs font-medium mb-1">Start Date</label>
+                            <input type="date" wire:model="start_date"
+                                   class="w-full px-3 py-2 text-xs border border-gray-400 rounded focus:ring-2 focus:ring-green-500 focus:border-green-500" required>
+                        </div>
+                        <div class="relative">
+                            <label class="block text-xs font-medium mb-1">End Date</label>
+                            <input type="date" wire:model="end_date"
+                                   class="w-full px-3 py-2 text-xs border border-gray-400 rounded focus:ring-2 focus:ring-green-500 focus:border-green-500" required>
+                            @error('end_date')
                             <span class="text-red-500 text-xs">{{ $message }}</span>
                             @enderror
                         </div>
+                    </div>
+                </div>
 
-
-                        <div>
-                            <label class="block text-xs font-medium mb-1">Target Completion</label>
-
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 border-2 p-2 rounded">
-                                <!-- Start Date Input Field -->
-                                <div class="relative mb-3">
-                                    <label class="block text-xs font-medium mb-1">Start Date</label>
-                                    <div class="relative">
-                                        <input type="date" wire:model="start_date"
-                                           class="w-full px-3 py-2 text-xs border border-gray-400 rounded focus:ring-2 focus:ring-green-500 focus:border-green-500" required>
-                                    </div>
-
-                                </div>
-
-                                <!-- End Date Input Field -->
-                                <div class="relative">
-                                    <label class="block text-xs font-medium mb-1">End Date</label>
-
-                                    <div class="relative">
-                                        <input type="date" wire:model="end_date"
-                                           class="w-full px-3 py-2 text-xs border border-gray-400 rounded focus:ring-2 focus:ring-green-500 focus:border-green-500" required>
-                                            @error('end_date')
-                                            <span class="text-red-500 text-xs">{{ $message }}</span>
-                                            @enderror
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+                <!-- Description -->
                 <div class="mb-3 mt-3">
                     <label class="block text-xs font-medium mb-1">Description</label>
                     <textarea wire:model="description" class="w-full h-[80px] px-3 py-2 text-xs border border-gray-400 rounded focus:ring-2 focus:ring-green-500 focus:border-green-500" rows="2" style="resize: none;" required></textarea>
@@ -195,9 +184,6 @@
                 </div>
 
             </form>
-
-
-
         </div>
     </div>
     @script
