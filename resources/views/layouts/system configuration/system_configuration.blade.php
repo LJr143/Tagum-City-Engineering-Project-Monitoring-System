@@ -12,16 +12,10 @@
 
     <x-slot name="main">
 
-        <div class="flex h-screen text-gray-800">
+        <h3 class="text-base font-semibold leading-6 text-gray-900">System Configuration</h3>
+        <p class="mb-6 text-[11px]">Configure early warning indicators for the project and auto termination</p>
 
-            <!-- Main Content -->
-            <div class="flex-1 p-4">
-                <h3 class="text-base font-semibold leading-6 text-gray-900">System Configuration</h3>
-
-
-            </div>
-        </div>
-
+        <livewire:system-configuration/>
 
     </x-slot>
 

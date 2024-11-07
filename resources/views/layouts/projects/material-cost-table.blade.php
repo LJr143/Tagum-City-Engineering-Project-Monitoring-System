@@ -384,7 +384,15 @@
                         </svg>
                         <h2 class="text-sm font-semibold text-red-500">Realign Contingency Fund</h2>
                     </div>
-                    <p class="text-xs mb-4">Current Contingency Balance: <span class="font-semibold text-gray-700">Php {{ number_format($contingencyBalance, 2) }}</span></p>
+                    <p class="text-xs mb-4">
+                        @if ($contingencyBalance)
+                            Current Contingency Balance:
+                            <span class="font-semibold text-gray-700">Php {{ number_format($contingencyBalance, 2) }}</span>
+                        @else
+                            <span class="font-semibold text-red-500">No Contingency Balance Available</span>
+                        @endif
+                    </p>
+
                     <p class="text-xs mb-4">Enter the amount to realign from the contingency fund to either material or labor costs.</p>
 
                     <!-- Realignment Form -->

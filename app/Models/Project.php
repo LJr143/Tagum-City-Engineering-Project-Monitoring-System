@@ -32,5 +32,10 @@ class Project extends Model
         return $this->belongsTo(User::class, 'project_incharge_id');
     }
 
+    public function delayConfigurations()
+    {
+        return $this->hasMany(SystemConfiguration::class);
+    }
+
 }
 

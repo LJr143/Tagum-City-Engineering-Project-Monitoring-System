@@ -25,7 +25,7 @@ class AddManualDirectCost extends Component
     public function removeCost($index)
     {
         unset($this->direct_costs[$index]);
-        $this->direct_costs = array_values($this->indirect_costs);
+        $this->direct_costs = array_values($this->direct_costs);
     }
 
     public function saveDirectCosts()
@@ -49,7 +49,7 @@ class AddManualDirectCost extends Component
         $this->reset('direct_costs');
 
         // Dispatch an event to indicate the costs have been saved
-        $this->dispatch('indirectCostsSaved');
+        $this->dispatch('directCostsSaved');
     }
 
 
