@@ -10,7 +10,7 @@ class DirectCost extends Model
     use HasFactory;
 
 
-    protected $fillable = ['pow_id', 'description', 'amount'];
+    protected $fillable = ['pow_id', 'description', 'amount',   'remaining_cost',];
 
     public function pow()
     {

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('description');
             $table->decimal('amount', 15, 2);
             $table->double('spent_cost')->default(0);
+            $table->double('remaining_cost')->default(0);
             $table->timestamps();
         });
     }
