@@ -45,8 +45,14 @@
                                 <p class="text-[12px] font-bold">Php {{ number_format($totalIndirectCost, 2) }}</p>
                                 <p class="text-gray-600 text-[10px]">Indirect Cost</p>
                             </div>
+
+                            <div class="flex-1 text-center md:text-left mb-4 md:mb-0">
+                                <p class="text-[12px] font-bold">Php {{ number_format($totalDirectCost, 2) }}</p>
+                                <p class="text-gray-600 text-[10px]">Other Direct Cost</p>
+                            </div>
+
                             <div class="flex-1 text-center md:text-left mb-4 md:mb-0 ">
-                                <p class="text-[12px] font-bold">Php {{ number_format($card->total_material_cost + $card->total_labor_cost + $totalIndirectCost), 2 }}</p>
+                                <p class="text-[12px] font-bold">Php {{ number_format($card->total_material_cost + $card->total_labor_cost + $totalIndirectCost + $totalDirectCost), 2 }}</p>
                                 <p class="text-gray-600 text-[10px]">Total Project Cost</p>
                             </div>
 

@@ -42,7 +42,7 @@ Route::middleware(['auth:sanctum', 'verified', 'inactivity.logout'])->group(func
     });
 
     // User Management (Admin)
-    Route::middleware('role:admin')->group(function () {
+    Route::middleware('role:admin,encoder')->group(function () {
         Route::get('/manage-user', [UserController::class, 'index'])->name('manage-user');
 
         //System Configuration
@@ -57,7 +57,7 @@ Route::middleware(['auth:sanctum', 'verified', 'inactivity.logout'])->group(func
 
         // Report
         Route::get('/report', function () {
-            return view('layouts.reports.admin-report');
+            return view('layouts.reports.report-');
         })->name('report');
     });
 

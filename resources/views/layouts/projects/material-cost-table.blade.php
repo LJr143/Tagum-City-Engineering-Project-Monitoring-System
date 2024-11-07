@@ -42,7 +42,7 @@
 
                 </div>
 
-                @if (auth()->user()->isAdmin())
+                @if (auth()->user()->isAdmin() || auth()->user()->isEncoder())
                     <div>
                         <div class="flex justify-content-between">
                             <button onclick="openDeleteModal()"
@@ -101,6 +101,7 @@
                             @endif
                         </div>
                         <div class="mt-2">
+                            @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'suspended')
                             <button onclick="openRealignmentModal()"
                                     class=" w-full text-center bg-green-500 text-white text-[10px] h-7 sm:text-xs px-2 sm:px-4 py-1 sm:py-2 rounded shadow-md hover:bg-green-600 focus:outline-none flex items-center justify-center space-x-2">
                                 <span>Realignment Setting</span>
@@ -120,6 +121,7 @@
                                           stroke-linejoin="round"/>
                                 </svg>
                             </button>
+                            @endif
                         </div>
                     </div>
 
@@ -167,7 +169,9 @@
                     <div class="bg-white shadow-md rounded-lg p-6">
                         <h3 class="text-sm font-semibold mb-2 text-center"> Materials</h3>
                         <div class="mb-2">
+                            @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'suspended')
                             <livewire:add-manual-material :pow_id="$pow->id"/>
+                            @endif
                         </div>
                         <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
                             <livewire:material-table :pow_id="$pow->id"/>
@@ -182,8 +186,8 @@
                         <!-- Filter, Search, Import Inside Card -->
                         <div class="flex items-center justify-between mb-4 space-x-4">
                             <div class="flex space-x-2 ml-auto">
-                                @if (auth()->user()->isEncoder())
-                                    <livewire:add-payroll :pow_id="$pow->id"/>
+                                @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'suspended')
+                                <livewire:add-payroll :pow_id="$pow->id"/>
                                 @endif
                                 <input type="text" placeholder="Search..."
                                        class="px-2 py-1 border border-gray-300 rounded-md shadow-sm text-xs w-55">
@@ -201,7 +205,9 @@
                     <div class="bg-white shadow-md rounded-lg p-6">
                         <h3 class="text-sm font-semibold mb-2 text-center"> Indirect Cost</h3>
                         <div class="mb-2">
+                            @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'suspended')
                             <livewire:add-manual-indirect-cost :pow_id="$pow->id"/>
+                            @endif
                         </div>
                         <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
                             <livewire:indirect-cost-table :pow_id="$pow->id"/>
@@ -213,7 +219,9 @@
                     <div class="bg-white shadow-md rounded-lg p-6">
                         <h3 class="text-sm font-semibold mb-2 text-center"> Other Direct Cost</h3>
                         <div class="mb-2">
+                            @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'suspended')
                             <livewire:add-manual-direct-cost :pow_id="$pow->id"/>
+                            @endif
                         </div>
                         <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
                             <livewire:other-direct-cost-table :pow_id="$pow->id"/>

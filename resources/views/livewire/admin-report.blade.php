@@ -1,4 +1,4 @@
-<!-- resources/views/livewire/admin-report.blade.php -->
+<!-- resources/views/livewire/report-.blade.php -->
 <div>
     <!-- Filter Section -->
     <div class="flex space-x-4 mb-4">
