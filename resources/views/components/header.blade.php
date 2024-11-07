@@ -25,31 +25,22 @@
 {{--                    </svg>--}}
                 </div>
 
-        <div class="flex justify-center items-center">
+        <div class="flex justify-center items-center space-x-2">
             <svg width="3" height="12" viewBox="0 0 3 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <line x1="1.5" y1="1.5" x2="1.5" y2="22.5" stroke="#36D600" stroke-width="3" stroke-linecap="round"/>
             </svg>
 
-            <img
-                class="w-[50px]"
-                src="{{ asset('storage/' . (auth()->user()->profile_photo_path ?? 'pmsAssets/default.png')) }}"
-                alt="profile_img"
-            />
+            <img class="w-[50px] h-[50px] rounded-full object-cover"
+                 src="{{ asset('storage/' . (auth()->user()->profile_photo_path ?? 'pmsAssets/default.png')) }}" alt="profile_img"/>
 
-
-            <div class="block items-center">
-                <p style="font-size: 12px">
-                    {{ auth()->user()->first_name }}
-                    @if(auth()->user()->middle_initial)
-                        {{ auth()->user()->middle_initial }}.
-                    @endif
-                    {{ auth()->user()->last_name }}
-                </p>
-                <p style="font-size: 8px">{{ auth()->user()->role }}</p>
+            <div class="hidden md:block">
+                <p class="text-sm">{{ auth()->user()->first_name }}
+                    @if(auth()->user()->middle_initial) {{ auth()->user()->middle_initial }}. @endif
+                    {{ auth()->user()->last_name }}</p>
+                <p class="text-xs text-gray-500">{{ auth()->user()->role }}</p>
             </div>
-
-
         </div>
+
         <div class="ml-2">
             <x-dropdown align="right" width="48" contentClasses="py-2 bg-white" dropdownClasses="border border-gray-200">
                 <x-slot name="trigger">

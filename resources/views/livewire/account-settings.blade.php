@@ -3,7 +3,7 @@
         <div class="relative w-20 h-20">
             @if ($profilePhotoPath)
             <div class="profile-image mt-3">
-                <img src="{{ asset('storage/' . $profilePhotoPath) }}" alt="Profile Image" width="200" />
+                <img src="{{ asset('storage/' . $profilePhotoPath) }}" alt="Profile Image" width="200" class="rounded-full object-cover" />
             </div>
             @else
             <img src="{{ asset('storage/pmsAssets/default.png') }}" alt="Profile Image" class="w-full h-full bg-gray-300 rounded-full object-cover" />
