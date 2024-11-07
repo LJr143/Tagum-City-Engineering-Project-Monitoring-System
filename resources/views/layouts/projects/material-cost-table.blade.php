@@ -42,11 +42,11 @@
 
                 </div>
 
-                @if (auth()->user()->isAdmin())
+                @if (auth()->user()->isAdmin() || auth()->user()->isEncoder())
                     <div>
                         <div class="flex justify-content-between">
                             <button onclick="openDeleteModal()"
-                                    class="bg-red-500 mr-2 text-white text-[10px] sm:text-xs px-2 sm:px-4 py-1 sm:py-2 rounded shadow-md hover:bg-red-600 focus:outline-none flex items-center space-x-2">
+                                    class="bg-red-500 mr-2 text-white text-[10px] sm:text-xs px-2 h-7 sm:px-4 py-1 sm:py-2 rounded shadow-md hover:bg-red-600 focus:outline-none flex items-center space-x-2">
                                 <span>Delete</span>
                                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
@@ -66,7 +66,7 @@
                             </button>
                             @if($pow->project->status != 'suspended' && $pow->project->status != 'completed')
                                 <button onclick="openSuspendModal()"
-                                        class="bg-red-500 text-white text-[10px] sm:text-xs px-2 sm:px-4 py-1 sm:py-2 rounded shadow-md hover:bg-red-600 focus:outline-none flex items-center space-x-2">
+                                        class="bg-red-500 text-white text-[10px] sm:text-xs px-2 sm:px-4 py-1 h-7 sm:py-2 rounded shadow-md hover:bg-red-600 focus:outline-none flex items-center space-x-2">
                                     <span>Suspend</span>
                                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
@@ -85,31 +85,25 @@
                                     </svg>
                                 </button>
                             @else
-
-                                <button onclick="openResumeModal()"
-                                        class="bg-green-500 text-white text-[10px] sm:text-xs px-2 sm:px-4 py-1 sm:py-2 rounded shadow-md hover:bg-green-600 focus:outline-none flex items-center space-x-2">
+                                <button onclick="openResumeModal()" class="bg-green-500 text-white text-[10px] h-7 sm:text-xs px-2 sm:px-4 py-1 sm:py-2 rounded shadow-md hover:bg-green-600 focus:outline-none flex items-center space-x-1">
                                     <span>Resume</span>
-                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10 10V16" stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                              stroke-linejoin="round"/>
-                                        <path d="M14 10V16" stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                              stroke-linejoin="round"/>
-                                        <path d="M18 6V18C18 19.1046 17.1046 20 16 20H8C6.89543 20 6 19.1046 6 18V6"
-                                              stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                              stroke-linejoin="round"/>
-                                        <path d="M4 6H20" stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                              stroke-linejoin="round"/>
-                                        <path d="M15 6V5C15 3.89543 14.1046 3 13 3H11C9.89543 3 9 3.89543 9 5V6"
-                                              stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                              stroke-linejoin="round"/>
+                                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <rect width="15" height="15" fill="url(#pattern0_1545_9266)"/>
+                                        <defs>
+                                            <pattern id="pattern0_1545_9266" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                                <use xlink:href="#image0_1545_9266" transform="scale(0.01)"/>
+                                            </pattern>
+                                            <image id="image0_1545_9266" width="100" height="100" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAAAsTAAALEwEAmpwYAAADyUlEQVR4nO3dXYgWVRzH8aNuvhGkIkZIShCk+RKsRsV6ISReBWIkZKaXISJEemH4hhca2+WKN90aCuKykCAseaNCFKQUalDSImuBb5AvmPj+lYMztOr67Mwz/2nOmfl9LpfdYfb89pxn57z8xzkRERERERERERERERHJDRgNLACWAYuA8UWbERgFdAIrgLXAKmC+/7oiat1wnwDnedINYCswpo0gJgE7gUGG9xewCZigYJ5tvM201ud7T44wlgKXyOZ34F2F8l/jvQM8zNBw6zOG8SFwj3z8928HOhofDLA/Y6P9mSGM2cC/tO8H4LVGhwKcy9FgL49wre8p7jqwxjUVcC1HY73Z4jrzsHUAmOyaJvmLzGpOi+tsw57/r2+xaxLDQPooxwPga2CsawLDQI5TrpPALFd3hoH8SPluAZ/X+ik/skBS/cArro4iDYRkJuADVzcRB0Iyw/ANMNHVRYWBnAZuYuMM8Jarg4oC2Z38zDTgEDZuAxvzTIIGqaJAPnpqvWRtwTmwoY4A012sqg4k5Z8xgBPYuAqsdDEKJRDPT78DO4D72NgLvOhiElIgKeA9YAAbfja7y8UixEA84CXgW2z4BbBu4AUXulADSSWbI/7Bxk/A6y5koQfiATOBY9jwv+9nLlQxBOL5nS/JLpU72DgITHGhiSWQFPA28Ad1XQCLLRDP7+UCerCbD+sJZgEsxkBSwHLgCjZO+X0BrmoxB+L5nTDAYWz4tljoqhR7IEPmw75IJhiL8j1uhqtKHQJJ+fsDfqG4XleVOgXi+R37yYd0lu2xrVSzvlK3QFLAEuBv2veVq0JdA/GAqcB3tOeoq0KdAxnyhP9rG4EMuCookOdSIIENWcfMb6jJQxbFP9R3lX2PjQgE/dsbTiCGD4YHy7i/xvQQbKdOLgOvWt5fowLBfnJxgdW9NS4QbKfffwbesLivxgWCFqhqu4Q7qCXcx7TJIeYhC20DCicQtFGutltJd7RT1eh/F+KQhTZbhxEIOo4QTg9BB3bCGLLQkbYgAtlT0qHPDdFXeajwWPRvhgc9dSzaIBALKhxg2EOKUmmNgEpr9Kv4TBiB3FJ5piepgFnZIinx1x3MCaeyqQhmfcvEzjXuGY0tE2tZSLnfIIjGF1LeZ1hqfFbBomQqNZ5sGvAfnCNZl7HHLQPu5gxCxfifasQvR2iw3pyvq3gfuJgxjLN6XcXwjfjxMC9f8eP5loIvdLnwnCAGk1IZ9SlgWdIrjzqTYacLGGdwzY7kmp/6oi/Aar3ySERERERERERERERExEXnEQrlvdEPbQz+AAAAAElFTkSuQmCC"/>
+                                        </defs>
                                     </svg>
                                 </button>
+
                             @endif
                         </div>
                         <div class="mt-2">
+                            @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'suspended')
                             <button onclick="openRealignmentModal()"
-                                    class=" w-full text-center bg-green-500 text-white text-[10px] sm:text-xs px-2 sm:px-4 py-1 sm:py-2 rounded shadow-md hover:bg-green-600 focus:outline-none flex items-center justify-center space-x-2">
+                                    class=" w-full text-center bg-green-500 text-white text-[10px] h-7 sm:text-xs px-2 sm:px-4 py-1 sm:py-2 rounded shadow-md hover:bg-green-600 focus:outline-none flex items-center justify-center space-x-2">
                                 <span>Realignment Setting</span>
                                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
@@ -127,6 +121,7 @@
                                           stroke-linejoin="round"/>
                                 </svg>
                             </button>
+                            @endif
                         </div>
                     </div>
 
@@ -138,7 +133,7 @@
 
 
             <div>
-                <div class="sm:hidden">
+                <div class="sm:hidden mb-4">
                     <label for="tabs" class="sr-only">Select a tab</label>
                     <select id="tabs" name="tabs" onchange="changeTab(event)"
                             class="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
@@ -174,7 +169,9 @@
                     <div class="bg-white shadow-md rounded-lg p-6">
                         <h3 class="text-sm font-semibold mb-2 text-center"> Materials</h3>
                         <div class="mb-2">
+                            @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'suspended')
                             <livewire:add-manual-material :pow_id="$pow->id"/>
+                            @endif
                         </div>
                         <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
                             <livewire:material-table :pow_id="$pow->id"/>
@@ -189,8 +186,8 @@
                         <!-- Filter, Search, Import Inside Card -->
                         <div class="flex items-center justify-between mb-4 space-x-4">
                             <div class="flex space-x-2 ml-auto">
-                                @if (auth()->user()->isEncoder())
-                                    <livewire:add-payroll :pow_id="$pow->id"/>
+                                @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'suspended')
+                                <livewire:add-payroll :pow_id="$pow->id"/>
                                 @endif
                                 <input type="text" placeholder="Search..."
                                        class="px-2 py-1 border border-gray-300 rounded-md shadow-sm text-xs w-55">
@@ -208,7 +205,9 @@
                     <div class="bg-white shadow-md rounded-lg p-6">
                         <h3 class="text-sm font-semibold mb-2 text-center"> Indirect Cost</h3>
                         <div class="mb-2">
+                            @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'suspended')
                             <livewire:add-manual-indirect-cost :pow_id="$pow->id"/>
+                            @endif
                         </div>
                         <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
                             <livewire:indirect-cost-table :pow_id="$pow->id"/>
@@ -220,7 +219,9 @@
                     <div class="bg-white shadow-md rounded-lg p-6">
                         <h3 class="text-sm font-semibold mb-2 text-center"> Other Direct Cost</h3>
                         <div class="mb-2">
+                            @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'suspended')
                             <livewire:add-manual-direct-cost :pow_id="$pow->id"/>
+                            @endif
                         </div>
                         <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
                             <livewire:other-direct-cost-table :pow_id="$pow->id"/>
@@ -273,7 +274,7 @@
             <!-- Modal for Delete Item -->
             <div id="delete-modal"
                  class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-50">
-                <div class="bg-white rounded-lg shadow-lg p-6 w-1/3">
+                <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md mx-4 sm:mx-auto">
                     <div class="flex items-center mb-2">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"
                              class="mr-2">
@@ -283,7 +284,7 @@
                         </svg>
                         <h2 class="text-sm font-semibold text-red-500">Delete Item</h2>
                     </div>
-                    <p class="text-xs mb-4">Are you sure you want to remove this item? This process cannot be
+                    <p class="text-xs mb-4 ml-7">Are you sure you want to remove this item? This process cannot be
                         undone.</p>
 
                     <!-- Delete Form -->
@@ -309,7 +310,7 @@
 
             <div id="suspend-modal"
                  class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-50">
-                <div class="bg-white rounded-lg shadow-lg p-6 w-1/3">
+                <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md mx-4 sm:mx-auto">
                     <div class="flex items-center mb-2">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"
                              class="mr-2">
@@ -319,7 +320,7 @@
                         </svg>
                         <h2 class="text-sm font-semibold text-red-500">Suspend Project</h2>
                     </div>
-                    <p class="text-xs mb-4">Are you sure you want to suspend this project?.</p>
+                    <p class="text-xs mb-4 ml-7">Are you sure you want to suspend this project?.</p>
 
                     <!-- Suspend Form -->
                     <form id="suspend-form" action="{{ route('projects.suspend') }}" method="POST">
@@ -344,17 +345,15 @@
 
             <div id="resume-modal"
                  class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-50">
-                <div class="bg-white rounded-lg shadow-lg p-6 w-1/3">
+                <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md mx-4 sm:mx-auto">
                     <div class="flex items-center mb-2">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"
-                             class="mr-2">
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                  d="M8.4845 2.49512C9.15808 1.32845 10.842 1.32845 11.5156 2.49512L17.7943 13.3701C18.4678 14.5368 17.6259 15.9951 16.2787 15.9951H3.72136C2.37421 15.9951 1.53224 14.5368 2.20582 13.3701L8.4845 2.49512ZM10 5.00012C10.4142 5.00012 10.75 5.33591 10.75 5.75012V9.25012C10.75 9.66434 10.4142 10.0001 10 10.0001C9.58579 10.0001 9.25 9.66434 9.25 9.25012L9.25 5.75012C9.25 5.33591 9.58579 5.00012 10 5.00012ZM10 14.0001C10.5523 14.0001 11 13.5524 11 13.0001C11 12.4478 10.5523 12.0001 10 12.0001C9.44772 12.0001 9 12.4478 9 13.0001C9 13.5524 9.44772 14.0001 10 14.0001Z"
-                                  fill="#CA383A"/>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M8.4845 2.49512C9.15808 1.32845 10.842 1.32845 11.5156 2.49512L17.7943 13.3701C18.4678 14.5368 17.6259 15.9951 16.2787 15.9951H3.72136C2.37421 15.9951 1.53224 14.5368 2.20582 13.3701L8.4845 2.49512ZM10 5.00012C10.4142 5.00012 10.75 5.33591 10.75 5.75012V9.25012C10.75 9.66434 10.4142 10.0001 10 10.0001C9.58579 10.0001 9.25 9.66434 9.25 9.25012L9.25 5.75012C9.25 5.33591 9.58579 5.00012 10 5.00012ZM10 14.0001C10.5523 14.0001 11 13.5524 11 13.0001C11 12.4478 10.5523 12.0001 10 12.0001C9.44772 12.0001 9 12.4478 9 13.0001C9 13.5524 9.44772 14.0001 10 14.0001Z" fill="#4CAF50"/>
                         </svg>
-                        <h2 class="text-sm font-semibold text-red-500">Resume Project</h2>
+
+                        <h2 class="text-sm font-semibold text-green-500">Resume Project</h2>
                     </div>
-                    <p class="text-xs mb-4">Are you sure you want to resume this project?.</p>
+                    <p class="text-xs mb-4 ml-7">Are you sure you want to resume this project?.</p>
 
                     <form id="resume-form" action="{{ route('projects.resume') }}" method="POST">
                         @csrf
@@ -375,7 +374,7 @@
             </div>
 
             <div id="realignment-modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-50">
-                <div class="bg-white rounded-lg shadow-lg p-6 w-1/3">
+                <div class="bg-white rounded-lg shadow-lg p-4 sm:p-6 w-11/12 sm:w-1/3 ">
                     <div class="flex items-center mb-2">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
                             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -413,10 +412,10 @@
                         </select>
 
                         <div class="flex justify-end">
-                            <button type="button" onclick="closeRealignmentModal()" class="bg-white border border-gray-300 text-gray-700 rounded-md text-xs px-4 py-2 hover:bg-gray-400">
+                            <button type="button" onclick="closeRealignmentModal()" class="bg-white border border-gray -300 text-gray-700 rounded-md text-xs px-4 py-2 hover:bg-gray-400">
                                 Cancel
                             </button>
-                            <button type="submit" class="bg-blue-500 text-white rounded-md px-4 py-2 text-xs hover:bg-blue-600 ml-2">
+                            <button type="submit" class="bg-green-500 text-white rounded-md px-4 py-2 text-xs hover:bg-green-600 ml-2">
                                 Realign
                             </button>
                         </div>
@@ -428,15 +427,22 @@
             <!-- Save Modal -->
             <div id="save-modal"
                  class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-50">
-                <div class="bg-white rounded-lg shadow-lg p-6 w-1/3">
+                <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md mx-4 sm:mx-auto">
                     <div class="flex items-center mb-2">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"
-                             class="mr-2">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M3 3h14v14H3V3z" fill="#4F46E5"/>
+                        <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <rect width="25" height="25" fill="url(#pattern0_1562_9309)"/>
+                            <defs>
+                                <pattern id="pattern0_1562_9309" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                    <use xlink:href="#image0_1562_9309" transform="scale(0.01)"/>
+                                </pattern>
+                                <image id="image0_1562_9309" width="100" height="100" xlink:href="data:image/png;base64,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"/>
+                            </defs>
                         </svg>
-                        <h2 class="text-sm font-semibold text-gray-800">Save Changes</h2>
+
+
+                        <h2 class="text-sm font-semibold text-green-600 ml-1">Save Changes</h2>
                     </div>
-                    <p class="text-xs mb-4">Are you sure you want to save these changes? This action cannot be
+                    <p class="text-xs mb-4 ml-7">Are you sure you want to save these changes? This action cannot be
                         undone.</p>
                     <div class="flex justify-end">
                         <button id="save-cancel-button" onclick="closeSaveModal()"

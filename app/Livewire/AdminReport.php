@@ -67,6 +67,13 @@ class AdminReport extends PowerGridComponent
                 $totalCost = $totalLabor + $totalMaterials + $totalIndirects;
                 return Money::of($totalCost, 'PHP')->formatTo('en_PH');
             })
+
+            ->add('source_of_funds', function(Project $project) {
+                $firstPow = $project->pows()->first();
+                return $firstPow ? $firstPow->source_of_funds : 'N/A';
+            })
+
+
             ->add('description', fn(Project $project) => Str::limit($project->description, 30, '...'))
             ->add('start_date')
             ->add('end_date')
@@ -89,6 +96,9 @@ class AdminReport extends PowerGridComponent
                 ->sortable()
                 ->searchable(),
             Column::make('Location', 'baranggay')
+                ->sortable()
+                ->searchable(),
+            Column::make('Source of Funds', 'source_of_funds')
                 ->sortable()
                 ->searchable(),
             Column::make('Project Cost', 'project_cost')

@@ -28,6 +28,11 @@
                         <livewire:admin-report />
                     </div>
                 </div>
+                <div class="shadow text-[12px] w-full bg-white mt-5 p-5 rounded-md md:max-w-[800px] min-[1408px]:max-w-[1000px] lg:max-w-[900px] xl:max-w-[870px] 2xl:max-w-[1190px]">
+                    <div class="powergrid-filters">
+                        <livewire:report-running-balance />
+                    </div>
+                </div>
 
             </div>
         </div>

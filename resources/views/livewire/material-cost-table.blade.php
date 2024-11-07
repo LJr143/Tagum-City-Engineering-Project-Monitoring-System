@@ -32,7 +32,24 @@
     </style>
 
     {{-- Modal Warning --}}
-    @if ($totalMaterialCost == 0)
+    @if ($showWarning)
+        <div id="warningModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-modal z-50">
+            <div class="modal-content bg-white rounded-lg shadow-lg p-6 w-full max-w-md mx-4 sm:mx-6 md:mx-8 lg:mx-10 xl:mx-12">
+                <div class="flex items-center mb-2">
+                    <h2 class="text-sm font-semibold text-red-500">{{ $pow->project->status === 'terminated' ? 'Termination Notice' : 'Warning!' }}</h2>
+                </div>
+
+                <p class="text-xs mb-4">{{ $warningMessage }}</p>
+
+                <div class="flex justify-end">
+                    <button wire:click="closeWarning" class="bg-white border border-gray-300 text-gray-700 rounded-md text-xs px-4 py-2 hover:bg-gray-200">
+                        Okay
+                    </button>
+                </div>
+            </div>
+        </div>
+    @endif
+@if ($totalMaterialCost == 0)
         <div id="warningModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-modal z-50">
             <div class="modal-content bg-white rounded-lg shadow-lg p-6 w-full max-w-md mx-4 sm:mx-6 md:mx-8 lg:mx-10 xl:mx-12">
                 <div class="flex items-center mb-2">
@@ -41,7 +58,7 @@
                     </svg>
                     <h2 class="text-sm font-semibold text-red-500">Warning!</h2>
                 </div>
-                <p class="text-xs mb-4">Please add the Information of Materials for monitoring and updating.</p>
+                <p class="text-xs mb-4 ml-7">Please add the Information of Materials for monitoring and updating.</p>
                 <div class="flex justify-end">
                     <button id="delete-cancel-button" onclick="closeModal()" class="bg-white border border-gray-300 text-gray-700 rounded-md text-xs px-4 py-2 hover:bg-gray-200">
                         Okay
@@ -69,6 +86,7 @@
                 </div>
             </div>
         </div>
+
         @else
             <div id="warningModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-modal z-50">
                 <div class="modal-content bg-white rounded-lg shadow-lg p-6 w-full max-w-md mx-4 sm:mx-6 md:mx-8 lg:mx-10 xl:mx-12">
@@ -92,7 +110,7 @@
 
 
 
-    <div class="bg-white p-4 rounded shadow mb-5">
+    <div class="bg-white p-4 rounded shadow mb-4">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div class="flex flex-col sm:flex-row items-center">
                 <div class="relative w-20 h-20 mb-4 sm:mb-0 sm:mr-4">
@@ -250,10 +268,9 @@
 
 
 
-    <div class="bg-white p-4 rounded shadow mb-3">
+    <div class="bg-white p-4 rounded shadow mb-5">
         <div class="w-full progress-bar-container text-[12px]">
-            <div class="flex flex-col justify-between items-start project-progress-container ">
-
+            <div class="flex flex-col justify-between items-start project-progress-container">
                 <span class="text-gray-700 text-[12px] ">Total Project Spent Cost: <span class="font-bold"> Php {{ number_format($totalProjectSpentCost, 2) }}</span></span>
                 <span class="text-gray-700 text-[12px] ">Overall Project Progress Actual Progress: <span class="font-bold"> {{ number_format($overallProgress, 2) }}%</span></span>
                 <div class="progress-bar" style="height: 15px; background-color: #E0E0E0; position: relative;">
@@ -281,6 +298,15 @@
                     position: absolute;
                     left: 0;">
                     </div>
+
+                        <div
+                            class="actual-progress bg-red-200"
+                            style="
+                    width: {{ $inputProgress }}%;
+                    height: 100%;
+                    position: absolute;
+                    left: 0;">
+                        </div>
                 </div>
             </div>
         </div>
