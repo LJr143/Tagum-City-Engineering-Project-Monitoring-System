@@ -11,9 +11,9 @@
     </div>
 
     <!-- Modal Background -->
-    <div x-show="open" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50 mt-12 mb-12 mx-4">
+    <div x-show="open" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
         <!-- Modal Content -->
-        <div class="bg-white p-6 rounded-lg shadow-md max-w-2xl w-full relative z-60">
+        <div class="bg-white p-6 rounded-lg shadow-md max-w-2xl  w-full sm:max-w-md relative z-60 mx-4">
             <button @click="open = false" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                      xmlns="http://www.w3.org/2000/svg">
@@ -86,22 +86,25 @@
                     <!-- Upload Material Input -->
                     <div x-show="uploadFile === 'upload'" x-cloak>
                         <label for="materialsFile" class="block text-gray-700 text-xs">Upload Material (PR)</label>
-                        <div class="relative">
+
+                        <div x-data="{ isLoading: false }" class="relative">
                             <input type="file" id="materialsFile" wire:model="materialsFile"
                                    class="mt-1 block w-full p-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-xs"
-                                   @change="isLoading = true; setTimeout(() => { isLoading = false }, 3000)">
-                            <!-- Loading spinner -->
+                                   @change="isLoading = true; setTimeout(() => isLoading = false, 3000)">
+
+                            <!-- Loading spinner controlled by Alpine.js -->
                             <div x-show="isLoading" class="absolute inset-0 flex justify-center items-center bg-gray-800 bg-opacity-50 rounded-md">
-                                <div class="spinner-border animate-spin inline-block w-8 h-8 border-4 border-t-4 border-gray-300 rounded-full" role="status">
-                                    <span class="visually-hidden">Loading...</span>
-                                </div>
+                                <div class="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-gray-300"></div>
                             </div>
                         </div>
+
                         <!-- Error message for materialsFile -->
                         @error('materialsFile')
                         <span class="text-red-500 ml-2 text-[10px]">{{ $message }}</span>
                         @enderror
                     </div>
+
+
 
                     <!-- Total Material Cost Input -->
                     <div x-show="uploadFile === 'manual'" x-cloak>

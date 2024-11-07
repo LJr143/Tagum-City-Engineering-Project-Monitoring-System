@@ -32,7 +32,7 @@
                         <!-- Project Title -->
                         <div>
                             <label class="block text-xs font-medium mb-1">Project Title</label>
-                            <input type="text" wire:model="title" class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
+                            <input type="text" wire:model="title" class="w-full px-3 py-2 text-xs border border-gray-400 rounded focus:ring-green-500 focus:border-green-500" required>
                         </div>
 
                         <!-- Project Address -->
@@ -41,20 +41,20 @@
                             <div class="flex flex-col md:flex-row gap-2 border-2 p-2 rounded">
                                 <div class="w-full md:w-2/6">
                                     <label class="block text-xs font-medium mb-1">Barangay</label>
-                                    <input type="text" wire:model="baranggay" class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
+                                    <input type="text" wire:model="baranggay" class="w-full px-3 py-2 text-xs border border-gray-400 rounded focus:ring-green-500 focus:border-green-500" required>
                                 </div>
                                 <div class="w-full md:w-2/6">
                                     <label class="block text-xs font-medium mb-1">Street</label>
-                                    <input type="text" wire:model="street" class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
+                                    <input type="text" wire:model="street" class="w-full px-3 py-2 text-xs border border-gray-400 rounded focus:ring-green-500 focus:border-green-500" required>
                                 </div>
                                 <div class="w-full md:w-1/6">
                                     <label class="block text-xs font-medium mb-1">X-axis</label>
-                                    <input type="text" wire:model="x_axis" class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
+                                    <input type="text" wire:model="x_axis" class="w-full px-3 py-2 text-xs border border-gray-400 rounded focus:ring-green-500 focus:border-green-500" required>
                                     @error('x_axis') <span class="text-red-500 text-[9px]">{{ $message }}</span> @enderror
                                 </div>
                                 <div class="w-full md:w-1/6">
                                     <label class="block text-xs font-medium mb-1">Y-axis</label>
-                                    <input type="text" wire:model="y_axis" class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
+                                    <input type="text" wire:model="y_axis" class="w-full px-3 py-2 text-xs border border-gray-400 rounded focus:ring-green-500 focus:border-green-500" required>
                                     @error('y_axis') <span class="text-red-500 text-[9px]">{{ $message }}</span> @enderror
                                 </div>
                             </div>
@@ -63,7 +63,7 @@
                         <!-- Project In-Charge -->
                         <div x-data="{ open: false, search: '{{ $currentProjectInchargeName ?? '' }}', filteredProjectIncharge: [] }" class="relative">
                             <label for="projectIncharge_id" class="block text-xs font-medium mb-1">Project In-Charge</label>
-                            <input type="text" id="projectIncharge_id" x-model="search" @focus="open = true" class="w-full px-3 py-2 text-xs border border-gray-400 rounded" placeholder="Search Project In-Charge" autocomplete="off" required>
+                            <input type="text" id="projectIncharge_id" x-model="search" @focus="open = true" class="w-full px-3 py-2 text-xs border border-gray-400 rounded focus:ring-green-500 focus:border-green-500" placeholder="Search Project In-Charge" autocomplete="off" required>
                             <ul x-show="open && filteredProjectIncharge.length > 0" @click.away="open = false" class="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg sm:text-xs" x-transition>
                                 <template x-for="projectIncharge in filteredProjectIncharge" :key="projectIncharge.id">
                                     <li @click.stop="selectProjectIncharge(projectIncharge)" class="cursor-pointer hover:bg-indigo-500 hover:text-white p-2">
@@ -82,12 +82,12 @@
                             <div class="flex flex-col md:flex-row gap-2 border-2 p-2 rounded">
                                 <div class="w-full md:w-1/2">
                                     <label class="block text-xs font-medium mb-1">Start Date</label>
-                                    <input type="date" wire:model="start_date" class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
+                                    <input type="date" wire:model="start_date" class="w-full px-3 py-2 text-xs border border-gray-400 rounded focus:ring-green-500 focus:border-green-500" required>
                                     @error('start_date') <span class="text-red-500 text-[10px]">{{ $message }}</span> @enderror
                                 </div>
                                 <div class="w-full md:w-1/2">
                                     <label class="block text-xs font-medium mb-1">End Date</label>
-                                    <input type="date" wire:model="end_date" class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
+                                    <input type="date" wire:model="end_date" class="w-full px-3 py-2 text-xs border border-gray-400 rounded focus:ring-green-500 focus:border-green-500" required>
                                     @error('end_date') <span class="text-red-500 text-[10px]">{{ $message }}</span> @enderror
                                 </div>
                             </div>
@@ -96,7 +96,7 @@
                         <!-- Description -->
                         <div>
                             <label class="block text-xs font-medium mb-1">Description</label>
-                            <textarea wire:model="description" class="w-full h-[80px] px-3 py-2 text-xs border border-gray-400 rounded resize-none" required></textarea>
+                            <textarea wire:model="description" class="w-full h-[80px] px-3 py-2 text-xs border border-gray-400 rounded resize-none focus:ring-green-500 focus:border-green-500" required></textarea>
                         </div>
                     </div>
 
