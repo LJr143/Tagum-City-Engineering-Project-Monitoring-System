@@ -2,7 +2,7 @@
     <div class="flex justify-end">
         <div class="relative ml-2">
             <button @click="directOpen = true"
-                    class="bg-green-500 text-white text-xs px-4 py-2 rounded shadow-md hover:bg-blue-600 focus:outline-none">
+                    class="bg-green-500 text-white text-xs px-4 py-2 rounded shadow-md hover:bg-green-600 focus:outline-none">
                 Add Direct Cost
             </button>
         </div>
@@ -28,17 +28,16 @@
             x-transition:leave="transition ease-in duration-200"
             x-transition:leave-start="opacity-100 transform scale-100"
             x-transition:leave-end="opacity-0 transform scale-90"
-            class="bg-white w-full max-w-[700px] p-6 rounded-lg relative"
+            class="bg-white rounded-lg shadow-lg p-6 w-full max-w-2xl mx-4 overflow-y-auto max-h-[300px]"
         >
-            <!-- Close Button (X) -->
-            <button @click="directOpen = false" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-                     stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                </svg>
-            </button>
+            <div class="flex justify-between items-center mb-4 border-b border-gray-300 pb-2">
+                <h2 class="text-sm font-bold text-left w-full sm:w-auto">Add Direct Costs</h2>
 
-            <h2 class="text-lg font-bold mb-4">Add Direct Costs</h2>
+                <!-- Close Button (X) -->
+                <button @click="directOpen = false" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
 
             <form wire:submit.prevent="saveDirectCosts" class="space-y-4 text-[12px]">
                 <!-- Display Fields Dynamically -->
@@ -47,13 +46,13 @@
                         <input type="text" name="direct_costs[{{ $index }}][description]"
                                wire:model.defer="direct_costs.{{ $index }}.description"
                                placeholder="Description"
-                               class="w-1/2 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-xs"
+                               class="w-1/2 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 text-xs"
                                required>
 
                         <input type="number" name="direct_costs[{{ $index }}][amount]"
                                wire:model.defer="direct_costs.{{ $index }}.amount"
                                placeholder="Amount"
-                               class="w-1/3 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-xs"
+                               class="w-1/3 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 text-xs"
                                required>
 
                         @if ($index > 0)
@@ -70,23 +69,26 @@
                     </div>
                 @endforeach
 
+
                 <!-- Add Field Button -->
                 <button type="button" wire:click="addCost"
-                        class="bg-blue-500 text-white text-[12px] px-2 py-1 rounded hover:bg-blue-600">
+                        class="text-[12px] px-2 py-1 rounded  text-green-600 bg-green-100 hover:bg-green-200 p-2 mt-4">
                     + Add Field
                 </button>
+
 
                 <!-- Action Buttons -->
                 <div class="mt-6 flex justify-end space-x-2">
                     <button @click="directOpen = false" type="button"
-                            class="bg-gray-300 text-gray-700 text-[12px] px-4 py-2 rounded shadow-md hover:bg-gray-400 text-xs">
+                            class="bg-gray-300 text-gray-700 text-[12px] h-7 px-4 py-1 rounded shadow-md hover:bg-gray-400 justify-center text-center">
                         Cancel
                     </button>
                     <button type="submit"
-                            class="bg-green-500 text-white px-6 py-2 rounded shadow-md hover:bg-green-600 text-[12px]">
+                            class="bg-green-500 text-white px-6 py-1 h-7 rounded shadow-md hover:bg-green-600 text-[12px] justify-center text-center">
                         Save
                     </button>
                 </div>
+
             </form>
         </div>
     </div>
