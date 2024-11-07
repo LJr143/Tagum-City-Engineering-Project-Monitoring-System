@@ -41,6 +41,8 @@ class ProgressInformation extends Component
 
     public $overallProgress = 0;
 
+    public $progress = 0;
+
 
     public function mount($pow_id): void
     {
@@ -64,7 +66,8 @@ class ProgressInformation extends Component
         $this->totalIndirectCost = IndirectCost::where('pow_id', $this->pow_id)->sum('amount');
         $this->totalDirectCost = DirectCost::where('pow_id', $this->pow_id)->sum('amount');
 
-
+        // Retrieve progress percentage from the found POW record.
+        $this->progress = $this->pow->progress_percentage;
     }
 
     public function fetchProjectConfigurations()
@@ -134,6 +137,7 @@ class ProgressInformation extends Component
             'overallProgress' => $this->overallProgress,
             'projectConfigurations' => $this->projectConfigurations,
             'totalProjectSpentCost' => $this->materialSpentCost + $this->laborSpentCost + $this->indirectSpentCost,
+            'inputProgress' => $this->progress,
         ]);
     }
 }
