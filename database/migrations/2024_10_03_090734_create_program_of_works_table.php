@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('source_of_funds');
             $table->string('total_material_cost')->nullable();
             $table->string('total_labor_cost');
+            $table->double('progress_percentage')->default(0);
             $table->timestamps();
 
         });
