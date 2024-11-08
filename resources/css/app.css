@@ -88,6 +88,10 @@ select {
 select option {
     color: #9B9B9B;
 }
+html, body {
+     overflow-x: hidden;
+}
+
 
 
 
