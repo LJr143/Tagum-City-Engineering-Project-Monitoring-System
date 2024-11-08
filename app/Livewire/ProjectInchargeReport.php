@@ -51,7 +51,17 @@ class ProjectInchargeReport extends PowerGridComponent
 
     public function datasource(): ?Builder
     {
-        return Project::query()->with('pows.indirectCosts', 'projectIncharge'); // Ensure relationships are loaded
+        $user = auth()->user();
+
+        if ($user->isProjectInCharge()) {
+            return Project::query()
+                ->whereHas('pows', function ($query) use ($user) {
+                    $query->where('project_incharge_id', $user->id);
+                })
+                ->with('pows.indirectCosts', 'projectIncharge');
+        }
+
+        return Project::query()->with('pows.indirectCosts', 'projectIncharge');
     }
 
     public function fields(): PowerGridFields
@@ -107,11 +117,9 @@ class ProjectInchargeReport extends PowerGridComponent
             Column::make('Project Description', 'description'),
             Column::make('Date Started', 'start_date'),
             Column::make('Target Date', 'end_date'),
-//            Column::make('Date of Completion', ''),
             Column::make('Accomplishment (%)', 'accomplishment_percentage')
                 ->sortable()
                 ->bodyAttribute('style', 'text-align: center;'),
-            Column::make('Project Incharge', 'project_incharge'),
             Column::make('Remarks', 'status')
                 ->searchable(),
         ];

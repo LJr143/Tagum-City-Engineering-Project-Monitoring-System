@@ -35,6 +35,14 @@
                     </div>
                 </div>
 
+                @else
+
+                    <div class="shadow text-[12px] w-full bg-white mt-0 p-5 rounded-md md:max-w-[800px] min-[1408px]:max-w-[1000px] lg:max-w-[900px] xl:max-w-[870px] 2xl:max-w-[1190px]">
+                        <div class="powergrid-filters">
+                            <livewire:project-incharge-report />
+                        </div>
+                    </div>
+
                 @endif
 
             </div>
