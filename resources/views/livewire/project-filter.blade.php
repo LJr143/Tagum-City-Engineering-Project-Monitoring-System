@@ -183,6 +183,9 @@
 
 
 @if ($projects->isEmpty())
+        <div class="text-center mt-2 text-gray-500 text-[12px]">
+            No project assigned for you.
+        </div>
     @else
         {{-- Pagination Links --}}
         <div class="w-full py-5 flex justify-center items-center">

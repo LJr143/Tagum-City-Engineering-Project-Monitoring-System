@@ -15,7 +15,7 @@
             <!-- Header -->
             <header class="flex flex-row justify-between items-center mb-4">
                 <h1 class="text-base font-semibold leading-6 text-gray-900">Projects</h1>
-                @if (auth()->user()->isAdmin())
+                @if (auth()->user()->isAdmin() || auth()->user()->isEncoder())
                     <!-- Modal -->
                     <livewire:add-project/>
                 @endif

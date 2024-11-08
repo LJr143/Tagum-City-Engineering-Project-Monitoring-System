@@ -195,6 +195,9 @@
                     </div>
 
                                         @if ($projects->isEmpty())
+                                            <div class="text-center mt-4 text-gray-500 text-[12px]">
+                                                No project assigned for you.
+                                            </div>
                                             <!-- No pagination if no cards -->
                                         @else
                                             {{-- Pagination Links --}}
