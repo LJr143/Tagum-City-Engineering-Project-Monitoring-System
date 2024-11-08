@@ -15,7 +15,6 @@
                         <div class="flex space-x-2">
                             @if (auth()->user()->isAdmin() || auth()->user()->isEncoder())
                                 <livewire:edit-project :project="$project->id"/>
-                            @endif
 
                                 <!-- Delete Button -->
                                 <button type="button" onclick="openDeleteModal()"
@@ -39,10 +38,15 @@
                                     </svg>
 
                                 </button>
+                            @endif
+
                         </div>
+                        @if (auth()->user()->isAdmin() || auth()->user()->isEncoder())
                         <div>
                             <livewire:project-configuration-settings :projectId="$project->id"/>
                         </div>
+                        @endif
+
                         <div class="relative flex flex-col items-center space-y-2 mt-4 w-full">
                             <div class="w-full h-40 bg-gray-200 flex items-center justify-center overflow-hidden">
                                 <img src="{{ asset('storage/pmsAssets/pic1.jpg') }}" alt="Profile Image"

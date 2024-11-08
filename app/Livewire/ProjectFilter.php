@@ -31,11 +31,23 @@ class ProjectFilter extends Component
 
     private function loadProjectCounts()
     {
-        $this->totalProjects = Project::count();
-        $this->pendingProjects = Project::where('status', 'pending')->count();
-        $this->completedProjects = Project::where('status', 'completed')->count();
-        $this->suspendedProjects = Project::where('status', 'suspended')->count();
+        $user = auth()->user();
+
+        if ($user->isProjectInCharge()) {
+            // Only count projects assigned to the project in-charge
+            $this->totalProjects = Project::where('project_incharge_id', $user->id)->count();
+            $this->pendingProjects = Project::where('project_incharge_id', $user->id)->where('status', 'pending')->count();
+            $this->completedProjects = Project::where('project_incharge_id', $user->id)->where('status', 'completed')->count();
+            $this->suspendedProjects = Project::where('project_incharge_id', $user->id)->where('status', 'suspended')->count();
+        } else {
+            // Count all projects for admin or other roles
+            $this->totalProjects = Project::count();
+            $this->pendingProjects = Project::where('status', 'pending')->count();
+            $this->completedProjects = Project::where('status', 'completed')->count();
+            $this->suspendedProjects = Project::where('status', 'suspended')->count();
+        }
     }
+
 
         public function filterProjects()
         {

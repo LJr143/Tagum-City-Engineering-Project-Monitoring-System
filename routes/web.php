@@ -61,6 +61,10 @@ Route::middleware(['auth:sanctum', 'verified', 'inactivity.logout'])->group(func
         })->name('report');
     });
 
+    Route::get('/report', function () {
+        return view('layouts.reports.report-');
+    })->name('report');
+
     // Logout
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });
