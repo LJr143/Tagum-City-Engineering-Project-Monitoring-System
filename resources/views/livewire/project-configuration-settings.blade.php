@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    <!-- Modals -->
+    <!-- Modalss -->
     <div
         x-show="open"
         x-transition:enter="transition ease-out duration-300"
@@ -38,7 +38,7 @@
             x-transition:leave="transition ease-in duration-200"
             x-transition:leave-start="opacity-100 transform scale-100"
             x-transition:leave-end="opacity-0 transform scale-90"
-            class="bg-white w-full max-w-[90%] sm:max-w-[900px] p-4 sm:p-6 rounded-lg relative"
+            class="bg-white w-full max-w-[90%] sm:max-w-[900px] p-4 sm:p-6 rounded-lg relative overflow-y-auto max-h-[80vh]"
         >
             <button @click="open = false" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
@@ -47,7 +47,7 @@
                 </svg>
             </button>
 
-            <h2 class="text-lg font-bold mb-4">Project Configuration Settings</h2>
+            <h2 class="text-sm font-bold mb-4">Project Configuration Settings</h2>
             <form wire:submit.prevent="saveProgress" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <!-- Column 1 -->
 
@@ -155,6 +155,7 @@
 
     </div>
 </div>
+
 
 
 @script
