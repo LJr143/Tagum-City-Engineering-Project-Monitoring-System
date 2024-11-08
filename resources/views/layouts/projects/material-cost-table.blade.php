@@ -189,8 +189,8 @@
                                 @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'suspended')
                                 <livewire:add-payroll :pow_id="$pow->id"/>
                                 @endif
-                                <input type="text" placeholder="Search..."
-                                       class="px-2 py-1 border border-gray-300 rounded-md shadow-sm text-xs w-55">
+{{--                                <input type="text" placeholder="Search..."--}}
+{{--                                       class="px-2 py-1 border border-gray-300 rounded-md shadow-sm text-xs w-55">--}}
                             </div>
                         </div>
                         <!-- Table for Material Costs -->

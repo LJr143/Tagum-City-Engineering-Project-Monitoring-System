@@ -183,9 +183,15 @@
 
 
 @if ($projects->isEmpty())
+    @if(auth()->user()->isProjectIncharge())
         <div class="text-center mt-2 text-gray-500 text-[12px]">
             No project assigned for you.
         </div>
+        @else
+            <div class="text-center mt-2 text-gray-500 text-[12px]">
+                No project to show
+            </div>
+        @endif
     @else
         {{-- Pagination Links --}}
         <div class="w-full py-5 flex justify-center items-center">

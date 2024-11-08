@@ -45,6 +45,7 @@
                         <div>
                             <livewire:project-configuration-settings :projectId="$project->id"/>
                         </div>
+
                         @endif
 
                         <div class="relative flex flex-col items-center space-y-2 mt-4 w-full">
@@ -63,8 +64,8 @@
                     <h2 class="text-m font-semibold mb-2 text-green-500">{{ $project->title }}</h2>
                     <span
                         class="text-xs text-green-500 bg-green-100 px-2 py-1 rounded {{ $project->status == 'suspended' ? 'text-red-500 bg-red-100' : '' }}">
-    {{ $project->status }}
-</span>
+                    {{ $project->status }}
+                </span>
 
                 </div>
                 <p class="text-xs"><span
