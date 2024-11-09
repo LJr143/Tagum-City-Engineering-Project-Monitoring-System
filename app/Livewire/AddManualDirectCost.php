@@ -32,8 +32,12 @@ class AddManualDirectCost extends Component
     {
         // Validation
         $this->validate([
+            'direct_costs.*.item_no' => 'required|string|max:255',
             'direct_costs.*.description' => 'required|string|max:255',
-            'direct_costs.*.amount' => 'required|numeric|min:0',
+            'direct_costs.*.%_of_total' => 'required|numeric|min:0',
+            'direct_costs.*.quantity' => 'required|numeric|min:0',
+            'direct_costs.*.unit' => 'required|string|min:0',
+            'direct_costs.*.unit' => 'required|string|min:0',
         ]);
 
         foreach ($this->direct_costs as $cost) {
