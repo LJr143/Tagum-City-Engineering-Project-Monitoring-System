@@ -29,7 +29,7 @@
                     <input type="text" id="reference-number" wire:model="reference_number"
                            class="mt-1 block w-full h-8 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-xs"
                            required>
-                    <!-- Error message for reference_number -->
+                    <!-- Errorr message for reference_number -->
                     @error('reference_number')
                     <span class="text-red-500 ml-2 text-[10px]">{{ $message }}</span>
                     @enderror
