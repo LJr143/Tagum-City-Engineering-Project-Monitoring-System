@@ -30,21 +30,27 @@ class ProjectConfigurationSettings extends Component
         $this->loadProject();
         $this->initializeProgress();
         $this->pastDeadlines = PastDeadline::where('project_id', $this->projectId)->get();
+
     }
 
-    private function loadProject()
+    private function loadProject(): void
     {
         $this->project = Project::find($this->projectId);
     }
 
-    private function initializeProgress()
+    private function initializeProgress(): void
     {
         $availableDates = $this->getAvailableDates();
+
+        $assignedPercentages = \App\Models\ProjectConfiguration::whereIn('progress_date', $availableDates)
+            ->pluck('percentage', 'progress_date')
+            ->toArray();
+
 
         foreach ($availableDates as $date) {
             $this->progress[] = [
                 'date' => $date,
-                'percentage' => null,
+                'percentage' => $assignedPercentages[$date] ?? null,
             ];
         }
 
@@ -129,7 +135,6 @@ class ProjectConfigurationSettings extends Component
 
         $this->dispatch('project-extended', ['filePath' => $filePath]);
     }
-
 
     private function getAvailableDates()
     {

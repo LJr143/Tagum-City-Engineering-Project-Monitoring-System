@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    <!-- Modalss -->
+    <!-- Modals -->
     <div
         x-show="open"
         x-transition:enter="transition ease-out duration-300"
@@ -49,25 +49,22 @@
 
             <h2 class="text-sm font-bold mb-4">Project Configuration Settings</h2>
             <form wire:submit.prevent="saveProgress" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <!-- Column 1 -->
-
-                <!-- Custom Date Section -->
-                <div x-data="{ showCustomDate: @entangle('showCustomDate') }" class="border-2 p-2 rounded">
-                    <button type="button" @click="showCustomDate = !showCustomDate" class="text-blue-500 text-xs font-medium hover:underline">
-                        Add Custom Date
-                    </button>
-
-                    <div x-show="showCustomDate" class="mt-2">
-                        <input type="date" wire:model="customDate" class="text-xs border border-gray-400 rounded px-2 py-1 mr-2 w-full sm:w-auto">
-                        <input type="number" wire:model="customPercentage" placeholder="Set Percentage" min="0" max="100" class="text-xs border border-gray-400 rounded px-2 py-1 w-full sm:w-24 mt-2 sm:mt-0">
-                        <button type="button" wire:click="addCustomProgress" class="text-green-500 text-xs hover:underline mt-2">
-                            Add
-                        </button>
-                    </div>
-                </div>
-
                 <!-- Available Dates Table -->
                 <div class="border-2 p-2 rounded">
+                    <!-- Custom Date Section -->
+                    <div x-data="{ showCustomDate: @entangle('showCustomDate') }" class="">
+                        <button type="button" @click="showCustomDate = !showCustomDate" class="text-blue-500 text-xs font-medium hover:underline">
+                            Add Custom Date
+                        </button>
+
+                        <div x-show="showCustomDate" class="mt-1 mb-2">
+                            <input type="date" wire:model="customDate" class="text-xs border border-gray-400 rounded px-2 py-1 mr-2 w-full sm:w-auto">
+                            <input type="number" wire:model="customPercentage" placeholder="Set Percentage" min="0" max="100" class="text-xs border border-gray-400 rounded px-2 py-1 w-full sm:w-24 mt-2 sm:mt-0">
+                            <button type="button" wire:click="addCustomProgress" class="text-green-500 text-xs hover:underline mt-2">
+                                Add
+                            </button>
+                        </div>
+                    </div>
                     <label class="block text-xs font-medium">Available Dates (15th and 30th):</label>
                     <div class="overflow-x-auto mt-2" style="max-height: 200px;">
                         <table class="min-w-full border-collapse">
@@ -97,12 +94,24 @@
 
                 <!-- Saved Progress List -->
                 <div class="border-2 p-2 rounded overflow-y-auto" style="max-height: 200px;">
-                    <h3 class="font-bold text-sm">Saved Progress</h3>
-                    <ul class="text-xs">
+                    <h3 class="font-bold text-sm">Currently Saved Progress</h3>
+                    <table class="text-xs w-full border border-gray-300">
+                        <thead>
+                        <tr>
+                            <th class="border px-4 py-2 text-left">Date</th>
+                            <th class="border px-4 py-2 text-left">Percentage (%)</th>
+                        </tr>
+                        </thead>
+                        <tbody>
                         @foreach($progress as $item)
-                            <li>{{ $item['date'] }}: {{ $item['percentage'] }}%</li>
+                            <tr>
+                                <td class="border px-4 py-2">{{ $item['date'] }}</td>
+                                <td class="border px-4 py-2">{{ $item['percentage'] ?? 'N/A' }}%</td>
+                            </tr>
                         @endforeach
-                    </ul>
+                        </tbody>
+                    </table>
+
                 </div>
 
                 <!-- Extend Project Section -->
