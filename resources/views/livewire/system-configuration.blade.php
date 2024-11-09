@@ -77,35 +77,38 @@
 
                 <div class="mt-8">
                     <h3 class="text-[12px] font-medium">Saved Warnings:</h3>
-                    <table class="min-w-full table-auto border-collapse">
-                        <thead>
-                        <tr>
-                            <th class="px-4 py-2 text-left">Warning Name</th>
-                            <th class="px-4 py-2 text-left">Percentage</th>
-                            <th class="px-4 py-2 text-left">Color</th>
-                            <th class="px-4 py-2 text-left">Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($warningConfig as $warning)
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full table-auto border-collapse">
+                            <thead>
                             <tr>
-                                <td class="px-4 py-2 text-[12px]">{{ $warning->name }}</td>
-                                <td class="px-4 py-2 text-[12px]">{{ $warning->value }}%</td>
-                                <td class="px-4 py-2 text-[12px]">
-                                    <span class="inline-block w-6 h-6 rounded-full" style="background-color: {{ $warning->color }};"></span>
-                                </td>
-                                <td class="px-4 py-2">
-                                    <button type="button" wire:click="deleteWarning({{ $warning->id }})" class="text-red-500 hover:text-red-700">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                                        </svg>
-                                    </button>
-                                </td>
+                                <th class="px-4 py-2 text-left">Warning Name</th>
+                                <th class="px-4 py-2 text-left">Percentage</th>
+                                <th class="px-4 py-2 text-left">Color</th>
+                                <th class="px-4 py-2 text-left">Action</th>
                             </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            @foreach($warningConfig as $warning)
+                                <tr>
+                                    <td class="px-4 py-2 text-[12px]">{{ $warning->name }}</td>
+                                    <td class="px-4 py-2 text-[12px]">{{ $warning->value }}%</td>
+                                    <td class="px-4 py-2 text-[12px]">
+                                        <span class="inline-block w-6 h-6 rounded-full" style="background-color: {{ $warning->color }};"></span>
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        <button type="button" wire:click="deleteWarning({{ $warning->id }})" class="text-red-500 hover:text-red-700">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                            </svg>
+                                        </button>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+
 
 
             </div>
@@ -186,34 +189,36 @@
                 </form>
                 <div class="mt-8">
                     <h3 class="text-[12px] font-medium">Saved Auto Termination:</h3>
-                    <table class="min-w-full table-auto border-collapse">
-                        <thead>
-                        <tr>
-                            <th class="px-4 py-2 text-left">Termination Name</th>
-                            <th class="px-4 py-2 text-left">Percentage</th>
-                            <th class="px-4 py-2 text-left">Color</th>
-                            <th class="px-4 py-2 text-left">Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($terminationConfig as $warning)
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full table-auto border-collapse">
+                            <thead>
                             <tr>
-                                <td class="px-4 py-2 text-[12px]">{{ $warning->name }}</td>
-                                <td class="px-4 py-2 text-[12px]">{{ $warning->value }}%</td>
-                                <td class="px-4 py-2 text-[12px]">
-                                    <span class="inline-block w-6 h-6 rounded-full" style="background-color: {{ $warning->color }};"></span>
-                                </td>
-                                <td class="px-4 py-2">
-                                    <button type="button" wire:click="deleteWarning({{ $warning->id }})" class="text-red-500 hover:text-red-700">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                                        </svg>
-                                    </button>
-                                </td>
+                                <th class="px-4 py-2 text-left">Termination Name</th>
+                                <th class="px-4 py-2 text-left">Percentage</th>
+                                <th class="px-4 py-2 text-left">Color</th>
+                                <th class="px-4 py-2 text-left">Action</th>
                             </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            @foreach($terminationConfig as $warning)
+                                <tr>
+                                    <td class="px-4 py-2 text-[12px]">{{ $warning->name }}</td>
+                                    <td class="px-4 py-2 text-[12px]">{{ $warning->value }}%</td>
+                                    <td class="px-4 py-2 text-[12px]">
+                                        <span class="inline-block w-6 h-6 rounded-full" style="background-color: {{ $warning->color }};"></span>
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        <button type="button" wire:click="deleteWarning({{ $warning->id }})" class="text-red-500 hover:text-red-700">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                            </svg>
+                                        </button>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
             </div>
