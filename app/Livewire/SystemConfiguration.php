@@ -44,7 +44,7 @@ class SystemConfiguration extends Component
         $this->warning = [['name' => '', 'percentage' => '', 'color' => '#FF0000']];
 
         // Dispatch an event
-        $this->dispatch('warningSaved');
+        $this->dispatch('warning-saved');
     }
 
 
@@ -78,7 +78,7 @@ class SystemConfiguration extends Component
         $this->termination = [['name' => '', 'percentage' => '', 'color' => '#FF0000']];
 
         // Dispatch an event
-        $this->dispatch('terminationSaved');
+        $this->dispatch('termination-saved');
     }
 
     public function deleteWarning($id)
