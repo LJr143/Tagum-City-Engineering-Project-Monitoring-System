@@ -2,7 +2,7 @@
     <div class="flex justify-end">
         <div class="relative ml-2">
             <button @click="open = true"
-                    class="flex bg-green-500 text-white text-xs px-4 py-2 rounded shadow-md hover:bg-green-600 focus:outline-none">
+                    class="flex bg-green-500 text-white text-xs px-3.5 py-2 rounded shadow-md hover:bg-green-600 focus:outline-none">
                 Edit Project
 
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
