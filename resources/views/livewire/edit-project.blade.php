@@ -28,7 +28,7 @@
         x-transition:leave="transition ease-in duration-200"
         x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
-        class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+        class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 px-4"
     >
         <!-- Modal Content -->
         <div
@@ -39,7 +39,7 @@
             x-transition:leave="transition ease-in duration-200"
             x-transition:leave-start="opacity-100 transform scale-100"
             x-transition:leave-end="opacity-0 transform scale-90"
-            class="bg-white w-full max-w-[700px] p-6 rounded-lg relative"
+            class="bg-white p-4 md:p-4 rounded-lg shadow-lg w-full max-w-md md:max-w-[600px] max-h-[60vh] sm:max-h-[50vh] md:max-h-none overflow-y-auto sm:overflow-visible"
         >
             <!-- Close Button (X) -->
             <button @click="open = false" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
@@ -49,7 +49,7 @@
                 </svg>
             </button>
 
-            <h2 class="text-lg font-bold mb-4">Edit Project</h2>
+            <h2 class="text-sm font-bold mb-4">Edit Project</h2>
             <form wire:submit.prevent="updateProject" class="text-xs" >
                 <div class="grid  gap-6">
                     <!-- Left side (Project Info) -->
@@ -57,7 +57,7 @@
                         <div>
                             <label class="block text-xs font-medium mb-1">Project Title</label>
                             <input type="text" wire:model="title"
-                                   class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
+                                   class="w-full px-3 py-2 text-xs border border-gray-400 rounded focus:ring-green-500 focus:border-green-500" required>
                         </div>
                         <div class="col-span-5 space-y-4">
                             <label class="block text-xs font-medium mb-1">Project Address</label>
@@ -65,19 +65,19 @@
                                 <div class="w-2/6">
                                     <label class="block text-xs font-medium mb-1">Baranggay</label>
                                     <input type="text" wire:model="baranggay"
-                                           class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
+                                           class="w-full px-3 py-2 text-xs border border-gray-400 rounded focus:ring-green-500 focus:border-green-500" required>
                                 </div>
 
                                 <div class="w-2/6">
                                     <label class="block text-xs font-medium mb-1">Street</label>
                                     <input type="text" wire:model="street"
-                                           class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
+                                           class="w-full px-3 py-2 text-xs border border-gray-400 rounded focus:ring-green-500 focus:border-green-500" required>
                                 </div>
 
                                 <div class="w-1/6">
                                     <label class="block text-xs font-medium mb-1">X-axis</label>
                                     <input type="text" wire:model="x_axis"
-                                           class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
+                                           class="w-full px-3 py-2 text-xs border border-gray-400 rounded focus:ring-green-500 focus:border-green-500" required>
                                     <!-- Error message for x_axis -->
                                     @error('x_axis')
                                     <span class="text-red-500 ml-1 text-[9px]">{{ $message }}</span>
@@ -87,7 +87,7 @@
                                 <div class="w-1/6">
                                     <label class="block text-xs font-medium mb-1">Y-axis</label>
                                     <input type="text" wire:model="y_axis"
-                                           class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
+                                           class="w-full px-3 py-2 text-xs border border-gray-400 rounded focus:ring-green-500 focus:border-green-500" required>
                                     <!-- Error message for y_axis -->
                                     @error('y_axis')
                                     <span class="text-red-500 ml-1 text-[9px]">{{ $message }}</span>
@@ -123,7 +123,7 @@
         "
                                 @keydown.escape.window="open = false"
                                 @click="open = true"
-                                class="w-full px-3 py-2 text-xs border border-gray-400 rounded"
+                                class="w-full px-3 py-2 text-xs border border-gray-400 rounded focus:ring-green-500 focus:border-green-500"
                                 placeholder="Search Project In-Charge"
                                 autocomplete="off"
                                 required
@@ -163,7 +163,7 @@
                                 <div class="w-2/4">
                                     <label class="block text-xs font-medium mb-1">Start Date</label>
                                     <input type="date" wire:model="start_date"
-                                           class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
+                                           class="w-full px-3 py-2 text-xs border border-gray-400 rounded focus:ring-green-500 focus:border-green-500" required>
                                     <!-- Error message for start_date -->
                                     @error('start_date')
                                     <span class="text-red-500 ml-2 text-[10px]">{{ $message }}</span>
@@ -172,7 +172,7 @@
                                 <div class="w-2/4">
                                     <label class="block text-xs font-medium mb-1">End Date</label>
                                     <input type="date" wire:model="end_date"
-                                           class="w-full px-3 py-2 text-xs border border-gray-400 rounded" required>
+                                           class="w-full px-3 py-2 text-xs border border-gray-400 rounded focus:ring-green-500 focus:border-green-500" required>
                                     @error('end_date')
                                     <span class="text-red-500 ml-2 text-[10px]">{{ $message }}</span>
                                     @enderror
@@ -183,7 +183,7 @@
                         <div>
                             <label class="block text-xs font-medium mb-1">Description</label>
                             <textarea wire:model="description"
-                                      class="w-full h-[80px] px-3 py-2 text-xs border border-gray-400 rounded"
+                                      class="w-full h-[80px] px-3 py-2 text-xs border border-gray-400 rounded focus:ring-green-500 focus:border-green-500"
                                       style="resize: none;" required></textarea>
                         </div>
                     </div>
