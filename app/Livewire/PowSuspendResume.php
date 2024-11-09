@@ -64,13 +64,15 @@ class PowSuspendResume extends PowerGridComponent
         return PowerGrid::fields()
             ->add('id')
             ->add('transaction')
-            ->add('by');
+            ->add('by')
+            ->add('created_at');
     }
     public function columns(): array
     {
         return [
             Column::make('Transaction', 'transaction')->sortable()->searchable(),
             Column::make('Made By', 'by')->sortable()->searchable(),
+            Column::make('Transaction Date', 'created_at')->sortable()->searchable(),
         ];
     }
 }

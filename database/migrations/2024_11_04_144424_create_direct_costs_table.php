@@ -14,8 +14,13 @@ return new class extends Migration
         Schema::create('direct_costs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('pow_id')->constrained('program_of_works')->onDelete('cascade');
+            $table->string('item_no');
             $table->string('description');
-            $table->decimal('amount', 15, 2);
+            $table->double('%_of_total');
+            $table->double('quantity');
+            $table->string('unit');
+            $table->double('unit_cost');
+            $table->double('total_cost');
             $table->double('spent_cost')->default(0);
             $table->double('remaining_cost')->default(0);
             $table->timestamps();
