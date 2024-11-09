@@ -36,7 +36,7 @@ Route::middleware(['auth:sanctum', 'verified', 'inactivity.logout'])->group(func
 
         Route::post('/projects/suspend', [ProjectController::class, 'suspend'])->name('projects.suspend');
         Route::post('/projects/resume', [ProjectController::class, 'resume'])->name('projects.resume');
-        Route::post('/projects/realign', [ProjectController::class, 'realignContingency'])->name('projects.realign');
+        Route::post('/projects/realign', [ProjectController::class, 'realignFunds'])->name('projects.realign');
 
 
     });

@@ -61,15 +61,26 @@ class OtherDirectCostTable extends PowerGridComponent
     {
         return PowerGrid::fields()
             ->add('id')
+            ->add('item_no')
             ->add('description')
-            ->add('amount');
+            ->add('%_of_total')
+            ->add('quantity')
+            ->add('unit')
+            ->add('unit_cost')
+            ->add('total_cost');
+
+
     }
     public function columns(): array
     {
         return [
             Column::make('Id', 'id')->sortable(),
             Column::make('Description', 'description')->sortable()->searchable(),
-            Column::make('Amount', 'amount')->sortable()->searchable(),
+            Column::make('%_of_total', '%_of_total')->sortable()->searchable(),
+            Column::make('quantity', 'quantity')->sortable()->searchable(),
+            Column::make('unit', 'unit')->sortable()->searchable(),
+            Column::make('unit_cost', 'unit_cost')->sortable()->searchable(),
+            Column::make('total_cost', 'total_cost')->sortable()->searchable(),
         ];
     }
 }

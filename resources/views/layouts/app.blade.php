@@ -87,7 +87,7 @@
             </main>
         @endif
         <div class="mt-auto pb-1 text-center">
-            <p class="text-[8px]">Developed by the USeP BSIT @2024</p>
+            <p class="text-[8px]">Developed by USeP BSIT, 2024</p>
         </div>
     </div>
 </div>

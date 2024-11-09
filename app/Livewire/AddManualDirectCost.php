@@ -9,7 +9,7 @@ use Livewire\Component;
 class AddManualDirectCost extends Component
 {
 
-    public $direct_costs = [['description' => '', 'amount' => '']];
+    public $direct_costs = [['description' => '', 'amount' => '', 'item_no' => '', '%_of_total' => '', 'quantity' => '', 'unit' => '', 'unit_cost' => '']];
     public $pow_id;
 
     public function mount($pow_id): void
@@ -19,7 +19,7 @@ class AddManualDirectCost extends Component
 
     public function addCost()
     {
-        $this->direct_costs[] = ['description' => '', 'amount' => 0];
+        $this->direct_costs[] = ['description' => '', 'amount' => '', 'item_no' => '', '%_of_total' => '', 'quantity' => '', 'unit' => '', 'unit_cost' => ''];
     }
 
     public function removeCost($index)

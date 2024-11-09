@@ -43,17 +43,40 @@
                 <!-- Display Fields Dynamically -->
                 @foreach ($direct_costs as $index => $cost)
                     <div class="flex gap-2 items-center">
+                        <input type="text" name="direct_costs[{{ $index }}][item_no]"
+                               wire:model.defer="direct_costs.{{ $index }}.item_no"
+                               placeholder="Item no"
+                               class="w-1/2 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 text-xs"
+                        >
                         <input type="text" name="direct_costs[{{ $index }}][description]"
                                wire:model.defer="direct_costs.{{ $index }}.description"
                                placeholder="Description"
                                class="w-1/2 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 text-xs"
-                               required>
+                        >
 
-                        <input type="number" name="direct_costs[{{ $index }}][amount]"
-                               wire:model.defer="direct_costs.{{ $index }}.amount"
-                               placeholder="Amount"
-                               class="w-1/3 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 text-xs"
-                               required>
+                        <input type="number" name="direct_costs[{{ $index }}][%_of_total]"
+                               wire:model.defer="direct_costs.{{ $index }}.%_of_total"
+                               placeholder="%_of_total"
+                               class="w-1/2 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 text-xs"
+                        >
+
+                        <input type="number" name="direct_costs[{{ $index }}][quantity]"
+                               wire:model.defer="direct_costs.{{ $index }}.quantity"
+                               placeholder="quantity"
+                               class="w-1/2 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 text-xs"
+                        >
+
+                        <input type="text" name="direct_costs[{{ $index }}][unit]"
+                               wire:model.defer="direct_costs.{{ $index }}.unit"
+                               placeholder="unit"
+                               class="w-1/2 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 text-xs"
+                        >
+
+                        <input type="number" name="direct_costs[{{ $index }}][unit_cost]"
+                               wire:model.defer="direct_costs.{{ $index }}.unit_cost"
+                               placeholder="unit_cost"
+                               class="w-1/2 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 text-xs"
+                        >
 
                         @if ($index > 0)
                             <!-- Remove Field Button -->

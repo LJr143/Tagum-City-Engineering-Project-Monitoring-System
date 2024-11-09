@@ -141,7 +141,7 @@
                         <option value="materials">Materials</option>
                         <option value="labor-cost">Labor Cost</option>
                         <option value="indirect-cost">Indirect Cost</option>
-                        <option value="other-direct-cost">Other Direct Cost</option>
+                        <option value="other-direct-cost">Direct Cost</option>
                         <option value="purchase-order-history">Purchase Order History</option>
                         <option value="pow-suspension-resume">POW Suspension/Resume History</option>
                     </select>
@@ -229,7 +229,7 @@
                 <!-- Other Direct Cost Section -->
                 <div id="other-direct-cost" class="hidden w-full">
                     <div class="bg-white shadow-md rounded-lg p-6">
-                        <h3 class="text-sm font-semibold mb-2 text-center"> Other Direct Cost</h3>
+                        <h3 class="text-sm font-semibold mb-2 text-center"> Direct Cost</h3>
                         <div class="mb-2">
                             @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'suspended')
                             <livewire:add-manual-direct-cost :pow_id="$pow->id"/>

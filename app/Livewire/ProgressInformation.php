@@ -116,8 +116,8 @@ class ProgressInformation extends Component
 
     public function calculateOverallProgress(): void
     {
-        $totalSpentCost = $this->materialSpentCost + $this->laborSpentCost + $this->indirectSpentCost;
-        $totalProjectCost = $this->totalMaterialCost + $this->totalLaborCost + $this->totalIndirectCost;
+        $totalSpentCost = $this->materialSpentCost + $this->laborSpentCost + $this->indirectSpentCost + $this->directSpentCost;
+        $totalProjectCost = $this->totalMaterialCost + $this->totalLaborCost + $this->totalIndirectCost + $this->totalDirectCost;
 
         $this->overallProgress = $totalProjectCost > 0
             ? ($totalSpentCost / $totalProjectCost) * 100
