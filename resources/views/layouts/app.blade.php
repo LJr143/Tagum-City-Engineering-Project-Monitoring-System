@@ -67,6 +67,7 @@
          x-on:open-edit-modal.window="pushNotification('success', 'Edit Modal Opened', 'Edit modal opened successfully.');"
          x-on:user-deleted.window="pushNotification('success', 'User Deleted', 'User deleted successfully.');"
          x-on:material-edited.window="pushNotification('success', 'Material Edited', 'Material edited successfully.');"
+         x-on:suspend-success.window="pushNotification('success', 'Project Suspended', 'Project suspended successfully.');"
 
     >
 

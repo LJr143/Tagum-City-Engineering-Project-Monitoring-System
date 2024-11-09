@@ -142,6 +142,8 @@
                         <option value="labor-cost">Labor Cost</option>
                         <option value="indirect-cost">Indirect Cost</option>
                         <option value="other-direct-cost">Other Direct Cost</option>
+                        <option value="purchase-order-history">Purchase Order History</option>
+                        <option value="pow-suspension-resume">POW Suspension/Resume History</option>
                     </select>
                 </div>
                 <div class="hidden sm:block mb-4">
@@ -159,6 +161,12 @@
                             <a id="other-direct-cost-tab" href="#" onclick="changeTabTo('other-direct-cost')"
                                class="text-gray-500 hover:border-green-600 hover:text-green-600 whitespace-nowrap border-b-2 pb-1 px-1 text-xs font-medium">Other
                                 Direct Cost</a>
+
+                            <a id="purchase-order-history-tab" href="#" onclick="changeTabTo('purchase-order-history')"
+                               class="text-gray-500 hover:border-green-600 hover:text-green-600 whitespace-nowrap border-b-2 pb-1 px-1 text-xs font-medium">Purchase Order History</a>
+
+                            <a id="pow-suspension-resume-tab" href="#" onclick="changeTabTo('pow-suspension-resume')"
+                               class="text-gray-500 hover:border-green-600 hover:text-green-600 whitespace-nowrap border-b-2 pb-1 px-1 text-xs font-medium">POW Suspension/Resume History</a>
                         </nav>
                     </div>
                 </div>
@@ -218,6 +226,7 @@
                     </div>
                 </div>
 
+                <!-- Other Direct Cost Section -->
                 <div id="other-direct-cost" class="hidden w-full">
                     <div class="bg-white shadow-md rounded-lg p-6">
                         <h3 class="text-sm font-semibold mb-2 text-center"> Other Direct Cost</h3>
@@ -232,18 +241,28 @@
                     </div>
                 </div>
 
-            </div>
+                <!-- Purchase Order History Section -->
+                <div id="purchase-order-history" class="hidden w-full">
+                        <div class="bg-white shadow-md rounded-lg p-6">
+                            <h3 class="text-sm font-semibold mb-2 text-center"> Purchase Order History</h3>
+                            <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
+                                <livewire:purchase-order-table :pow_id="$pow->id"/>
+                            </div>
+                        </div>
+                </div>
 
-            <div class="flex w-full gap-4 mt-5">
-                <div id="purchase-order" class=" w-full">
+                <!-- POW Suspension Resume Section -->
+                <div id="pow-suspension-resume" class="hidden w-full">
                     <div class="bg-white shadow-md rounded-lg p-6">
                         <h3 class="text-sm font-semibold mb-2 text-center"> Purchase Order History</h3>
                         <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
-                            <livewire:purchase-order-table :pow_id="$pow->id"/>
+                            <livewire:pow-suspend-resume :pow_id="$pow->id"/>
                         </div>
                     </div>
                 </div>
+
             </div>
+
 
             <!-- Modal for Edit Item -->
             <div id="edit-modal"
@@ -285,6 +304,7 @@
                     </div>
                 </div>
             </div>
+
             <!-- Modal for Delete Item -->
             <div id="delete-modal"
                  class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-50">
@@ -322,41 +342,10 @@
                 </div>
             </div>
 
-            <div id="suspend-modal"
-                 class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-50">
-                <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md mx-4 sm:mx-auto">
-                    <div class="flex items-center mb-2">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"
-                             class="mr-2">
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                  d="M8.4845 2.49512C9.15808 1.32845 10.842 1.32845 11.5156 2.49512L17.7943 13.3701C18.4678 14.5368 17.6259 15.9951 16.2787 15.9951H3.72136C2.37421 15.9951 1.53224 14.5368 2.20582 13.3701L8.4845 2.49512ZM10 5.00012C10.4142 5.00012 10.75 5.33591 10.75 5.75012V9.25012C10.75 9.66434 10.4142 10.0001 10 10.0001C9.58579 10.0001 9.25 9.66434 9.25 9.25012L9.25 5.75012C9.25 5.33591 9.58579 5.00012 10 5.00012ZM10 14.0001C10.5523 14.0001 11 13.5524 11 13.0001C11 12.4478 10.5523 12.0001 10 12.0001C9.44772 12.0001 9 12.4478 9 13.0001C9 13.5524 9.44772 14.0001 10 14.0001Z"
-                                  fill="#CA383A"/>
-                        </svg>
-                        <h2 class="text-sm font-semibold text-red-500">Suspend Project</h2>
-                    </div>
-                    <p class="text-xs mb-4 ml-7">Are you sure you want to suspend this project?.</p>
+            <!-- Modal for Suspension -->
+            <livewire:suspend-project :powId="$pow->id" :index="$index"/>
 
-                    <!-- Suspend Form -->
-                    <form id="suspend-form" action="{{ route('projects.suspend') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="project_id" value="{{ $pow->project_id }}">
-
-                        <div class="flex justify-end">
-                            <button type="button" id="delete-cancel-button" onclick="closeSuspendModal()"
-                                    class="bg-white border border-gray-300 text-gray-700 rounded-md text-xs px-4 py-2 hover:bg-gray-400">
-                                Cancel
-                            </button>
-                            <button type="submit" id="suspend-modal-confirm"
-                                    class="bg-red-500 text-white rounded-md px-4 py-2 text-xs hover:bg-red-600 ml-2">
-                                Suspend
-                            </button>
-                        </div>
-                    </form>
-
-
-                </div>
-            </div>
-
+            <!-- Modal for Resume -->
             <div id="resume-modal"
                  class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-50">
                 <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md mx-4 sm:mx-auto">
@@ -372,6 +361,7 @@
                     <form id="resume-form" action="{{ route('projects.resume') }}" method="POST">
                         @csrf
                         <input type="hidden" name="project_id" value="{{ $pow->project_id }}">
+                        <input type="hidden" name="pow_id" value="{{ $pow->id }}">
 
                         <div class="flex justify-end">
                             <button type="button" onclick="closeResumeModal()"
@@ -387,6 +377,7 @@
                 </div>
             </div>
 
+            <!-- Modal for Realignment -->
             <div id="realignment-modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-50">
                 <div class="bg-white rounded-lg shadow-lg p-4 sm:p-6 w-11/12 sm:w-1/3 ">
                     <div class="flex items-center mb-2">
@@ -437,7 +428,6 @@
                 </div>
             </div>
 
-
             <!-- Save Modal -->
             <div id="save-modal"
                  class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-50">
@@ -470,9 +460,6 @@
                     </div>
                 </div>
             </div>
-
-
-
         </div>
 
     </x-slot>
@@ -488,6 +475,8 @@
             document.getElementById('labor-cost').style.display = tab === 'labor-cost' ? 'block' : 'none';
             document.getElementById('indirect-cost').style.display = tab === 'indirect-cost' ? 'block' : 'none';
             document.getElementById('other-direct-cost').style.display = tab === 'other-direct-cost' ? 'block' : 'none';
+            document.getElementById('purchase-order-history').style.display = tab === 'purchase-order-history' ? 'block' : 'none';
+            document.getElementById('pow-suspension-resume').style.display = tab === 'pow-suspension-resume' ? 'block' : 'none';
 
             // Highlight active tab
             document.getElementById('materials-tab').classList.toggle('border-green-600', tab === 'materials');
@@ -498,6 +487,10 @@
             document.getElementById('indirect-cost-tab').classList.toggle('text-green-600', tab === 'indirect-cost');
             document.getElementById('other-direct-cost-tab').classList.toggle('border-green-600', tab === 'other-direct-cost');
             document.getElementById('other-direct-cost-tab').classList.toggle('text-green-600', tab === 'other-direct-cost');
+            document.getElementById('purchase-order-history-tab').classList.toggle('border-green-600', tab === 'purchase-order-history');
+            document.getElementById('purchase-order-history-tab').classList.toggle('text-green-600', tab === 'purchase-order-history');
+            document.getElementById('pow-suspension-resume-tab').classList.toggle('border-green-600', tab === 'pow-suspension-resume');
+            document.getElementById('pow-suspension-resume-tab').classList.toggle('text-green-600', tab === 'pow-suspension-resume');
         }
 
         // Modal Management Functions

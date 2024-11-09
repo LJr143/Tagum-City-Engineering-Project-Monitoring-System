@@ -32,7 +32,7 @@
     </style>
 
     {{-- Modal Warning --}}
-    @if ($showWarning)
+    @if ($showWarning && auth()->user()->isProjectIncharge())
         <div id="warningModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-modal z-50">
             <div class="modal-content bg-white rounded-lg shadow-lg p-6 w-full max-w-md mx-4 sm:mx-6 md:mx-8 lg:mx-10 xl:mx-12">
                 <div class="flex items-center mb-2">
@@ -49,7 +49,7 @@
             </div>
         </div>
     @endif
-@if ($totalMaterialCost == 0)
+@if ($totalMaterialCost == 0 && auth()->user()->isProjectIncharge())
         <div id="warningModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-modal z-50">
             <div class="modal-content bg-white rounded-lg shadow-lg p-6 w-full max-w-md mx-4 sm:mx-6 md:mx-8 lg:mx-10 xl:mx-12">
                 <div class="flex items-center mb-2">
@@ -67,9 +67,9 @@
             </div>
         </div>
 
-    @elseif($totalMaterialCost != $pow->total_material_cost)
+    @elseif($totalMaterialCost != $pow->total_material_cost && auth()->user()->isProjectIncharge())
 
-        @if($totalMaterialCost > $pow->total_material_cost)
+        @if($totalMaterialCost > $pow->total_material_cost && auth()->user()->isProjectIncharge())
         <div id="warningModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-modal z-50">
             <div class="modal-content bg-white rounded-lg shadow-lg p-6 w-full max-w-md mx-4 sm:mx-6 md:mx-8 lg:mx-10 xl:mx-12">
                 <div class="flex items-center mb-2">

@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Imports\MaterialsImport;
 use App\Models\DirectCost;
 use App\Models\Pow;
+use App\Models\PowSuspendResume;
 use App\Models\Project;
 use App\Models\SystemConfiguration;
 use App\Services\LogService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ProjectController extends Controller
@@ -71,15 +73,25 @@ class ProjectController extends Controller
         // Validate the incoming request data
         $request->validate([
             'project_id' => 'required|exists:projects,id',
+            'pow_id' => 'required|exists:program_of_works,id',
         ]);
 
         // Find the project and update its status
+        $powId = $request->pow_id;
         $project = Project::find($request->project_id);
         $project->status = 'suspended';
         $project->save();
 
+        // Store the suspension record in PowSuspendResume
+        PowSuspendResume::create([
+            'pow_id' => $powId,
+            'transaction' => 'suspended', // or specific transaction type if needed
+            'user_id' => Auth::id(), // get the ID of the authenticated user
+            'created_at' => now(), // if you want to set the current timestamp manually
+        ]);
+
         // Redirect back with a success message
-        return redirect()->back()->with('success', 'Project has been suspended successfully.');
+        return redirect()->back();
     }
 
     public function resume(Request $request)
@@ -87,12 +99,21 @@ class ProjectController extends Controller
         // Validate the incoming request data
         $request->validate([
             'project_id' => 'required|exists:projects,id',
+            'pow_id' => 'required|exists:program_of_works,id',
         ]);
 
         // Find the project and update its status
+        $powId = $request->pow_id;
         $project = Project::find($request->project_id);
         $project->status = 'pending'; // or any other status you prefer for resumed projects
         $project->save();
+
+        PowSuspendResume::create([
+            'pow_id' => $powId,
+            'transaction' => 'resume', // or specific transaction type if needed
+            'user_id' => Auth::id(), // get the ID of the authenticated user
+            'created_at' => now(), // if you want to set the current timestamp manually
+        ]);
 
         // Redirect back with a success message
         return redirect()->back()->with('success', 'Project has been resumed successfully.');
