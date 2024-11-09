@@ -17,28 +17,28 @@
                             <input type="text" name="warning[{{ $index }}][name]"
                                    wire:model.defer="warning.{{ $index }}.name"
                                    placeholder="e.g. warning"
-                                   class="w-1/2 p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-xs"
+                                   class="w-1/2 p-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 text-xs"
                                    required>
 
                             <!-- Percentage Field -->
                             <input type="text" name="warning[{{ $index }}][percentage]"
                                    wire:model.defer="warning.{{ $index }}.percentage"
                                    placeholder="Percentage"
-                                   class="w-1/2 p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-xs"
+                                   class="w-1/2 p-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 text-xs"
                                    required>
 
                             <!-- Color Picker and Hex Value -->
                             <div class="flex items-center gap-2">
                                 <!-- Color Picker Input -->
                                 <input type="color" wire:model.defer="warning.{{ $index }}.color"
-                                       class="w-[25px] h-[25px] rounded-full border-0 shadow focus:ring-indigo-500 focus:border-indigo-500"
+                                       class="w-[25px] h-[25px] rounded-full border-0 shadow focus:ring-green-500 focus:border-green-500"
                                        required>
 
                                 <!-- Hex Value Display/Input -->
                                 <input type="text" name="warning[{{ $index }}][color]"
                                        wire:model.defer="warning.{{ $index }}.color"
                                        placeholder="#FFFFFF"
-                                       class="w-[80px] p-2 text-center border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-xs"
+                                       class="w-[80px] p-2 text-center border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 text-xs"
                                        readonly>
                             </div>
 
@@ -58,7 +58,7 @@
 
                     <!-- Add Field Button -->
                     <button type="button" wire:click="addWarning"
-                            class="bg-blue-500 text-white text-[12px] px-2 py-1 rounded hover:bg-blue-600">
+                            class="bg-green-200 text-green-600 text-[12px] px-2 py-1 rounded hover:bg-green-300">
                         + Add Field
                     </button>
 
@@ -130,28 +130,28 @@
                             <input type="text" name="termination[{{ $index }}][name]"
                                    wire:model.defer="termination.{{ $index }}.name"
                                    placeholder="e.g. auto terminate"
-                                   class="w-1/2 p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-xs"
+                                   class="w-1/2 p-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 text-xs"
                                    required>
 
                             <!-- Percentage Field -->
                             <input type="text" name="termination[{{ $index }}][percentage]"
                                    wire:model.defer="termination.{{ $index }}.percentage"
                                    placeholder="Percentage"
-                                   class="w-1/2 p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-xs"
+                                   class="w-1/2 p-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 text-xs"
                                    required>
 
                             <!-- Color Picker and Hex Value -->
                             <div class="flex items-center gap-2">
                                 <!-- Color Picker Input -->
                                 <input type="color" wire:model.defer="termination.{{ $index }}.color"
-                                       class="w-[25px] h-[25px] rounded-full border-0 shadow focus:ring-indigo-500 focus:border-indigo-500"
+                                       class="w-[25px] h-[25px] rounded-full border-0 shadow focus:ring-green-500 focus:border-green-500"
                                        required>
 
                                 <!-- Hex Value Display/Input -->
                                 <input type="text" name="termination[{{ $index }}][color]"
                                        wire:model.defer="termination.{{ $index }}.color"
                                        placeholder="#FFFFFF"
-                                       class="w-[80px] p-2 text-center border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-xs"
+                                       class="w-[80px] p-2 text-center border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 text-xs"
                                        readonly>
                             </div>
 
@@ -171,7 +171,7 @@
 
                     <!-- Add Field Button -->
                     <button type="button" wire:click="addTermination"
-                            class="bg-blue-500 text-white text-[12px] px-2 py-1 rounded hover:bg-blue-600">
+                            class="bg-green-200 text-green-600 text-[12px] px-2 py-1 rounded hover:bg-green-300">
                         + Add Field
                     </button>
 
