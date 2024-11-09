@@ -4,8 +4,10 @@ namespace App\Livewire;
 
 use AllowDynamicProperties;
 use App\Models\Material;
+use App\Models\PurchaseOrder;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\View\View;
+use Livewire\Component;
 use Livewire\WithPagination;
 use PowerComponents\LivewirePowerGrid\Column;
 use PowerComponents\LivewirePowerGrid\Exportable;
@@ -16,12 +18,11 @@ use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\PowerGridFields;
 use PowerComponents\LivewirePowerGrid\Traits\WithExport;
 
-#[AllowDynamicProperties] class MaterialTable extends PowerGridComponent
+#[AllowDynamicProperties] class PurchaseOrderTable extends PowerGridComponent
 {
     use WithExport;
     use WithPagination;
 
-    public $selectedUserId;
     public $pow_id;
 
 
@@ -37,7 +38,7 @@ use PowerComponents\LivewirePowerGrid\Traits\WithExport;
                 ->showToggleColumns()
                 ->withoutLoading(),
             Footer::make()
-                ->showPerPage(10) // Set default items per page
+                ->showPerPage(10)
                 ->showRecordCount(),
         ];
     }
@@ -58,23 +59,23 @@ use PowerComponents\LivewirePowerGrid\Traits\WithExport;
 
     public function datasource(): Builder
     {
-        return Material::query()->where('pow_id', $this->pow_id);
+        return PurchaseOrder::query()->where('pow_id', $this->pow_id);
     }
 
     public function fields(): PowerGridFields
     {
         return PowerGrid::fields()
             ->add('id')
-            ->add('pow')
-            ->add('item_no')
+            ->add('purchase_order_number')
+            ->add('supplier')
             ->add('quantity')
-            ->add('unit_of_issue')
-            ->add('item_description')
-            ->add('estimated_unit_cost')
-            ->add('estimated_cost')
-            ->add('quantity_bal', function (Material $material) {
-                return $material->quantity - $material->quantity_use;
+            ->add('total_items', function () {
+                return PurchaseOrder::where('pow_id', $this->pow_id)
+                ->distinct('purchase_order_number')
+                ->count('purchase_order_number');
             });
+
+
 
     }
 
@@ -82,34 +83,14 @@ use PowerComponents\LivewirePowerGrid\Traits\WithExport;
     {
         $columns = [
             Column::make('Id', 'id')->hidden(),
-            Column::make('Item No', 'item_no')->sortable()->searchable(),
-            Column::make('Quantity', 'quantity')->sortable()->searchable(),
-            Column::make('Unit of Issue', 'unit_of_issue')->sortable()->searchable(),
-            Column::make('Item Description', 'item_description')->sortable()->searchable(),
-            Column::make('Unit Cost', 'estimated_unit_cost')->searchable(),
-            Column::make('Total Cost', 'estimated_cost'),
-            Column::make('Quantity Bal.', 'quantity_bal')->sortable()->searchable(),
+            Column::make('Purchase Order No.', 'purchase_order_number')->sortable()->searchable(),
+            Column::make('Supplier', 'supplier')->sortable()->searchable(),
+            Column::make('Total Items', 'total_items')->sortable()->searchable(),
         ];
 
-        if (auth()->user()->isEncoder()) {
-            $columns[] = Column::action('Action')->bodyAttribute('text-center');
-        }
 
         return $columns;
     }
-
-    public function actionsFromView($row): View
-    {
-        return view('actions-view-material', ['row' => $row]);
-    }
-    public function edit($rowId)
-    {
-        $this->selectedUserId = $rowId;
-        $this->dispatch('open-edit-modal');
-    }
-
-
-
 
 
 }

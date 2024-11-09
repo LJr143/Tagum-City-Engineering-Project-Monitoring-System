@@ -124,7 +124,8 @@
                             @endif
                         </div>
                     </div>
-
+                @else
+                    <livewire:add-p-o :pow_id="$pow->id"/>
                 @endif
             </div>
 
@@ -171,6 +172,8 @@
                         <div class="mb-2">
                             @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'suspended')
                             <livewire:add-manual-material :pow_id="$pow->id"/>
+                            @else
+                                <livewire:make-material-report :pow_id="$pow->id"/>
                             @endif
                         </div>
                         <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
@@ -229,6 +232,17 @@
                     </div>
                 </div>
 
+            </div>
+
+            <div class="flex w-full gap-4 mt-5">
+                <div id="purchase-order" class=" w-full">
+                    <div class="bg-white shadow-md rounded-lg p-6">
+                        <h3 class="text-sm font-semibold mb-2 text-center"> Purchase Order History</h3>
+                        <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
+                            <livewire:purchase-order-table :pow_id="$pow->id"/>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Modal for Edit Item -->
