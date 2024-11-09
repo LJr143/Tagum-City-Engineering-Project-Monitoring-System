@@ -21,7 +21,7 @@
                 <div class="flex items-center justify-between mb-4 space-x-4">
                     <div class="flex space-x-2 ml-auto">
                         <livewire:add-user/>
-                        <input type="text" placeholder="Search..." class="px-2 py-1 border border-gray-300 rounded-md shadow-sm text-xs w-55">
+                        <input type="text" placeholder="Search..." class="px-2 py-1 border border-gray-300 rounded-md shadow-sm text-xs w-55 focus:ring-green-500 focus:border-green-500">
                     </div>
                 </div>
                 <!-- Table for Material Costs -->
