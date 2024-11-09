@@ -37,15 +37,20 @@ class AddManualDirectCost extends Component
             'direct_costs.*.%_of_total' => 'required|numeric|min:0',
             'direct_costs.*.quantity' => 'required|numeric|min:0',
             'direct_costs.*.unit' => 'required|string|min:0',
-            'direct_costs.*.unit' => 'required|string|min:0',
+            'direct_costs.*.unit_cost' => 'required|numeric|min:0',
         ]);
 
         foreach ($this->direct_costs as $cost) {
             DirectCost::create([
                 'pow_id' => $this->pow_id,
+                'item_no' => $cost['item_no'],
                 'description' => $cost['description'],
-                'amount' => $cost['amount'],
-                'remaining_cost' => $cost['amount'],
+                '%_of_total' => $cost['%_of_total'],
+                'quantity' => $cost['quantity'],
+                'unit' => $cost['unit'],
+                'unit_cost' => $cost['unit_cost'],
+                'total_cost' => $cost['unit_cost'] * $cost['quantity'],
+                'remaining_cost' => $cost['unit_cost'] * $cost['quantity'],
             ]);
         }
 

@@ -64,7 +64,7 @@ class ProgressInformation extends Component
 
         // Fetch total indirect costs.
         $this->totalIndirectCost = IndirectCost::where('pow_id', $this->pow_id)->sum('amount');
-        $this->totalDirectCost = DirectCost::where('pow_id', $this->pow_id)->sum('amount');
+        $this->totalDirectCost = DirectCost::where('pow_id', $this->pow_id)->sum('total_cost');
 
         // Retrieve progress percentage from the found POW record.
         $this->progress = $this->pow->progress_percentage;

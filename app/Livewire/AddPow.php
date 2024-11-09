@@ -109,11 +109,17 @@ class AddPow extends Component
         // Save Direct costs if there are any
         if (!empty(array_filter($this->direct_costs))) {
             foreach ($this->direct_costs as $cost) {
-                if (!empty($cost['description']) && !empty($cost['amount'])) {
+                if (!empty($cost['description']) && !empty($cost['unit_cost'])) {
                     DirectCost::create([
                         'pow_id' => $pow->id,
+                        'item_no' => $cost['item_no'],
                         'description' => $cost['description'],
-                        'amount' => $cost['amount'],
+                        '%_of_total' => $cost['%_of_total'],
+                        'quantity' => $cost['quantity'],
+                        'unit' => $cost['unit'],
+                        'unit_cost' => $cost['unit_cost'],
+                        'total_cost' => $cost['unit_cost'] * $cost['quantity'],
+                        'remaining_cost' => $cost['unit_cost'] * $cost['quantity'],
                     ]);
                 }
             }

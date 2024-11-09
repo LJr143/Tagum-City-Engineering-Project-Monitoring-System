@@ -174,7 +174,6 @@
                                            class="w-1/2 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 text-xs"
                                     >
 
-
                                     @if ($index > 0)
                                         <!-- Remove Field Button -->
                                         <button type="button" wire:click="removeCost('direct',{{ $index }})"
