@@ -17,6 +17,7 @@
         </svg>
     </button>
 </div>
+
 {{-- NAVIGATION BUTTONS --}}
 <div class="hidden w-full max-w-[240px] lg:flex flex-col h-full justify-between pt-2 pb-10 flex-1 overflow-y-auto">
     <div class="text-sm">
@@ -31,19 +32,19 @@
                    @click="setActiveTab('dashboard'); show = false; showManage = false; subActiveItem = ''; setsubTmsActiveItem(''); setsettingsTmsActiveItem('')">
                     <div class=" text-center px-[13px] py-[10px] rounded-full justify-center items-center flex"
                          :class="{'bg-customGreen-100': {{ request()->routeIs('dashboard') ? 'true' : 'false' }}, 'bg-none': {{ !request()->routeIs('dashboard') ? 'true' : 'false' }}}">
-                        <svg width="15" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="18px" height="18px" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M5.47292 2.47192C2.81715 2.47192 2 3.28908 2 5.94484C2 8.6006 2.81715 9.41776 5.47292 9.41776C8.12868 9.41776 8.94583 8.6006 8.94583 5.94484C8.94583 3.28908 8.12868 2.47192 5.47292 2.47192Z"
-                                stroke="#3F3E44" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                stroke="#3F3E44" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
                             <path
                                 d="M5.47292 12.196C2.81715 12.196 2 13.0132 2 15.669C2 18.3247 2.81715 19.1419 5.47292 19.1419C8.12868 19.1419 8.94583 18.3247 8.94583 15.669C8.94583 13.0132 8.12868 12.196 5.47292 12.196Z"
-                                stroke="#3F3E44" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                stroke="#3F3E44" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
                             <path
                                 d="M15.1971 12.196C12.5414 12.196 11.7242 13.0132 11.7242 15.669C11.7242 18.3247 12.5414 19.1419 15.1971 19.1419C17.8528 19.1419 18.67 18.3247 18.67 15.669C18.67 13.0132 17.8528 12.196 15.1971 12.196Z"
-                                stroke="#3F3E44" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                stroke="#3F3E44" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
                             <path
                                 d="M15.1971 2.47192C12.5414 2.47192 11.7242 3.28908 11.7242 5.94484C11.7242 8.6006 12.5414 9.41776 15.1971 9.41776C17.8528 9.41776 18.67 8.6006 18.67 5.94484C18.67 3.28908 17.8528 2.47192 15.1971 2.47192Z"
-                                stroke="#3F3E44" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                stroke="#3F3E44" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </div>
                     <span class="mr-1" :class="{'block':showSide, 'hidden':!showSide}"
