@@ -17,7 +17,7 @@
 
             <!-- Buttons -->
             <div class="flex justify-end mt-4">
-                <button type="button" @click="closeSuspendModal()" class="bg-white border border-gray-300 text-gray-700 rounded-md text-xs px-4 py-2 hover:bg-gray-400">
+                <button type="button" @click="showModal = false" class="bg-white border border-gray-300 text-gray-700 rounded-md text-xs px-4 py-2 hover:bg-gray-400">
                     Cancel
                 </button>
                 <button type="submit" onclick="confirmSuspendAction()" class="bg-red-500 text-white rounded-md px-4 py-2 text-xs hover:bg-green-600 ml-2">

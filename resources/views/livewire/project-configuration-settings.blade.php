@@ -127,6 +127,7 @@
                         <input type="file" wire:model="extensionOrderFile" accept="application/pdf" class="text-xs border border-gray-400 rounded px-2 py-1 mr-2 w-full">
                     </div>
                 </div>
+
                 <!-- Past Deadlines Table -->
                 <div class="border-2 p-2 rounded overflow-y-auto" style="max-height: 200px;">
                     <h3 class="font-bold text-sm">Project Extension History</h3>
@@ -146,12 +147,10 @@
                         @endforeach
                         </tbody>
                     </table>
-
                 </div>
-                <div> </div>
                 <div class="mt-6 flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-2">
                     <button type="button" @click="open = false"
-                            class="bg-gray-300 ml-20 px-4 py-2 rounded hover:bg-gray-400 text-xs w-full sm:w-[70px] h-[35px]">
+                            class="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400 text-xs w-full sm:w-[70px] h-[35px]">
                         Cancel
                     </button>
                     <button type="submit"
@@ -168,4 +167,14 @@
 
 
 
+@script
+<script>
+    Livewire.on('progress-saved', () => {
+        alert('Progress saved successfully!');
+    });
 
+    Livewire.on('progress-error', (event) => {
+        alert(event.message);
+    });
+</script>
+@endscript

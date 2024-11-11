@@ -58,7 +58,7 @@ class AddManualDirectCost extends Component
         $this->reset('direct_costs');
 
         // Dispatch an event to indicate the costs have been saved
-        $this->dispatch('direct-costs-saved');
+        $this->dispatch('directCostsSaved');
     }
 
 
