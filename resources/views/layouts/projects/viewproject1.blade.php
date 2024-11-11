@@ -9,18 +9,26 @@
 
     <x-slot name="main">
         <div>
-            <div class="flex-1 p-5">
-                <div class="flex justify-end mb-4">
-                    <div class="flex flex-col items-end space-y-2 w-full">
-                        <div class="flex space-x-2">
+            <div class="flex-1 ">
+                <div class="max-w-7xl mx-auto">
+                    <div class="flex flex-col sm:flex-row items-center justify-between mb-4">
+                        <div class="text-xl font-medium mb-6 sm:mb-0 sm:mr-auto text-left w-full sm:w-auto">
+                            Project Information
+                        </div>
+                        <div class="flex space-x-4">
                             @if (auth()->user()->isAdmin() || auth()->user()->isEncoder())
-                                <livewire:edit-project :project="$project->id"/>
+                                <livewire:project-configuration-settings :projectId="$project->id"/>
 
-                                <!-- Delete Button -->
-                                <button type="button" onclick="openDeleteModal()"
-                                        class="flex bg-red-500 text-white text-xs px-4 py-2 rounded shadow-md hover:bg-red-600 focus:outline-none">
-                                    Delete Project
+                            @endif
 
+
+                            @if (auth()->user()->isAdmin() || auth()->user()->isEncoder())
+
+                            <!-- Delete Button -->
+                                <button onclick="openDeleteModal()" class="text-xs bg-red-500 hover:bg-red-600  text-white px-4 py-2 rounded flex items-center space-x-2">
+                              <span>
+                               Delete Project
+                              </span>
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
                                          xmlns="http://www.w3.org/2000/svg" class="ml-2">
                                         <path d="M10 10V16" stroke="white" stroke-width="1.5" stroke-linecap="round"
@@ -36,53 +44,138 @@
                                               stroke="white" stroke-width="1.5" stroke-linecap="round"
                                               stroke-linejoin="round"/>
                                     </svg>
-
-                                </button>
+                            </button>
                             @endif
-
                         </div>
-                        @if (auth()->user()->isAdmin() || auth()->user()->isEncoder())
-                        <div>
-                            <livewire:project-configuration-settings :projectId="$project->id"/>
+                    </div>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mb-8">
+                        <div class="w-full sm:w-1/3 relative">
+                            <!-- Default Image -->
+                            <img src="{{ asset('storage/pmsAssets/pic1.jpg') }}" alt="Profile Image" id="editable-image-preview"
+                                 class="rounded-lg shadow-lg w-full max-h-[250px]" />
+
+                            <button class="absolute top-2 right-2 bg-white opacity-50 p-2 rounded-full shadow-lg" onclick="toggleImageEdit()">
+                                <i class="fas fa-edit"></i>
+                            </button>
+
+                            <input accept="image/*" class="absolute top-0 right-0 w-20 h-20 opacity-0 cursor-pointer" id="editable-image" onchange="previewImage(event)" type="file"/>
                         </div>
 
-                        @endif
+                        <div class="bg-white shadow-md rounded-lg p-4 w-full">
+                            <div class="flex justify-between items-center mb-4">
+                              <span class="text-xs
+                                    {{ $project->status == 'pending' ? 'text-yellow-500 bg-yellow-100' : '' }}
+                                    {{ $project->status == 'suspended' ? 'text-red-500 bg-red-100' : 'text-green-500 bg-green-100' }}
+                                    px-2 py-1 rounded">
 
-                        <div class="relative flex flex-col items-center space-y-2 mt-4 w-full">
-                            <div class="w-full h-40 bg-gray-200 flex items-center justify-center overflow-hidden">
-                                <img src="{{ asset('storage/pmsAssets/pic1.jpg') }}" alt="Profile Image"
-                                     id="editable-image-preview" class="object-contain w-full h-full">
-                                <input type="file" id="editable-image"
-                                       class="absolute top-0 right-0 w-20 h-20 opacity-0 cursor-pointer"
-                                       accept="image/*" onchange="previewImage(event)">
+                                  {{ $project->status }}
+                                </span>
+                                @if (auth()->user()->isAdmin() || auth()->user()->isEncoder())
+                                    <livewire:edit-project :project="$project->id"/>
+
+                                @endif
+                            </div>
+                            <div class="flex items-start mb-4">
+                                <i class="far fa-bookmark text-gray-500 mr-3 mt-1"></i>
+
+                                <div>
+                                    <h2 class="text-xs sm:text-sm font-bold">{{ $project->title }}</h2>
+                                    <p class="text-[10px] sm:text-xs text-gray-600">
+                                        <span class="text-[10px] sm:text-xs  text-black font-semibold">Location:</span>
+                                        {{ $project->baranggay }} {{$project->street}}
+                                    </p>
+                                    <p class="text-[10px] sm:text-xs  text-gray-600">
+                                        <span class="text-[10px] sm:text-xs  text-black font-semibold">
+                                         Date Created:
+                                        </span>
+                                        {{ $project->created_at }}
+                                    </p>
+                                    <p class="text-[10px] sm:text-xs  text-gray-600">
+                                        <span class="text-[10px] sm:text-xs  text-black font-semibold">
+                                         Project Incharge:
+                                        </span>
+                                        {{ $project->projectIncharge->first_name }} {{ $project->projectIncharge->last_name }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="far fa-file-alt text-gray-500 mr-3 mt-1"></i>
+                                <div>
+                                    <h3 class="text-xs sm:text-sm font-bold">
+                                        Description
+                                    </h3>
+                                    <p class="text-xs text-gray-600">
+                                        {{ $project->description }}
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class=" flex justify-between items-center">
-                    <h2 class="text-m font-semibold mb-2 text-green-500">{{ $project->title }}</h2>
-                    <span
-                        class="text-xs text-green-500 bg-green-100 px-2 py-1 rounded {{ $project->status == 'suspended' ? 'text-red-500 bg-red-100' : '' }}">
-                    {{ $project->status }}
-                </span>
+
+
+
+
+
 
                 </div>
-                <p class="text-xs"><span
-                        class="font-bold">Address : </span> {{ $project->baranggay }} {{$project->street}}</p>
-                <p class="text-xs font-bold">Date created :<span
-                        class="ml-2 text-black font-normal">{{ $project->created_at }}</span></p>
-                <p class="text-xs"><span
-                        class="font-bold">Project Incharge:</span> {{ $project->projectIncharge->first_name }} {{ $project->projectIncharge->last_name }}
-                </p>
-                <div class="mt-7 mb-10">
-                    <h2 class="text-sm font-semibold mb-2">Description</h2>
-                    <p class="text-xs">{{ $project->description }}</p>
+                <!-- Modal -->
+                <div class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center hidden" id="modal">
+                    <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
+                        <h2 class="text-lg font-bold mb-4">
+                            Edit Project
+                        </h2>
+                        <form>
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700">
+                                    Project Name
+                                </label>
+                                <input class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" type="text" value="ROAD CONSTRUCTION"/>
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700">
+                                    Date Created
+                                </label>
+                                <input class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" type="text" value="20/08/2022"/>
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700">
+                                    Project Incharge
+                                </label>
+                                <input class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" type="text" value="Fname Ml. Lname"/>
+                            </div>
+                            <div class="flex justify-end">
+                                <button class="bg-gray-500 text-white px-4 py-2 rounded mr-2" onclick="toggleModal()" type="button">
+                                    Cancel
+                                </button>
+                                <button class="bg-blue-500 text-white px-4 py-2 rounded" type="submit">
+                                    Save
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                 <livewire:program-of-works :project-id="$project->id"/>
             </div>
         </div>
+
+
+
 
         <!-- Modal For Delete Confirmation -->
         <div id="delete-modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-50">
@@ -139,6 +232,42 @@
                     reader.readAsDataURL(file);
                 }
             }
+
+
+
+            // Function to preview the uploaded image
+            function previewImage(event) {
+                const file = event.target.files[0];
+                const preview = document.getElementById('editable-image-preview');
+
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        preview.src = e.target.result; // Set the image source to the uploaded file
+                    }
+                    reader.readAsDataURL(file);
+                } else {
+                    // If no file is selected, keep the default image
+                    preview.src = "{{ asset('storage/pmsAssets/pic1.jpg') }}"; // Default image path
+                }
+            }
+
+            // Optional: Initialize the image to the default if no upload has occurred
+            document.addEventListener('DOMContentLoaded', (event) => {
+                const preview = document.getElementById('editable-image-preview');
+                const input = document.getElementById('editable-image');
+
+                // If no image is uploaded, set the default image
+                if (!input.files.length) {
+                    preview.src = "https://storage.googleapis.com/a1aa/image/7sqyBEJMkfU9JCpW16NTsey92unWEdvgKQYDhdRtU8tRfNfOB.jpg"; // Default image path
+                }
+            });
+
+
+
+
+
+
         </script>
     </x-slot>
 </x-app-layout>
