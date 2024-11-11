@@ -68,7 +68,13 @@
          x-on:user-deleted.window="pushNotification('success', 'User Deleted', 'User deleted successfully.');"
          x-on:material-edited.window="pushNotification('success', 'Material Edited', 'Material edited successfully.');"
          x-on:suspend-success.window="pushNotification('success', 'Project Suspended', 'Project suspended successfully.');"
-
+         x-on:resume-success.window="pushNotification('success', 'Project Resume', 'Project resumed successfully.');"
+         x-on:material-added.window="pushNotification('success', 'Material Added', 'Material Added successfully.');"
+         x-on:progress-saved.window="pushNotification('success', 'Progress Saved', 'Progress Saved successfully.');"
+         x-on:warning-saved.window="pushNotification('success', 'Warning Saved', 'Warning Config Saved successfully.');"
+         x-on:termination-saved.window="pushNotification('success', 'Termination Saved', 'Termination Saved successfully.');"
+         x-on:delete-success.window="pushNotification('success', 'Project Deleted', 'Project Deleted successfully.');"
+         x-on:direct-costs-saved.window="pushNotification('success', 'Other Direct Costs Added', 'added successfully.');"
     >
 
 
