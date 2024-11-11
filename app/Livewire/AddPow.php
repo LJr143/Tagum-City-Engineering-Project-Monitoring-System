@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Imports\MaterialsImport;
+use App\Imports\PowImport;
 use App\Models\DirectCost;
 use App\Models\Pow;
 use App\Models\User;
@@ -26,6 +27,8 @@ class AddPow extends Component
     public $total_labor_cost;
     public $engineers;
     public $materialsFile;
+
+    public $powFile;
     public $isUploading = false;
 
     public $indirect_costs = [['description' => '', 'amount' => '']];
@@ -39,6 +42,7 @@ class AddPow extends Component
         'total_labor_cost' => 'required|numeric',
         'projectId' => 'required|exists:projects,id',
         'materialsFile' => 'nullable|file|mimes:xlsx,csv',
+        'powFile' => 'nullable|file|mimes:xlsx,csv',
         'direct_costs.*.description' => 'string|max:255',
         'direct_costs.*.amount' => 'numeric|min:0',
         'indirect_costs.*.description' => 'string|max:255',
@@ -51,6 +55,8 @@ class AddPow extends Component
         'total_labor_cost.required' => 'The total labor cost is required.',
         'materialsFile.file' => 'The uploaded file must be a valid file.',
         'materialsFile.mimes' => 'The file must be a type of: xlsx, csv.',
+        'powFile.file' => 'The uploaded file must be a valid file.',
+        'powFile.mimes' => 'The file must be a type of: xlsx, csv.',
         'direct_costs.*.description.required' => 'Description is required for each direct cost.',
         'direct_costs.*.amount.required' => 'Amount is required for each direct cost.',
         'indirect_costs.*.description.required' => 'Description is required for each indirect cost.',
@@ -85,23 +91,40 @@ class AddPow extends Component
 
         // Handle materials file upload if provided
         if ($this->materialsFile) {
+        try {
+            // Upload and import the materials file
+            $this->uploadMaterialsFile($this->materialsFile);
+
+            Log::info('Starting materials import...');
+            $import = new MaterialsImport($pow->id);
+            Excel::import($import, $this->materialsFile->getRealPath());
+            Log::info('Materials import completed successfully.');
+
+            // Get the total material cost from the import
+            $totalMaterialCost = $import->getTotalCost();
+            // Update the POW record with the total material cost
+            $pow->total_material_cost = $totalMaterialCost;
+            $pow->save();
+            session()->flash('message', 'Materials imported successfully!');
+        } catch (\Exception $e) {
+            Log::error('Materials import failed: ' . $e->getMessage());
+            session()->flash('error', 'Failed to import materials. Please check the log for details.');
+        }
+    }
+
+        if ($this->powFile) {
             try {
                 // Upload and import the materials file
-                $this->uploadMaterialsFile($this->materialsFile);
+                $this->uploadPowFile($this->powFile);
 
-                Log::info('Starting materials import...');
-                $import = new MaterialsImport($pow->id);
-                Excel::import($import, $this->materialsFile->getRealPath());
-                Log::info('Materials import completed successfully.');
+                Log::info('Starting pow import...');
+                $import = new PowImport($pow->id);
+                Excel::import($import, $this->powFile->getRealPath());
+                Log::info('Pow import completed successfully.');
 
-                // Get the total material cost from the import
-                $totalMaterialCost = $import->getTotalCost();
-                // Update the POW record with the total material cost
-                $pow->total_material_cost = $totalMaterialCost;
-                $pow->save();
-                session()->flash('message', 'Materials imported successfully!');
+                session()->flash('message', 'Pow imported successfully!');
             } catch (\Exception $e) {
-                Log::error('Materials import failed: ' . $e->getMessage());
+                Log::error('Pow import failed: ' . $e->getMessage());
                 session()->flash('error', 'Failed to import materials. Please check the log for details.');
             }
         }
@@ -167,6 +190,13 @@ class AddPow extends Component
         return $path;
     }
 
+    protected function uploadPowFile($file)
+    {
+        $path = $file->store('pow', 'public');
+        Log::info('Pow file uploaded successfully.', ['path' => $path]);
+        return $path;
+    }
+
     public function addCost($type)
     {
         if ($type === 'direct') {
@@ -186,7 +216,6 @@ class AddPow extends Component
             $this->indirect_costs = array_values($this->indirect_costs); // Re-index array after removal
         }
     }
-
 
     public function render()
     {

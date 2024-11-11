@@ -156,20 +156,6 @@
                     </div>
                 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 <livewire:program-of-works :project-id="$project->id"/>
             </div>
         </div>
@@ -257,10 +243,10 @@
                 const preview = document.getElementById('editable-image-preview');
                 const input = document.getElementById('editable-image');
 
-                // If no image is uploaded, set the default image
-                if (!input.files.length) {
-                    preview.src = "https://storage.googleapis.com/a1aa/image/7sqyBEJMkfU9JCpW16NTsey92unWEdvgKQYDhdRtU8tRfNfOB.jpg"; // Default image path
-                }
+                // // If no image is uploaded, set the default image
+                // if (!input.files.length) {
+                //     preview.src = "https://storage.googleapis.com/a1aa/image/7sqyBEJMkfU9JCpW16NTsey92unWEdvgKQYDhdRtU8tRfNfOB.jpg"; // Default image path
+                // }
             });
 
 
