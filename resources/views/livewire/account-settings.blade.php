@@ -1,5 +1,46 @@
 
 <script>
+
+    //TABS
+    function showProfileContent() {
+        document.getElementById('profileContent').style.display = 'block';
+        document.getElementById('securityContent').style.display = 'none';
+        document.getElementById('developersContent').style.display = 'none';
+        document.getElementById('profileButton').classList.add('text-green-500');
+        document.getElementById('profileButton').classList.remove('text-gray-600');
+        document.getElementById('securityButton').classList.add('text-gray-600');
+        document.getElementById('securityButton').classList.remove('text-green-500');
+        document.getElementById('developersButton').classList.add('text-gray-600');
+        document.getElementById('developersButton').classList.remove('text-green-500');
+    }
+
+    function showSecurityContent() {
+        document.getElementById('profileContent').style.display = 'none';
+        document.getElementById('securityContent').style.display = 'block';
+        document.getElementById('developersContent').style.display = 'none';
+        document.getElementById('profileButton').classList.remove('text-green-500');
+        document.getElementById('profileButton').classList.add('text-gray-600');
+        document.getElementById('securityButton').classList.remove('text-gray-600');
+        document.getElementById('securityButton').classList.add('text-green-500');
+        document.getElementById('developersButton').classList.add('text-gray-600');
+        document.getElementById('developersButton').classList.remove('text-green-500');
+    }
+
+    function showDevelopersContent() {
+        document.getElementById('profileContent').style.display = 'none';
+        document.getElementById('securityContent').style.display = 'none';
+        document.getElementById('developersContent').style.display = 'block';
+        document.getElementById('profileButton').classList.remove('text-green-500');
+        document.getElementById('profileButton').classList.add('text-gray-600');
+        document.getElementById('securityButton').classList.add('text-gray-600');
+        document.getElementById('securityButton').classList.remove('text-green-500');
+        document.getElementById('developersButton').classList.remove('text-gray-600');
+        document.getElementById('developersButton').classList.add('text-green-500');
+    }
+
+
+
+
     function enableEditProfile() {
         document.getElementById('name').style.display = 'none';
         document.getElementById('nameInput').style.display = 'block';
@@ -32,23 +73,7 @@
         reader.readAsDataURL(event.target.files[0]);
     }
 
-    function showSecurityContent() {
-        document.getElementById('profileContent').style.display = 'none';
-        document.getElementById('securityContent').style.display = 'block';
-        document.getElementById('profileButton').classList.remove('text-green-500');
-        document.getElementById('profileButton').classList.add('text-gray-600');
-        document.getElementById('securityButton').classList.remove('text-gray-600');
-        document.getElementById('securityButton').classList.add('text-green-500');
-    }
 
-    function showProfileContent() {
-        document.getElementById('profileContent').style.display = 'block';
-        document.getElementById('securityContent').style.display = 'none';
-        document.getElementById('profileButton').classList.add('text-green-500');
-        document.getElementById('profileButton').classList.remove('text-gray-600');
-        document.getElementById('securityButton').classList.add('text-gray-600');
-        document.getElementById('securityButton').classList.remove('text-green-500');
-    }
 
 
 
@@ -375,15 +400,21 @@
     </h1>
     <div class="bg-white rounded-lg shadow-lg p-4">
         <div class="flex flex-col md:flex-row">
-            <div class="flex flex-row md:flex-col text-left w-full md:w-1/6 mb-4 md:mb-0">
-                <div class="mb-2">
+
+            <div class="text-left w-full md:w-1/6 mb-4 md:mb-0 ">
+                <div class="mb:1 md:mb-2">
                     <button class="w-full text-xs text-left text-green-500 py-2 px-4 rounded-lg" id="profileButton" onclick="showProfileContent()">
                         My Profile
                     </button>
                 </div>
-                <div>
+                <div class="mb:1 md:mb-2">
                     <button class="w-full text-xs text-left py-2 px-4 rounded-lg text-gray-600" id="securityButton" onclick="showSecurityContent()">
                         Security
+                    </button>
+                </div>
+                <div>
+                    <button class="w-full text-xs text-left py-2 px-4 rounded-lg text-gray-600" id="developersButton" onclick="showDevelopersContent()">
+                        Developers
                     </button>
                 </div>
             </div>
@@ -759,9 +790,75 @@
                         </ul>
                     </div>
                 </div>
-
-
             </div>
+
+
+
+
+            <div id="developersContent" style="display: none;" class="w-full md:w-4/4 md:pl-4 py-1">
+
+                    <h2 class="text-sm font-medium text-gray-800 mb-3">
+                        Practicum Supervisor
+                    </h2>
+                <div>
+                    <div class="flex justify-center">
+                        <div class="w-24 h-24 rounded-full">
+                            <img alt="Profile image placeholder" class="w-full h-full rounded-full" src="http://127.0.0.1:8000/storage/pmsAssets/practicum_supervisor.jpg" />
+                        </div>
+                    </div>
+                    <h2 class="text-xs font-semibold  text-gray-800 mt-4 text-center">Mishill D. Cempron</h2>
+                </div>
+                <div class="mt-5">
+                    <h3 class="text-sm font-medium text-gray-800">Developers</h3>
+                    <p class="text-xs text-gray-600">Meet the developers of this system</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-8">
+                        <!-- Developer 1 -->
+                        <div class="text-center">
+                            <div class="w-24 h-24 rounded-full mx-auto">
+                                <img alt="Developer image placeholder" class="w-full h-full rounded-full" src="http://127.0.0.1:8000/storage/pmsAssets/raña.jpg" />
+                            </div>
+                            <h4 class="text-xs font-semibold  text-gray-800 mt-4">Lorjohn M. Raña</h4>
+                            <p class="text-[10px] text-gray-600">Back-end Developer</p>
+                            <p class="text-[10px] text-gray-600">lorjohn143@gmail.com</p>
+                        </div>
+                        <!-- Developer 2 -->
+                        <div class="text-center">
+                            <div class="w-24 h-24 rounded-full mx-auto">
+                                <img alt="Developer image placeholder" class="w-full h-full rounded-full" src="http://127.0.0.1:8000/storage/pmsAssets/ang.jfif" />
+                            </div>
+                            <h4 class="text-xs font-semibold  text-gray-800 mt-4">Sweet Frachette L. Ang</h4>
+                            <p class="text-[10px] text-gray-600">Front-end Developer</p>
+                            <p class="text-[10px] text-gray-600">sweetfrachettelaude@gmail.com</p>
+                        </div>
+                        <!-- Developer 3 -->
+                        <div class="text-center">
+                            <div class="w-24 h-24 rounded-full mx-auto">
+                                <img alt="Developer image placeholder" class="w-full h-full rounded-full" src="http://127.0.0.1:8000/storage/pmsAssets/vargas.png" />
+                            </div>
+                            <h4 class="text-xs font-semibold  text-gray-800 mt-4">Kristine Mae L. Vargas</h4>
+                            <p class="text-[10px] text-gray-600">Front-end Developer</p>
+                            <p class="text-[10px] text-gray-600">krstnmvrgs04@gmail.com</p>
+                        </div>
+                        <!-- Developer 4 -->
+                        <div class="text-center">
+                            <div class="w-24 h-24 rounded-full mx-auto">
+                                <img alt="Developer image placeholder" class="w-full h-full rounded-full" src="http://127.0.0.1:8000/storage/pmsAssets/estolloso.jfif" />
+                            </div>
+                            <h4 class="text-xs font-semibold  text-gray-800 mt-4">Marvin F. Estolloso</h4>
+                            <p class="text-[10px] text-gray-600">Front-end Developer</p>
+                            <p class="text-[10px] text-gray-600">Marvinestolloso00592@gmail.com</p>
+                        </div>
+                        <!-- Developer 5 -->
+                        <div class="text-center">
+                            <div class="w-24 h-24 rounded-full mx-auto">
+                                <img alt="Developer image placeholder" class="w-full h-full rounded-full" src="https://placehold.co/96x96" />
+                            </div>
+                            <h4 class="text-xs font-semibold  text-gray-800 mt-4">Alfred Vitangcor</h4>
+                            <p class="text-[10px] text-gray-600"></p>
+                            <p class="text-[10px] text-gray-600">fnamemilname@gmail.com</p>
+                        </div>
+
+                    </div>
 
 
         </div>
