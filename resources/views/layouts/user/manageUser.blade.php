@@ -15,7 +15,7 @@
         <p class="mb-6 text-sm">List of user within the system</p>
 
         <div id="labor-cost" class="">
-            <div class="bg-white shadow-md rounded-lg p-6">
+            <div class="bg-white shadow-md rounded-lg">
                 <h3 class="text-sm font-semibold mb-4 text-center">Manage User</h3>
                 <!-- Filter, Search, Import Inside Card -->
                 <div class="flex items-center justify-between mb-4 space-x-4">

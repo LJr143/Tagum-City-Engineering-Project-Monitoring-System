@@ -398,7 +398,7 @@
     <h1 class="text-xl font-medium mb-6">
         Account Settings
     </h1>
-    <div class="bg-white rounded-lg shadow-lg p-4">
+    <div class="bg-white rounded-lg shadow-lg p-4 min-h-screen">
         <div class="flex flex-col md:flex-row">
 
             <div class="text-left w-full md:w-1/6 mb-4 md:mb-0 ">
