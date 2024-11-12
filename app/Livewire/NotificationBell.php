@@ -3,12 +3,12 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 
 class NotificationBell extends Component
 {
     public $notifications;
     public $count = 0;
-    public $showUnread = false; // Track if unread-only mode is active
 
     protected $listeners = ['notificationAdded' => 'loadNotifications'];
 
@@ -19,29 +19,24 @@ class NotificationBell extends Component
 
     public function loadNotifications(): void
     {
-        // Fetch notifications based on $showUnread
-        $query = auth()->user()->notifications();
+        // Fetch the notifications for the logged-in user
+        $this->notifications = auth()->user()->notifications()->unread()->get();
 
-        if ($this->showUnread) {
-            $query->unread();
-        }
-
-        $this->notifications = $query->get();
-        $this->count = auth()->user()->notifications()->unread()->count();
+        // Update notification count
+        $this->count = $this->notifications->count();
     }
 
-    public function toggleUnread()
-    {
-        $this->showUnread = !$this->showUnread;
-        $this->loadNotifications(); // Reload notifications based on unread status
-    }
 
     public function markAsRead($notificationId)
     {
+        // Mark a specific notification as read
         $notification = auth()->user()->notifications()->findOrFail($notificationId);
         $notification->markAsRead();
+
+        // Refresh the notifications after marking as read
         $this->loadNotifications();
     }
+
 
     public function render()
     {
