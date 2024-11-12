@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Notifications\NewProjectCreated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,7 +22,6 @@ class Project extends Model
         'description',
     ];
 
-
     public function pows(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Pow::class);
@@ -32,7 +32,7 @@ class Project extends Model
         return $this->belongsTo(User::class, 'project_incharge_id', 'id');
     }
 
-    public function delayConfigurations()
+    public function delayConfigurations(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(SystemConfiguration::class);
     }

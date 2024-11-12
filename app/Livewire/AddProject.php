@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Project;
 use App\Models\User;
+use App\Notifications\ProjectNotification;
 use App\Services\LogService;
 use Livewire\Component;
 
@@ -54,7 +55,7 @@ class AddProject extends Component
         $this->validate(); // Validate all fields
 
         // If validation passes, create the project
-        Project::create([
+        $project = Project::create([
             'title' => $this->title,
             'baranggay' => $this->baranggay,
             'street' => $this->street,
@@ -65,6 +66,17 @@ class AddProject extends Component
             'project_incharge_id' => $this->projectIncharge_id,
             'description' => $this->description,
         ]);
+
+        // Get the newly created project's ID
+        $projectId = $project->id;
+
+        $admins = User::where(function ($query) {
+            $query->whereRaw('role = ?', ['admin']);
+        })->get();
+
+        foreach ($admins as $admin) {
+            $admin->notify(new ProjectNotification('A new project has been created.', $projectId));
+        }
 
         LogService::logAction(
             'added project',

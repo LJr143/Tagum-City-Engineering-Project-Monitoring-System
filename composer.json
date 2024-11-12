@@ -15,9 +15,11 @@
         "maatwebsite/excel": "^3.1",
         "mallardduck/blade-boxicons": "^2.4",
         "openspout/openspout": "^4.26",
-        "power-components/livewire-powergrid": "^5.10"
+        "power-components/livewire-powergrid": "^5.10",
+        "pusher/pusher-php-server": "^7.2"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.14",
         "fakerphp/faker": "^1.23",
         "laravel/pint": "^1.13",
         "laravel/sail": "^1.26",
