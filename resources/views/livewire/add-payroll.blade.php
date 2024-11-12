@@ -1,6 +1,6 @@
 <div x-data="{ open: false }" x-cloak @payroll-added.window="open = false">
     <!-- Trigger Button -->
-    <button @click="open = true" class="bg-green-700 text-white rounded-md px-4 py-2 text-xs hover:bg-green-800">
+    <button @click="open = true" class="bg-green-500 text-white text-xs px-4 py-2 rounded shadow-md hover:bg-green-600 focus:outline-none">
         Add Payroll
     </button>
 
@@ -13,7 +13,7 @@
         x-transition:leave="transition ease-in duration-200"
         x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
-        class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50"
+        class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
     >
         <div
             x-show="open"
@@ -23,40 +23,58 @@
             x-transition:leave="transition ease-in duration-200"
             x-transition:leave-start="opacity-100 transform scale-100"
             x-transition:leave-end="opacity-0 transform scale-90"
-            class="bg-white rounded-md shadow-lg p-6 w-1/3"
+            class="bg-white p-6 rounded-lg shadow-md w-full max-w-md mx-4"
         >
-            <!-- Payroll Title -->
-            <h2 class="text-sm font-semibold mb-4">Add Payroll</h2>
+
+            <div class="flex justify-between items-center mb-4 border-b border-gray-300 pb-2">
+                <!-- Payroll Title -->
+                <h2 class="text-sm font-bold text-left w-full sm:w-auto">Add Payroll</h2>
+
+                <!-- Close Button (X) -->
+                <button @click="open = false" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+
+
 
             <form wire:submit.prevent="submit" class="space-y-2">
                 <!-- Payroll Title Field -->
-                <label for="payroll-title" class="text-xs font-semibold mb-2 block">Payroll</label>
-                <input id="payroll-title" type="text" placeholder="Payroll Title" class="border border-gray-300 text-xs rounded-lg px-4 py-2 w-full mb-4" wire:model="payroll_title">
+                <div>
+                <label for="payroll-title" class="text-xs font-semibold block mb-1">Payroll</label>
+                <input id="payroll-title" type="text" placeholder="Payroll Title" class="border border-gray-300 text-xs rounded-lg px-4 py-2 w-full mb-3" wire:model="payroll_title">
+                </div>
 
                 <!-- Amount and Date Fields -->
-                <div class="flex space-x-2">
+                <div class="flex flex-col md:flex-row md:space-x-4 mb-4">
                     <!-- Amount Field -->
-                    <div class="w-1/2">
-                        <label for="amount" class="text-xs font-semibold mb-2 block">Amount</label>
+                    <div class="flex-1 mb-4 md:mb-0">
+                        <label for="amount" class="text-xs font-semibold block mb-1">Amount</label>
                         <input id="amount" type="text" placeholder="Enter Amount" class="border border-gray-300 text-xs rounded-md px-4 py-2 w-full" wire:model="payroll_amount">
                     </div>
 
                     <!-- Date Field -->
-                    <div class="w-1/2">
-                        <label for="date" class="text-xs font-semibold mb-2 block">Date</label>
+                    <div class="flex-1">
+                        <label for="date" class="text-xs font-semibold  block mb-1">Date</label>
                         <input id="date" type="date" class="border border-gray-300 text-xs rounded-md px-4 py-2 w-full" wire:model="payroll_date">
                     </div>
                 </div>
 
-                <!-- Buttons -->
-                <div class="flex justify-end mt-4">
-                    <button @click="open = false" type="button" class="bg-white border border-gray-300 text-gray-700 rounded-md text-xs px-4 py-2 hover:bg-gray-300">
+                <!-- Action Buttons -->
+                <div class="mt-6 pt-3 flex justify-end space-x-2  ">
+                    <button @click="open = false"
+                            type="button"
+                            class="bg-gray-300 text-gray-700 text-[12px] h-7 px-4 py-1 rounded shadow-md hover:bg-gray-400 justify-center text-center">
                         Cancel
                     </button>
-                    <button type="submit" class="bg-green-700 text-white rounded-md px-4 py-2 text-xs hover:bg-green-800 ml-2">
-                        Add
+                    <button type="submit"
+                            class="bg-green-500 text-white px-6 py-1 h-7 rounded shadow-md hover:bg-green-600 text-[12px] justify-center text-center">
+                        Save
                     </button>
                 </div>
+
+
             </form>
         </div>
     </div>
