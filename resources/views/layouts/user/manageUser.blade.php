@@ -11,8 +11,8 @@
 
     <x-slot name="main">
 
-        <h1 class="text-xl font-medium">User</h1>
-        <p class="mb-6 text-sm">List of user within the system</p>
+        <h1 class="text-base font-semibold leading-6 text-gray-900">User</h1>
+        <p class="mb-6 text-[11px]">User Directory and System Member List</p>
 
         <div id="labor-cost" class="">
             <div class="bg-white shadow-md rounded-lg">

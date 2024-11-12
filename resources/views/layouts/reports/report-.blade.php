@@ -10,8 +10,8 @@
 
     <x-slot name="main">
 
-        <h1 class="text-xl font-medium">Reports</h1>
-        <p class="mb-6 text-sm">Project Monitoring Reports</p>
+        <h1 class="text-base font-semibold leading-6 text-gray-900">Reports</h1>
+        <p class="mb-6 text-[11px]">Project Monitoring and Performance Reports</p>
 
         <div class="container mx-auto">
             <div class="bg-white shadow-md rounded-lg">

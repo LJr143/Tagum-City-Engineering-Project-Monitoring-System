@@ -12,8 +12,8 @@
     <x-slot name="main">
 
 
-        <h1 class="text-xl font-medium">System Logs</h1>
-        <p class="mb-6 text-sm">List of activity within the system</p>
+        <h1 class="text-base font-semibold leading-6 text-gray-900">System Logs</h1>
+        <p class="mb-6 text-[11px]">System Activity Logs and Event History</p>
 
         <div class="container mx-auto bg-white p-6 rounded-lg shadow">
             <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">

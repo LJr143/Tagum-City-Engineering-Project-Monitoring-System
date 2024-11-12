@@ -1,4 +1,4 @@
-<div x-data="{ open: false }" wire:poll.5s class="relative">
+<div x-data="{ open: false }" wire:poll.5s class="relative" x-cloak>
     <!-- Notification Bell Icon -->
     <div class="notification-bell cursor-pointer mr-2" wire:click="loadNotifications" @click="open = !open">
         <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -28,7 +28,7 @@
                         {{ $notification->data['project_title'] ?? 'No title available' }}<br>
                     </p>
                     @if(isset($notification->data['project_id']))
-                        <a href="{{ url('/projects/' . $notification->data['project_id']) }}" class="text-blue-500 text-xs">View Project</a>
+                        <a href="{{ url('/project/view-pow/' . $notification->data['project_id']) }}" class="text-blue-500 text-xs">View Project</a>
                     @else
                         <span class="text-gray-500 text-xs">No project link available</span>
                     @endif

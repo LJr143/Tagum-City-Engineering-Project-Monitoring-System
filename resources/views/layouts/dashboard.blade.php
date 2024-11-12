@@ -17,6 +17,7 @@
             <!-- Main Content -->
             <div class="flex-1 p-4">
                 <h3 class="text-base font-semibold leading-6 text-gray-900">Dashboard</h3>
+                <p class="mb-6 text-[11px]">Quick Overview of Projects</p>
 
                 <dl class="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"> <!-- Increased gap to 4 -->
 
@@ -167,17 +168,29 @@
                                                     <td class="whitespace-nowrap px-3 py-1 text-xs text-gray-500">
                                                         Php {{ $project->total_indirect_costs }}
                                                     </td>
+
                                                     <td class="whitespace-nowrap px-3 py-1 text-xs text-gray-500">
                                                         <div class="flex items-center">
                                                             <div class="relative">
                                                                 <svg class="w-10 h-10" viewBox="0 0 36 36">
-                                                                    <path class="text-gray-300" stroke-width="3" stroke="currentColor" fill="none" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831" />
-                                                                    <path class="text-green-600" stroke-width="3" stroke-linecap="round" stroke="currentColor" fill="none" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831" stroke-dasharray="0 100" />
+                                                                    <!-- Background Circle (Full Circle) -->
+                                                                    <circle cx="18" cy="18" r="15.9155" stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none" class="text-gray-300" />
+
+                                                                    <!-- Foreground Circle (Progress) -->
+                                                                    <circle cx="18" cy="18" r="15.9155" stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none"
+                                                                            class="text-green-600"
+                                                                            stroke-dasharray="{{ $project->overallProgress * 113.097 / 100 }}, 113.097" />
                                                                 </svg>
-                                                                <span class="absolute left-0 top-0 w-full h-full flex items-center justify-center text-sm text-gray-900">0%</span>
+
+                                                                <!-- Display progress percentage inside the circle -->
+                                                                <span class="absolute left-0 top-0 w-full h-full flex items-center justify-center text-[8px] text-gray-900">
+                {{ number_format($project->overallProgress, 0) }}%
+            </span>
                                                             </div>
                                                         </div>
                                                     </td>
+
+
                                                     <td class="whitespace-nowrap text-sm text-gray-500 text-center">
                                 <span class="flex items-center justify-center text-center rounded-[5px] capitalize p-2 w-[150px] text-xs font-semibold leading-5
                                     @if($project->status == 'pending') text-yellow-800 bg-yellow-500 text-white

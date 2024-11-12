@@ -14,7 +14,10 @@
         <div>
             <!-- Header -->
             <header class="flex flex-row justify-between items-center mb-4">
-                <h1 class="text-base font-semibold leading-6 text-gray-900">Projects</h1>
+               <div>
+                   <h3 class="text-base font-semibold leading-6 text-gray-900">Projects</h3>
+                   <p class="mb-2 text-[11px]">Detailed List of All Projects in the System</p>
+               </div>
                 @if (auth()->user()->isAdmin() || auth()->user()->isEncoder())
                     <!-- Modal -->
                     <livewire:add-project/>

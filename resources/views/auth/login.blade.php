@@ -3,7 +3,7 @@
     <!-- Right Side -->
 
     <div class="relative z-10 w-3/4 md:w-2/3">
-        <img alt="Logo" class="mb-4 mt-5 sm:mt-[5px]   w-[200px] ml-[-30px] sm:ml-[-50px] "  src="{{ asset('storage/pmsAssets/pms_logo.png') }}" />
+{{--        <img alt="Logo" class="mb-4 mt-5 sm:mt-[5px]   w-[200px] ml-[-30px] sm:ml-[-50px] "  src="{{ asset('storage/pmsAssets/pms_logo.png') }}" />--}}
         <h1 class="text-4xl font-bold text-[25px] text-green-600">
             WELCOME BACK!
         </h1>

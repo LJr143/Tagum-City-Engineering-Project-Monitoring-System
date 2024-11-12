@@ -45,7 +45,7 @@ class ProjectNotification extends Notification
     {
         return (new MailMessage)
             ->line($this->message)
-            ->action('View Project', url('/projects/' . $this->projectId))
+            ->action('View Project', url('/project/view-pow/' . $this->projectId))
             ->line('Thank you for staying updated!');
     }
 

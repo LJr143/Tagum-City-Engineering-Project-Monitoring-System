@@ -1,22 +1,28 @@
-<div class="h-[85px] w-[250px] justify-between items-center px-1 hidden lg:flex transition-all duration-300"
-     :class="{'w-[250px]':showSide, 'w-[100px]':!showSide}">
+<div
+     :class="{'w-[250px]':showSide, 'w-[100px]':!showSide}"
+     x-data="{ showSide: localStorage.getItem('sidebarState') === 'true' ? true : false }"
+     x-init="$watch('showSide', value => localStorage.setItem('sidebarState', value))"
+>
 
-    <div class="mt-10" :class="{'block':showSide, 'hidden':!showSide}">
-        <img src="{{ asset('storage/pmsAssets/pms_logo.png') }}" class="h-30 w-25  ml-1.5" alt="logo">
+    <div class="h-[85px] w-[250px] justify-between items-center px-1 hidden lg:flex">
+        <div class="mt-10" :class="{'block':showSide, 'hidden':!showSide}">
+            <img src="{{ asset('storage/pmsAssets/pms_logo.png') }}" class="h-30 w-25  ml-1.5" alt="logo">
+        </div>
+        <button @click="showSide = ! showSide; show = false; showManage = false"
+                :class="{'hover:bg-customGreen-50 focus:bg-customGreen-100':showSide, 'bg-customGreen-100':!showSide}"
+                class="p-3 ml-2 rounded-xl">
+            <svg class="transform ease-in-out transition" :class="{'rotate-180':!showSide,'rotate-0':showSide}" width="12"
+                 height="10" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.17742 13.3548L1 7.17742L7.17742 1" stroke="rgba(36, 144, 0, 1)" stroke-width="1.90074"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M15.731 12.4045L10.5039 7.17743L15.731 1.95038" stroke="rgba(36, 144, 0, 0.8)"
+                      stroke-opacity="0.45"
+                      stroke-width="1.50476" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
     </div>
-    <button @click="showSide = ! showSide; show = false; showManage = false"
-            :class="{'hover:bg-customGreen-50 focus:bg-customGreen-100':showSide, 'bg-customGreen-100':!showSide}"
-            class="p-3 ml-2 rounded-xl">
-        <svg class="transform ease-in-out transition" :class="{'rotate-180':!showSide,'rotate-0':showSide}" width="12"
-             height="10" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M7.17742 13.3548L1 7.17742L7.17742 1" stroke="rgba(36, 144, 0, 1)" stroke-width="1.90074"
-                  stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M15.731 12.4045L10.5039 7.17743L15.731 1.95038" stroke="rgba(36, 144, 0, 0.8)"
-                  stroke-opacity="0.45"
-                  stroke-width="1.50476" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-    </button>
-</div>
+
+
 
 {{-- NAVIGATION BUTTONS --}}
 <div class="hidden w-full max-w-[240px] lg:flex flex-col h-full justify-between pt-2 pb-10 flex-1 overflow-y-auto">
@@ -188,4 +194,7 @@
         </ul>
 
     </div>
+</div>
+
+
 </div>

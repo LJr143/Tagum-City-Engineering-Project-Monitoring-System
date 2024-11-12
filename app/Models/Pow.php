@@ -38,22 +38,22 @@ class Pow extends Model
 
     public function indirectCosts(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(IndirectCost::class, 'pow_id', 'id'); // Adjust as necessary
+        return $this->hasMany(IndirectCost::class, 'pow_id', 'id');
     }
 
     public function materials()
     {
-        return $this->hasMany(Material::class);
+        return $this->hasMany(Material::class, 'pow_id', 'id');
     }
 
     public function payroll()
     {
-        return $this->hasMany(Payroll::class);
+        return $this->hasMany(Payroll::class, 'pow_id', 'id');
     }
 
     public function directCosts()
     {
-        return $this->hasMany(DirectCost::class);
+        return $this->hasMany(DirectCost::class, 'pow_id', 'id');
     }
 
 

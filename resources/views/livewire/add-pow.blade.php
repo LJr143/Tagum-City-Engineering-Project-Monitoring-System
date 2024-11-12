@@ -94,15 +94,15 @@
                         @enderror
                     </div>
 
-                    <div x-show="uploadFile === 'upload'" x-cloak>
-                        <label for="powFile" class="block text-gray-700 text-xs">Upload POW</label>
-                        <input type="file" id="powFile" wire:model="powFile"
-                               class="mt-1 block w-full p-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-xs">
-                        <!-- Error message for materialsFile -->
-                        @error('powFile')
-                        <span class="text-red-500 ml-2 text-[10px]">{{ $message }}</span>
-                        @enderror
-                    </div>
+{{--                    <div x-show="uploadFile === 'upload'" x-cloak>--}}
+{{--                        <label for="powFile" class="block text-gray-700 text-xs">Upload POW</label>--}}
+{{--                        <input type="file" id="powFile" wire:model="powFile"--}}
+{{--                               class="mt-1 block w-full p-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-xs">--}}
+{{--                        <!-- Error message for materialsFile -->--}}
+{{--                        @error('powFile')--}}
+{{--                        <span class="text-red-500 ml-2 text-[10px]">{{ $message }}</span>--}}
+{{--                        @enderror--}}
+{{--                    </div>--}}
 
                     <!-- Total Material Cost Input -->
                     <div x-show="uploadFile === 'manual'" x-cloak>
@@ -146,6 +146,17 @@
 
                         <!-- Form -->
                         <div class="space-y-4">
+
+                            <div>
+                                <label for="powFile" class="block text-gray-700 text-xs">Upload POW</label>
+                                <input type="file" id="powFile" wire:model="powFile"
+                                       class="mt-1 block w-full p-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-xs">
+                                <!-- Error message for materialsFile -->
+                                @error('powFile')
+                                <span class="text-red-500 ml-2 text-[10px]">{{ $message }}</span>
+                                @enderror
+                            </div>
+
                             <!-- Display Fields Dynamically -->
                             @foreach ($direct_costs as $index => $cost)
                                 <div class="flex gap-2 items-center border-2 p-2 ">
