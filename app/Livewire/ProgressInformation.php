@@ -90,7 +90,7 @@ class ProgressInformation extends Component
         $this->laborSpentCost = $labor->sum('payroll_amount');
 
         $this->indirectSpentCost = IndirectCost::where('pow_id', $this->pow_id)->sum('spent_cost');
-        $this->directSpentCost = DirectCost::where('pow_id', $this->pow_id)->sum('spent_cost');
+        $this->directSpentCost = ($this->totalLaborCost - $this->remainingLaborCost) + ($this->totalMaterialCost - $this->remainingMaterialCost);
 
         // Calculate remaining costs and used percentages.
         $this->remainingMaterialCost = max(0, $this->totalMaterialCost - $this->materialSpentCost);
@@ -108,7 +108,7 @@ class ProgressInformation extends Component
             ? ($this->indirectSpentCost / $this->totalIndirectCost) * 100
             : 0;
 
-        $this->remainingDirectCost = max(0, $this->totalDirectCost - $this->directSpentCost);
+        $this->remainingDirectCost = max(0, $this->totalDirectCost - (($this->totalLaborCost - $this->remainingLaborCost) + ($this->totalMaterialCost - $this->remainingMaterialCost)));
         $this->usedDirectCost = $this->totalDirectCost > 0
             ? ($this->directSpentCost / $this->totalDirectCost) * 100
             : 0;
@@ -116,8 +116,8 @@ class ProgressInformation extends Component
 
     public function calculateOverallProgress(): void
     {
-        $totalSpentCost = $this->materialSpentCost + $this->laborSpentCost + $this->indirectSpentCost + $this->directSpentCost;
-        $totalProjectCost = $this->totalMaterialCost + $this->totalLaborCost + $this->totalIndirectCost + $this->totalDirectCost;
+        $totalSpentCost = $this->materialSpentCost + $this->laborSpentCost + $this->indirectSpentCost ;
+        $totalProjectCost = $this->totalMaterialCost + $this->totalLaborCost + $this->totalIndirectCost;
 
         $this->overallProgress = $totalProjectCost > 0
             ? ($totalSpentCost / $totalProjectCost) * 100

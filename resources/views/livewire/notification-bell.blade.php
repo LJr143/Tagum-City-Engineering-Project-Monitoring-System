@@ -1,4 +1,4 @@
-<div x-data="{ open: false }" wire:poll.5s class="relative">
+<div x-data="{ open: false }" wire:poll.5s class="relative" x-cloak>
     <!-- Notification Bell Icon -->
     <div class="notification-bell cursor-pointer mr-2" wire:click="loadNotifications" @click="open = !open">
         <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -159,7 +159,7 @@
                                class="text-gray-500 hover:border-green-600 hover:text-green-600 whitespace-nowrap border-b-2 pb-1 px-1 text-xs font-medium">Indirect
                                 Cost</a>
                             <a id="other-direct-cost-tab" href="#" onclick="changeTabTo('other-direct-cost')"
-                               class="text-gray-500 hover:border-green-600 hover:text-green-600 whitespace-nowrap border-b-2 pb-1 px-1 text-xs font-medium">Other
+                               class="text-gray-500 hover:border-green-600 hover:text-green-600 whitespace-nowrap border-b-2 pb-1 px-1 text-xs font-medium">
                                 Direct Cost</a>
 
                             <a id="purchase-order-history-tab" href="#" onclick="changeTabTo('purchase-order-history')"
@@ -254,7 +254,7 @@
                 <!-- POW Suspension Resume Section -->
                 <div id="pow-suspension-resume" class="hidden w-full">
                     <div class="bg-white shadow-md rounded-lg p-6">
-                        <h3 class="text-sm font-semibold mb-2 text-center"> Purchase Order History</h3>
+                        <h3 class="text-sm font-semibold mb-2 text-center"> Suspension / Continuation  History</h3>
                         <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
                             <livewire:pow-suspend-resume :pow_id="$pow->id"/>
                         </div>

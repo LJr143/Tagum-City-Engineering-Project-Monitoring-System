@@ -1,7 +1,21 @@
 <div
-     :class="{'w-[250px]':showSide, 'w-[100px]':!showSide}"
-     x-data="{ showSide: localStorage.getItem('sidebarState') === 'true' ? true : false }"
-     x-init="$watch('showSide', value => localStorage.setItem('sidebarState', value))"
+    :class="{
+        'w-[250px]': showSide && !isSmallScreen,
+        'w-[100px]': !showSide && !isSmallScreen,
+        'hidden': isSmallScreen
+    }"
+    x-data="{
+        showSide: localStorage.getItem('sidebarState') === 'true' ? true : false,
+        isSmallScreen: window.innerWidth < 640, // Adjust based on your screen size requirements
+        checkScreenSize() {
+            this.isSmallScreen = window.innerWidth < 640;
+        }
+    }"
+    x-init="
+        $watch('showSide', value => localStorage.setItem('sidebarState', value));
+        window.addEventListener('resize', () => checkScreenSize());
+        checkScreenSize();
+    "
 >
 
     <div class="h-[85px] w-[250px] justify-between items-center px-1 hidden lg:flex">
