@@ -8,7 +8,7 @@
         </svg>
     </button>
 
-    <div class="flex space-x-4 sm:pl-2 pr-2">
+    <div class="flex sm:pl-2 pr-2 w-full">
         <img alt="Seal 1" src="http://127.0.0.1:8000/storage/pmsAssets/logo_img.png" class="w-[130px]">
     </div>
     <!-- Search Bar -->
