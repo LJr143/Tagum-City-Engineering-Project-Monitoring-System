@@ -17,7 +17,7 @@
         x-transition:leave="transition ease-in duration-200"
         x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
-        class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+        class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50 p-4"
     >
         <!-- Modal Content -->
         <div
@@ -28,7 +28,7 @@
             x-transition:leave="transition ease-in duration-200"
             x-transition:leave-start="opacity-100 transform scale-100"
             x-transition:leave-end="opacity-0 transform scale-90"
-            class="bg-white rounded-lg shadow-lg p-6 w-full max-w-2xl mx-4 overflow-y-auto max-h-[300px]"
+            class="bg-white p-6 rounded-lg shadow-md max-w-2xl w-full relative overflow-y-auto max-h-[90vh] sm:max-h-[90vh]"
         >
             <div class="flex justify-between items-center mb-4 border-b border-gray-300 pb-2">
                 <h2 class="text-sm font-bold text-left w-full sm:w-auto">Add Direct Costs</h2>
@@ -42,40 +42,40 @@
             <form wire:submit.prevent="saveDirectCosts" class="space-y-4 text-[12px]">
                 <!-- Display Fields Dynamically -->
                 @foreach ($direct_costs as $index => $cost)
-                    <div class="flex gap-2 items-center">
+                    <div class="flex flex-col sm:flex-row gap-2 items-center border-2 p-2 ">
                         <input type="text" name="direct_costs[{{ $index }}][item_no]"
                                wire:model.defer="direct_costs.{{ $index }}.item_no"
                                placeholder="Item no"
-                               class="w-1/2 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 text-xs"
+                               class="w-full sm:w-1/2 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 text-xs"
                         >
                         <input type="text" name="direct_costs[{{ $index }}][description]"
                                wire:model.defer="direct_costs.{{ $index }}.description"
                                placeholder="Description"
-                               class="w-1/2 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 text-xs"
+                               class="w-full sm:w-1/2 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 text-xs"
                         >
 
                         <input type="number" name="direct_costs[{{ $index }}][%_of_total]"
                                wire:model.defer="direct_costs.{{ $index }}.%_of_total"
                                placeholder="%_of_total"
-                               class="w-1/2 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 text-xs"
+                               class="w-full sm:w-1/2 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 text-xs"
                         >
 
                         <input type="number" name="direct_costs[{{ $index }}][quantity]"
                                wire:model.defer="direct_costs.{{ $index }}.quantity"
                                placeholder="quantity"
-                               class="w-1/2 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 text-xs"
+                               class="w-full sm:w-1/2 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 text-xs"
                         >
 
                         <input type="text" name="direct_costs[{{ $index }}][unit]"
                                wire:model.defer="direct_costs.{{ $index }}.unit"
                                placeholder="unit"
-                               class="w-1/2 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 text-xs"
+                               class="w-full sm:w-1/2 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 text-xs"
                         >
 
                         <input type="number" name="direct_costs[{{ $index }}][unit_cost]"
                                wire:model.defer="direct_costs.{{ $index }}.unit_cost"
                                placeholder="unit_cost"
-                               class="w-1/2 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 text-xs"
+                               class="w-full sm:w-1/2 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 text-xs"
                         >
 
                         @if ($index > 0)
