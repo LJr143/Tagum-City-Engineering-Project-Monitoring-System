@@ -180,7 +180,7 @@
                         <div class="mb-2">
                             @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'suspended' && $pow->project->status != 'completed')
                             <livewire:add-manual-material :pow_id="$pow->id"/>
-                            @else
+                            @elseif(auth()->user()->isProjectIncharge() && $pow->project->status != 'suspended' && $pow->project->status != 'completed')
                                 <livewire:make-material-report :pow_id="$pow->id"/>
                             @endif
                         </div>
