@@ -153,7 +153,7 @@
                             class="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400 text-xs w-full sm:w-[70px] h-[35px]">
                         Cancel
                     </button>
-                    <button type="submit"
+                    <button type="submit" @if($project->status == 'completed') :class="disable" @endif
                             class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 text-xs w-full sm:w-[150px] h-[35px]">
                         Save Changes
                     </button>

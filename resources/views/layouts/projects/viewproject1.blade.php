@@ -22,7 +22,7 @@
                             @endif
 
 
-                            @if (auth()->user()->isAdmin() || auth()->user()->isEncoder())
+                            @if (auth()->user()->isAdmin() || auth()->user()->isEncoder() && $project->status != 'completed')
 
                             <!-- Delete Button -->
                                 <button onclick="openDeleteModal()" class="text-xs bg-red-500 hover:bg-red-600  text-white px-4 py-2 rounded flex items-center space-x-2">
