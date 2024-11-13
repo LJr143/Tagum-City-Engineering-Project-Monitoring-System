@@ -24,6 +24,8 @@ class NotificationBell extends Component
 
         // Update unread notification count
         $this->count = auth()->user()->notifications()->unread()->count();
+
+        $this->notifications = auth()->user()->notifications()->orderBy('created_at', 'desc')->get();
     }
 
     public function showUnreadNotifications()
