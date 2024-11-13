@@ -1,4 +1,4 @@
-<div x-data="{ open: false }" wire:poll.5s class="relative" x-cloak>
+<div x-data="{ open: false, showUnread: false }" wire:poll.5s class="relative" x-cloak>
     <!-- Notification Bell Icon -->
     <div class="notification-bell cursor-pointer mr-2" wire:click="loadNotifications" @click="open = !open">
         <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -23,29 +23,92 @@
 
         <div class="px-3 py-1 flex justify-between items-center border-b">
             <div class="flex space-x-3">
-                <button wire:click="showAllNotifications" class="text-green-600 font-semibold border-b-2 border-green-600 text-sm">All</button>
-                <button wire:click="showUnreadNotifications" class="text-gray-500 text-sm">Unread</button>
+                <button @click="showUnread = false" :class="!showUnread ? 'text-green-600 font-semibold border-b-2 border-green-600' : 'text-gray-500'" wire:click="showAllNotifications" class="text-sm">All</button>
+                <button @click="showUnread = true" :class="showUnread ? 'text-green-600 font-semibold border-b-2 border-green-600' : 'text-gray-500'" wire:click="showUnreadNotifications" class="text-sm">Unread</button>
             </div>
             <button wire:click="markAllAsRead" class="text-gray-500 text-xs">Mark all read</button>
         </div>
 
         <!-- Scrollable Notifications -->
         <div class="px-3 py-1 max-h-64 overflow-y-auto">
-            @forelse($notifications as $notification)
-                <div class="notification py-2 border-b text-sm">
-                    <h4 class="font-semibold text-sm">{{ $notification->data['project_title'] ?? 'No Title' }}</h4>
-                    <p class="text-xs text-gray-500">{{ $notification->data['project_id'] ?? 'No message available.' }}</p>
-                    <p class="text-xs text-gray-400">{{ $notification->created_at->format('F j, Y, g:i A') }}</p>
-                    <div class="flex justify-between items-center mt-1">
-                        <span class="text-green-600"><i class="fas fa-circle text-xs"></i></span>
-                        <button wire:click="markAsRead('{{ $notification->id }}')" class="text-gray-500 text-xs">Mark as read</button>
+            <!-- New Notifications Section -->
+            <div>
+                <h4 class="text-sm font-semibold text-gray-700">New</h4>
+                @php
+                    if (!empty($notifications)) {
+                        $newNotifications = $notifications->filter(function ($notification) {
+                            return $notification->created_at->diffInHours() < 1;
+                        });
+                    }
+                @endphp
+                @forelse($newNotifications as $notification)
+                    <div class="notification py-2 border-b text-sm">
+                        <!-- Flex container for message and "View Project" link -->
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h4 class="font-semibold text-xs">{{ $notification->data['project_title'] ?? 'No Title' }}</h4>
+                                <p class="text-[11px] text-gray-500">{{ $notification->data['message'] ?? 'No message available.' }}</p>
+                                <p class="text-[11px] text-gray-400">{{ $notification->created_at->format('F j, Y, g:i A') }}</p>
+                            </div>
+                            @if(isset($notification->data['project_id']))
+                                <a href="{{ url('/project/view-pow/' . $notification->data['project_id']) }}" class="text-green-500 text-sm mr-2">
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
+                            @else
+                                <span class="text-gray-500 text-xs ml-2">No project link available</span>
+                            @endif
+                        </div>
+
+                        <div class="flex justify-end items-center mt-1">
+                            <!-- Show green dot and "Mark as read" only for unread notifications -->
+                            @if(is_null($notification->read_at))
+                                <button wire:click="markAsRead('{{ $notification->id }}')" class="text-gray-500 text-xs font-semibold">Mark as read</button>
+                            @endif
+                        </div>
                     </div>
-                </div>
-            @empty
-                <div class="p-2 text-center text-gray-500 text-xs">
-                    No notifications
-                </div>
-            @endforelse
+                @empty
+                    <div class="p-2 text-center text-gray-500 text-xs">No new notifications</div>
+                @endforelse
+            </div>
+
+            <!-- Recent Notifications Section -->
+            <div class="mt-2">
+                <h4 class="text-sm font-semibold text-gray-700">Recent</h4>
+                @php
+                    $recentNotifications = $notifications->filter(function ($notification) {
+                        return $notification->created_at->diffInHours() >= 1;
+                    });
+                @endphp
+                @forelse($recentNotifications as $notification)
+                    <div class="notification py-2 border-b text-sm">
+                        <!-- Flex container for message and "View Project" link -->
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h4 class="font-semibold text-xs">{{ $notification->data['project_title'] ?? 'No Title' }}</h4>
+                                <p class="text-[11px] text-gray-500">{{ $notification->data['message'] ?? 'No message available.' }}</p>
+                                <p class="text-[11px] text-gray-400">{{ $notification->created_at->format('F j, Y, g:i A') }}</p>
+                            </div>
+                            @if(isset($notification->data['project_id']))
+                                <a href="{{ url('/project/view-pow/' . $notification->data['project_id']) }}" class="text-green-500 text-sm mr-2">
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
+                            @else
+                                <span class="text-gray-500 text-xs ml-2">No project link available</span>
+                            @endif
+                        </div>
+
+                        <div class="flex justify-end items-center mt-1">
+                            <!-- Show green dot and "Mark as read" only for unread notifications -->
+                            @if(is_null($notification->read_at))
+                                <button wire:click="markAsRead('{{ $notification->id }}')" class="text-gray-500 text-xs font-semibold">Mark as read</button>
+                            @endif
+                        </div>
+                    </div>
+                @empty
+                    <div class="p-2 text-center text-gray-500 text-xs">No recent notifications</div>
+                @endforelse
+            </div>
         </div>
+
     </div>
 </div>
