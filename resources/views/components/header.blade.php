@@ -8,8 +8,8 @@
         </svg>
     </button>
 
-    <div class="flex sm:pl-2 pr-2 w-full">
-        <img alt="Seal 1" src="http://127.0.0.1:8000/storage/pmsAssets/logo_img.png" class="w-[130px]">
+    <div class="flex sm:pl-2 pr-2">
+        <img alt="Seal 1" src="{{ asset('storage/pmsAssets/logo_img.png') }}" class="w-[130px]">
     </div>
     <!-- Search Bar -->
 
@@ -46,7 +46,7 @@
             </div>
 
             <div class=" items-center hidden sm:block">
-                <p style="font-size: 12px">
+                <p style="font-size: 12px" class="w-full">
                     {{ auth()->user()->first_name }}
                     @if(auth()->user()->middle_initial)
                     {{ auth()->user()->middle_initial }}.

@@ -148,6 +148,7 @@
                         </tbody>
                     </table>
                 </div>
+                @if($project->status != 'completed')
                 <div class="mt-6 flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-2">
                     <button type="button" @click="open = false"
                             class="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400 text-xs w-full sm:w-[70px] h-[35px]">
@@ -158,6 +159,7 @@
                         Save Changes
                     </button>
                 </div>
+                @endif
             </form>
 
         </div>

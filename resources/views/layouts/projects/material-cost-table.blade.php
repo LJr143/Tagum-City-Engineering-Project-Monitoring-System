@@ -42,7 +42,7 @@
 
                 </div>
 
-                @if (auth()->user()->isAdmin() || auth()->user()->isEncoder())
+                @if ((auth()->user()->isAdmin() || auth()->user()->isEncoder()) && $pow->project->status != 'completed'))
                     <div>
                         <div class="flex justify-content-between">
                             <button onclick="openDeleteModal()"
@@ -84,7 +84,7 @@
                                               stroke-linejoin="round"/>
                                     </svg>
                                 </button>
-                            @else
+                            @elseif ($pow->project->status != 'completed')
                                 <button onclick="openResumeModal()" class="bg-green-500 text-white text-[10px] h-7 sm:text-xs px-2 sm:px-4 py-1 sm:py-2 rounded shadow-md hover:bg-green-600 focus:outline-none flex items-center space-x-1">
                                     <span>Resume</span>
                                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -124,7 +124,7 @@
                             @endif
                         </div>
                     </div>
-                @else
+                @elseif(auth()->user()->isProjectIncharge() && ($pow->project->status != 'completed' || $pow->project->status != 'suspended'))
                     <livewire:add-p-o :pow_id="$pow->id"/>
                 @endif
             </div>
@@ -178,9 +178,9 @@
                     <div class="bg-white shadow-md rounded-lg p-6">
                         <h3 class="text-sm font-semibold mb-2 text-center"> Materials</h3>
                         <div class="mb-2">
-                            @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'suspended')
+                            @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'suspended' && $pow->project->status != 'completed')
                             <livewire:add-manual-material :pow_id="$pow->id"/>
-                            @else
+                            @elseif(auth()->user()->isProjectIncharge() && $pow->project->status != 'suspended' && $pow->project->status != 'completed')
                                 <livewire:make-material-report :pow_id="$pow->id"/>
                             @endif
                         </div>
@@ -197,11 +197,9 @@
                         <!-- Filter, Search, Import Inside Card -->
                         <div class="flex items-center justify-between mb-4 space-x-4">
                             <div class="flex space-x-2 ml-auto">
-                                @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'suspended')
+                                @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'suspended' && $pow->project->status != 'completed')
                                 <livewire:add-payroll :pow_id="$pow->id"/>
                                 @endif
-{{--                                <input type="text" placeholder="Search..."--}}
-{{--                                       class="px-2 py-1 border border-gray-300 rounded-md shadow-sm text-xs w-55">--}}
                             </div>
                         </div>
                         <!-- Table for Material Costs -->
@@ -216,7 +214,7 @@
                     <div class="bg-white shadow-md rounded-lg p-6">
                         <h3 class="text-sm font-semibold mb-2 text-center"> Indirect Cost</h3>
                         <div class="mb-2">
-                            @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'suspended')
+                            @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'suspended' && $pow->project->status != 'completed')
                             <livewire:add-manual-indirect-cost :pow_id="$pow->id"/>
                             @endif
                         </div>
@@ -231,7 +229,7 @@
                     <div class="bg-white shadow-md rounded-lg p-6">
                         <h3 class="text-sm font-semibold mb-2 text-center"> Direct Cost</h3>
                         <div class="mb-2">
-                            @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'suspended')
+                            @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'suspended' && $pow->project->status != 'completed')
                             <livewire:add-manual-direct-cost :pow_id="$pow->id"/>
                             @endif
                         </div>
@@ -262,7 +260,6 @@
                 </div>
 
             </div>
-
 
             <!-- Modal for Edit Item -->
             <div id="edit-modal"
@@ -615,5 +612,6 @@
             }
         });
     </script>
+
 
 </x-app-layout>

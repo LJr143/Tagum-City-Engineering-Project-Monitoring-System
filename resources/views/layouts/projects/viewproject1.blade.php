@@ -12,7 +12,7 @@
             <div class="flex-1 ">
                 <div class="max-w-7xl mx-auto">
                     <div class="flex flex-col sm:flex-row items-center justify-between mb-4">
-                        <div class="text-xl font-medium mb-6 sm:mb-0 sm:mr-auto text-left w-full sm:w-auto">
+                        <div class="text-base font-semibold text-gray-900 mb-6 sm:mb-0 sm:mr-auto text-left w-full sm:w-auto">
                             Project Information
                         </div>
                         <div class="flex space-x-4">
@@ -22,7 +22,7 @@
                             @endif
 
 
-                            @if (auth()->user()->isAdmin() || auth()->user()->isEncoder())
+                            @if (auth()->user()->isAdmin() || auth()->user()->isEncoder() && $project->status != 'completed')
 
                             <!-- Delete Button -->
                                 <button onclick="openDeleteModal()" class="text-xs bg-red-500 hover:bg-red-600  text-white px-4 py-2 rounded flex items-center space-x-2">
@@ -49,10 +49,10 @@
                         </div>
                     </div>
                     <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mb-8">
-                        <div class="w-full sm:w-1/3 relative">
+                        <div class="w-full sm:w-1/3 relative max-h-[250px] h-[250px]">
                             <!-- Default Image -->
                             <img src="{{ asset('storage/pmsAssets/pic1.jpg') }}" alt="Profile Image" id="editable-image-preview"
-                                 class="rounded-lg shadow-lg w-full max-h-[250px]" />
+                                 class="rounded-lg shadow-lg w-full h-full object-cover" />
 
                             <button class="absolute top-2 right-2 bg-white opacity-50 p-2 rounded-full shadow-lg" onclick="toggleImageEdit()">
                                 <i class="fas fa-edit"></i>
@@ -60,7 +60,6 @@
 
                             <input accept="image/*" class="absolute top-0 right-0 w-20 h-20 opacity-0 cursor-pointer" id="editable-image" onchange="previewImage(event)" type="file"/>
                         </div>
-
                         <div class="bg-white shadow-md rounded-lg p-4 w-full">
                             <div class="flex justify-between items-center mb-4">
                               <span class="text-xs
@@ -70,7 +69,7 @@
 
                                   {{ $project->status }}
                                 </span>
-                                @if (auth()->user()->isAdmin() || auth()->user()->isEncoder())
+                                @if ((auth()->user()->isAdmin() || auth()->user()->isEncoder()) && $project->status != 'completed')
                                     <livewire:edit-project :project="$project->id"/>
 
                                 @endif
@@ -175,7 +174,7 @@
                     </svg>
                     <h2 class="text-sm font-semibold text-red-500">Delete Project</h2>
                 </div>
-                <p class="text-xs sm:text-sm mb-4">Are you sure you want to delete this project? This action cannot be undone.</p>
+                <p class="text-xs sm:text-sm mb-4 ml-7">Are you sure you want to delete this project? This action cannot be undone.</p>
                 <div class="flex justify-end">
                     <button id="delete-cancel-button" onclick="closeDeleteModal()"
                             class="bg-white border border-gray-300 text-gray-700 rounded-md text-xs sm:text-sm px-3 py-2 sm:px-4 hover:bg-gray-400">

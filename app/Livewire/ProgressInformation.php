@@ -90,7 +90,7 @@ class ProgressInformation extends Component
         $this->laborSpentCost = $labor->sum('payroll_amount');
 
         $this->indirectSpentCost = IndirectCost::where('pow_id', $this->pow_id)->sum('spent_cost');
-        $this->directSpentCost = ($this->totalLaborCost - $this->remainingLaborCost) + ($this->totalMaterialCost - $this->remainingMaterialCost);
+        $this->directSpentCost = $this->laborSpentCost + $this->materialSpentCost;
 
         // Calculate remaining costs and used percentages.
         $this->remainingMaterialCost = max(0, $this->totalMaterialCost - $this->materialSpentCost);
