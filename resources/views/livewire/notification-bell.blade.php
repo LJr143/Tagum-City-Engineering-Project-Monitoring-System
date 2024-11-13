@@ -28,7 +28,7 @@
                         {{ $notification->data['project_title'] ?? 'No title available' }}<br>
                     </p>
                     @if(isset($notification->data['project_id']))
-                        <a href="{{ url('/projects/' . $notification->data['project_id']) }}" class="text-blue-500 text-xs">View Project</a>
+                        <a href="{{ url('/project/view-pow/' . $notification->data['project_id']) }}" class="text-blue-500 text-xs">View Project</a>
                     @else
                         <span class="text-gray-500 text-xs">No project link available</span>
                     @endif

@@ -70,7 +70,7 @@
 
                                   {{ $project->status }}
                                 </span>
-                                @if (auth()->user()->isAdmin() || auth()->user()->isEncoder())
+                                @if ((auth()->user()->isAdmin() || auth()->user()->isEncoder()) && $project->status != 'completed')
                                     <livewire:edit-project :project="$project->id"/>
 
                                 @endif
