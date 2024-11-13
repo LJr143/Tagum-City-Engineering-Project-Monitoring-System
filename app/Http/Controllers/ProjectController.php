@@ -120,7 +120,7 @@ class ProjectController extends Controller
     }
 
 
-    public function realignContingency(Request $request)
+    public function realignFunds(Request $request)
     {
         $request->validate([
             'project_id' => 'required|exists:projects,id',
@@ -134,7 +134,7 @@ class ProjectController extends Controller
         if ($pow) {
             $realignAmount = $request->realign_amount;
 
-            $directCost = $pow->directCosts()->where('description', 'contingencies')->first();
+            $directCost = $pow->inDirectCosts()->where('description', 'contingencies')->first();
 
             if ($directCost) {
                 if ($directCost->remaining_cost >= $realignAmount) {

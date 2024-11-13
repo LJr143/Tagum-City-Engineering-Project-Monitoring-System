@@ -84,7 +84,6 @@ class MaterialCostTable extends ProgressInformation
         $this->showWarning = false;
     }
 
-
     public function updatedProgress()
     {
         $this->checkProgress();
