@@ -6,7 +6,7 @@
 
         <div class="flex flex-col space-y-2">
             <div class="flex flex-row justify-between items-center mb-2">
-                <h2 class="text-sm md:text-xl font-medium ">Program of Work</h2>
+                <h2 class="text-base font-semibold text-gray-900">Program of Work</h2>
                 <div class="relative w-full md:w-auto">
                     @if (auth()->user()->isAdmin() || auth()->user()->isEncoder())
                         <livewire:add-pow :project-id="$projectId"/>
