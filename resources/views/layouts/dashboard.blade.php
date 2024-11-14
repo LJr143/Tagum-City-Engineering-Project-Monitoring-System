@@ -15,7 +15,7 @@
         <div class="container mx-auto">
 
             <!-- Main Content -->
-            <div class="flex-1 p-4">
+            <div class="flex-1 p-4 ">
                 <h3 class="text-base font-semibold leading-6 text-gray-900">Dashboard</h3>
                 <p class="mb-6 text-[11px]">Quick Overview of Projects</p>
 
@@ -108,7 +108,111 @@
                 </dl>
 
 
-                <!-- Project Card Section -->
+
+
+                <!-- Bar Chart Section -->
+                <div x-data="chartData()" x-init="initChart" class="bg-white py-4 px-6 rounded-lg shadow-lg w-full md:max-w-[600px] lg:max-w-[1200px] mt-6 mx-auto">
+                    <h2 class="text-base font-semibold leading-6 text-gray-900 mb-2">Column Chart</h2>
+                    <div class="flex items-center mb-4 text-xs text-gray-700">
+                        <div class="flex items-center mr-4">
+                            <div class="w-3 h-3 bg-[#4CAF50] mr-2"></div>
+                            <span>Total Material Cost</span>
+                        </div>
+                        <div class="flex items-center mr-4">
+                            <div class="w-3 h-3 bg-[#8BC34A] mr-2"></div>
+                            <span>Total Labor Cost</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 bg-[#CDDC39] mr-2"></div>
+                            <span>Total Indirect Cost</span>
+                        </div>
+                    </div>
+                    <div class="relative overflow-x-auto w-full">
+                        <div class="min-w-[600px]"> <!-- Set a minimum width for the chart -->
+                            <canvas id="myChart" x-ref="chart" class="w-full h-52"></canvas> <!-- Adjusted height -->
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    function chartData() {
+                        return {
+                            myChart: null,
+                            initChart() {
+                                const ctx = this.$refs.chart.getContext('2d');
+                                this.myChart = new Chart(ctx, {
+                                    type: 'bar',
+                                    data: {
+                                        labels: ['Road Widening', 'Construction', 'P-C', 'P-D', 'P-E', 'P-F', 'P-G', 'P-H', 'P-I', 'P-J'],
+                                        datasets: [
+                                            {
+                                                label: 'Total Material Cost',
+                                                data: [65, 59, 80, 81, 56, 55, 40, 45, 60, 70],
+                                                backgroundColor: '#4CAF50',
+                                                borderColor: '#4CAF50',
+                                                borderWidth: 0.5
+                                            },
+                                            {
+                                                label: 'Total Labor Cost',
+                                                data: [28, 48, 40, 19, 86, 27, 90, 50, 30, 60],
+                                                backgroundColor: '#8BC34A',
+                                                borderColor: '#8BC34A',
+                                                borderWidth: 0.5
+                                            },
+                                            {
+                                                label: 'Total Indirect Cost',
+                                                data: [35, 29, 50, 71, 66, 65, 60, 55, 40, 50],
+                                                backgroundColor: '#CDDC39',
+                                                borderColor: '#CDDC39',
+                                                borderWidth: 0.5
+                                            }
+                                        ]
+                                    },
+                                    options: {
+                                        responsive: true,
+                                        maintainAspectRatio: false,
+                                        scales: {
+                                            y: {
+                                                beginAtZero: true,
+                                                max: 100,
+                                                ticks: {
+                                                    callback: function(value) {
+                                                        return value + '%';
+                                                    }
+                                                }
+                                            },
+                                            x: {
+                                                ticks: {
+                                                    autoSkip: false,
+                                                    maxRotation: 0, // Prevent diagonal labels
+                                                    minRotation: 0  // Prevent diagonal labels
+                                                }
+                                            }
+                                        },
+                                        plugins: {
+                                            legend: {
+                                                display: false
+                                            },
+                                            tooltip: {
+                                                callbacks: {
+                                                    label: function(tooltipItem) {
+                                                        return tooltipItem.dataset.label + ': ' + tooltipItem.raw + '%';
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                });
+
+                                // Resize the chart on window resize
+                                window.addEventListener('resize', () => this.myChart.resize());
+                            }
+                        };
+                    }
+                </script>
+
+
+                <!-- Project Card Section
                 <div class="mt-8 w-full mx-auto bg-white p-6 rounded-lg shadow-md">
                     <div class="flex justify-between items-center mb-4">
                         <h2 class="text-base font-semibold leading-6 text-gray-900">Projects</h2>
@@ -125,7 +229,7 @@
                         No project assigned for you.
                     </div>
                     @else
-                    <!-- Project Table -->
+                     Project Table
                     <div class="overflow-x-auto bg-white shadow rounded-lg">
                         <table class="min-w-full divide-y divide-gray-300">
                             <thead>
@@ -159,14 +263,18 @@
                                         <div class="flex items-center">
                                             <div class="relative">
                                                 <svg class="w-10 h-10" viewBox="0 0 36 36">
-                                                    <!-- Background Circle (Full Circle) -->
+
+
+                                                     Background Circle (Full Circle)
                                                     <circle cx="18" cy="18" r="15.9155" stroke="currentColor" stroke-width="3" fill="none" class="text-gray-300" />
-                                                    <!-- Foreground Circle (Progress) -->
+
+                                                     Foreground Circle (Progress)
                                                     <circle cx="18" cy="18" r="15.9155" stroke="currentColor" stroke-width="3" fill="none"
                                                         class="text-green-600"
                                                         stroke-dasharray="{{ $project->overallProgress * 113.097 / 100 }}, 113.097" />
                                                 </svg>
-                                                <!-- Progress Percentage -->
+
+                                                Progress Percentage
                                                 <span class="absolute left-0 top-0 w-full h-full flex items-center justify-center text-[8px] text-gray-900">
                                                     {{ number_format($project->overallProgress, 0) }}%
                                                 </span>
@@ -188,7 +296,7 @@
                         </table>
                     </div>
 
-                    <!-- Pagination Section -->
+                     Pagination Section
                     <div class="w-full py-4 flex flex-col items-center justify-between space-y-2">
 
                         <div>
@@ -198,11 +306,12 @@
                     @endif
 
 
-                    <!-- updated area -->
+                    updated area
 
 
 
                 </div>
+                -->
             </div>
         </div>
 
