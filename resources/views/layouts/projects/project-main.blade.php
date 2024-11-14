@@ -24,7 +24,7 @@
                 @endif
             </header>
 
-            <livewire:project-filter/>
+            <livewire:project-filter :status="request()->query('status', 'all')" />
         </div>
     </x-slot>
 </x-app-layout>

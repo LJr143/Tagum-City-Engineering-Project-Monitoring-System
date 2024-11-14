@@ -16,7 +16,7 @@ class ProjectFilter extends Component
     public $endDate;
 
     public $totalProjects;
-    public $pendingProjects;
+    public $ongoingProjects;
     public $completedProjects;
     public $suspendedProjects;
 
@@ -24,10 +24,12 @@ class ProjectFilter extends Component
 
     protected $paginationTheme = 'tailwind';
 
-    public function mount()
+    public function mount($status = 'all')
     {
+        $this->selectedStatus = $status;
         $this->loadProjectCounts();
     }
+
 
     private function loadProjectCounts()
     {
@@ -36,13 +38,13 @@ class ProjectFilter extends Component
         if ($user->isProjectInCharge()) {
             // Only count projects assigned to the project in-charge
             $this->totalProjects = Project::where('project_incharge_id', $user->id)->count();
-            $this->pendingProjects = Project::where('project_incharge_id', $user->id)->where('status', 'pending')->count();
+            $this->ongoingProjects = Project::where('project_incharge_id', $user->id)->where('status', 'ongoing')->count();
             $this->completedProjects = Project::where('project_incharge_id', $user->id)->where('status', 'completed')->count();
             $this->suspendedProjects = Project::where('project_incharge_id', $user->id)->where('status', 'suspended')->count();
         } else {
             // Count all projects for admin or other roles
             $this->totalProjects = Project::count();
-            $this->pendingProjects = Project::where('status', 'pending')->count();
+            $this->ongoingProjects = Project::where('status', 'ongoing')->count();
             $this->completedProjects = Project::where('status', 'completed')->count();
             $this->suspendedProjects = Project::where('status', 'suspended')->count();
         }

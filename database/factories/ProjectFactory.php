@@ -22,7 +22,7 @@ class ProjectFactory extends Factory
             'start_date' => $this->faker->optional()->date(),
             'end_date' => $this->faker->optional()->date(),
             'description' => $this->faker->paragraph(),
-            'status' => fake()->randomElement(['suspended', 'pending','completed']),
+            'status' => fake()->randomElement(['suspended', 'ongoing','completed']),
             'created_at' => now(),
             'updated_at' => now(),
         ];

@@ -3,7 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
-use App\Livewire\DelayConfiguration;
+use App\Livewire\Dashboard;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
@@ -12,11 +12,11 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-// Authenticated Routes
-Route::middleware(['auth:sanctum', 'verified', 'inactivity.logout'])->group(function () {
+    // Authenticated Routes
+    Route::middleware(['auth:sanctum', 'verified', 'inactivity.logout'])->group(function () {
 
     // Dashboard
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', Dashboard::class)->name('dashboard');
 
     // User Profile
     Route::get('/account-settings', function () {

@@ -10,20 +10,16 @@
             class="flex-grow px-1 py-1 rounded-full  font-semibold text-[10px] sm:text-xs"
             @click="selected = 'all'; $wire.filterProjects()">
             <span :class="selected === 'all' ? 'text-green-500' : 'text-gray-600'">{{ $totalProjects  }}</span>
-            <span class="font-semibold text-[10px] sm:text-xs lg:text-sm whitespace-nowrap">
                 All Projects
-            </span>
         </button>
 
-        <!-- Pending Button -->
+        <!-- Ongoing Button -->
         <button
-            :class="selected === 'pending' ? 'bg-white text-black' : 'text-gray-600 hover:text-black'"
+            :class="selected === 'ongoing' ? 'bg-white text-black' : 'text-gray-600 hover:text-black'"
             class="flex-grow px-1 py-1 rounded-full  font-semibold text-[10px] sm:text-xs"
-            @click="selected = 'pending'; $wire.filterProjects()">
-            <span :class="selected === 'pending' ? 'text-green-500' : 'text-gray-600'">{{ $pendingProjects }}</span>
-            <span class="font-semibold text-[10px] sm:text-xs lg:text-sm whitespace-nowrap">
-                Pending
-            </span>
+            @click="selected = 'ongoing'; $wire.filterProjects()">
+            <span :class="selected === 'ongoing' ? 'text-green-500' : 'text-gray-600'">{{ $ongoingProjects }}</span>
+                Ongoing
         </button>
 
         <!-- Completed Button -->
@@ -166,7 +162,7 @@
                                     <div>
                                         <div class="status-div text-[10px] font-bold rounded-2xl px-3 py-2 w-32 text-center
                                     @if($project->status === 'completed') bg-green-500 text-white
-                                    @elseif($project->status === 'pending') bg-yellow-500 text-white
+                                    @elseif($project->status === 'ongoing') bg-yellow-500 text-white
                                     @elseif($project->status === 'suspended' || $project->status == 'terminated') bg-red-500 text-white
                                     @endif">
                                             {{ $project->status }}
