@@ -6,7 +6,6 @@ use App\Models\DirectCost;
 use App\Models\IndirectCost;
 use App\Models\OtherDirectCost;
 use App\Models\Pow;
-use App\Models\Project;  // Make sure to import the Project model
 use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Concerns\ToModel;
 
@@ -16,11 +15,15 @@ class PowImport implements ToModel
     private int $powId;
     private bool $stopImporting = false;
 
-    public $totalMaterialPow = 0;
+    private float $totalMaterialPow = 0;
+
+    private float $totalMaterialsCost;
 
     public function __construct(int $powId)
     {
         $this->powId = $powId;
+        $importMaterials = new MaterialsImport($this->powId);
+        $this->totalMaterialsCost = $importMaterials->getTotalCost();
     }
 
     public function model(array $row)
@@ -180,9 +183,21 @@ class PowImport implements ToModel
     private function getMaterialCost(array $row)
     {
         if (str_contains(strtolower($row[1]), 'material')) {
+            $this->totalMaterialPow = floatval($row[3]);
             return floatval($row[3]);
         }
         return 0;
+    }
+
+    public function getTotalMaterialCost(): float
+    {
+        return $this->totalMaterialPow;
+    }
+
+    private function validateMaterialCost(): bool
+    {
+        // Compare current total material cost with the imported one
+        return $this->totalMaterialPow === $this->totalMaterialsCost;
     }
 
     /**

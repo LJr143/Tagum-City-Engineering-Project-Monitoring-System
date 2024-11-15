@@ -63,7 +63,9 @@ class ProgressInformation extends Component
         }
 
         // Fetch total indirect costs.
-        $this->totalIndirectCost = IndirectCost::where('pow_id', $this->pow_id)->sum('amount');
+        $this->totalIndirectCost = IndirectCost::where('pow_id', $this->pow->id)
+            ->where('description', 'REGEXP', '^[0-9]+(\.?\s|$)') // Match "1 " or "1. "
+            ->sum('amount');
         $this->totalDirectCost = DirectCost::where('pow_id', $this->pow_id)->sum('total_cost');
 
         // Retrieve progress percentage from the found POW record.
@@ -90,6 +92,9 @@ class ProgressInformation extends Component
         $this->laborSpentCost = $labor->sum('payroll_amount');
 
         $this->indirectSpentCost = IndirectCost::where('pow_id', $this->pow_id)->sum('spent_cost');
+        $this->indirectSpentCost = IndirectCost::where('pow_id', $this->pow->id)
+            ->where('description', 'REGEXP', '^[0-9]+(\.?\s|$)')
+            ->sum('spent_cost');
         $this->directSpentCost = $this->laborSpentCost + $this->materialSpentCost;
 
         // Calculate remaining costs and used percentages.

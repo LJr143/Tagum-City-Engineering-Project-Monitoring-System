@@ -69,7 +69,7 @@ class MaterialsImport implements ToModel
             'estimated_cost' => $material->estimated_cost,
         ]);
 
-        return $material; // Return the newly created instance
+        return $material;
     }
 
     public function getTotalCost(): float
