@@ -40,7 +40,9 @@ class ProgramOfWorks extends Component
         }
 
         // Calculate the total indirect cost for this POW
-        $this->totalIndirectCost = IndirectCost::where('pow_id', $this->pow->id)->sum('amount');
+        $this->totalIndirectCost = IndirectCost::where('pow_id', $this->pow->id)
+            ->where('description', 'REGEXP', '^[0-9]+(\.?\s|$)') // Match "1 " or "1. "
+            ->sum('amount');
         $this->totalMaterialCost = Material::where('pow_id', $this->pow->id)->sum('estimated_cost');
         $this->totalDirectCost = DirectCost::where('pow_id', $this->pow->id)->sum('total_cost');
     }

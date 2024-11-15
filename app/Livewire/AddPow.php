@@ -37,30 +37,18 @@ class AddPow extends Component
     protected $rules = [
         'reference_number' => 'required|string|max:255',
         'source_of_funds' => 'required|string|max:255',
-        'description' => 'required|string',
-        'total_material_cost' => 'nullable|numeric',
-        'total_labor_cost' => 'required|numeric',
         'projectId' => 'required|exists:projects,id',
-        'materialsFile' => 'nullable|file|mimes:xlsx,csv',
-        'powFile' => 'nullable|file|mimes:xlsx,csv',
-        'direct_costs.*.description' => 'string|max:255',
-        'direct_costs.*.amount' => 'numeric|min:0',
-        'indirect_costs.*.description' => 'string|max:255',
-        'indirect_costs.*.amount' => 'numeric|min:0',
+        'materialsFile' => 'required|file|mimes:xlsx,csv',
+        'powFile' => 'required|file|mimes:xlsx,csv',
     ];
 
     protected $messages = [
         'reference_number.required' => 'The reference number is required.',
         'source_of_funds.required' => 'The source of fund is required.',
-        'total_labor_cost.required' => 'The total labor cost is required.',
         'materialsFile.file' => 'The uploaded file must be a valid file.',
         'materialsFile.mimes' => 'The file must be a type of: xlsx, csv.',
         'powFile.file' => 'The uploaded file must be a valid file.',
         'powFile.mimes' => 'The file must be a type of: xlsx, csv.',
-        'direct_costs.*.description.required' => 'Description is required for each direct cost.',
-        'direct_costs.*.amount.required' => 'Amount is required for each direct cost.',
-        'indirect_costs.*.description.required' => 'Description is required for each indirect cost.',
-        'indirect_costs.*.amount.required' => 'Amount is required for each indirect cost.',
     ];
 
     public function mount($projectId): void
@@ -83,8 +71,6 @@ class AddPow extends Component
             'reference_number' => $this->reference_number,
             'source_of_funds' => $this->source_of_funds,
             'description' => $this->description,
-            'total_material_cost' => $this->total_material_cost,
-            'total_labor_cost' => $this->total_labor_cost,
         ];
 
         $pow = Pow::create($data);

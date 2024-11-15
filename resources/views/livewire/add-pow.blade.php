@@ -5,7 +5,7 @@
         <div class="relative ml-2">
             <button @click="open = true"
                     class="bg-green-500 text-white mr-2 text-xs px-4 py-2 rounded shadow-md hover:bg-green-600 focus:outline-none">
-                Add New POW
+                Add Project Details
             </button>
         </div>
     </div>
@@ -18,7 +18,7 @@
             <div class="flex justify-between items-center mb-4 border-b border-gray-300 pb-2">
                 <div class="flex items-center">
 
-                    <h2 class="text-lg font-bold text-center sm:text-left w-full sm:w-auto">Add New POW Card</h2>
+                    <h2 class="text-lg font-bold text-center sm:text-left w-full sm:w-auto">Add Project Details</h2>
                 </div>
 
                 <!-- Close Button (X) -->
@@ -59,80 +59,28 @@
 
                 <div class="flex gap-4">
                     <div class="w-full">
-                        <h3 class="text-xs font-semibold mb-2 mt-2">Direct and Indirect Cost Information</h3>
-                        <div class="flex flex-col space-y-1">
-                            <label for="total_labor_cost" class="block text-gray-700 text-xs">Total Labor Cost</label>
-                            <input type="text" id="total_labor_cost" wire:model="total_labor_cost"
-                                   class="mt-1 block w-full p-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-xs"
-                                   required>
-                            <!-- Error message for total_labor_cost -->
-                            @error('total_labor_cost')
-                            <span class="text-red-500 ml-2 text-[10px]">{{ $message }}</span>
-                            @enderror
+                        <h3 class="text-xs font-semibold mb-2 mt-2">Direct and Indirect Cost Importation</h3>
 
-                        </div>
-                    </div>
-                </div>
-                <!-- Radio Button Toggle -->
-                <div x-data="{ uploadFile: 'none' }" class="mb-4">
-                    <div class="flex items-center space-x-4 mb-4">
-                        <label class="flex items-center space-x-2">
-                            <input type="radio" name="upload_option" x-model="uploadFile" value="upload"
-                                   class="text-green-600 focus:ring-green-500 focus:border-green-500">
-                            <span class="text-gray-700 text-[11px] sm:text-xs">Upload Excel File</span>
-                        </label>
-                        <label class="flex items-center space-x-2">
-                            <input type="radio" name="upload_option" x-model="uploadFile" value="manual"
-                                   class="text-green-600 focus:ring-green-500 focus:border-green-500" >
-                            <span class="text-gray-700 text-[11px] sm:text-xs">Enter Total Material Cost</span>
-                        </label>
-                    </div>
+                            <div class="text-[12px]">
+                                <label for="materialsFile" class="block text-gray-700 text-xs">Upload Material (PR)</label>
+                                <input type="file" id="materialsFile" wire:model="materialsFile" class="border mt-1 block w-full p-1">
+                                @error('materialsFile')
+                                <span class="text-red-500 ml-2 text-[10px]">{{ $message }}</span>
+                                @enderror
+                            </div>
 
-                    <!-- Upload Material Input -->
-                    <div x-show="uploadFile === 'upload'" x-cloak>
-                        <label for="materialsFile" class="block text-gray-700 text-xs">Upload Material (PR)</label>
-                        <input type="file" id="materialsFile" wire:model="materialsFile"
-                               class="mt-1 block w-full p-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-xs">
-                        <!-- Error message for materialsFile -->
-                        @error('materialsFile')
-                        <span class="text-red-500 ml-2 text-[10px]">{{ $message }}</span>
-                        @enderror
-                    </div>
+                            <div class="text-[12px]">
+                                <label for="powFile" class="block text-gray-700 text-xs">Upload POW</label>
+                                <input type="file" id="powFile" wire:model="powFile" class="border mt-1 block w-full p-1">
+                                @error('powFile')
+                                <span class="text-red-500 ml-2 text-[10px]">{{ $message }}</span>
+                                @enderror
+                            </div>
 
-{{--                    <div x-show="uploadFile === 'upload'" x-cloak>--}}
-{{--                        <label for="powFile" class="block text-gray-700 text-xs">Upload POW</label>--}}
-{{--                        <input type="file" id="powFile" wire:model="powFile"--}}
-{{--                               class="mt-1 block w-full p-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-xs">--}}
-{{--                        <!-- Error message for materialsFile -->--}}
-{{--                        @error('powFile')--}}
-{{--                        <span class="text-red-500 ml-2 text-[10px]">{{ $message }}</span>--}}
-{{--                        @enderror--}}
-{{--                    </div>--}}
 
-                    <!-- Total Material Cost Input -->
-                    <div x-show="uploadFile === 'manual'" x-cloak>
-                        <label for="total_material_cost" class="block text-gray-700 text-xs">Total Material Cost</label>
-                        <input type="text" id="total_material_cost" wire:model="total_material_cost"
-                               class="mt-1 block w-full p-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-xs">
-                        <!-- Error message for total_material_cost -->
-                        @error('total_material_cost')
-                        <span class="text-red-500 ml-2 text-[10px]">{{ $message }}</span>
-                        @enderror
-                    </div>
 
-                    <div class="flex justify-end mt-4 w-full">
-                        <button type="button" @click="directOpen = true"
-                                class="bg-green-200 text-green-600 text-xs px-4 py-2 w-full rounded shadow-md hover:bg-green-300">
-                            Add Direct Costs
-                        </button>
-                    </div>
-                    <div class="flex justify-end mt-2 w-full">
-                        <button type="button" @click="indirectOpen = true"
-                                class="bg-green-200 text-green-600 text-xs px-4 py-2 w-full rounded shadow-md hover:bg-green-300">
-                            Add Indirect Cost
-                        </button>
-                    </div>
 
+                    </div>
                 </div>
 
                 <!-- Modal Direct Costs -->
@@ -351,5 +299,7 @@
         this.search = engineer.first_name;
         this.open = false;
     }
+
+
 </script>
 @endscript

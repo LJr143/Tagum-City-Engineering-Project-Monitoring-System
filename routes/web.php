@@ -16,7 +16,7 @@ Route::get('/', function () {
     Route::middleware(['auth:sanctum', 'verified', 'inactivity.logout'])->group(function () {
 
     // Dashboard
-    Route::get('/dashboard', Dashboard::class)->name('dashboard');
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // User Profile
     Route::get('/account-settings', function () {

@@ -11,17 +11,16 @@
 
     <link rel="shortcut icon" href="{{ asset('storage/pmsAssets/icon_img.png') }}">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.0.1/dist/chart.umd.min.js"></script>
-
 
     <!-- Styles -->
     @livewireStyles
@@ -29,28 +28,7 @@
 
 <body class="font-poppins antialiased bg-[#F7F7F9]">
 
-<div class="min-h-screen max-w-screen-2xl mx-auto bg-[#F7F7F9] {{ $mainClass }}" x-data="{addProcess: false, showSide: true, subSide: false, show:false , showManage:false, preventAction: false, cancellTransaction: false,
-        activeItem: localStorage.getItem('activeItem') || 'dashboard',
-            setActiveTab(tab) {
-                localStorage.setItem('activeItem', tab);
-                this.activeItem = tab;
-            },
-        subActiveItem: localStorage.getItem('subActiveItem') || 'dashboard',
-            setSubActiveTab(tab) {
-                localStorage.setItem('subActiveItem', tab);
-                this.subActiveItem = tab;
-            },
-        subTmsActiveItem: localStorage.getItem('subTmsActiveItem') || '',
-            setsubTmsActiveItem(tab) {
-                localStorage.setItem('subTmsActiveItem', tab);
-                this.subTmsActiveItem = tab;
-            },
-        settingsTmsActiveItem: localStorage.getItem('settingsTmsActiveItem') || '',
-            setsettingsTmsActiveItem(tab) {
-                localStorage.setItem('settingsTmsActiveItem', tab);
-                this.settingsTmsActiveItem = tab;
-            },
-        }">
+<div class="min-h-screen max-w-screen-2xl mx-auto bg-[#F7F7F9] {{ $mainClass }}" x-data="{ showSide: true, subSide: false, show:false , showManage:false, preventAction: false">
     @if (isset($sidebar))
         {{-- Sidebar --}}
         <sidebar class="h-screen flex flex-col shadow bg-white z-10 ">
@@ -109,6 +87,7 @@
 <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+
 @yield('scripts')
 </body>
 
