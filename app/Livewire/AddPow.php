@@ -27,6 +27,11 @@ class AddPow extends Component
     public $total_labor_cost;
     public $engineers;
     public $materialsFile;
+    public $totalMaterialCost = 0;
+    public $totalMaterialCostPow = 0;
+    public $warningMessage = null;
+    public $showWarningModal = false;
+
 
     public $powFile;
     public $isUploading = false;
@@ -87,9 +92,9 @@ class AddPow extends Component
             Log::info('Materials import completed successfully.');
 
             // Get the total material cost from the import
-            $totalMaterialCost = $import->getTotalCost();
+            $this->totalMaterialCost = $import->getTotalCost();
             // Update the POW record with the total material cost
-            $pow->total_material_cost = $totalMaterialCost;
+            $pow->total_material_cost = $this->totalMaterialCost;
 
 
             $pow->save();
@@ -110,12 +115,27 @@ class AddPow extends Component
                 Excel::import($import, $this->powFile->getRealPath());
                 Log::info('Pow import completed successfully.');
 
+                $this->totalMaterialCostPow = $import->getTotalMaterialCost();
+
+                if ($this->totalMaterialCost != $this->totalMaterialCostPow) {
+                    // Set the warning message
+                    $this->warningMessage = "The material costs from the PR and POW files do not match. Please review.";
+                    $this->showWarningModal = true; // Show the warning modal
+                    $this->deleteAssociatedRecords($pow->id); // Delete associated record
+                    $this->dispatch('Mismatch Value Importation');
+                } else {
+                    Log::info('Pow total MaterialCost: ' . $this->totalMaterialCost . ' ' . $this->totalMaterialCostPow);
+                }
+
+
                 session()->flash('message', 'Pow imported successfully!');
             } catch (\Exception $e) {
                 Log::error('Pow import failed: ' . $e->getMessage());
                 session()->flash('error', 'Failed to import materials. Please check the log for details.');
             }
         }
+
+
 
         // Save Direct costs if there are any
         if (!empty(array_filter($this->direct_costs))) {
@@ -156,19 +176,44 @@ class AddPow extends Component
         );
 
         // Reset the form and dispatch success event
-        $this->dispatch('pow-added');
-        $this->reset();
+        if ($this->totalMaterialCost != $this->totalMaterialCostPow) {
+            // Set the warning message
+            $this->warningMessage = "The material costs from the PR and POW files do not match. Please review.";
+            Log::info('Pow total MaterialCost: ' . $this->totalMaterialCost . ' ' . $this->totalMaterialCostPow);
+            $this->showWarningModal = true; // Show the warning modal
+            $this->deleteAssociatedRecords($pow->id); // Delete associated record
+            $this->dispatch('mismatch-import');
+            $this->reset();
+        } else {
+            Log::info('Pow total MaterialCost: ' . $this->totalMaterialCost . ' ' . $this->totalMaterialCostPow);
+            $this->dispatch('pow-added');
+            $this->reset();
 
-        // Reset indirect and direct costs
-        $this->indirect_costs = [['description' => '', 'amount' => '']];
-        $this->direct_costs = [['description' => '', 'amount' => '']];
+            // Reset indirect and direct costs
+            $this->indirect_costs = [['description' => '', 'amount' => '']];
+            $this->direct_costs = [['description' => '', 'amount' => '']];
 
-        // Set the uploading state back to false
-        $this->isUploading = false;
+            // Set the uploading state back to false
+            $this->isUploading = false;
 
-        // Redirect to view the POW
-        return redirect()->route('view-project-pow', ['id' => $pow->project_id])
-            ->with('success', 'POW added successfully.');
+            // Redirect to view the POW
+            return redirect()->route('view-project-pow', ['id' => $pow->project_id])
+                ->with('success', 'POW added successfully.');
+        }
+
+
+
+    }
+
+    private function deleteAssociatedRecords($powId): void
+    {
+        $pow = Pow::find($powId);
+        if ($pow) {
+            $pow->delete();
+            Log::info('Deleted Pow record', ['pow_id' => $powId]);
+        } else {
+            Log::warning('Pow record not found, skipping deletion', ['pow_id' => $powId]);
+        }
     }
 
     protected function uploadMaterialsFile($file)
@@ -204,6 +249,8 @@ class AddPow extends Component
             $this->indirect_costs = array_values($this->indirect_costs); // Re-index array after removal
         }
     }
+
+
 
     public function render()
     {
