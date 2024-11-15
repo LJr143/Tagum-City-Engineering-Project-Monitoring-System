@@ -42,6 +42,8 @@
 <div class="hidden w-full max-w-[240px] lg:flex flex-col h-full justify-between pt-2 pb-10 flex-1 overflow-y-auto">
     <div class="text-sm">
         <ul class="mt-10 space-y-1 tracking-wide">
+
+            @if (auth()->user()->isAdmin())
             <li x-data="{toggle: false}" @mouseenter="toggle = true"
                 @mouseleave="toggle = false"
                 :style="toggle ? 'background-color: rgba(36, 144, 0, 0.3);' : ''">
@@ -71,6 +73,7 @@
                           style="font-size: 12px">Dashboard</span>
                 </a>
             </li>
+            @endif
 
             <li x-data="{ toggle: false }" @mouseenter="toggle = true" @mouseleave="toggle = false"
                 :style="{ 'background-color': toggle ? 'rgba(36, 144, 0, 0.3)' : '' }">
