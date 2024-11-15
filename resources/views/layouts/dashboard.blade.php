@@ -225,8 +225,6 @@
                             Alpine.data('chartData', chartData);
                         });
                     </script>
-
-
                 </div>
 
 
