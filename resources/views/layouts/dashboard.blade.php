@@ -119,7 +119,7 @@
 
 
 
-                <!-- Bar Chart Section -->
+                <!-- Bar Chartt Section -->
                 <div class="mt-5 grid grid-cols-1 sm:grid-cols-1 ">
 
                     <div x-data="chartData()" x-init="initChart" class="bg-white py-4 px-6 rounded-lg shadow-lg w-full  mt-6"> <!-- Set max-width here -->
