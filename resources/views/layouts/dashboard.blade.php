@@ -70,7 +70,6 @@
 
 
                     <a href="{{ route('project-main', ['status' => 'completed']) }}">
-
                     <div
                         class="relative overflow-hidden rounded-lg bg-white px-3 pb-4 pt-4 shadow sm:px-3 sm:pt-4 lg:w-49">
                         <dt>
@@ -116,6 +115,7 @@
                         </dt>
                     </div>
                     </a>
+                </dl>
 
 
 
