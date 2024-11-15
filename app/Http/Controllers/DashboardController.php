@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
+    public function redirectToProjects($status)
+    {
+        return redirect()->route('project-main', ['status' => $status]);
+    }
     public function index()
     {
         $user = Auth::user();

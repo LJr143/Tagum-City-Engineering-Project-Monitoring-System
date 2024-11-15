@@ -20,6 +20,7 @@
 
                 <dl class="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
 
+                    <a href="{{ route('project-main', ['status' => 'all']) }}">
                     <div
                         class="relative overflow-hidden rounded-lg bg-white px-3 pb-4 pt-4 shadow sm:px-3 sm:pt-4 lg:w-49" wire:click="redirectToProjects('all')">
                         <dt>
@@ -40,7 +41,10 @@
                             <p class="ml-20 truncate text-xs font-normal text-gray-500">Total Projects</p>
                         </dt>
                     </div>
+                    </a>
 
+
+                    <a href="{{ route('project-main', ['status' => 'ongoing']) }}">
                     <div
                         class="relative overflow-hidden rounded-lg bg-white px-3 pb-4 pt-4 shadow sm:px-3 sm:pt-4 lg:w-49" wire:click="redirectToProjects('ongoing')">
                         <dt>
@@ -61,6 +65,7 @@
                             <p class="ml-20 truncate text-xs font-normal text-gray-500">Ongoing Projects</p>
                         </dt>
                     </div>
+                    </a>
 
                     <div
                         class="relative overflow-hidden rounded-lg bg-white px-3 pb-4 pt-4 shadow sm:px-3 sm:pt-4 lg:w-49">
