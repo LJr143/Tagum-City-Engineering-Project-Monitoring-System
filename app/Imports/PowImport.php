@@ -16,6 +16,8 @@ class PowImport implements ToModel
     private int $powId;
     private bool $stopImporting = false;
 
+    public $totalMaterialPow = 0;
+
     public function __construct(int $powId)
     {
         $this->powId = $powId;
@@ -177,9 +179,8 @@ class PowImport implements ToModel
      */
     private function getMaterialCost(array $row)
     {
-        // Add logic here to identify material cost, for example:
         if (str_contains(strtolower($row[1]), 'material')) {
-            return floatval($row[3]); // Assuming column 8 holds the material cost
+            return floatval($row[3]);
         }
         return 0;
     }
@@ -191,7 +192,7 @@ class PowImport implements ToModel
     {
         // Add logic here to identify labor cost, for example:
         if (str_contains(strtolower($row[1]), 'labor')) {
-            return floatval($row[3]); // Assuming column 10 holds the labor cost
+            return floatval($row[3]);
         }
         return 0;
     }
@@ -201,10 +202,9 @@ class PowImport implements ToModel
      */
     private function updateLaborCost(float $laborCost): void
     {
-        // Assuming you have a method to get the project by powId and update the labor cost
         $pow = Pow::find($this->powId);
         if ($pow) {
-            $pow->total_labor_cost += $laborCost; // Add the labor cost
+            $pow->total_labor_cost += $laborCost;
             $pow->save();
             Log::info('Labor cost updated for pow', ['pow_id' => $this->powId, 'labor_cost' => $pow->labor_cost]);
         }

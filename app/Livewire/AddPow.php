@@ -90,6 +90,8 @@ class AddPow extends Component
             $totalMaterialCost = $import->getTotalCost();
             // Update the POW record with the total material cost
             $pow->total_material_cost = $totalMaterialCost;
+
+
             $pow->save();
             session()->flash('message', 'Materials imported successfully!');
         } catch (\Exception $e) {

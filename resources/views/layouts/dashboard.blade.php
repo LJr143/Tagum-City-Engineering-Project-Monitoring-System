@@ -68,6 +68,9 @@
                     </div>
                     </a>
 
+
+                    <a href="{{ route('project-main', ['status' => 'completed']) }}">
+
                     <div
                         class="relative overflow-hidden rounded-lg bg-white px-3 pb-4 pt-4 shadow sm:px-3 sm:pt-4 lg:w-49">
                         <dt>
@@ -89,7 +92,9 @@
                             <p class="ml-20 truncate text-xs font-normal text-gray-500">Completed Projects</p>
                         </dt>
                     </div>
+                    </a>
 
+                    <a href="{{ route('project-main', ['status' => 'suspended']) }}">
                     <div
                         class="relative overflow-hidden rounded-lg bg-white px-3 pb-4 pt-4 shadow sm:px-3 sm:pt-4 lg:w-49">
                         <dt>
@@ -110,7 +115,8 @@
                             <p class="ml-20 truncate text-xs font-normal text-gray-500">Suspended Projects</p>
                         </dt>
                     </div>
-                </dl>
+                    </a>
+
 
 
                 <!-- Bar Chart Section -->
