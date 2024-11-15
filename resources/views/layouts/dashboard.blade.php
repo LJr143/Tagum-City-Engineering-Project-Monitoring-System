@@ -14,14 +14,15 @@
 
         <div class="container mx-auto">
 
+            <!-- Main Content -->
             <div class="flex-1 p-4 ">
                 <h3 class="text-base font-semibold leading-6 text-gray-900">Dashboard</h3>
                 <p class="mb-6 text-[11px]">Quick Overview of Projects</p>
 
-                <dl class="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                <dl class="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"> <!-- Increased gap to 4 -->
 
                     <div
-                        class="relative overflow-hidden rounded-lg bg-white px-3 pb-4 pt-4 shadow sm:px-3 sm:pt-4 lg:w-49" wire:click="redirectToProjects('all')">
+                        class="relative overflow-hidden rounded-lg bg-white px-3 pb-4 pt-4 shadow sm:px-3 sm:pt-4 lg:w-49">
                         <dt>
                             <div
                                 class=" ml-7 absolute rounded-full p-2 bg-green-700 bg-opacity-70 w-10 h-10 flex items-center justify-center">
@@ -42,7 +43,7 @@
                     </div>
 
                     <div
-                        class="relative overflow-hidden rounded-lg bg-white px-3 pb-4 pt-4 shadow sm:px-3 sm:pt-4 lg:w-49" wire:click="redirectToProjects('ongoing')">
+                        class="relative overflow-hidden rounded-lg bg-white px-3 pb-4 pt-4 shadow sm:px-3 sm:pt-4 lg:w-49">
                         <dt>
                             <div
                                 class=" ml-7 absolute rounded-full p-2 bg-green-700 bg-opacity-70 w-10 h-10 flex items-center justify-center">
@@ -66,7 +67,7 @@
                         class="relative overflow-hidden rounded-lg bg-white px-3 pb-4 pt-4 shadow sm:px-3 sm:pt-4 lg:w-49">
                         <dt>
                             <div
-                                class=" ml-7 absolute rounded-full p-2 bg-green-700 bg-opacity-70 w-10 h-10 flex items-center justify-center" wire:click="redirectToProjects('completed')">
+                                class=" ml-7 absolute rounded-full p-2 bg-green-700 bg-opacity-70 w-10 h-10 flex items-center justify-center">
                                 <svg width="65" height="51" viewBox="0 0 65 51" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                     <rect width="65" height="51" fill="url(#pattern0_1392_9135)" />
                                     <defs>
@@ -85,7 +86,7 @@
                     </div>
 
                     <div
-                        class="relative overflow-hidden rounded-lg bg-white px-3 pb-4 pt-4 shadow sm:px-3 sm:pt-4 lg:w-49" wire:click="redirectToProjects('suspended')">
+                        class="relative overflow-hidden rounded-lg bg-white px-3 pb-4 pt-4 shadow sm:px-3 sm:pt-4 lg:w-49">
                         <dt>
                             <div
                                 class=" ml-7 absolute rounded-full p-2 bg-green-700 bg-opacity-70 w-10 h-10 flex items-center justify-center">
@@ -110,7 +111,7 @@
                 <!-- Bar Chart Section -->
                 <div class="mt-5 grid grid-cols-1 sm:grid-cols-1 ">
 
-                    <div x-data="chartData()" x-init="initChart" class="bg-white py-4 px-6 rounded-lg shadow-lg w-full  mt-6">
+                    <div x-data="chartData()" x-init="initChart" class="bg-white py-4 px-6 rounded-lg shadow-lg w-full  mt-6"> <!-- Set max-width here -->
                         <h2 class="text-[13px] sm:text-base font-semibold leading-6 text-gray-900 mb-2">Project Progress and Cost Analysis</h2>
                         <div class="flex flex-col sm:flex-row items-start mb-4 text-xs text-gray-700">
                             <div class="flex items-center mb-2 sm:mb-0 mr-4 text-[11px] sm:text-[12px]">
@@ -127,92 +128,201 @@
                             </div>
                         </div>
                         <div class="relative overflow-x-auto w-full">
-                            <div class="min-w-[400px]">
-                                <canvas id="myChart" x-ref="chart" class="w-full h-52"></canvas>
+                            <div class="min-w-[400px]"> <!-- Set a minimum width for the chart -->
+                                <canvas id="myChart" x-ref="chart" class="w-full h-52"></canvas> <!-- Adjusted height -->
                             </div>
                         </div>
                     </div>
 
+
                     <script>
-                        function chartData() {
-                            return {
-                                myChart: null,
-                                initChart() {
-                                    const ctx = this.$refs.chart.getContext('2d');
-                                    this.myChart = new Chart(ctx, {
-                                        type: 'bar',
-                                        data: {
-                                            labels: ['P-A', 'P-B', 'P-C', 'P-D', 'P-E', 'P-F', 'P-G', 'P-H', 'P-I', 'P-J'],
-                                            datasets: [
-                                                {
-                                                    label: 'Overall Project Progress',
-                                                    data: [65, 59, 80, 81, 56, 55, 40, 45, 60, 70],
-                                                    backgroundColor: '#4CAF50',
-                                                    borderColor: '#4CAF50',
-                                                    borderWidth: 0.5
-                                                },
-                                                {
-                                                    label: 'Material Cost Percentage',
-                                                    data: [28, 48, 40, 19, 86, 27, 90, 50, 30, 60],
-                                                    backgroundColor: '#8BC34A',
-                                                    borderColor: '#8BC34A',
-                                                    borderWidth: 0.5
-                                                },
-                                                {
-                                                    label: 'Labor Cost Percentage',
-                                                    data: [35, 29, 50, 71, 66, 65, 60, 55, 40, 50],
-                                                    backgroundColor: '#CDDC39',
-                                                    borderColor: '#CDDC39',
-                                                    borderWidth: 0.5
-                                                }
-                                            ]
-                                        },
-                                        options: {
-                                            responsive: true,
-                                            maintainAspectRatio: false,
-                                            scales: {
-                                                y: {
-                                                    beginAtZero: true,
-                                                    max: 100,
-                                                    ticks: {
-                                                        callback: function(value) {
-                                                            return value + '%';
+                        document.addEventListener('DOMContentLoaded', function () {
+                            function chartData() {
+                                return {
+                                    myChart: null,
+                                    initChart() {
+                                        const ctx = this.$refs.chart.getContext('2d');
+
+                                        // Pass data directly as JSON
+                                        const chartData = @json($chartData);
+                                        const labels = chartData.map(item => item.title);
+                                        const overallProgressData = chartData.map(item => item.overall_progress_percentage);
+                                        const materialCostData = chartData.map(item => item.material_usage_percentage);
+                                        const laborCostData = chartData.map(item => item.labor_usage_percentage);
+
+                                        // Initialize Chart.js
+                                        this.myChart = new Chart(ctx, {
+                                            type: 'bar',
+                                            data: {
+                                                labels: labels,
+                                                datasets: [
+                                                    {
+                                                        label: 'Overall Project Progress',
+                                                        data: overallProgressData,
+                                                        backgroundColor: '#4CAF50',
+                                                        borderColor: '#4CAF50',
+                                                        borderWidth: 0.5
+                                                    },
+                                                    {
+                                                        label: 'Material Cost Percentage',
+                                                        data: materialCostData,
+                                                        backgroundColor: '#8BC34A',
+                                                        borderColor: '#8BC34A',
+                                                        borderWidth: 0.5
+                                                    },
+                                                    {
+                                                        label: 'Labor Cost Percentage',
+                                                        data: laborCostData,
+                                                        backgroundColor: '#CDDC39',
+                                                        borderColor: '#CDDC39',
+                                                        borderWidth: 0.5
+                                                    }
+                                                ]
+                                            },
+                                            options: {
+                                                responsive: true,
+                                                maintainAspectRatio: false,
+                                                scales: {
+                                                    y: {
+                                                        beginAtZero: true,
+                                                        max: 100,
+                                                        ticks: {
+                                                            callback: function (value) {
+                                                                return value + '%';
+                                                            }
                                                         }
                                                     }
                                                 },
-                                                x: {
-                                                    ticks: {
-                                                        autoSkip: false,
-                                                        maxRotation: 0, // Prevent diagonal labels
-                                                        minRotation: 0  // Prevent diagonal labels
-                                                    }
-                                                }
-                                            },
-                                            plugins: {
-                                                legend: {
-                                                    display: false
-                                                },
-                                                tooltip: {
-                                                    callbacks: {
-                                                        label: function(tooltipItem) {
-                                                            return tooltipItem.dataset.label + ': ' + tooltipItem.raw + '%';
+                                                plugins: {
+                                                    legend: {
+                                                        display: true
+                                                    },
+                                                    tooltip: {
+                                                        callbacks: {
+                                                            label: function (tooltipItem) {
+                                                                return tooltipItem.dataset.label + ': ' + tooltipItem.raw + '%';
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }
-                                        }
-                                    });
+                                        });
+                                    }
+                                };
+                            }
 
-                                    // Resize the chart on window resize
-                                    window.addEventListener('resize', () => this.myChart.resize());
-                                }
-                            };
-                        }
+                            Alpine.data('chartData', chartData);
+                        });
                     </script>
+
+
                 </div>
 
+
+                <!-- Project Card Section
+                <div class="mt-8 w-full mx-auto bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-base font-semibold leading-6 text-gray-900">Projects</h2>
+                        <a href="{{ route('project-main') }}"
+                            class="block rounded-md bg-green-600 px-3 py-1 text-center text-xs font-small text-white shadow-sm hover:bg-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
+                            View All
+                        </a>
+                    </div>
+                    <p class="mb-4 text-xs text-gray-700">A list of all the projects, including their name, the person in charge, cost, and progress status.</p>
+
+
+                    @if ($projects->isEmpty())
+                    <div class="text-center mt-4 text-gray-500 text-[12px]">
+                        No project assigned for you.
+                    </div>
+                    @else
+                    Project Table
+                   <div class="overflow-x-auto bg-white shadow rounded-lg">
+                       <table class="min-w-full divide-y divide-gray-300">
+                           <thead>
+                               <tr>
+                                   <th class="py-3.5 px-4 text-left text-sm font-semibold text-gray-900">Project Name</th>
+                                   <th class="py-3.5 px-4 text-left text-sm font-semibold text-gray-900">Project Incharge</th>
+                                   <th class="py-3.5 px-4 text-left text-sm font-semibold text-gray-900">Material Cost</th>
+                                   <th class="py-3.5 px-4 text-left text-sm font-semibold text-gray-900">Labor Cost</th>
+                                   <th class="py-3.5 px-4 text-left text-sm font-semibold text-gray-900">Indirect Cost</th>
+                                   <th class="py-3.5 px-4 text-left text-sm font-semibold text-gray-900">Progress</th>
+                                   <th class="py-3.5 px-4 text-left text-sm font-semibold text-gray-900">Status</th>
+                               </tr>
+                           </thead>
+                           <tbody class="divide-y divide-gray-200 bg-white">
+@foreach($projects as $project)
+                        <tr>
+                            <td class="whitespace py-1 px-4 pr-3 text-xs text-gray-900">{{ $project->title }}</td>
+                                    <td class="whitespace-nowrap py-1 px-4 pr-3 text-xs text-gray-900">
+                                        {{ $project->projectIncharge->first_name }} {{ $project->projectIncharge->last_name }}
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-1 text-xs text-gray-500">
+                            Php {{ $project->total_material_cost }}
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-1 text-xs text-gray-500">
+                            Php {{ $project->total_labor_cost }}
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-1 text-xs text-gray-500">
+                            Php {{ $project->total_indirect_costs }}
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-1 text-xs text-gray-500">
+                            <div class="flex items-center">
+                                <div class="relative">
+                                    <svg class="w-10 h-10" viewBox="0 0 36 36">
+
+
+                                         Background Circle (Full Circle)
+                                        <circle cx="18" cy="18" r="15.9155" stroke="currentColor" stroke-width="3" fill="none" class="text-gray-300" />
+
+                                         Foreground Circle (Progress)
+                                        <circle cx="18" cy="18" r="15.9155" stroke="currentColor" stroke-width="3" fill="none"
+                                            class="text-green-600"
+                                            stroke-dasharray="{{ $project->overallProgress * 113.097 / 100 }}, 113.097" />
+                                                </svg>
+
+                                                Progress Percentage
+                                                <span class="absolute left-0 top-0 w-full h-full flex items-center justify-center text-[8px] text-gray-900">
+                                                    {{ number_format($project->overallProgress, 0) }}%
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="whitespace-nowrap text-sm text-gray-500 text-center">
+                                        <span class="flex items-center justify-center text-center rounded-[5px] capitalize p-2 w-[150px] text-xs font-semibold leading-5
+                                @if($project->status == 'pending') text-yellow-800 bg-yellow-500
+                                @elseif($project->status == 'completed') text-green-800 bg-green-500
+                                @else text-red-800 bg-red-500
+                                @endif">
+                                            {{ $project->status }}
+                        </span>
+                    </td>
+                </tr>
+@endforeach
+                    </tbody>
+                </table>
+            </div>
+
+             Pagination Section
+            <div class="w-full py-4 flex flex-col items-center justify-between space-y-2">
+
+                <div>
+{{ $projects->links() }}
+                    </div>
+                </div>
+@endif
+
+
+                updated area
+
+
+
+            </div>
+-->
             </div>
         </div>
+
+
 
 
     </x-slot>
