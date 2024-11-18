@@ -65,7 +65,7 @@ class DashboardController extends Controller
         })->count();
         $pendingProjects = Project::when($user->isProjectIncharge(), function ($query) use ($user) {
             return $query->where('project_incharge_id', $user->id);
-        })->where('status', 'pending')->count();
+        })->where('status', 'ongoing')->count();
         $completedProjects = Project::when($user->isProjectIncharge(), function ($query) use ($user) {
             return $query->where('project_incharge_id', $user->id);
         })->where('status', 'completed')->count();
