@@ -61,24 +61,92 @@
                     <div class="w-full">
                         <h3 class="text-xs font-semibold mb-2 mt-2">Direct and Indirect Cost Importation</h3>
 
-                            <div class="text-[12px]">
-                                <label for="materialsFile" class="block text-gray-700 text-xs">Upload Material (PR)</label>
-                                <input type="file" id="materialsFile" wire:model="materialsFile" class="border mt-1 block w-full p-1">
-                                @error('materialsFile')
-                                <span class="text-red-500 ml-2 text-[10px]">{{ $message }}</span>
-                                @enderror
+                        <!-- UPLOAD PR AND POW -->
+                        <div class="text-[12px]">
+                            <label for="materialsFile" class="block text-gray-700 text-xs mb-1">Upload Material (PR)</label>
+                            <div class="relative group">
+                                <!-- Hidden File Input -->
+                                <input type="file" id="materialsFile" wire:model="materialsFile"
+                                       class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
+
+                                <!-- Custom Upload Button -->
+                                <div class="flex items-center justify-between bg-green-100 border border-dashed border-green-700 rounded p-2 cursor-pointer hover:bg-green-400">
+                                    <!-- Display File Name or Placeholder -->
+                                    <span class="text-green-700 text-xs truncate">
+                {{ $materialsFile ? $materialsFile->getClientOriginalName() : 'Choose a file...' }}
+            </span>
+
+                                    <!-- Loading Spinner -->
+                                    <div wire:loading wire:target="materialsFile" class="ml-2 animate-spin">
+                                        <svg class="w-6 h-6 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <circle
+                                                class="opacity-25"
+                                                cx="12"
+                                                cy="12"
+                                                r="10"
+                                                stroke="currentColor"
+                                                stroke-width="4">
+                                            </circle>
+                                            <path
+                                                class="opacity-75"
+                                                fill="currentColor"
+                                                d="M4 12a8 8 0 018-8v8h8a8 8 0 11-16 0z">
+                                            </path>
+                                        </svg>
+                                    </div>
+
+                                </div>
                             </div>
 
-                            <div class="text-[12px]">
-                                <label for="powFile" class="block text-gray-700 text-xs">Upload POW</label>
-                                <input type="file" id="powFile" wire:model="powFile" class="border mt-1 block w-full p-1">
-                                @error('powFile')
-                                <span class="text-red-500 ml-2 text-[10px]">{{ $message }}</span>
-                                @enderror
+                            <!-- Error Message -->
+                            @error('materialsFile')
+                            <span class="text-red-500 ml-2 text-[10px]">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+
+                        <div class="text-[12px] ">
+                            <label for="powFile" class="block text-gray-700 text-xs mt-2 mb-1">Upload POW</label>
+                            <div class="relative group">
+                                <!-- Hidden File Input -->
+                                <input type="file" id="powFile" wire:model="powFile"
+                                       class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
+
+                                <!-- Custom Upload Button -->
+                                <div class="flex items-center justify-between bg-green-100 border border-dashed border-green-700 rounded p-2 cursor-pointer hover:bg-green-400">
+                                    <!-- Display File Name or Placeholder -->
+                                    <span class="text-green-700 text-xs truncate">
+                {{ $powFile ? $powFile->getClientOriginalName() : 'Choose a file...' }}
+            </span>
+
+                                    <!-- Loading Spinner -->
+                                    <div  wire:loading wire:target="powFile"  class="ml-2 animate-spin">
+                                        <svg class="w-6 h-6 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <circle
+                                                class="opacity-25"
+                                                cx="12"
+                                                cy="12"
+                                                r="10"
+                                                stroke="currentColor"
+                                                stroke-width="4">
+                                            </circle>
+                                            <path
+                                                class="opacity-75"
+                                                fill="currentColor"
+                                                d="M4 12a8 8 0 018-8v8h8a8 8 0 11-16 0z">
+                                            </path>
+                                        </svg>
+                                    </div>
+
+
+                                </div>
                             </div>
 
-
-
+                            <!-- Error Message -->
+                            @error('powFile')
+                            <span class="text-red-500 ml-2 text-[10px]">{{ $message }}</span>
+                            @enderror
+                        </div>
 
                     </div>
                 </div>
