@@ -201,7 +201,7 @@
         document.getElementById('phone').style.display = 'none';
         document.getElementById('phoneInput').style.display = 'block';
         document.getElementById('editContactInfoButton').style.display = 'none';
-        document.getElementById('saveContactInfoButton').style.display = 'inline';
+        document.getElementById('saveContactInfoButton').style.display = 'block';
     }
 
     function saveContactInfoChanges() {
@@ -430,11 +430,11 @@
                             @csrf
                             <div class="relative w-16 h-16 rounded-full overflow-hidden bg-gray-300 mb-4 sm:mb-0 mt-2">
                                 <img
-                                    alt="rofile_img"
+                                    alt="Profile photo of a person"
                                     class="w-full h-full object-cover"
                                     height="64"
                                     id="photo"
-                                    src="{{asset('storage/' . (auth()->user()->profile_photo_path ?? 'pmsAssets/default.png'))}}"
+                                    src="{{ asset('storage/' . (auth()->user()->profile_photo_path ?? 'pmsAssets/default.png')) }}"
                                     width="64" />
                                 <input
                                     accept="image/*"
@@ -912,3 +912,6 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+</div>

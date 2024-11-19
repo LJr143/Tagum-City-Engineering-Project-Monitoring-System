@@ -58,7 +58,6 @@ Route::middleware(['auth:sanctum', 'verified', 'inactivity.logout'])->group(func
             return view('layouts.reports.report-');
         })->name('report');
     });
-
     Route::post('changeInf', [UserController::class, 'changeInf'])->name('changeInf');
     Route::post('updateContact', [UserController::class, 'updateContact'])->name('updateContact');
     Route::post('updatePassword', [UserController::class, 'updatePassword'])->name('updatePassword');
