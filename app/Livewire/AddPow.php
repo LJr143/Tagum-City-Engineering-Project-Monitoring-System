@@ -183,7 +183,6 @@ class AddPow extends Component
             $this->showWarningModal = true; // Show the warning modal
             $this->deleteAssociatedRecords($pow->id); // Delete associated record
             $this->dispatch('mismatch-import');
-            $this->reset();
         } else {
             Log::info('Pow total MaterialCost: ' . $this->totalMaterialCost . ' ' . $this->totalMaterialCostPow);
             $this->dispatch('pow-added');

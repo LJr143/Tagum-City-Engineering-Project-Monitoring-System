@@ -91,7 +91,14 @@ class ProjectFilter extends Component
                 })->sum('amount');
 
 
-                $materialSpentCost = $project->pows->flatMap(function ($pow) {
+            $totalIndirectSpentCost = $project->pows->flatMap(function ($pow) {
+                    return $pow->indirectCosts->filter(function ($indirectCost) {
+                        return preg_match('/^[0-9]+(\.?\s|$)/', $indirectCost->description);
+                    });
+                })->sum('spent_cost');
+
+
+            $materialSpentCost = $project->pows->flatMap(function ($pow) {
                 return $pow->materials;
             })->sum('spent_cost');
 
@@ -101,7 +108,7 @@ class ProjectFilter extends Component
 
             $project->total_project_cost = $totalMaterialCost + $totalLaborCost + $totalIndirectCost;
 
-            $totalSpentCost = $materialSpentCost + $laborSpentCost + $totalIndirectCost; // Add indirect costs if applicable
+            $totalSpentCost = $materialSpentCost + $laborSpentCost + $totalIndirectSpentCost;
 
             $project->overall_progress_percentage = $project->total_project_cost > 0
                 ? ($totalSpentCost / $project->total_project_cost) * 100
