@@ -12,11 +12,11 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-// Authenticated Routes
-Route::middleware(['auth:sanctum', 'verified', 'inactivity.logout'])->group(function () {
+    // Authenticated Routes
+    Route::middleware(['auth:sanctum', 'verified', 'inactivity.logout'])->group(function () {
 
     // Dashboard
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // User Profile
     Route::get('/account-settings', function () {
@@ -37,6 +37,8 @@ Route::middleware(['auth:sanctum', 'verified', 'inactivity.logout'])->group(func
         Route::post('/projects/suspend', [ProjectController::class, 'suspend'])->name('projects.suspend');
         Route::post('/projects/resume', [ProjectController::class, 'resume'])->name('projects.resume');
         Route::post('/projects/realign', [ProjectController::class, 'realignFunds'])->name('projects.realign');
+
+
     });
 
     // User Management (Admin)
@@ -44,7 +46,7 @@ Route::middleware(['auth:sanctum', 'verified', 'inactivity.logout'])->group(func
         Route::get('/manage-user', [UserController::class, 'index'])->name('manage-user');
 
         //System Configuration
-        Route::get('/system-configuration', function () {
+        Route::get('/system-configuration', function (){
             return view('layouts.system configuration.system_configuration');
         })->name('system-configuration');
 
@@ -58,12 +60,6 @@ Route::middleware(['auth:sanctum', 'verified', 'inactivity.logout'])->group(func
             return view('layouts.reports.report-');
         })->name('report');
     });
-
-    Route::post('changeInf', [UserController::class, 'changeInf'])->name('changeInf');
-    Route::post('updateContact', [UserController::class, 'updateContact'])->name('updateContact');
-    Route::post('updatePassword', [UserController::class, 'updatePassword'])->name('updatePassword');
-    Route::post('uploadImage', [UserController::class, 'uploadImage'])->name('uploadImage');
-    Route::post('upload', [UserController::class, 'upload'])->name('upload');
 
     Route::get('/report', function () {
         return view('layouts.reports.report-');
