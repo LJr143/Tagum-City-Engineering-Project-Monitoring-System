@@ -396,7 +396,7 @@
     <h1 class="text-xl font-medium mb-6">
         Account Settings
     </h1>
-    <div class="bg-white rounded-lg shadow-lg p-4 ">
+    <div class="bg-white rounded-lg shadow-lg p-4 min-h-screen">
         <div class="flex flex-col md:flex-row">
 
             <div class="text-left w-full md:w-1/6 mb-4 md:mb-0 ">
@@ -426,16 +426,15 @@
 
                 <div class="bg-white p-2 px-4 rounded-lg shadow mb-4 relative">
                     <div class="flex flex-col items-center mb-3 sm:flex-row sm:items-start">
-
                         <form id="upload" action="upload" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="relative w-16 h-16 rounded-full overflow-hidden bg-gray-300 mb-4 sm:mb-0 mt-2">
                                 <img
-                                    alt="Profile photo of a person"
+                                    alt="rofile_img"
                                     class="w-full h-full object-cover"
                                     height="64"
                                     id="photo"
-                                    src="{{ asset('storage/' . (auth()->user()->profile_photo_path ?? 'pmsAssets/default.png')) }}"
+                                    src="{{asset('storage/' . (auth()->user()->profile_photo_path ?? 'pmsAssets/default.png'))}}"
                                     width="64" />
                                 <input
                                     accept="image/*"
@@ -482,24 +481,6 @@
                                 </p>
                                 <input class="hidden text-[10px] h-7 text-gray-600 border border-gray-300 rounded p-1 focus:ring-green-500 focus:border-green-500" id="positionInput" type="text" value="{{$role}}" readonly />
                             </div>
-                        <div class="relative w-16 h-16 rounded-full overflow-hidden bg-gray-300 mb-4 sm:mb-0 mt-2">
-                            <img alt="Profile photo of a person" class="w-full h-full object-cover" height="64" id="photo" src="{{ asset('storage/pmsAssets/default.png') }}" width="64"/>
-                            <input accept="image/*" class="hidden" id="photoInput" onchange="previewImage(event)" type="file"/>
-                            <label class="absolute bottom-0 right-0 bg-black bg-opacity-50 text-white p-1 rounded-full cursor-pointer" for="photoInput" id="photoLabel" style="display: none;">
-                                <i class="fas fa-camera"></i>
-                            </label>
-                        </div>
-                        <div class="text-center sm:mt-6 sm:text-left sm:ml-4"> <!-- Added sm:ml-4 for spacing on larger screens -->
-                            <h3 class="text-xs font-semibold text-gray-800" id="name">
-                                {{ $first_name }} {{ $middle_initial }} {{ $last_name }}
-                            </h3>
-                            <input class="hidden text-xs font-semibold text-gray-800 border border-gray-300 rounded p-1 mb-1 focus:ring-green-500 focus:border-green-500" id="nameInput" type="text" value="{{ $first_name }} {{ $middle_initial }} {{ $last_name }}" readonly/>
-                            <p class="text-[10px] text-gray-600" id="position">
-                                {{$role}}
-                            </p>
-                            <input class="hidden text-[10px] h-7 text-gray-600 border border-gray-300 rounded p-1 focus:ring-green-500 focus:border-green-500" id="positionInput" type="text" value="{{$role}}" readonly/>
-                        </div>
-
                     </div>
                     <button class="text-xs text-gray-600 absolute top-3 right-3 hover:text-gray-800 transition duration-200 hidden" id="editButton" onclick="enableEditProfile()">
                         <i class="fas fa-edit"></i>
@@ -870,7 +851,7 @@
                 <div>
                     <div class="flex justify-center">
                         <div class="w-24 h-24 rounded-full">
-                            <img alt="Profile image placeholder" class="w-full rounded-full" src="{{ asset('storage/pmsAssets/practicum_supervisor.jpg') }}" />
+                            <img alt="Profile image placeholder" class="w-full h-full rounded-full" src="http://127.0.0.1:8000/storage/pmsAssets/practicum_supervisor.jpg" />
                         </div>
                     </div>
                     <h2 class="text-xs font-semibold  text-gray-800 mt-4 text-center">Mishill D. Cempron</h2>
@@ -882,7 +863,7 @@
                         <!-- Developer 1 -->
                         <div class="text-center">
                             <div class="w-24 h-24 rounded-full mx-auto">
-                                <img alt="Developer image placeholder" class="w-full h-full rounded-full" src="{{ asset('storage/pmsAssets/raña.jpg') }}" />
+                                <img alt="Developer image placeholder" class="w-full h-full rounded-full" src="http://127.0.0.1:8000/storage/pmsAssets/raña.jpg" />
                             </div>
                             <h4 class="text-xs font-semibold  text-gray-800 mt-4">Lorjohn M. Raña</h4>
                             <p class="text-[10px] text-gray-600">Back-end Developer</p>
@@ -891,7 +872,7 @@
                         <!-- Developer 2 -->
                         <div class="text-center">
                             <div class="w-24 h-24 rounded-full mx-auto">
-                                <img alt="Developer image placeholder" class="w-full h-full rounded-full" src="{{ asset('storage/pmsAssets/ang.jfif') }}" />
+                                <img alt="Developer image placeholder" class="w-full h-full rounded-full" src="http://127.0.0.1:8000/storage/pmsAssets/ang.jfif" />
                             </div>
                             <h4 class="text-xs font-semibold  text-gray-800 mt-4">Sweet Frachette L. Ang</h4>
                             <p class="text-[10px] text-gray-600">Front-end Developer</p>
@@ -900,7 +881,7 @@
                         <!-- Developer 3 -->
                         <div class="text-center">
                             <div class="w-24 h-24 rounded-full mx-auto">
-                                <img alt="Developer image placeholder" class="w-full h-full rounded-full" src="{{ asset('storage/pmsAssets/vargas.png') }}" />
+                                <img alt="Developer image placeholder" class="w-full h-full rounded-full" src="http://127.0.0.1:8000/storage/pmsAssets/vargas.png" />
                             </div>
                             <h4 class="text-xs font-semibold  text-gray-800 mt-4">Kristine Mae L. Vargas</h4>
                             <p class="text-[10px] text-gray-600">Front-end Developer</p>
@@ -909,7 +890,7 @@
                         <!-- Developer 4 -->
                         <div class="text-center">
                             <div class="w-24 h-24 rounded-full mx-auto">
-                                <img alt="Developer image placeholder" class="w-full h-full rounded-full" src="{{ asset('storage/pmsAssets/estolloso.jfif') }}" />
+                                <img alt="Developer image placeholder" class="w-full h-full rounded-full" src="http://127.0.0.1:8000/storage/pmsAssets/estolloso.jfif" />
                             </div>
                             <h4 class="text-xs font-semibold  text-gray-800 mt-4">Marvin F. Estolloso</h4>
                             <p class="text-[10px] text-gray-600">Front-end Developer</p>
@@ -918,22 +899,16 @@
                         <!-- Developer 5 -->
                         <div class="text-center">
                             <div class="w-24 h-24 rounded-full mx-auto">
-                                <img alt="Developer image placeholder" class="w-full h-full rounded-full" src="{{ asset('storage/pmsAssets/vitangcor.jpg') }}" />
+                                <img alt="Developer image placeholder" class="w-full h-full rounded-full" src="https://placehold.co/96x96" />
                             </div>
                             <h4 class="text-xs font-semibold  text-gray-800 mt-4">Alfred Vitangcor</h4>
                             <p class="text-[10px] text-gray-600"></p>
-                            <p class="text-[10px] text-gray-600">apvitangcor@gmail.com</p>
+                            <p class="text-[10px] text-gray-600">fnamemilname@gmail.com</p>
                         </div>
+
                     </div>
-                </div>
-            </div>
 
 
                 </div>
             </div>
         </div>
-
-        </div>
-    </div>
-</div>
-
