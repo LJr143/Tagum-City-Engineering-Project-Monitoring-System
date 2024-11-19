@@ -818,7 +818,7 @@
                                 <img alt="Developer image placeholder" class="w-full h-full rounded-full" src="{{ asset('storage/pmsAssets/raña.jpg') }}" />
                             </div>
                             <h4 class="text-xs font-semibold  text-gray-800 mt-4">Lorjohn M. Raña</h4>
-                            <p class="text-[10px] text-gray-600">Back-end Developer</p>
+                            <p class="text-[10px] text-gray-600">Lead Back-end Developer</p>
                             <p class="text-[10px] text-gray-600">lorjohn143@gmail.com</p>
                         </div>
                         <!-- Developer 2 -->

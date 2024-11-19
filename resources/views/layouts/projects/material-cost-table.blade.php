@@ -42,7 +42,7 @@
 
                 </div>
 
-                @if ((auth()->user()->isAdmin() || auth()->user()->isEncoder()) && $pow->project->status != 'completed'))
+                @if ((auth()->user()->isAdmin() || auth()->user()->isEncoder()) && $pow->project->status != 'completed')
                     <div>
                         <div class="flex justify-content-between">
                             <button onclick="openDeleteModal()"

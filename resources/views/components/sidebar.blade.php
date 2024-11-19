@@ -6,7 +6,7 @@
     }"
     x-data="{
         showSide: localStorage.getItem('sidebarState') === 'true' ? true : false,
-        isSmallScreen: window.innerWidth < 640, // Adjust based on your screen size requirements
+        isSmallScreen: window.innerWidth < 640,
         checkScreenSize() {
             this.isSmallScreen = window.innerWidth < 640;
         }
