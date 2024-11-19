@@ -201,7 +201,7 @@
         document.getElementById('phone').style.display = 'none';
         document.getElementById('phoneInput').style.display = 'block';
         document.getElementById('editContactInfoButton').style.display = 'none';
-        document.getElementById('saveContactInfoButton').style.display = 'block';
+        document.getElementById('saveContactInfoButton').style.display = 'inline';
     }
 
     function saveContactInfoChanges() {
@@ -374,6 +374,7 @@
         } else if (currentPassword !== 'correctPassword') { // Replace 'correctPassword' with actual validation logic
             currentPasswordIncorrectError.style.display = 'block';
             document.getElementById('current-password').classList.add('border-red-500', 'focus:ring-red-500', 'focus:border-red-500');
+            document.getElementById('current-password').classList.add('border-red-500', 'focus:ring-red-500', 'focus:border-red-500');
         } else {
             currentPasswordError.style.display = 'none';
             currentPasswordIncorrectError.style.display = 'none';
@@ -483,14 +484,17 @@
                             </div>
                     </div>
                     <button class="text-xs text-gray-600 absolute top-3 right-3 hover:text-gray-800 transition duration-200 hidden" id="editButton" onclick="enableEditProfile()">
+                    <button class="text-xs text-gray-600 absolute top-3 right-3 hover:text-gray-800 transition duration-200 hidden" id="editButton" onclick="enableEditProfile()">
                         <i class="fas fa-edit"></i>
                         Edit
                     </button>
+                    <button type="submit" class="text-xs text-gray-600 absolute top-3 right-3  hover:text-gray-800 transition duration-200" id="saveButton" onclick="saveProfileChanges()">
                     <button type="submit" class="text-xs text-gray-600 absolute top-3 right-3  hover:text-gray-800 transition duration-200" id="saveButton" onclick="saveProfileChanges()">
                         <i class="fas fa-save"></i>
                         Save
                     </button>
                 </div>
+                </form>
                 </form>
 
 
@@ -511,6 +515,13 @@
                                 </i>
                                 Save
                             </button>
+                        <form method="POST" action="changeInf">
+                            @csrf
+                            <button wire:click="savePersonalInfo" class="text-xs text-gray-600 absolute hover:text-gray-800 transition duration-200 top-2 right-2 hidden" id="savePersonalInfoButton" style="display: none;">
+                                <i class="fas fa-save">
+                                </i>
+                                Save
+                            </button>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div>
@@ -520,6 +531,7 @@
                             <p class="text-[11px] text-gray-800 font-medium" id="firstName">
                                 {{ $first_name }}
                             </p>
+                            <input name="fname" class="hidden text-[11px] w-full md:w-2/3 h-7 text-gray-800 border border-gray-300 rounded p-1 focus:ring-green-500 focus:border-green-500" id="firstNameInput" type="text" value="{{ $first_name }}" />
                             <input name="fname" class="hidden text-[11px] w-full md:w-2/3 h-7 text-gray-800 border border-gray-300 rounded p-1 focus:ring-green-500 focus:border-green-500" id="firstNameInput" type="text" value="{{ $first_name }}" />
                             <p class="text-red-500 text-xs hidden" id="firstNameError">Please enter a valid first name.</p>
                         </div>
@@ -531,6 +543,7 @@
                                 {{ $middle_initial }}
                             </p>
                             <input name="mname" class="hidden text-[11px] w-full md:w-2/3 h-7 text-gray-800 border border-gray-300 rounded p-1 focus:ring-green-500 focus:border-green-500" id="middleInitialInput" type="text" value="{{ $middle_initial }}" />
+                            <input name="mname" class="hidden text-[11px] w-full md:w-2/3 h-7 text-gray-800 border border-gray-300 rounded p-1 focus:ring-green-500 focus:border-green-500" id="middleInitialInput" type="text" value="{{ $middle_initial }}" />
                             <p class="text-red-500 text-xs hidden" id="middleInitialError">Please enter a valid middle initial.</p>
                         </div>
                         <div>
@@ -541,6 +554,7 @@
                                 {{ $last_name }}
                             </p>
                             <input name="lname" class="hidden text-[11px] w-full md:w-2/3 text-gray-800 border border-gray-300 rounded p-1 focus:ring-green-500 focus:border-green-500" id="lastNameInput" type="text" value="{{ $last_name }}" />
+                            <input name="lname" class="hidden text-[11px] w-full md:w-2/3 text-gray-800 border border-gray-300 rounded p-1 focus:ring-green-500 focus:border-green-500" id="lastNameInput" type="text" value="{{ $last_name }}" />
                             <p class="text-red-500 text-xs hidden" id="lastNameError">Please enter a valid last name.</p>
                         </div>
                         <div>
@@ -549,13 +563,16 @@
                             </p>
                             <p class="text-[11px] text-gray-800 font-medium" id="birthdate">
                                 {{ $birthdate }}
+                                {{ $birthdate }}
                             </p>
+                            <input name="bdate" class="hidden text-[11px] w-full md:w-2/3 h-7 text-gray-800 border border-gray-300 rounded p-1 focus:ring-green-500 focus:border-green-500" id="birthdateInput" type="date" value="01/01/1990" />
                             <input name="bdate" class="hidden text-[11px] w-full md:w-2/3 h-7 text-gray-800 border border-gray-300 rounded p-1 focus:ring-green-500 focus:border-green-500" id="birthdateInput" type="date" value="01/01/1990" />
                             <p class="text-red-500 text-xs hidden" id="birthdateError">Please enter a valid birthdate.</p>
                             <p class="text-red-500 text-xs hidden" id="birthdateTodayError">Birthdate cannot be today.</p>
                             <p class="text-red-500 text-xs hidden" id="birthdateUnder18Error">You must be at least 18 years old.</p>
                         </div>
                     </div>
+                    </form>
                     </form>
                 </div>
 
@@ -578,6 +595,13 @@
                                 </i>
                                 Save
                             </button>
+                        <form action="updateContact" method="post">
+                            @csrf
+                            <button wire:click.defer="saveContactInfoChanges" class="text-xs text-gray-600 hover:text-gray-800 transition duration-200 hidden" id="saveContactInfoButton" style="display: none;">
+                                <i class="fas fa-save">
+                                </i>
+                                Save
+                            </button>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div>
@@ -586,7 +610,9 @@
                             </p>
                             <p class="text-[11px] text-gray-800 font-medium" id="email">
                                 {{ $email }}
+                                {{ $email }}
                             </p>
+                            <input name="email" wire:model="email" class="hidden text-[11px] w-full md:w-2/3 h-7 text-gray-800 border border-gray-300 rounded p-1 focus:ring-green-500 focus:border-green-500" id="emailInput" type="email" value="email@example.com" />
                             <input name="email" wire:model="email" class="hidden text-[11px] w-full md:w-2/3 h-7 text-gray-800 border border-gray-300 rounded p-1 focus:ring-green-500 focus:border-green-500" id="emailInput" type="email" value="email@example.com" />
                             <p class="text-red-500 text-xs hidden" id="emailError">Please enter a valid email address.</p>
                         </div>
@@ -596,11 +622,14 @@
                             </p>
                             <p class="text-[11px] text-gray-800 font-medium" id="phone">
                                 {{ $phoneNumber }}
+                                {{ $phoneNumber }}
                             </p>
+                            <input wire:model="phone" name="phone" class="hidden text-[11px] w-full md:w-2/3 h-7 text-gray-800 border border-gray-300 rounded p-1 focus:ring-green-500 focus:border-green-500" id="phoneInput" type="tel" value="0917-123-4567" />
                             <input wire:model="phone" name="phone" class="hidden text-[11px] w-full md:w-2/3 h-7 text-gray-800 border border-gray-300 rounded p-1 focus:ring-green-500 focus:border-green-500" id="phoneInput" type="tel" value="0917-123-4567" />
                             <p class="text-red-500 text-xs hidden" id="phoneError">Please enter a valid phone number (format: 0917-123-4567).</p>
                         </div>
                     </div>
+                    </form>
                     </form>
                 </div>
             </div>
@@ -618,12 +647,18 @@
                         </h3>
                         <form action="updatePassword" method="POST">
                             @csrf
+                        <form action="updatePassword" method="POST">
+                            @csrf
                             <div class="mb-4">
                                 <label class="block text-[12px] text-gray-600" for="user-id">
                                     User ID
                                 </label>
                                 <input name="userId" wire:model="userID" class="w-full text-[11px] h-7 text-gray-800 px-3 py-2 border border-gray-300 rounded p-1 focus:ring-green-500 focus:border-green-500" id="user-id" type="text" onfocus="clearError('userIdError')" />
+                                <input name="userId" wire:model="userID" class="w-full text-[11px] h-7 text-gray-800 px-3 py-2 border border-gray-300 rounded p-1 focus:ring-green-500 focus:border-green-500" id="user-id" type="text" onfocus="clearError('userIdError')" />
                                 <!-- Error message -->
+                                @error('user_id')
+                                <span class="text-red-500 text-xs" id="userIdError" style="display: none;">User ID is required.</span>
+                                @enderror
                                 @error('user_id')
                                 <span class="text-red-500 text-xs" id="userIdError" style="display: none;">User ID is required.</span>
                                 @enderror
@@ -635,12 +670,16 @@
                                 </label>
                                 <div class="relative">
                                     <input name="oldPassword" wire:model="currentPassword" class="w-full text-[11px] h-8 text-gray-800 px-3 py-2 border border-gray-300 rounded p-1 focus:ring-green-500 focus:border-green-500 pr-10" id="current-password" type="password" onfocus="clearError('currentPasswordError'); clearError('currentPasswordIncorrectError')" />
+                                    <input name="oldPassword" wire:model="currentPassword" class="w-full text-[11px] h-8 text-gray-800 px-3 py-2 border border-gray-300 rounded p-1 focus:ring-green-500 focus:border-green-500 pr-10" id="current-password" type="password" onfocus="clearError('currentPasswordError'); clearError('currentPasswordIncorrectError')" />
                                     <button type="button" class="absolute inset-y-0 right-3 flex items-center cursor-pointer" onclick="toggleCurrentPasswordVisibility()">
+                                        @error('current_password')
                                         @error('current_password')
                                         <span id="currentPasswordIcon" class="w-4 h-4 mr-2">
                                             @enderror
+                                            @enderror
                                             <svg id="eyeSlashIconCurrent" width="31" height="20" viewBox="0 0 31 20" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                                 <g clip-path="url(#clip0_1607_9292)">
+                                                    <path d="M31 0H0V20H31V0Z" fill="url(#pattern0_1607_9292)" />
                                                     <path d="M31 0H0V20H31V0Z" fill="url(#pattern0_1607_9292)" />
                                                 </g>
                                                 <defs>
@@ -651,27 +690,46 @@
                                                         <rect width="31" height="20" fill="white" />
                                                     </clipPath>
                                                     <image id="image0_1607_9292" width="100" height="100" xlink:href="data:image/png;base64,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" />
+                                                    <pattern id="pattern0_1607_9292" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                                        <use xlink:href="#image0_1607_9292" transform="matrix(0.00645161 0 0 0.01 0.177419 0)" />
+                                                    </pattern>
+                                                    <clipPath id="clip0_1607_9292">
+                                                        <rect width="31" height="20" fill="white" />
+                                                    </clipPath>
+                                                    <image id="image0_1607_9292" width="100" height="100" xlink:href="data:image/png;base64,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" />
                                                 </defs>
+                                            </svg>
                                             </svg>
 
 
 
                                             <svg id="eyeIconCurrent" class="hidden" width="31" height="20" viewBox="0 0 31 20" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                                 <g clip-path="url(#clip0_1607_9295)">
+                                            <svg id="eyeIconCurrent" class="hidden" width="31" height="20" viewBox="0 0 31 20" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                <g clip-path="url(#clip0_1607_9295)">
                                                     <g clip-path="url(#clip1_1607_9295)">
+                                                        <path d="M31 0H0V20H31V0Z" fill="url(#pattern0_1607_9295)" />
                                                         <path d="M31 0H0V20H31V0Z" fill="url(#pattern0_1607_9295)" />
                                                     </g>
                                                 </g>
                                                 <defs>
+                                                </g>
+                                                <defs>
                                                     <pattern id="pattern0_1607_9295" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                                        <use xlink:href="#image0_1607_9295" transform="matrix(0.00645161 0 0 0.01 0.177419 0)" />
                                                         <use xlink:href="#image0_1607_9295" transform="matrix(0.00645161 0 0 0.01 0.177419 0)" />
                                                     </pattern>
                                                     <clipPath id="clip0_1607_9295">
                                                         <rect width="31" height="20" fill="white" />
+                                                        <rect width="31" height="20" fill="white" />
                                                     </clipPath>
                                                     <clipPath id="clip1_1607_9295">
                                                         <rect width="31" height="20" fill="white" />
+                                                        <rect width="31" height="20" fill="white" />
                                                     </clipPath>
+                                                    <image id="image0_1607_9295" width="100" height="100" xlink:href="data:image/png;base64,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" />
+                                                </defs>
+                                            </svg>
                                                     <image id="image0_1607_9295" width="100" height="100" xlink:href="data:image/png;base64,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" />
                                                 </defs>
                                             </svg>
@@ -708,11 +766,26 @@
                                 </label>
                                 <div class="relative">
                                     <input name="newPassword" wire:model="newPassword" class="w-full text-[11px] h-8 text-gray-800 px-3 py-2 border border-gray-300 rounded p-1 focus:ring-green-500 focus:border-green-500 pr-10" id="new-password" type="password" onfocus="clearError('newPasswordError')" oninput="validatePassword()" />
+                                    <input name="newPassword" wire:model="newPassword" class="w-full text-[11px] h-8 text-gray-800 px-3 py-2 border border-gray-300 rounded p-1 focus:ring-green-500 focus:border-green-500 pr-10" id="new-password" type="password" onfocus="clearError('newPasswordError')" oninput="validatePassword()" />
                                     <button type="button" class="absolute inset-y-0 right-3 flex items-center cursor-pointer" onclick="toggleNewPasswordVisibility()">
+                                        @error('newPassword_confirmation')
                                         @error('newPassword_confirmation')
                                         <span id="newPasswordIcon" class="w-4 h-4 mr-2">
                                             @enderror
+                                            @enderror
                                             <svg id="eyeSlashIconNew" width="31" height="20" viewBox="0 0 31 20" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                <g clip-path="url(#clip0_1616_9292)">
+                                                    <path d="M31 0H0V20H31V0Z" fill="url(#pattern0_1616_9292)" />
+                                                </g>
+                                                <defs>
+                                                    <pattern id="pattern0_1616_9292" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                                        <use xlink:href="#image0_1616_9292" transform="matrix(0.00645161 0 0 0.01 0.177419 0)" />
+                                                    </pattern>
+                                                    <clipPath id="clip0_1616_9292">
+                                                        <rect width="31" height="20" fill="white" />
+                                                    </clipPath>
+                                                    <image id="image0_1616_9292" width="100" height="100" xlink:href="data:image/png;base64,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" />
+                                                </defs>
                                                 <g clip-path="url(#clip0_1616_9292)">
                                                     <path d="M31 0H0V20H31V0Z" fill="url(#pattern0_1616_9292)" />
                                                 </g>
@@ -733,6 +806,9 @@
                                                     <g clip-path="url(#clip1_1616_9295)">
                                                         <path d="M31 0H0V20H31V0Z" fill="url(#pattern0_1616_9295)" />
                                                     </g>
+                                                    <g clip-path="url(#clip1_1616_9295)">
+                                                        <path d="M31 0H0V20H31V0Z" fill="url(#pattern0_1616_9295)" />
+                                                    </g>
                                                 </g>
                                                 <defs>
                                                     <pattern id="pattern0_1616_9295" patternContentUnits="objectBoundingBox" width="1" height="1">
@@ -745,7 +821,18 @@
                                                         <rect width="31" height="20" fill="white" />
                                                     </clipPath>
                                                     <image id="image0_1616_9295" width="100" height="100" xlink:href="data:image/png;base64,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" />
+                                                    <pattern id="pattern0_1616_9295" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                                        <use xlink:href="#image0_1616_9295" transform="matrix(0.00645161 0 0 0.01 0.177419 0)" />
+                                                    </pattern>
+                                                    <clipPath id="clip0_1616_9295">
+                                                        <rect width="31" height="20" fill="white" />
+                                                    </clipPath>
+                                                    <clipPath id="clip1_1616_9295">
+                                                        <rect width="31" height="20" fill="white" />
+                                                    </clipPath>
+                                                    <image id="image0_1616_9295" width="100" height="100" xlink:href="data:image/png;base64,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" />
                                                 </defs>
+                                            </svg>
                                             </svg>
 
 
@@ -763,11 +850,13 @@
                                 </label>
                                 <div class="relative">
                                     <input name="confirmPassword" wire:model="retypeNewPassword" class="w-full text-[11px] h-8 text-gray-800 px-3 py-2 border border-gray-300 rounded p-1 focus:ring-green-500 focus:border-green-500 pr-10" id="retype-new-password" type="password" onfocus="clearError('retypeNewPasswordError')" oninput="validateRetypePassword()" />
+                                    <input name="confirmPassword" wire:model="retypeNewPassword" class="w-full text-[11px] h-8 text-gray-800 px-3 py-2 border border-gray-300 rounded p-1 focus:ring-green-500 focus:border-green-500 pr-10" id="retype-new-password" type="password" onfocus="clearError('retypeNewPasswordError')" oninput="validateRetypePassword()" />
                                     <button type="button" class="absolute inset-y-0 right-3 flex items-center cursor-pointer" onclick="toggleRetypeNewPasswordVisibility()">
                                         <span id="retypeNewPasswordIcon" class="w-4 h-4 mr-2">
 
                                             <svg id="eyeSlashIconRetype" width="31" height="20" viewBox="0 0 31 20" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                                 <g clip-path="url(#clip0_1616_9299)">
+                                                    <path d="M31 0H0V20H31V0Z" fill="url(#pattern0_1616_9299)" />
                                                     <path d="M31 0H0V20H31V0Z" fill="url(#pattern0_1616_9299)" />
                                                 </g>
                                                 <defs>
@@ -778,13 +867,24 @@
                                                         <rect width="31" height="20" fill="white" />
                                                     </clipPath>
                                                     <image id="image0_1616_9299" width="100" height="100" xlink:href="data:image/png;base64,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" />
+                                                    <pattern id="pattern0_1616_9299" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                                        <use xlink:href="#image0_1616_9299" transform="matrix(0.00645161 0 0 0.01 0.177419 0)" />
+                                                    </pattern>
+                                                    <clipPath id="clip0_1616_9299">
+                                                        <rect width="31" height="20" fill="white" />
+                                                    </clipPath>
+                                                    <image id="image0_1616_9299" width="100" height="100" xlink:href="data:image/png;base64,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" />
                                                 </defs>
+                                            </svg>
                                             </svg>
 
 
 
                                             <svg id="eyeIconRetype" class="hidden" width="31" height="20" viewBox="0 0 31 20" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                                 <g clip-path="url(#clip0_1616_9302)">
+                                                    <g clip-path="url(#clip1_1616_9302)">
+                                                        <path d="M31 0H0V20H31V0Z" fill="url(#pattern0_1616_9302)" />
+                                                    </g>
                                                     <g clip-path="url(#clip1_1616_9302)">
                                                         <path d="M31 0H0V20H31V0Z" fill="url(#pattern0_1616_9302)" />
                                                     </g>
@@ -800,7 +900,18 @@
                                                         <rect width="31" height="20" fill="white" />
                                                     </clipPath>
                                                     <image id="image0_1616_9302" width="100" height="100" xlink:href="data:image/png;base64,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" />
+                                                    <pattern id="pattern0_1616_9302" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                                        <use xlink:href="#image0_1616_9302" transform="matrix(0.00645161 0 0 0.01 0.177419 0)" />
+                                                    </pattern>
+                                                    <clipPath id="clip0_1616_9302">
+                                                        <rect width="31" height="20" fill="white" />
+                                                    </clipPath>
+                                                    <clipPath id="clip1_1616_9302">
+                                                        <rect width="31" height="20" fill="white" />
+                                                    </clipPath>
+                                                    <image id="image0_1616_9302" width="100" height="100" xlink:href="data:image/png;base64,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" />
                                                 </defs>
+                                            </svg>
                                             </svg>
 
 
@@ -848,6 +959,9 @@
                 <h2 class="text-sm font-medium text-gray-800 mb-3">
                     Practicum Supervisor
                 </h2>
+                <h2 class="text-sm font-medium text-gray-800 mb-3">
+                    Practicum Supervisor
+                </h2>
                 <div>
                     <div class="flex justify-center">
                         <div class="w-24 h-24 rounded-full">
@@ -866,7 +980,7 @@
                                 <img alt="Developer image placeholder" class="w-full h-full rounded-full" src="http://127.0.0.1:8000/storage/pmsAssets/raña.jpg" />
                             </div>
                             <h4 class="text-xs font-semibold  text-gray-800 mt-4">Lorjohn M. Raña</h4>
-                            <p class="text-[10px] text-gray-600">Back-end Developer</p>
+                            <p class="text-[10px] text-gray-600">Lead Back-end Developer</p>
                             <p class="text-[10px] text-gray-600">lorjohn143@gmail.com</p>
                         </div>
                         <!-- Developer 2 -->

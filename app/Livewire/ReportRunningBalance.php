@@ -72,7 +72,11 @@ class ReportRunningBalance extends PowerGridComponent
             ->add('project_cost', function (Project $project) {
                 $totalLabor = $project->pows->sum('total_labor_cost');
                 $totalMaterials = $project->pows->sum('total_material_cost');
-                $totalIndirects = $project->pows->flatMap(fn($pow) => $pow->indirectCosts)->sum('amount');
+                $totalIndirects = $project->pows->flatMap(function ($pow) {
+                    return $pow->indirectCosts->filter(function ($indirectCost) {
+                        return preg_match('/^[0-9]+(\.?\s|$)/', $indirectCost->description);
+                    });
+                })->sum('amount');
                 $totalDirectCosts = $project->pows->flatMap(fn($pow) => $pow->directCosts)->sum('amount');
                 $totalCost = $totalLabor + $totalMaterials + $totalIndirects + $totalDirectCosts;
                 return Money::of($totalCost, 'PHP')->formatTo('en_PH');
@@ -91,7 +95,11 @@ class ReportRunningBalance extends PowerGridComponent
             })
 
             ->add('indirect_balance', function (Project $project){
-                $totalIndirects = $project->pows->flatMap(fn($pow) => $pow->indirectCosts)->sum('amount');
+                $totalIndirects = $project->pows->flatMap(function ($pow) {
+                    return $pow->indirectCosts->filter(function ($indirectCost) {
+                        return preg_match('/^[0-9]+(\.?\s|$)/', $indirectCost->description);
+                    });
+                })->sum('amount');
                 $totalIndirectSpent = $project->pows->flatMap(fn($pow) => $pow->indirectCosts)->sum('spent_cost');
                 $indirectBalance = $totalIndirects - $totalIndirectSpent;
 

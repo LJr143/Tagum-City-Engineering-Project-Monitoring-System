@@ -64,6 +64,12 @@ Route::middleware(['auth:sanctum', 'verified', 'inactivity.logout'])->group(func
     Route::post('uploadImage', [UserController::class, 'uploadImage'])->name('uploadImage');
     Route::post('upload', [UserController::class, 'upload'])->name('upload');
 
+    Route::post('changeInf', [UserController::class, 'changeInf'])->name('changeInf');
+    Route::post('updateContact', [UserController::class, 'updateContact'])->name('updateContact');
+    Route::post('updatePassword', [UserController::class, 'updatePassword'])->name('updatePassword');
+    Route::post('uploadImage', [UserController::class, 'uploadImage'])->name('uploadImage');
+    Route::post('upload', [UserController::class, 'upload'])->name('upload');
+
     Route::get('/report', function () {
         return view('layouts.reports.report-');
     })->name('report');

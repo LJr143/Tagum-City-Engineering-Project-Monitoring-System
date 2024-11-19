@@ -17,23 +17,23 @@
     <!-- Notifications Dropdown -->
     <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg overflow-hidden z-10">
         <div class="border-b px-3 py-1 flex justify-between items-center">
-            <h2 class="text-md font-semibold">Notifications</h2>
+            <h2 class="text-[12px] font-semibold">Notifications</h2>
             <i @click="open = false" class="fas fa-times cursor-pointer"></i>
         </div>
 
-        <div class="px-3 py-1 flex justify-between items-center border-b">
+        <div class="px-3 py-1 flex justify-between items-center border-b text-[12px]">
             <div class="flex space-x-3">
-                <button @click="showUnread = false" :class="!showUnread ? 'text-green-600 font-semibold border-b-2 border-green-600' : 'text-gray-500'" wire:click="showAllNotifications" class="text-sm">All</button>
-                <button @click="showUnread = true" :class="showUnread ? 'text-green-600 font-semibold border-b-2 border-green-600' : 'text-gray-500'" wire:click="showUnreadNotifications" class="text-sm">Unread</button>
+                <button @click="showUnread = false" :class="!showUnread ? 'text-green-600 font-semibold border-b-2 border-green-600' : 'text-gray-500'" wire:click="showAllNotifications" class="text-[12px]">All</button>
+                <button @click="showUnread = true" :class="showUnread ? 'text-green-600 font-semibold border-b-2 border-green-600' : 'text-gray-500'" wire:click="showUnreadNotifications" class="text-[12px]">Unread</button>
             </div>
-            <button wire:click="markAllAsRead" class="text-gray-500 text-xs">Mark all read</button>
+            <button wire:click="markAllAsRead" class="text-gray-500 text-[12px]">Mark all read</button>
         </div>
 
         <!-- Scrollable Notifications -->
         <div class="px-3 py-1 max-h-64 overflow-y-auto">
             <!-- New Notifications Section -->
             <div>
-                <h4 class="text-sm font-semibold text-gray-700">New</h4>
+                <h4 class="text-[12px] font-semibold text-gray-700">New</h4>
                 @php
                     if (!empty($notifications)) {
                         $newNotifications = $notifications->filter(function ($notification) {
@@ -46,7 +46,7 @@
                         <!-- Flex container for message and "View Project" link -->
                         <div class="flex justify-between items-center">
                             <div>
-                                <h4 class="font-semibold text-xs">{{ $notification->data['project_title'] ?? 'No Title' }}</h4>
+                                <h4 class="font-semibold text-[12px]">{{ $notification->data['project_title'] ?? 'No Title' }}</h4>
                                 <p class="text-[11px] text-gray-500">{{ $notification->data['message'] ?? 'No message available.' }}</p>
                                 <p class="text-[11px] text-gray-400">{{ $notification->created_at->format('F j, Y, g:i A') }}</p>
                             </div>
@@ -62,7 +62,7 @@
                         <div class="flex justify-end items-center mt-1">
                             <!-- Show green dot and "Mark as read" only for unread notifications -->
                             @if(is_null($notification->read_at))
-                                <button wire:click="markAsRead('{{ $notification->id }}')" class="text-gray-500 text-xs font-semibold">Mark as read</button>
+                                <button wire:click="markAsRead('{{ $notification->id }}')" class="text-gray-500 text-[12px] font-semibold">Mark as read</button>
                             @endif
                         </div>
                     </div>
@@ -73,7 +73,7 @@
 
             <!-- Recent Notifications Section -->
             <div class="mt-2">
-                <h4 class="text-sm font-semibold text-gray-700">Recent</h4>
+                <h4 class="text-[12px] font-semibold text-gray-700">Recent</h4>
                 @php
                     $recentNotifications = $notifications->filter(function ($notification) {
                         return $notification->created_at->diffInHours() >= 1;
@@ -84,7 +84,7 @@
                         <!-- Flex container for message and "View Project" link -->
                         <div class="flex justify-between items-center">
                             <div>
-                                <h4 class="font-semibold text-xs">{{ $notification->data['project_title'] ?? 'No Title' }}</h4>
+                                <h4 class="font-semibold text-[12px]">{{ $notification->data['project_title'] ?? 'No Title' }}</h4>
                                 <p class="text-[11px] text-gray-500">{{ $notification->data['message'] ?? 'No message available.' }}</p>
                                 <p class="text-[11px] text-gray-400">{{ $notification->created_at->format('F j, Y, g:i A') }}</p>
                             </div>
@@ -93,7 +93,7 @@
                                     <i class="fas fa-chevron-right"></i>
                                 </a>
                             @else
-                                <span class="text-gray-500 text-xs ml-2">No project link available</span>
+                                <span class="text-gray-500 text-[12px] ml-2">No project link available</span>
                             @endif
                         </div>
 

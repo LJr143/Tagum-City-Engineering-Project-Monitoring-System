@@ -113,10 +113,6 @@
 
 
 
-
-
-
-
                 </div>
                 <!-- Modal -->
                 <div class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center hidden" id="modal">
@@ -160,10 +156,8 @@
         </div>
 
 
-
-
         <!-- Modal For Delete Confirmation -->
-        <div id="delete-modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-50">
+        <div id="delete-modal" class="fixed inset-0 flex items-center  justify-center bg-black bg-opacity-50 hidden z-50">
             <div class="bg-white rounded-lg shadow-lg p-4 sm:p-6 w-full max-w-xs sm:max-w-md md:w-1/3 mx-2">
                 <div class="flex items-center mb-2">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -174,25 +168,23 @@
                     </svg>
                     <h2 class="text-sm font-semibold text-red-500">Delete Project</h2>
                 </div>
-                <p class="text-xs sm:text-sm mb-4 ml-7">Are you sure you want to delete this project? This action cannot be undone.</p>
-                <div class="flex justify-end">
+                <p class="text-xs sm:text-[12px] mb-4 ml-7">Are you sure you want to delete this project? This action cannot be undone.</p>
+                <div class="flex justify-end sm:text-[12px]">
                     <button id="delete-cancel-button" onclick="closeDeleteModal()"
-                            class="bg-white border border-gray-300 text-gray-700 rounded-md text-xs sm:text-sm px-3 py-2 sm:px-4 hover:bg-gray-400">
+                            class="bg-white border border-gray-300 text-gray-700 rounded-md text-[12px] sm:text-[12px] px-3 py-2 sm:px-4 hover:bg-gray-400">
                         Cancel
                     </button>
                     <form id="delete-form" action="{{ route('project.destroy', $project->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit"
-                                class="bg-red-500 text-white rounded-md px-3 py-2 sm:px-4 text-xs sm:text-sm hover:bg-red-600 ml-2">
+                                class="bg-red-500 text-white rounded-md px-3 py-2 sm:px-4 text-[12px] sm:text-[12px] hover:bg-red-600 ml-2">
                             Delete
                         </button>
                     </form>
                 </div>
             </div>
         </div>
-
-
 
         <script>
             function openDeleteModal() {
