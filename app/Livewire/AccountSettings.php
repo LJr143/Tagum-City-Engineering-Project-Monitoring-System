@@ -71,30 +71,83 @@ class AccountSettings extends Component
         $this->validateOnly('profileImage');
     }
 
-    public function saveChanges()
+    public function saveProfile()
     {
+        $user = auth()->user();
 
-        $this->validate();
+        // Validate input
+        $this->validate([
+            'first_name' => 'required|string|max:255',
+            'middle_initial' => 'nullable|string|max:1',
+            'last_name' => 'required|string|max:255',
+            'profileImage' => 'nullable|image|max:1024', // 1MB max
+        ]);
 
-        $user = User::find($this->userID);
-
+        // Update profile image if provided
         if ($this->profileImage) {
-            $imageName = $this->profileImage->store('profile-images', 'public');
-            $user->profile_photo_path = $imageName;
-            $this->profilePhotoPath = $imageName;
+            $path = $this->profileImage->store('profile-images', 'public');
+            $user->profile_image = $path;
         }
 
+        // Update user details
+        $user->first_name = $this->first_name;
+        $user->middle_initial = $this->middle_initial;
+        $user->last_name = $this->last_name;
+
+        // Check if 'role' is provided
+        if ($this->role) {
+            $user->role = $this->role;
+        }
+
+        // Save the changes
+        $user->save();
+
+        // Flash a success message
+        session()->flash('message', 'Profile updated successfully.');
+    }
+
+    public function savePersonalInfo()
+    {
+        $user = User::find($this->userID);
+
+        // dd($user);
+
+        // // Validate input
+        // $this->validate([
+        //     'first_name' => 'required|string|max:255',
+        //     'middle_initial' => 'nullable|string|max:1',
+        //     'last_name' => 'required|string|max:255',
+        //     'birthdate' => 'required|date|before:today',
+        // ]);
+
+        // Update personal information
         $user->first_name = $this->first_name;
         $user->middle_initial = $this->middle_initial;
         $user->last_name = $this->last_name;
         $user->birth_date = $this->birthdate;
-        $user->contact_number = $this->phoneNumber;
-        $user->email = $this->email;
-
-
         $user->save();
 
-        session()->flash('message', 'Account settings updated successfully.');
+        dd($user->first_name);
+        // $user->save();
+
+        session()->flash('message', 'Personal information updated successfully.');
+    }
+    public function saveContactInfoChanges()
+    {
+        $user = User::find($this->userID);
+
+        // Validate input
+        // $this->validate([
+        //     'email' => 'required|email|max:255',
+        //     'phoneNumber' => 'nullable|string|regex:/^09[0-9]{9}$/',
+        // ]);
+
+        // Update contact information
+        $user->email = $this->email;
+        $user->contact_number = $this->phoneNumber;
+        $user->save();
+
+        session()->flash('message', 'Contact information updated successfully.');
     }
 
     public function updateAccount()
