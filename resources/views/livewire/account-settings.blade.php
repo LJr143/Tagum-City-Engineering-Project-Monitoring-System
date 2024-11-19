@@ -503,18 +503,14 @@
                         <h3 class="text-xs font-semibold text-gray-800">
                             Personal Information
                         </h3>
-                        <button class="text-xs text-gray-600 hover:text-gray-800 transition duration-200" id="editPersonalInfoButton" onclick="enableEditPersonalInfo()">
-                            <i class="fas fa-edit">
-                            </i>
-                            Edit
-                        </button>
-                        <form method="POST" action="changeInf">
-                            @csrf
-                            <button wire:click="savePersonalInfo" class="text-xs text-gray-600 absolute hover:text-gray-800 transition duration-200 top-2 right-2 hidden" id="savePersonalInfoButton" style="display: none;">
-                                <i class="fas fa-save">
+                        <div>
+
+                            <button class="text-xs text-gray-600 hover:text-gray-800 transition duration-200" id="editPersonalInfoButton" onclick="enableEditPersonalInfo()">
+                                <i class="fas fa-edit">
                                 </i>
-                                Save
+                                Edit
                             </button>
+
                             <form method="POST" action="changeInf">
                                 @csrf
                                 <button wire:click="savePersonalInfo" class="text-xs text-gray-600 absolute hover:text-gray-800 transition duration-200 top-2 right-2 hidden" id="savePersonalInfoButton" style="display: none;">
@@ -522,6 +518,7 @@
                                     </i>
                                     Save
                                 </button>
+                        </div>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div>
@@ -582,18 +579,13 @@
                         <h3 class="text-xs font-semibold text-gray-800">
                             Contact Information
                         </h3>
-                        <button class="text-xs text-gray-600 hover:text-gray-800 transition duration-200" id="editContactInfoButton" onclick="enableEditContactInfo()">
-                            <i class="fas fa-edit">
-                            </i>
-                            Edit
-                        </button>
-                        <form action="updateContact" method="post">
-                            @csrf
-                            <button wire:click.defer="saveContactInfoChanges" class="text-xs text-gray-600 hover:text-gray-800 transition duration-200 hidden" id="saveContactInfoButton" style="display: none;">
-                                <i class="fas fa-save">
+                        <div>
+                            <button class="text-xs text-gray-600 hover:text-gray-800 transition duration-200" id="editContactInfoButton" onclick="enableEditContactInfo()">
+                                <i class="fas fa-edit">
                                 </i>
-                                Save
+                                Edit
                             </button>
+
                             <form action="updateContact" method="post">
                                 @csrf
                                 <button wire:click.defer="saveContactInfoChanges" class="text-xs text-gray-600 hover:text-gray-800 transition duration-200 hidden" id="saveContactInfoButton" style="display: none;">
@@ -601,6 +593,7 @@
                                     </i>
                                     Save
                                 </button>
+                        </div>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div>
