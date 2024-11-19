@@ -46,8 +46,7 @@
          x-on:user-deleted.window="pushNotification('success', 'User Deleted', 'User deleted successfully.');"
          x-on:material-edited.window="pushNotification('success', 'Material Edited', 'Material edited successfully.');"
          x-on:suspend-success.window="pushNotification('success', 'Project Suspended', 'Project suspended successfully.');"
-         x-on:mismatch-import.window="pushNotification('error', 'Project Details Failed', 'Adding Project Details Failed due to mismatch value.');"
-
+         x-on:mismatch-import.window="pushNotification('error', 'Project Details Failed', 'PR total amount does not match pow total amount.');"
     >
 
 

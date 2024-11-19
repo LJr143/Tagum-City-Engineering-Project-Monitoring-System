@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\IndirectCost;
 use App\Models\Project;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -84,10 +85,13 @@ class ProjectFilter extends Component
             $totalMaterialCost = $project->pows->sum('total_material_cost');
             $totalLaborCost = $project->pows->sum('total_labor_cost');
             $totalIndirectCost = $project->pows->flatMap(function ($pow) {
-                return $pow->indirectCosts;
-            })->sum('amount');
+                    return $pow->indirectCosts->filter(function ($indirectCost) {
+                        return preg_match('/^[0-9]+(\.?\s|$)/', $indirectCost->description);
+                    });
+                })->sum('amount');
 
-            $materialSpentCost = $project->pows->flatMap(function ($pow) {
+
+                $materialSpentCost = $project->pows->flatMap(function ($pow) {
                 return $pow->materials;
             })->sum('spent_cost');
 
