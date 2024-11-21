@@ -104,12 +104,12 @@ class ProjectController extends Controller
         // Find the project and update its status
         $powId = $request->pow_id;
         $project = Project::find($request->project_id);
-        $project->status = 'pending'; // or any other status you prefer for resumed projects
+        $project->status = 'ongoing'; // or any other status you prefer for resumed projects
         $project->save();
 
         PowSuspendResume::create([
             'pow_id' => $powId,
-            'transaction' => 'resume', // or specific transaction type if needed
+            'transaction' => 'ongoing', // or specific transaction type if needed
             'user_id' => Auth::id(), // get the ID of the authenticated user
             'created_at' => now(), // if you want to set the current timestamp manually
         ]);

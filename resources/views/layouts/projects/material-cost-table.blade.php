@@ -386,12 +386,7 @@
                         <h2 class="text-sm font-semibold text-red-500">Realign Fund</h2>
                     </div>
                     <p class="text-xs mb-4">
-                        @if ($contingencyBalance)
-                            Current Contingency Balance:
-                            <span class="font-semibold text-gray-700">Php {{ number_format($contingencyBalance, 2) }}</span>
-                        @else
-                            <span class="font-semibold text-red-500">No Contingency Balance Available</span>
-                        @endif
+                            <span class="font-semibold text-red-500">This Action cannot be undone, please be cautious</span>
                     </p>
 
                     <p class="text-xs mb-4">Select a source and destination for realignment, and choose specific items to adjust the budget</p>
