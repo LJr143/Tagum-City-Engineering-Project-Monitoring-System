@@ -71,7 +71,7 @@ class Realignment extends Component
         return [];
     }
 
-    public function submitRealignment()
+    public function submitRealignment(): void
     {
         $this->validate();
 
@@ -100,6 +100,16 @@ class Realignment extends Component
         // Save changes
         $sourceItem->save();
         $destinationItem->save();
+
+        \App\Models\RealignmentHistory::create([
+            'pow_id' => $this->pow_id,
+            'source_item_id' => $this->category_source_item,
+            'source_type' => $this->category_source,
+            'destination_item_id' => $this->destination_category_item,
+            'destination_type' => $this->destination_category,
+            'amount' => $this->realign_amount,
+            'realigned_by' => auth()->id(),
+        ]);
 
         session()->flash('message', 'Realignment successful!');
     }

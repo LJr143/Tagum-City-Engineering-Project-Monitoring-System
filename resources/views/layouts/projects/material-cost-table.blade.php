@@ -144,6 +144,7 @@
                         <option value="other-direct-cost">Direct Cost</option>
                         <option value="purchase-order-history">Purchase Order History</option>
                         <option value="pow-suspension-resume">POW Suspension/Resume History</option>
+                        <option value="realignment-history">Realignment History</option>
                     </select>
                 </div>
                 <div class="hidden sm:block mb-4">
@@ -167,6 +168,9 @@
 
                             <a id="pow-suspension-resume-tab" href="#" onclick="changeTabTo('pow-suspension-resume')"
                                class="text-gray-500 hover:border-green-600 hover:text-green-600 whitespace-nowrap border-b-2 pb-1 px-1 text-xs font-medium">POW Suspension/Resume History</a>
+
+                            <a id="realignment-history-tab" href="#" onclick="changeTabTo('realignment-history')"
+                               class="text-gray-500 hover:border-green-600 hover:text-green-600 whitespace-nowrap border-b-2 pb-1 px-1 text-xs font-medium">Realignment History</a>
                         </nav>
                     </div>
                 </div>
@@ -255,6 +259,15 @@
                         <h3 class="text-sm font-semibold mb-2 text-center"> Suspension / Continuation  History</h3>
                         <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
                             <livewire:pow-suspend-resume :pow_id="$pow->id"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="realignment-history" class="hidden w-full">
+                    <div class="bg-white shadow-md rounded-lg p-6">
+                        <h3 class="text-sm font-semibold mb-2 text-center"> Project Realignment  History</h3>
+                        <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
+                            <livewire:realignment-history :pow_id="$pow->id"/>
                         </div>
                     </div>
                 </div>
@@ -445,6 +458,7 @@
             document.getElementById('other-direct-cost').style.display = tab === 'other-direct-cost' ? 'block' : 'none';
             document.getElementById('purchase-order-history').style.display = tab === 'purchase-order-history' ? 'block' : 'none';
             document.getElementById('pow-suspension-resume').style.display = tab === 'pow-suspension-resume' ? 'block' : 'none';
+            document.getElementById('realignment-history').style.display = tab === 'realignment-history' ? 'block' : 'none';
 
             // Highlight active tab
             document.getElementById('materials-tab').classList.toggle('border-green-600', tab === 'materials');
@@ -459,6 +473,8 @@
             document.getElementById('purchase-order-history-tab').classList.toggle('text-green-600', tab === 'purchase-order-history');
             document.getElementById('pow-suspension-resume-tab').classList.toggle('border-green-600', tab === 'pow-suspension-resume');
             document.getElementById('pow-suspension-resume-tab').classList.toggle('text-green-600', tab === 'pow-suspension-resume');
+            document.getElementById('realignment-history-tab').classList.toggle('border-green-600', tab === 'realignment-history');
+            document.getElementById('realignment-history-tab').classList.toggle('text-green-600', tab === 'realignment-history');
         }
 
         // Modal Management Functions
