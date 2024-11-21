@@ -37,6 +37,7 @@ Route::middleware(['auth:sanctum', 'verified', 'inactivity.logout'])->group(func
         Route::post('/projects/suspend', [ProjectController::class, 'suspend'])->name('projects.suspend');
         Route::post('/projects/resume', [ProjectController::class, 'resume'])->name('projects.resume');
         Route::post('/projects/realign', [ProjectController::class, 'realignFunds'])->name('projects.realign');
+
     });
 
     // User Management (Admin)
@@ -58,12 +59,6 @@ Route::middleware(['auth:sanctum', 'verified', 'inactivity.logout'])->group(func
             return view('layouts.reports.report-');
         })->name('report');
     });
-    Route::post('changeInf', [UserController::class, 'changeInf'])->name('changeInf');
-    Route::post('updateContact', [UserController::class, 'updateContact'])->name('updateContact');
-    Route::post('updatePassword', [UserController::class, 'updatePassword'])->name('updatePassword');
-    Route::post('uploadImage', [UserController::class, 'uploadImage'])->name('uploadImage');
-    Route::post('upload', [UserController::class, 'upload'])->name('upload');
-
     Route::post('changeInf', [UserController::class, 'changeInf'])->name('changeInf');
     Route::post('updateContact', [UserController::class, 'updateContact'])->name('updateContact');
     Route::post('updatePassword', [UserController::class, 'updatePassword'])->name('updatePassword');

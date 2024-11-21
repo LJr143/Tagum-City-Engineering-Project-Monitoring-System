@@ -63,7 +63,6 @@ class ProjectController extends Controller
             auth()->id()
         );
 
-        // Optionally, you can redirect or perform actions based on the project_id
         return redirect()->route('view-project-pow', ['id' => $project_id])
             ->with('message', 'Pow deleted successfully.');
     }
@@ -85,12 +84,12 @@ class ProjectController extends Controller
         // Store the suspension record in PowSuspendResume
         PowSuspendResume::create([
             'pow_id' => $powId,
-            'transaction' => 'suspended', // or specific transaction type if needed
-            'user_id' => Auth::id(), // get the ID of the authenticated user
-            'created_at' => now(), // if you want to set the current timestamp manually
+            'transaction' => 'suspended',
+            'user_id' => Auth::id(),
+            'created_at' => now(),
         ]);
 
-        // Redirect back with a success message
+
         return redirect()->back();
     }
 
@@ -118,7 +117,6 @@ class ProjectController extends Controller
         // Redirect back with a success message
         return redirect()->back()->with('success', 'Project has been resumed successfully.');
     }
-
 
     public function realignFunds(Request $request)
     {
@@ -160,6 +158,8 @@ class ProjectController extends Controller
 
         return redirect()->back()->withErrors('POW not found for the specified project.');
     }
+
+
 
 
 }

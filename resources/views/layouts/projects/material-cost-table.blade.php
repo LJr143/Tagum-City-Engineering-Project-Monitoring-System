@@ -150,7 +150,7 @@
                     <div class="border-b border-gray-200">
                         <nav class="-mb-px flex space-x-8" aria-label="Tabs">
                             <a id="materials-tab" href="#" onclick="changeTabTo('materials')"
-                               class="border-green-600 text-green-600 whitespace-nowrap border-b-2 pb-1 px-1 text-xs font-medium"
+                               class="text-gray-500 border-green-600 text-green-600 whitespace-nowrap border-b-2 pb-1 px-1 text-xs font-medium"
                                aria-current="page">Materials</a>
                             <a id="labor-cost-tab" href="#" onclick="changeTabTo('labor-cost')"
                                class="text-gray-500 hover:border-green-600 hover:text-green-600 whitespace-nowrap border-b-2 pb-1 px-1 text-xs font-medium">Labor
@@ -383,7 +383,7 @@
                                   d="M8.4845 2.49512C9.15808 1.32845 10.842 1.32845 11.5156 2.49512L17.7943 13.3701C18.4678 14.5368 17.6259 15.9951 16.2787 15.9951H3.72136C2.37421 15.9951 1.53224 14.5368 2.20582 13.3701L8.4845 2.49512ZM10 5.00012C10.4142 5.00012 10.75 5.33591 10.75 5.75012V9.25012C10.75 9.66434 10.4142 10.0001 10 10.0001C9.58579 10.0001 9.25 9.66434 9.25 9.25012L9.25 5.75012C9.25 5.33591 9.58579 5.00012 10 5.00012ZM10 14.0001C10.5523 14.0001 11 13.5524 11 13.0001C11 12.4478 10.5523 12.0001 10 12.0001C9.44772 12.0001 9 12.4478 9 13.0001C9 13.5524 9.44772 14.0001 10 14.0001Z"
                                   fill="#CA383A"/>
                         </svg>
-                        <h2 class="text-sm font-semibold text-red-500">Realign Contingency Fund</h2>
+                        <h2 class="text-sm font-semibold text-red-500">Realign Fund</h2>
                     </div>
                     <p class="text-xs mb-4">
                         @if ($contingencyBalance)
@@ -394,34 +394,10 @@
                         @endif
                     </p>
 
-                    <p class="text-xs mb-4">Enter the amount to realign from the contingency fund to either material or labor costs.</p>
+                    <p class="text-xs mb-4">Select a source and destination for realignment, and choose specific items to adjust the budget</p>
 
                     <!-- Realignment Form -->
-                    <form id="realignment-form" action="{{ route('projects.realign') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="project_id" value="{{ $pow->project_id }}">
-
-                        <!-- Amount to Realign -->
-                        <label for="realign-amount" class="block text-xs font-medium text-gray-700">Amount to Realign</label>
-                        <input type="number" name="realign_amount" id="realign-amount" step="0.01" min="0"
-                               class="w-full border border-gray-300 rounded-md px-2 py-1 text-xs mb-4" required>
-
-                        <!-- Destination Selection -->
-                        <label class="block text-xs font-medium text-gray-700">Realign To</label>
-                        <select name="destination" class="w-full border border-gray-300 rounded-md px-2 py-1 text-xs mb-4" required>
-                            <option value="material">Material Cost</option>
-                            <option value="labor">Labor Cost</option>
-                        </select>
-
-                        <div class="flex justify-end">
-                            <button type="button" onclick="closeRealignmentModal()" class="bg-white border border-gray -300 text-gray-700 rounded-md text-xs px-4 py-2 hover:bg-gray-400">
-                                Cancel
-                            </button>
-                            <button type="submit" class="bg-green-500 text-white rounded-md px-4 py-2 text-xs hover:bg-green-600 ml-2">
-                                Realign
-                            </button>
-                        </div>
-                    </form>
+                    <livewire:realignment :pow_id="$pow->id" />
                 </div>
             </div>
 
@@ -591,24 +567,21 @@
 
     </script>
     <script>
-        // Function to hide the message after 2 seconds
         document.addEventListener("DOMContentLoaded", function() {
-            // Select the success and error message elements
             let successMessage = document.getElementById('success-message');
             let errorMessage = document.getElementById('error-message');
 
-            // If success message exists, hide it after 2 seconds
+
             if (successMessage) {
                 setTimeout(function() {
                     successMessage.style.display = 'none';
-                }, 2000); // 2000ms = 2 seconds
+                }, 2000);
             }
 
-            // If error message exists, hide it after 2 seconds
             if (errorMessage) {
                 setTimeout(function() {
                     errorMessage.style.display = 'none';
-                }, 2000); // 2000ms = 2 seconds
+                }, 2000);
             }
         });
     </script>
