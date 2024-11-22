@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\IndirectCost;
 use App\Models\Project;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -84,8 +85,18 @@ class ProjectFilter extends Component
             $totalMaterialCost = $project->pows->sum('total_material_cost');
             $totalLaborCost = $project->pows->sum('total_labor_cost');
             $totalIndirectCost = $project->pows->flatMap(function ($pow) {
-                return $pow->indirectCosts;
-            })->sum('amount');
+                    return $pow->indirectCosts->filter(function ($indirectCost) {
+                        return preg_match('/^[0-9]+(\.?\s|$)/', $indirectCost->description);
+                    });
+                })->sum('amount');
+
+
+            $totalIndirectSpentCost = $project->pows->flatMap(function ($pow) {
+                    return $pow->indirectCosts->filter(function ($indirectCost) {
+                        return preg_match('/^[0-9]+(\.?\s|$)/', $indirectCost->description);
+                    });
+                })->sum('spent_cost');
+
 
             $materialSpentCost = $project->pows->flatMap(function ($pow) {
                 return $pow->materials;
@@ -97,7 +108,7 @@ class ProjectFilter extends Component
 
             $project->total_project_cost = $totalMaterialCost + $totalLaborCost + $totalIndirectCost;
 
-            $totalSpentCost = $materialSpentCost + $laborSpentCost + $totalIndirectCost; // Add indirect costs if applicable
+            $totalSpentCost = $materialSpentCost + $laborSpentCost + $totalIndirectSpentCost;
 
             $project->overall_progress_percentage = $project->total_project_cost > 0
                 ? ($totalSpentCost / $project->total_project_cost) * 100

@@ -148,6 +148,8 @@
                         </tbody>
                     </table>
                 </div>
+
+                <div></div>
                 @if($project->status != 'completed')
                 <div class="mt-6 flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-2">
                     <button type="button" @click="open = false"
