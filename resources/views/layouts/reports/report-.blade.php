@@ -15,8 +15,8 @@
 
         <div class="container mx-auto">
             <div class="bg-white shadow-md rounded-lg">
-                <h3 class="text-sm font-semibold mb-4 text-center">Report</h3>
-                <div class="flex items-center justify-between mb-4 space-x-4">
+                <h3 class="text-sm font-semibold mt-4 text-center">Report</h3>
+                <div class="flex items-center justify-between mb-2 space-x-4">
                 </div>
                 @if(auth()->user()->isAdmin() || auth()->user()->isEncoder())
                 <div class="shadow text-[12px] w-full bg-white mt-0 p-5 rounded-md md:max-w-[800px] min-[1408px]:max-w-[1000px] lg:max-w-[900px] xl:max-w-[870px] 2xl:max-w-[1190px]">
@@ -32,8 +32,8 @@
 
                 @else
 
-                    <div class="shadow text-[12px] w-full bg-white mt-0 p-5 rounded-md md:max-w-[800px] min-[1408px]:max-w-[1000px] lg:max-w-[900px] xl:max-w-[870px] 2xl:max-w-[1190px]">
-                        <div class="powergrid-filters">
+                    <div class="shadow text-[12px] w-full bg-white mt-0 p-5 rounded-md md:max-w-[800px] min-[1408px]:max-w-[1000px] lg:max-w-[900px] xl:max-w-[870px] 2xl:max-w-[1190px] ">
+                        <div class="powergrid-filters text-[12px]">
                             <livewire:project-incharge-report />
                         </div>
                     </div>

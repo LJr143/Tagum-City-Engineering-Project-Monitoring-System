@@ -12,6 +12,7 @@ class DashboardController extends Controller
     {
         return redirect()->route('project-main', ['status' => $status]);
     }
+
     public function index()
     {
         // Get the authenticated user

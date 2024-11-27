@@ -94,4 +94,6 @@ class User extends Authenticatable
     {
         return $this->hasMany(Project::class, 'project_incharge_id');
     }
+
+
 }

@@ -122,7 +122,8 @@
                             class="mt-1 block w-full p-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-xs">
                         <option value="">Select Role</option>
                         <option value="admin">Admin</option>
-                        <option value="engineer">Engineer</option>
+                        <option value="encoder">Encoder</option>
+                        <option value="project incharge">Project Incharge</option>
                     </select>
                     @error('role') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>

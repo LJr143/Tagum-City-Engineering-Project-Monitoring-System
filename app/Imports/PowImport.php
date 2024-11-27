@@ -6,6 +6,7 @@ use App\Models\DirectCost;
 use App\Models\IndirectCost;
 use App\Models\OtherDirectCost;
 use App\Models\Pow;
+use App\Models\SwaReport;
 use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Concerns\ToModel;
 
@@ -81,6 +82,20 @@ class PowImport implements ToModel
             'total_cost' => $row[9],
         ]);
 
+        $swaReport = new SwaReport([
+            'pow_id' => $this->powId,
+            'item_no' => $row[0],
+            'description' => $row[1],
+            '%_of_total' => $row[2],
+            'quantity' => $row[4],
+            'unit' => $row[7],
+            'unit_cost' => $row[8],
+            'total_cost' => $row[10],
+            'remaining_cost' => $row[10],
+        ]);
+
+        $swaReport->save();
+
 
         // Proceed with importing direct costs
         return new DirectCost([
@@ -94,6 +109,7 @@ class PowImport implements ToModel
             'total_cost' => $row[10],
             'remaining_cost' => $row[10],
         ]);
+
     }
 
     /**

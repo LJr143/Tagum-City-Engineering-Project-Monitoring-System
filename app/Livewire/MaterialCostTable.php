@@ -138,7 +138,7 @@ class MaterialCostTable extends ProgressInformation
             'usedDirectCost' => $this->usedDirectCost,
             'overallProgress' => $this->overallProgress,
             'projectConfigurations' => $this->projectConfigurations,
-            'totalProjectSpentCost' => $this->materialSpentCost + $this->laborSpentCost + $this->indirectSpentCost + $this->directSpentCost,
+            'totalProjectSpentCost' => $this->materialSpentCost + $this->laborSpentCost + $this->indirectSpentCost,
             'inputProgress' => $this->progress,
         ]);
     }

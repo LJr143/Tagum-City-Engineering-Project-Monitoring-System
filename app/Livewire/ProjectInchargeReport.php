@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\IndirectCost;
 use App\Models\Material;
 use App\Models\Payroll;
 use App\Models\Project;
@@ -67,13 +68,20 @@ class ProjectInchargeReport extends PowerGridComponent
     public function fields(): PowerGridFields
     {
         return PowerGrid::fields()
-            ->add('id')
+            ->add('prn', function (Project $project) {
+                return $project->pows->first()->reference_number;
+
+            })
             ->add('title')
             ->add('baranggay')
             ->add('project_cost', function (Project $project) {
                 $totalLabor = $project->pows->sum('total_labor_cost');
                 $totalMaterials = $project->pows->sum('total_material_cost');
-                $totalIndirects = $project->pows->flatMap(fn($pow) => $pow->indirectCosts)->sum('amount');
+                $totalIndirects = $project->pows->flatMap(function ($pow) {
+                    return $pow->indirectCosts->filter(function ($indirectCost) {
+                        return preg_match('/^[0-9]+(\.?\s|$)/', $indirectCost->description);
+                    });
+                })->sum('amount');
                 $totalCost = $totalLabor + $totalMaterials + $totalIndirects;
                 return Money::of($totalCost, 'PHP')->formatTo('en_PH');
             })
@@ -101,7 +109,7 @@ class ProjectInchargeReport extends PowerGridComponent
     public function columns(): array
     {
         return [
-            Column::make('PRN', 'id'),
+            Column::make('PRN', 'prn'),
             Column::make('Project Name', 'title')
                 ->sortable()
                 ->searchable(),
@@ -150,14 +158,22 @@ class ProjectInchargeReport extends PowerGridComponent
         // Calculate total spent costs
         $spentMaterialCost = $materials->sum('spent_cost');
         $spentLaborCost = $labor->sum('payroll_amount');
-        $spentIndirectCost = $project->pows->flatMap(fn($pow) => $pow->indirectCosts)->sum('spent_cost');
+        $spentIndirectCost = $project->pows->flatMap(function ($pow) {
+            return $pow->indirectCosts->filter(function ($indirectCost) {
+                return preg_match('/^[0-9]+(\.?\s|$)/', $indirectCost->description);
+            });
+        })->sum('spent_cost');
 
         $totalSpentCost = $spentMaterialCost + $spentLaborCost + $spentIndirectCost;
 
         // Calculate total project costs
         $totalMaterialCost = $project->pows->sum('total_material_cost');
         $totalLaborCost = $project->pows->sum('total_labor_cost');
-        $totalIndirectCost = $project->pows->flatMap(fn($pow) => $pow->indirectCosts)->sum('amount');
+        $totalIndirectCost =  $project->pows->flatMap(function ($pow) {
+            return $pow->indirectCosts->filter(function ($indirectCost) {
+                return preg_match('/^[0-9]+(\.?\s|$)/', $indirectCost->description);
+            });
+        })->sum('amount');
 
         $totalProjectCost = $totalMaterialCost + $totalLaborCost + $totalIndirectCost;
 
@@ -165,7 +181,7 @@ class ProjectInchargeReport extends PowerGridComponent
             ? ($totalSpentCost / $totalProjectCost) * 100
             : 0;
 
-        return number_format($percentage, 1) . '%';
+        return number_format($percentage, 2) . '%';
     }
 
 }
