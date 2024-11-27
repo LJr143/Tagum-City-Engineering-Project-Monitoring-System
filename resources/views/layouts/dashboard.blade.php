@@ -14,6 +14,13 @@
 
         <div class="container mx-auto">
 
+{{--            <!-- In your Blade view -->--}}
+{{--            @if(auth()->user()->isProjectIncharge())--}}
+{{--                <script type="text/javascript">--}}
+{{--                    window.location.href = "{{ url('/project/main') }}";--}}
+{{--                </script>--}}
+{{--            @endif--}}
+
             <!-- Main Content -->
             <div class="flex-1 p-4 ">
                 <h3 class="text-base font-semibold leading-6 text-gray-900">Dashboard</h3>

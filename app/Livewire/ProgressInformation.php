@@ -91,7 +91,6 @@ class ProgressInformation extends Component
         $this->totalLaborCost = $this->pow->total_labor_cost;
         $this->laborSpentCost = $labor->sum('payroll_amount');
 
-        $this->indirectSpentCost = IndirectCost::where('pow_id', $this->pow_id)->sum('spent_cost');
         $this->indirectSpentCost = IndirectCost::where('pow_id', $this->pow->id)
             ->where('description', 'REGEXP', '^[0-9]+(\.?\s|$)')
             ->sum('spent_cost');

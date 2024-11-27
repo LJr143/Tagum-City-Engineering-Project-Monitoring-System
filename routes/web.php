@@ -25,7 +25,8 @@ Route::middleware(['auth:sanctum', 'verified', 'inactivity.logout'])->group(func
 
     // Project Management
     Route::prefix('project')->group(function () {
-        Route::get('/main', [ProjectController::class, 'index'])->name('project-main');
+
+//        Route::get('/main', [ProjectController::class, 'index'])->name('project-main');
         Route::get('/view-pow/{id}', [ProjectController::class, 'view'])->name('view-project-pow');
         Route::get('/material-table-cost/{pow_id}/{index}', [ProjectController::class, 'viewPowInfo'])->name('material-table-cost');
         Route::delete('/{id}', [ProjectController::class, 'destroy'])->name('project.destroy');
@@ -33,6 +34,8 @@ Route::middleware(['auth:sanctum', 'verified', 'inactivity.logout'])->group(func
         Route::get('/material-table-cost', function () {
             return view('layouts.Projects.material-cost-table');
         });
+
+        Route::get('/project/main', [ProjectController::class, 'index'])->name('project-main');
 
         Route::post('/projects/suspend', [ProjectController::class, 'suspend'])->name('projects.suspend');
         Route::post('/projects/resume', [ProjectController::class, 'resume'])->name('projects.resume');
@@ -58,7 +61,11 @@ Route::middleware(['auth:sanctum', 'verified', 'inactivity.logout'])->group(func
         Route::get('/report', function () {
             return view('layouts.reports.report-');
         })->name('report');
+
+
     });
+
+
     Route::post('changeInf', [UserController::class, 'changeInf'])->name('changeInf');
     Route::post('updateContact', [UserController::class, 'updateContact'])->name('updateContact');
     Route::post('updatePassword', [UserController::class, 'updatePassword'])->name('updatePassword');
