@@ -33,13 +33,12 @@
 
 
             <!-- Project Header -->
-            <div class="flex  justify-between items-center mb-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
                 <div class="mb-4 md:mb-0">
                     <h3 class="text-base font-semibold leading-6 text-gray-900 mb-2">Program of Work {{ $index }}</h3>
-                    <span class="inline-block  bg-green-600 text-white px-3 py-1 rounded text-xs  ">
+                    <span class="inline-block  bg-green-600 text-white px-3 py-1 rounded text-xs">
                             Ref: #{{ $pow->reference_number }}
-                        </span>
-
+                    </span>
                 </div>
 
                 @if ((auth()->user()->isAdmin() || auth()->user()->isEncoder()) && $pow->project->status != 'completed')
@@ -125,12 +124,15 @@
                         </div>
                     </div>
                 @elseif(auth()->user()->isProjectIncharge() && ($pow->project->status != 'completed' || $pow->project->status != 'suspended'))
-                    <div>
-                        <div class="flex flex-col items-end space-y-2">
-                            <div class="flex flex-wrap gap-2">
-                                <livewire:mark-project-complete :pow_id="$pow->id"/>
+
+                    <div class="w-full md:w-auto">
+                        <div class="flex flex-col md:flex-row items-start md:items-end space-y-2 md:space-y-0 gap-2">
+                            <div class="flex-shrink-0 w-full md:w-auto">
+                                <livewire:add-swaa-report :pow_id="$pow->id" class="w-full sm:w-auto"/>
                             </div>
-                            <livewire:add-swaa-report :pow_id="$pow->id"/>
+                            <div class="flex-shrink-0 w-full md:w-auto">
+                                <livewire:mark-project-complete :pow_id="$pow->id" class="w-full sm:w-auto"/>
+                            </div>
                         </div>
                     </div>
                 @endif
@@ -153,7 +155,7 @@
                         <option value="purchase-order-history">Purchase Order History</option>
                         <option value="pow-suspension-resume">POW Suspension/Resume History</option>
                         <option value="realignment-history">Realignment History</option>
-                        
+
                     </select>
                 </div>
                 <div class="hidden sm:block mb-4">
