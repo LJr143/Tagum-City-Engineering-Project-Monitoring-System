@@ -18,13 +18,15 @@ use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\PowerGridFields;
 use PowerComponents\LivewirePowerGrid\Traits\WithExport;
 
-#[AllowDynamicProperties] class PurchaseOrderTable extends PowerGridComponent
+#[AllowDynamicProperties]
+class PurchaseOrderTable extends PowerGridComponent
 {
     use WithExport;
     use WithPagination;
 
     public $pow_id;
-
+    public $startDate; // For storing the start date
+    public $endDate;   // For storing the end date
 
     public function setUp(): array
     {
@@ -43,7 +45,6 @@ use PowerComponents\LivewirePowerGrid\Traits\WithExport;
         ];
     }
 
-
     public function boot(): void
     {
         config(['livewire-powergrid.filter' => 'outside']);
@@ -56,10 +57,18 @@ use PowerComponents\LivewirePowerGrid\Traits\WithExport;
         }
     }
 
-
     public function datasource(): Builder
     {
-        return PurchaseOrder::query()->where('pow_id', $this->pow_id);
+        $query = PurchaseOrder::query()
+            ->selectRaw('*, DATE_FORMAT(created_at, "%Y-%m-%d %H:%i:%s") as date_created_formatted')
+            ->where('pow_id', $this->pow_id);
+
+        // Apply date range filter if set
+        if ($this->startDate && $this->endDate) {
+            $query->whereBetween('created_at', [$this->startDate, $this->endDate]);
+        }
+
+        return $query;
     }
 
     public function fields(): PowerGridFields
@@ -71,12 +80,10 @@ use PowerComponents\LivewirePowerGrid\Traits\WithExport;
             ->add('quantity')
             ->add('total_items', function () {
                 return PurchaseOrder::where('pow_id', $this->pow_id)
-                ->distinct('purchase_order_number')
-                ->count('purchase_order_number');
-            });
-
-
-
+                    ->distinct('purchase_order_number')
+                    ->count('purchase_order_number');
+            })
+            ->add('created_at'); // Keep this for filtering
     }
 
     public function columns(): array
@@ -86,11 +93,28 @@ use PowerComponents\LivewirePowerGrid\Traits\WithExport;
             Column::make('Purchase Order No.', 'purchase_order_number')->sortable()->searchable(),
             Column::make('Supplier', 'supplier')->sortable()->searchable(),
             Column::make('Total Items', 'total_items')->sortable()->searchable(),
+            Column::make('Date Purchased', 'date_created_formatted') // Change to "Date Created"
+            ->sortable()
+                ->searchable(),
         ];
-
 
         return $columns;
     }
 
+    public function filters(): array
+    {
+        return [
+            // Custom filter fields for date range
+            'startDate' => 'Start Date',
+            'endDate' => 'End Date',
+        ];
+    }
 
+    public function updating($propertyName)
+    {
+        // Trigger the table to refresh when the date fields are updated
+        if ($propertyName === 'startDate' || $propertyName === 'endDate') {
+            $this->resetPage();
+        }
+    }
 }
