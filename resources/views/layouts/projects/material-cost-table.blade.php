@@ -126,13 +126,13 @@
                     </div>
                 @elseif(auth()->user()->isProjectIncharge() && ($pow->project->status != 'completed' || $pow->project->status != 'suspended'))
                     <div>
-                        <div class="mb-2 flex">
-                            <livewire:add-p-o :pow_id="$pow->id"/>
-                            <livewire:mark-project-complete :pow_id="$pow->id"/>
+                        <div class="flex flex-col items-end space-y-2">
+                            <div class="flex flex-wrap gap-2">
+                                <livewire:add-p-o :pow_id="$pow->id"/>
+                                <livewire:mark-project-complete :pow_id="$pow->id"/>
+                            </div>
+                            <livewire:add-swaa-report :pow_id="$pow->id"/>
                         </div>
-                       <div>
-                           <livewire:add-swaa-report :pow_id="$pow->id"/>
-                       </div>
                     </div>
                 @endif
             </div>

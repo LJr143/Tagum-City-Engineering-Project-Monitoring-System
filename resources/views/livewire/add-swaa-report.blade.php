@@ -2,7 +2,7 @@
     <div class="flex justify-end">
         <div class="relative ml-2">
             <button @click="addSwaaReport = true"
-                    class="bg-green-500 text-white text-xs px-4 py-2 rounded shadow-md hover:bg-green-600 focus:outline-none">
+                    class="bg-green-500 text-white text-xs px-8 py-2 rounded shadow-md hover:bg-green-600 focus:outline-none">
                 Statement of Work Accomplishment
             </button>
         </div>

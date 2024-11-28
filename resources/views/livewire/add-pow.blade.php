@@ -27,7 +27,7 @@
                 </button>
             </div>
 
-            <form wire:submit.prevent="save" class="space-y-2" enctype="multipart/form-data" x-data="{ isLoading: false }" @submit="isLoading = true; setTimeout(() => isLoading = false, 4000)">
+            <form wire:submit.prevent="save" class="space-y-2" enctype="multipart/form-data" x-data="{ isLoading: false }" @submit="isLoading = true; setTimeout(() => isLoading = false, 6000)">
                 <div class="mb-1">
                     <label for="reference-number" class="block text-gray-700 text-xs">Reference Number</label>
                     <input type="text" id="reference-number" wire:model="reference_number"
@@ -280,6 +280,7 @@
                                            placeholder="Description"
                                            class="w-1/2 p-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 text-xs"
                                     >
+
 
                                     <input type="number" name="indirect_costs[{{ $index }}][amount]"
                                            wire:model.defer="indirect_costs.{{ $index }}.amount"
