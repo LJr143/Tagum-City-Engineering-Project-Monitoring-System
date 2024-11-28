@@ -18,11 +18,12 @@ class DashboardController extends Controller
         // Get the authenticated user
         $user = Auth::user();
 
-        // Load only associated projects for the project in-charge
+        // Load only associated projects for the project in-charge, filtered by 'ongoing' or 'pending' status
         $projects = Project::with(['pows', 'pows.indirectCosts'])
             ->when($user->isProjectIncharge(), function ($query) use ($user) {
                 return $query->where('project_incharge_id', $user->id);
             })
+            ->whereIn('status', ['ongoing', 'pending']) // Filter for ongoing or pending projects
             ->paginate(10);
 
         // Prepare chart data as an array of objects
@@ -85,6 +86,7 @@ class DashboardController extends Controller
             'chartData' // Pass the chart data to the view
         ));
     }
+
 
 
     public function calculateOverallProgress(): void
