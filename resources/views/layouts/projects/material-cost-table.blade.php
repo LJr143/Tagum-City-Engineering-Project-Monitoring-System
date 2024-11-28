@@ -138,6 +138,7 @@
             </div>
 
 
+
             <livewire:material-cost-table :pow_id="$pow->id"/>
 
 

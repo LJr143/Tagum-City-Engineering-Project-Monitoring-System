@@ -10,7 +10,7 @@ class NotificationBell extends Component
     public $notifications;
     public $count = 0;
 
-    protected $listeners = ['notificationAdded' => 'loadNotifications'];
+    protected $listeners = ['notificationAdded' => 'loadNotifications', 'refreshNotifications' => 'loadNotifications'];
 
     public function mount()
     {
@@ -58,6 +58,7 @@ class NotificationBell extends Component
         // Refresh the notifications and count
         $this->loadNotifications();
     }
+
 
     public function render()
     {

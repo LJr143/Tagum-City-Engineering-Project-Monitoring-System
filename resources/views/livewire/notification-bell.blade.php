@@ -29,6 +29,7 @@
             <button wire:click="markAllAsRead" class="text-gray-500 text-[12px]">Mark all read</button>
         </div>
 
+
         <!-- Scrollable Notifications -->
         <div class="px-3 py-1 max-h-64 overflow-y-auto">
             <!-- New Notifications Section -->

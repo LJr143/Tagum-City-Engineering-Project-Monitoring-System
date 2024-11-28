@@ -2,6 +2,7 @@
 
     namespace App\Livewire;
     use App\Models\Payroll;
+    use Brick\Money\Money;
     use Illuminate\Database\Eloquent\Builder;
     use PowerComponents\LivewirePowerGrid\Column;
     use PowerComponents\LivewirePowerGrid\Exportable;
@@ -22,7 +23,7 @@
         {
             $this->showCheckBox();
             return [
-                Exportable::make('export')
+                Exportable::make('payroll_report_' . now()->format('Y-m-d_H-i-s'))
                     ->striped()
                     ->columnWidth([2 => 30])
                     ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
@@ -58,7 +59,11 @@
             return PowerGrid::fields()
                 ->add('id')
                 ->add('payroll_title')
-                ->add('payroll_amount')
+                ->add('payroll_amount', function (Payroll $payroll){
+                    $payrollAmount = $payroll->payroll_amount;
+
+                    return Money::of($payrollAmount,'PHP')->formatTo('en_PH');
+                })
                 ->add('payroll_date');
         }
 

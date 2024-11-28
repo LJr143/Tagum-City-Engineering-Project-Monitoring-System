@@ -49,6 +49,7 @@ class MaterialCostTable extends ProgressInformation
         $this->calculateCosts();
         $this->calculateOverallProgress();
         $this->updatedProgress();
+        $this->calculateSavings();
     }
 
     public function checkProgress()
@@ -140,6 +141,7 @@ class MaterialCostTable extends ProgressInformation
             'projectConfigurations' => $this->projectConfigurations,
             'totalProjectSpentCost' => $this->materialSpentCost + $this->laborSpentCost + $this->indirectSpentCost,
             'inputProgress' => $this->progress,
+            'saving'=> $this->saving,
         ]);
     }
 }

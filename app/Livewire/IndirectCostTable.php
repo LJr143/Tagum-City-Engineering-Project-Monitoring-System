@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\IndirectCost;
+use Brick\Money\Money;
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\WithPagination;
 use PowerComponents\LivewirePowerGrid\Column;
@@ -27,7 +28,7 @@ class IndirectCostTable extends PowerGridComponent
     {
         $this->showCheckBox();
         return [
-            Exportable::make('export')
+            Exportable::make('indirect_cost_report_' . now()->format('Y-m-d'))
                 ->striped()
                 ->columnWidth([2 => 30])
                 ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
@@ -63,7 +64,11 @@ class IndirectCostTable extends PowerGridComponent
         return PowerGrid::fields()
             ->add('id')
             ->add('description')
-            ->add('amount');
+            ->add('amount', function (IndirectCost $indirectCost){
+                $indirectCostAmount = $indirectCost->amount;
+
+                return Money::of($indirectCostAmount, 'PHP')->formatTo('en_PH');
+            });
     }
     public function columns(): array
     {

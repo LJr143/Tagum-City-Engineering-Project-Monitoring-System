@@ -319,12 +319,11 @@
         </div>
     </div>
 
-
-
     <div class="bg-white p-4 rounded shadow mb-5">
         <div class="w-full progress-bar-container text-[12px]">
             <div class="flex flex-col justify-between items-start project-progress-container">
                 <span class="text-gray-700 text-[12px] ">Total Project Spent Cost: <span class="font-bold"> Php {{ number_format($totalProjectSpentCost, 2) }}</span></span>
+                <span class="text-gray-700 text-[12px] ">Total Project Savings: <span class="font-bold"> Php {{ number_format($saving, 2) }}</span></span>
                 <span class="text-gray-700 text-[12px] ">Overall Project Progress Actual Progress: <span class="font-bold"> {{ number_format($overallProgress, 2) }}%</span></span>
                 <div class="progress-bar" style="height: 15px; background-color: #E0E0E0; position: relative;">
                     @foreach($projectConfigurations as $config)

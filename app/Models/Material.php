@@ -21,4 +21,10 @@ class Material extends Model
         'spent_cost',
     ];
 
+    public function purchaseOrders()
+    {
+        return $this->hasMany(PurchaseOrder::class);
+    }
+
+
 }

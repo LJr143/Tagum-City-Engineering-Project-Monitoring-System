@@ -8,6 +8,7 @@ use App\Models\Pow;
 use App\Models\PowSuspendResume;
 use App\Models\Project;
 use App\Models\SystemConfiguration;
+use App\Notifications\ProjectNotification;
 use App\Services\LogService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -158,6 +159,40 @@ class ProjectController extends Controller
 
         return redirect()->back()->withErrors('POW not found for the specified project.');
     }
+
+    public function approveProject($projectId)
+    {
+        $project = Project::findOrFail($projectId);
+
+        $project->projectIncharge->notify(new ProjectNotification(
+            'Your project has been approved. Please review.',
+            $project->id
+        ));
+
+        // Change status to "Complete"
+        $project->status = 'completed';
+        $project->save();
+
+        session()->flash('success', 'Project has been approved and marked as complete.');
+    }
+
+    public function denyProject($projectId)
+    {
+        $project = Project::findOrFail($projectId);
+
+        // Notify the project in-charge
+        $project->projectIncharge->notify(new ProjectNotification(
+            'Your project has been denied. Please review and resubmit.',
+            $project->id
+        ));
+
+        // Change status to "Ongoing"
+        $project->status = 'ongoing';
+        $project->save();
+
+        session()->flash('error', 'Project has been denied and status set to ongoing.');
+    }
+
 
 
 

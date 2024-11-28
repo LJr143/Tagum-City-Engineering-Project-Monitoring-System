@@ -62,6 +62,9 @@ Route::middleware(['auth:sanctum', 'verified', 'inactivity.logout'])->group(func
             return view('layouts.reports.report-');
         })->name('report');
 
+        Route::post('/project/{id}/approve', [ProjectController::class, 'approveProject'])->name('project.approve');
+        Route::post('/project/{id}/deny', [ProjectController::class, 'denyProject'])->name('project.deny');
+
 
     });
 

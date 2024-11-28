@@ -17,6 +17,7 @@ class ProjectNotification extends Notification
     public $projectId;
     public $title;
 
+
     /**
      * Create a new notification instance.
      */

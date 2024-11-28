@@ -9,6 +9,7 @@ use App\Models\Payroll;
 use App\Models\Pow;
 use App\Models\Project;
 use App\Models\ProjectConfiguration;
+use App\Models\PurchaseOrder;
 use Livewire\Component;
 
 class ProgressInformation extends Component
@@ -43,6 +44,10 @@ class ProgressInformation extends Component
 
     public $progress = 0;
 
+    public $saving = 0;
+
+    public $totalPurchaseOrder = 0;
+
 
     public function mount($pow_id): void
     {
@@ -51,6 +56,7 @@ class ProgressInformation extends Component
         $this->fetchProjectConfigurations();
         $this->calculateCosts();
         $this->calculateOverallProgress();
+        $this->calculateSavings();
     }
 
     public function fetchPowInfo()
@@ -128,6 +134,19 @@ class ProgressInformation extends Component
             : 0;
     }
 
+    public function calculateSavings()
+    {
+        // Get the total material cost for the project
+
+        $materials = Material::where('pow_id', $this->pow_id)->get();
+        $po = PurchaseOrder::where('pow_id', $this->pow_id)->get();
+        $totalPurchaseOrderAmount = $po->sum('total_cost');
+
+        // Calculate savings
+        return $this->saving = $this->totalMaterialCost - $totalPurchaseOrderAmount;
+    }
+
+
     public function render()
     {
         return view('livewire.progress-information', [
@@ -142,6 +161,7 @@ class ProgressInformation extends Component
             'projectConfigurations' => $this->projectConfigurations,
             'totalProjectSpentCost' => $this->materialSpentCost + $this->laborSpentCost + $this->indirectSpentCost,
             'inputProgress' => $this->progress,
+            'saving'=> $this->saving,
         ]);
     }
 }

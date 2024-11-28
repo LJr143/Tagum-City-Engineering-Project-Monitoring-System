@@ -46,6 +46,13 @@ class Pow extends Model
         return $this->hasMany(Material::class, 'pow_id', 'id');
     }
 
+
+    public function purchaseOrders()
+    {
+        return $this->hasManyThrough(PurchaseOrder::class, Material::class, 'pow_id', 'pow_id');
+    }
+
+
     public function payroll()
     {
         return $this->hasMany(Payroll::class, 'pow_id', 'id');

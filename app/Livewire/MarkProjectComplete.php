@@ -2,6 +2,8 @@
 
 namespace App\Livewire;
 
+use App\Models\User;
+use App\Notifications\ProjectNotification;
 use Livewire\Component;
 use App\Models\Pow;
 use App\Models\Project;
@@ -33,11 +35,26 @@ class MarkProjectComplete extends Component
                 $project->status = 'pending validation';
                 $project->save();
 
+                // Notify the admin
+                // Fetch all admins
+                $admins = User::where('role', 'admin')->get();
+
+                // Notify each admin
+                foreach ($admins as $admin) {
+                    $admin->notify(new ProjectNotification(
+                        'A new project has been marked completed and requires your attention.',
+                        $project->id
+                    ));
+                }
+
+
                 // Optionally, trigger a success message
                 session()->flash('message', 'Project marked as pending validation.');
             }
         }
     }
+
+
 
 
     public function render()
