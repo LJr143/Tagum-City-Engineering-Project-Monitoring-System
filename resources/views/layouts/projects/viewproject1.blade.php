@@ -90,7 +90,7 @@
                         <div class="bg-white shadow-md rounded-lg p-4 w-full">
                             <div class="flex justify-between items-center mb-4">
                               <span class="text-xs
-                                    {{ $project->status == 'pending' ? 'text-yellow-500 bg-yellow-100' : '' }}
+                                    {{ $project->status == 'ongoing' ? 'text-yellow-500 bg-yellow-100' : '' }}
                                     {{ $project->status == 'suspended' ? 'text-red-500 bg-red-100' : 'text-green-500 bg-green-100' }}
                                     px-2 py-1 rounded">
 

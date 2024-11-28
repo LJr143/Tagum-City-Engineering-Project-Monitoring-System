@@ -33,13 +33,12 @@
 
 
             <!-- Project Header -->
-            <div class="flex  justify-between items-center mb-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
                 <div class="mb-4 md:mb-0">
                     <h3 class="text-base font-semibold leading-6 text-gray-900 mb-2">Program of Work {{ $index }}</h3>
-                    <span class="inline-block  bg-green-600 text-white px-3 py-1 rounded text-xs  ">
+                    <span class="inline-block  bg-green-600 text-white px-3 py-1 rounded text-xs">
                             Ref: #{{ $pow->reference_number }}
-                        </span>
-
+                    </span>
                 </div>
 
                 @if ((auth()->user()->isAdmin() || auth()->user()->isEncoder()) && $pow->project->status != 'completed')
@@ -125,13 +124,15 @@
                         </div>
                     </div>
                 @elseif(auth()->user()->isProjectIncharge() && ($pow->project->status != 'completed' || $pow->project->status != 'suspended'))
-                    <div>
-                        <div class="flex flex-col items-end space-y-2">
-                            <div class="flex flex-wrap gap-2">
-                                <livewire:add-p-o :pow_id="$pow->id"/>
-                                <livewire:mark-project-complete :pow_id="$pow->id"/>
+
+                    <div class="w-full md:w-auto">
+                        <div class="flex flex-col md:flex-row items-start md:items-end space-y-2 md:space-y-0 gap-2">
+                            <div class="flex-shrink-0 w-full md:w-auto">
+                                <livewire:add-swaa-report :pow_id="$pow->id" class="w-full sm:w-auto"/>
                             </div>
-                            <livewire:add-swaa-report :pow_id="$pow->id"/>
+                            <div class="flex-shrink-0 w-full md:w-auto">
+                                <livewire:mark-project-complete :pow_id="$pow->id" class="w-full sm:w-auto"/>
+                            </div>
                         </div>
                     </div>
                 @endif
@@ -154,6 +155,7 @@
                         <option value="purchase-order-history">Purchase Order History</option>
                         <option value="pow-suspension-resume">POW Suspension/Resume History</option>
                         <option value="realignment-history">Realignment History</option>
+
                     </select>
                 </div>
                 <div class="hidden sm:block mb-4">
@@ -173,13 +175,19 @@
                                 Direct Cost</a>
 
                             <a id="purchase-order-history-tab" href="#" onclick="changeTabTo('purchase-order-history')"
-                               class="text-gray-500 hover:border-green-600 hover:text-green-600 whitespace-nowrap border-b-2 pb-1 px-1 text-xs font-medium">Purchase Order History</a>
+                               class="text-gray-500 hover:border-green-600 hover:text-green-600 whitespace-nowrap border-b-2 pb-1 px-1 text-xs font-medium">
+                                Purchase Order History</a>
 
                             <a id="pow-suspension-resume-tab" href="#" onclick="changeTabTo('pow-suspension-resume')"
-                               class="text-gray-500 hover:border-green-600 hover:text-green-600 whitespace-nowrap border-b-2 pb-1 px-1 text-xs font-medium">POW Suspension/Resume History</a>
+                               class="text-gray-500 hover:border-green-600 hover:text-green-600 whitespace-nowrap border-b-2 pb-1 px-1 text-xs font-medium">
+                                POW Suspension/Resume History</a>
 
                             <a id="realignment-history-tab" href="#" onclick="changeTabTo('realignment-history')"
-                               class="text-gray-500 hover:border-green-600 hover:text-green-600 whitespace-nowrap border-b-2 pb-1 px-1 text-xs font-medium">Realignment History</a>
+                               class="text-gray-500 hover:border-green-600 hover:text-green-600 whitespace-nowrap border-b-2 pb-1 px-1 text-xs font-medium">
+                                Realignment History</a>
+
+
+
                         </nav>
                     </div>
                 </div>
@@ -188,19 +196,49 @@
             <div class="flex w-full gap-4">
                 <!-- Material Cost Section -->
                 <div id="materials" class="w-full">
-                    <div class="bg-white shadow-md rounded-lg p-6">
-                        <h3 class="text-sm font-semibold mb-2 text-center"> Materials</h3>
-                        <div class="mb-2">
-                            @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'suspended' && $pow->project->status != 'completed')
-                            <livewire:add-manual-material :pow_id="$pow->id"/>
-                            @elseif(auth()->user()->isProjectIncharge() && $pow->project->status != 'suspended' && $pow->project->status != 'completed')
-                                <livewire:make-material-report :pow_id="$pow->id"/>
-                            @endif
+                    <div class="w-full bg-white shadow-lg rounded-lg" x-data="{ tab: 'materials' }">
+                        <!-- Tabs -->
+                        <div class="flex justify-center space-x-4 bg-gray-200 rounded-t-lg">
+                            <button :class="tab === 'materials' ? 'bg-white font-bold text-green-500' : 'text-gray-500'" @click="tab = 'materials'" class="w-1/2 px-4 py-2 rounded-t-lg text-sm">
+                                Materials
+                            </button>
+                            <button :class="tab === 'materials-history' ? 'bg-white font-bold text-green-500' : 'text-gray-500'" @click="tab = 'materials-history'" class="w-1/2 px-4 py-2 rounded-t-lg text-sm">
+                                Materials History
+                            </button>
                         </div>
-                        <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
-                            <livewire:material-table :pow_id="$pow->id"/>
+                        <!-- Tab Content -->
+                        <div class="p-6">
+                            <div class="text-gray-700" x-show="tab === 'materials'">
+                               <!-- <h2 class="text-sm font-semibold mb-4">Materials</h2>-->
+                                <div class="  ">
+                                    <div class="mb-2">
+                                        @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'suspended' && $pow->project->status != 'completed')
+                                            <livewire:add-manual-material :pow_id="$pow->id"/>
+                                        @elseif(auth()->user()->isProjectIncharge() && $pow->project->status != 'suspended' && $pow->project->status != 'completed')
+                                            <livewire:make-material-report :pow_id="$pow->id"/>
+                                        @endif
+                                    </div>
+                                    <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
+                                        <livewire:material-table :pow_id="$pow->id"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="text-gray-700" x-show="tab === 'materials-history'">
+                                <h2 class="text-sm font-semibold mb-4">
+                                    Material History
+                                </h2>
+
+                            </div>
                         </div>
                     </div>
+
+
+
+
+
+
+
                 </div>
 
                 <!-- Labor Cost Section -->
@@ -254,12 +292,50 @@
 
                 <!-- Purchase Order History Section -->
                 <div id="purchase-order-history" class="hidden w-full">
-                        <div class="bg-white shadow-md rounded-lg p-6">
-                            <h3 class="text-sm font-semibold mb-2 text-center"> Purchase Order History</h3>
-                            <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
-                                <livewire:purchase-order-table :pow_id="$pow->id"/>
+                    <div class="bg-white shadow-md rounded-lg p-6">
+                        <h3 class="text-sm font-semibold mb-2 text-center"> Purchase Order History</h3>
+                        <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
+                            <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 mb-3">
+                                <!-- Start Date -->
+                                <div>
+                                    <label for="start-date" class="block text-xs text-gray-700">Date From</label>
+                                    <input
+                                        type="date"
+                                        id="start-date"
+                                        wire:model.defer="startDate"
+                                        class="mt-1 block h-8 w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 text-xs sm:text-[10px] md:text-xs">
+                                </div>
+
+                                <!-- End Date -->
+                                <div>
+                                    <label for="end-date" class="block text-xs text-gray-700">Date To</label>
+                                    <input
+                                        type="date"
+                                        id="end-date"
+                                        wire:model.defer="endDate"
+                                        class="mt-1 block h-8 w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 text-xs sm:text-[10px] md:text-xs">
+                                </div>
+
+                                <!-- Filter and Add Purchase Order Button Container -->
+                                <div class="flex justify-between w-full pt-5">
+                                    <!-- Filter Button -->
+                                    <div class="flex">
+                                        <button
+                                            wire:click="filterProjects"
+                                            class="text-xs px-4 py-2 h-8 bg-green-500 text-white rounded-md shadow hover:bg-green-600">
+                                            Filter
+                                        </button>
+                                    </div>
+                                    <!-- Add Purchase Order Button -->
+                                    <div>
+                                        <livewire:add-p-o :pow_id="$pow->id"/>
+                                    </div>
+                                </div>
                             </div>
+
+                            <livewire:purchase-order-table :pow_id="$pow->id"/>
                         </div>
+                    </div>
                 </div>
 
                 <!-- POW Suspension Resume Section -->
@@ -277,6 +353,16 @@
                         <h3 class="text-sm font-semibold mb-2 text-center"> Project Realignment  History</h3>
                         <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
                             <livewire:realignment-history :pow_id="$pow->id"/>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div id="materials-history" class="hidden w-full">
+                    <div class="bg-white shadow-md rounded-lg p-6">
+                        <h3 class="text-sm font-semibold mb-2 text-center"> Materials  History</h3>
+                        <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
+
                         </div>
                     </div>
                 </div>
@@ -469,6 +555,7 @@
             document.getElementById('pow-suspension-resume').style.display = tab === 'pow-suspension-resume' ? 'block' : 'none';
             document.getElementById('realignment-history').style.display = tab === 'realignment-history' ? 'block' : 'none';
 
+
             // Highlight active tab
             document.getElementById('materials-tab').classList.toggle('border-green-600', tab === 'materials');
             document.getElementById('materials-tab').classList.toggle('text-green-600', tab === 'materials');
@@ -484,6 +571,7 @@
             document.getElementById('pow-suspension-resume-tab').classList.toggle('text-green-600', tab === 'pow-suspension-resume');
             document.getElementById('realignment-history-tab').classList.toggle('border-green-600', tab === 'realignment-history');
             document.getElementById('realignment-history-tab').classList.toggle('text-green-600', tab === 'realignment-history');
+
         }
 
         // Modal Management Functions
