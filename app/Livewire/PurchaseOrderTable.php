@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use AllowDynamicProperties;
+use App\Models\Log;
 use App\Models\Material;
 use App\Models\PurchaseOrder;
 use Illuminate\Database\Eloquent\Builder;
@@ -27,9 +28,6 @@ class PurchaseOrderTable extends PowerGridComponent
     public $pow_id;
     public $startDate; // For storing the start date
     public $endDate;   // For storing the end date
-    public $modalVisible = false;
-    public $materials = [];
-    protected $listeners = ['openModal' => 'openModal'];
 
 
 
@@ -109,8 +107,9 @@ class PurchaseOrderTable extends PowerGridComponent
 
     public function actionsFromView($row): View
     {
-        return view('components.view-button', ['purchaseOrder' => $row]);
+        return view('components.view-button', ['purchaseOrderNumber' => $row->purchase_order_number]);
     }
+
 
 
     public function filters(): array
@@ -130,16 +129,10 @@ class PurchaseOrderTable extends PowerGridComponent
         }
     }
 
-    public function openModal($poId)
+    public function redirectToView($purchaseOrderNumber)
     {
-        $this->materials = Material::where('purchase_order_id', $poId)->get();
-        $this->modalVisible = true;
+        \Illuminate\Support\Facades\Log::info('View button clicked for PO number: ' . $purchaseOrderNumber);
+        // Redirect to the view-po-materials route and pass the purchase order number
+        return redirect()->route('view-po-materials', ['purchase_order_number' => $purchaseOrderNumber]);
     }
-
-    public function closeModal()
-    {
-        $this->modalVisible = false;
-        $this->materials = [];
-    }
-
 }

@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
 use App\Livewire\Dashboard;
+use App\Livewire\ViewPoMaterials;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
@@ -29,6 +30,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('updatePassword', [UserController::class, 'updatePassword'])->name('updatePassword');
     Route::post('uploadImage', [UserController::class, 'uploadImage'])->name('uploadImage');
     Route::post('upload', [UserController::class, 'upload'])->name('upload');
+
+    Route::get('/view-po-materials/{purchase_order_number}', ViewPoMaterials::class)
+        ->name('view-po-materials');
 
 
     // Project Management
