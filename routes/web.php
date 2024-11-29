@@ -11,15 +11,14 @@ use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 Route::get('/', function () {
     return view('auth.login');
 });
+
 // Authenticated Routes
 Route::middleware(['auth:sanctum', 'verified', 'inactivity.logout'])->group(function () {
 
-    // Dashboard (Only accessible to admin and encoder roles)
-    Route::middleware(['auth', 'roles:admin,encoder'])->group(function () {
-        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    });
+    // Dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // Other authenticated routes
+    // User Profile
     Route::get('/account-settings', function () {
         return view('layouts.account-settings.account-settings');
     })->name('userProfile');
@@ -30,17 +29,27 @@ Route::middleware(['auth:sanctum', 'verified', 'inactivity.logout'])->group(func
     Route::post('uploadImage', [UserController::class, 'uploadImage'])->name('uploadImage');
     Route::post('upload', [UserController::class, 'upload'])->name('upload');
 
+
     // Project Management
     Route::prefix('project')->group(function () {
-        Route::get('/project/main', [ProjectController::class, 'index'])->name('project-main');
+
+//        Route::get('/main', [ProjectController::class, 'index'])->name('project-main');
         Route::get('/view-pow/{id}', [ProjectController::class, 'view'])->name('view-project-pow');
         Route::get('/material-table-cost/{pow_id}/{index}', [ProjectController::class, 'viewPowInfo'])->name('material-table-cost');
         Route::delete('/{id}', [ProjectController::class, 'destroy'])->name('project.destroy');
         Route::delete('/pow/{id}', [ProjectController::class, 'destroyPow'])->name('pow.destroy');
+        Route::get('/material-table-cost', function () {
+            return view('layouts.Projects.material-cost-table');
+        });
+
+        Route::get('/project/main', [ProjectController::class, 'index'])->name('project-main');
+
         Route::post('/projects/suspend', [ProjectController::class, 'suspend'])->name('projects.suspend');
         Route::post('/projects/resume', [ProjectController::class, 'resume'])->name('projects.resume');
         Route::post('/projects/realign', [ProjectController::class, 'realignFunds'])->name('projects.realign');
+
     });
+
 
     Route::get('/report', function () {
         return view('layouts.reports.report-');
@@ -49,16 +58,31 @@ Route::middleware(['auth:sanctum', 'verified', 'inactivity.logout'])->group(func
     // Logout
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
-    // User Management (Admin and Encoder roles)
-    Route::middleware(['roles:admin,encoder'])->group(function () {
+    // User Management (Admin)
+    Route::middleware('role:admin,encoder')->group(function () {
+
+
         Route::get('/manage-user', [UserController::class, 'index'])->name('manage-user');
+
+        //System Configuration
         Route::get('/system-configuration', function () {
             return view('layouts.system configuration.system_configuration');
         })->name('system-configuration');
+
+        // System Logs
         Route::get('/system-logs', function () {
             return view('layouts.system_logs.system-logs');
         })->name('system-logs');
+
+        // Report
+        Route::get('/report', function () {
+            return view('layouts.reports.report-');
+        })->name('report');
+
         Route::post('/project/{id}/approve', [ProjectController::class, 'approveProject'])->name('project.approve');
         Route::post('/project/{id}/deny', [ProjectController::class, 'denyProject'])->name('project.deny');
+
+
     });
 });
+
