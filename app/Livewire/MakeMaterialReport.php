@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Material;
+use App\Models\MaterialHistory;
 use Livewire\Component;
 
 class MakeMaterialReport extends Component
@@ -49,6 +50,13 @@ class MakeMaterialReport extends Component
                 $existingMaterial->update([
                     'quantity_use' => $newQuantityUse,
                     'spent_cost' => $spentCost,
+                ]);
+
+                MaterialHistory::create([
+                   'material_id' => $existingMaterial->id,
+                   'pow_id' => $this->pow_id,
+                   'quantity' => $material['quantity'],
+                   'total_cost' => $existingMaterial->estimated_unit_cost * $material['quantity'],
                 ]);
             }
         }

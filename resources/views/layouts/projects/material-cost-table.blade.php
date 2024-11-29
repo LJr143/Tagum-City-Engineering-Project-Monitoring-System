@@ -123,16 +123,18 @@
                             @endif
                         </div>
                     </div>
-                @elseif(auth()->user()->isProjectIncharge() && ($pow->project->status != 'completed' || $pow->project->status != 'suspended'))
+                @elseif(auth()->user()->isProjectIncharge() && $pow->project->status != 'suspended')
 
                     <div class="w-full md:w-auto">
                         <div class="flex flex-col md:flex-row items-start md:items-end space-y-2 md:space-y-0 gap-2">
                             <div class="flex-shrink-0 w-full md:w-auto">
                                 <livewire:add-swaa-report :pow_id="$pow->id" class="w-full sm:w-auto"/>
                             </div>
+                            @if($pow->project->status != 'completed' && $pow->project->status != 'pending validation')
                             <div class="flex-shrink-0 w-full md:w-auto">
                                 <livewire:mark-project-complete :pow_id="$pow->id" class="w-full sm:w-auto"/>
                             </div>
+                            @endif
                         </div>
                     </div>
                 @endif
@@ -229,15 +231,14 @@
                                     Material History
                                 </h2>
 
+                                <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
+
+                                    <livewire:material-history :pow_id="$pow->id"/>
+                                </div>
+
                             </div>
                         </div>
                     </div>
-
-
-
-
-
-
 
                 </div>
 
@@ -327,9 +328,11 @@
                                         </button>
                                     </div>
                                     <!-- Add Purchase Order Button -->
+                                    @if((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'suspended' && $pow->project->status != 'completed')
                                     <div>
                                         <livewire:add-p-o :pow_id="$pow->id"/>
                                     </div>
+                                    @endif
                                 </div>
                             </div>
 

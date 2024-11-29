@@ -26,5 +26,11 @@ class Material extends Model
         return $this->hasMany(PurchaseOrder::class);
     }
 
+    public function histories()
+    {
+        return $this->hasMany(MaterialHistory::class);
+    }
+
+
 
 }
