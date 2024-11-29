@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Middleware;
 
 use Closure;
@@ -24,15 +23,16 @@ class RoleMiddleware
             return redirect()->route('login'); // Redirect to login if not authenticated
         }
 
-        // Check if the authenticated user has any of the required roles
+        $user = Auth::user();
+
+        // Check if the user has any of the required roles
         foreach ($roles as $role) {
-            if (Auth::user()->{"is" . ucfirst($role)}()) {
-                return $next($request); // Allow access if role matches
+            if ($user->{"is" . ucfirst($role)}()) {
+                return $next($request); // Allow access if the role matches
             }
         }
 
-        // If user doesn't have required role, redirect or show an error
-        return redirect()->route('dashboard')->with('error', 'Access denied');
+        // If user doesn't have the required role, redirect or show an error
+        return redirect()->route('login')->with('error', 'Access denied.');
     }
 }
-

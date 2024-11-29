@@ -8,15 +8,16 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    public function redirectToProjects($status)
-    {
-        return redirect()->route('project-main', ['status' => $status]);
-    }
-
     public function index()
     {
+
         // Get the authenticated user
         $user = Auth::user();
+
+
+        if (Auth::user()->isProjectIncharge()){
+            return redirect()->route('project-main', ['status' => 'all']);
+        }
 
         // Load only associated projects for the project in-charge, filtered by 'ongoing' or 'pending' status
         $projects = Project::with(['pows', 'pows.indirectCosts'])
