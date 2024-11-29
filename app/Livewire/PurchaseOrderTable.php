@@ -27,6 +27,11 @@ class PurchaseOrderTable extends PowerGridComponent
     public $pow_id;
     public $startDate; // For storing the start date
     public $endDate;   // For storing the end date
+    public $modalVisible = false;
+    public $materials = [];
+    protected $listeners = ['openModal' => 'openModal'];
+
+
 
     public function setUp(): array
     {
@@ -104,8 +109,9 @@ class PurchaseOrderTable extends PowerGridComponent
 
     public function actionsFromView($row): View
     {
-        return view('actions-view', ['row' => $row]);
+        return view('components.view-button', ['purchaseOrder' => $row]);
     }
+
 
     public function filters(): array
     {
@@ -123,4 +129,17 @@ class PurchaseOrderTable extends PowerGridComponent
             $this->resetPage();
         }
     }
+
+    public function openModal($poId)
+    {
+        $this->materials = Material::where('purchase_order_id', $poId)->get();
+        $this->modalVisible = true;
+    }
+
+    public function closeModal()
+    {
+        $this->modalVisible = false;
+        $this->materials = [];
+    }
+
 }
