@@ -297,36 +297,7 @@
                         <h3 class="text-sm font-semibold mb-2 text-center"> Purchase Order History</h3>
                         <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
                             <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 mb-3">
-                                <!-- Start Date -->
-                                <div>
-                                    <label for="start-date" class="block text-xs text-gray-700">Date From</label>
-                                    <input
-                                        type="date"
-                                        id="start-date"
-                                        wire:model.defer="startDate"
-                                        class="mt-1 block h-8 w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 text-xs sm:text-[10px] md:text-xs">
-                                </div>
 
-                                <!-- End Date -->
-                                <div>
-                                    <label for="end-date" class="block text-xs text-gray-700">Date To</label>
-                                    <input
-                                        type="date"
-                                        id="end-date"
-                                        wire:model.defer="endDate"
-                                        class="mt-1 block h-8 w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 text-xs sm:text-[10px] md:text-xs">
-                                </div>
-
-                                <!-- Filter and Add Purchase Order Button Container -->
-                                <div class="flex justify-between w-full pt-5">
-                                    <!-- Filter Button -->
-                                    <div class="flex">
-                                        <button
-                                            wire:click="filterProjects"
-                                            class="text-xs px-4 py-2 h-8 bg-green-500 text-white rounded-md shadow hover:bg-green-600">
-                                            Filter
-                                        </button>
-                                    </div>
                                     <!-- Add Purchase Order Button -->
                                     @if((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'suspended' && $pow->project->status != 'completed')
                                     <div>
@@ -335,8 +306,10 @@
                                     @endif
                                 </div>
                             </div>
+                                <div class="text-[12px]">
+                                    <livewire:purchase-order-table :pow_id="$pow->id"/>
+                                </div>
 
-                            <livewire:purchase-order-table :pow_id="$pow->id"/>
                         </div>
                     </div>
                 </div>

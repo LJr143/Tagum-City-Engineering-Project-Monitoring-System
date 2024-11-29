@@ -96,9 +96,15 @@ class PurchaseOrderTable extends PowerGridComponent
             Column::make('Date Purchased', 'date_created_formatted') // Change to "Date Created"
             ->sortable()
                 ->searchable(),
+            Column::action('Action'),
         ];
 
         return $columns;
+    }
+
+    public function actionsFromView($row): View
+    {
+        return view('actions-view', ['row' => $row]);
     }
 
     public function filters(): array
