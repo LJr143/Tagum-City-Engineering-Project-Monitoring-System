@@ -29,7 +29,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('updatePassword', [UserController::class, 'updatePassword'])->name('updatePassword');
     Route::post('uploadImage', [UserController::class, 'uploadImage'])->name('uploadImage');
     Route::post('upload', [UserController::class, 'upload'])->name('upload');
-
+    // Report
+    Route::get('/report', function () {
+        return view('layouts.reports.report-');
+    })->name('report');
 
     // Project Management
     Route::prefix('project')->group(function () {
@@ -75,10 +78,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
             return view('layouts.system_logs.system-logs');
         })->name('system-logs');
 
-        // Report
-        Route::get('/report', function () {
-            return view('layouts.reports.report-');
-        })->name('report');
 
         Route::post('/project/{id}/approve', [ProjectController::class, 'approveProject'])->name('project.approve');
         Route::post('/project/{id}/deny', [ProjectController::class, 'denyProject'])->name('project.deny');
