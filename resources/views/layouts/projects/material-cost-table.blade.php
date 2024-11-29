@@ -298,7 +298,7 @@
                         <div class="relative overflow-hidden text-[12px] w-full">
                             <div class="space-y-2 sm:space-y-0 sm:space-x-2 mb-3">
                                     <!-- Add Purchase Order Button -->
-                                    @if((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'suspended' && $pow->project->status != 'completed')
+                                    @if(auth()->user()->isProjectIncharge() && $pow->project->status != 'suspended' && $pow->project->status != 'completed')
                                     <div>
                                         <livewire:add-p-o :pow_id="$pow->id"/>
                                     </div>

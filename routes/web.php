@@ -16,7 +16,6 @@ Route::get('/', function () {
 // Authenticated Routes
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
-
     // Dashboard routing
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -33,6 +32,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::get('/view-po-materials/{purchase_order_number}', ViewPoMaterials::class)
         ->name('view-po-materials');
+
+    // Report
+    Route::get('/report', function () {
+        return view('layouts.reports.report-');
+    })->name('report');
 
 
     // Project Management
@@ -79,10 +83,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
             return view('layouts.system_logs.system-logs');
         })->name('system-logs');
 
-        // Report
-        Route::get('/report', function () {
-            return view('layouts.reports.report-');
-        })->name('report');
 
         Route::post('/project/{id}/approve', [ProjectController::class, 'approveProject'])->name('project.approve');
         Route::post('/project/{id}/deny', [ProjectController::class, 'denyProject'])->name('project.deny');

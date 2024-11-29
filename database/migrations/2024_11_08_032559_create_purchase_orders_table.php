@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('pow_id')->constrained('program_of_works')->onDelete('cascade');
             $table->string('purchase_order_number');
             $table->string('supplier');
-            $table->integer('item_no');
+            $table->foreignId('item_no')->constrained('materials')->onDelete('cascade');
             $table->integer('quantity');
             $table->double('unit_cost');
             $table->double('total_cost');

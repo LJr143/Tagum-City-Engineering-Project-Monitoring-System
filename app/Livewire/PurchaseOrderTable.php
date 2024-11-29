@@ -29,11 +29,12 @@ class PurchaseOrderTable extends PowerGridComponent
     public $startDate; // For storing the start date
     public $endDate;   // For storing the end date
 
+    public string $sortField = 'purchase_order_number';
 
 
     public function setUp(): array
     {
-        $this->showCheckBox();
+//        $this->showCheckBox();
         return [
             Exportable::make('export')
                 ->striped()
@@ -63,8 +64,14 @@ class PurchaseOrderTable extends PowerGridComponent
     public function datasource(): Builder
     {
         $query = PurchaseOrder::query()
-            ->selectRaw('*, DATE_FORMAT(created_at, "%Y-%m-%d %H:%i:%s") as date_created_formatted')
-            ->where('pow_id', $this->pow_id);
+            ->selectRaw(
+                'purchase_order_number, supplier, COUNT(*) as total_items, DATE_FORMAT(created_at, "%Y-%m-%d %H:%i:%s") as date_created_formatted'
+            )
+            ->where('pow_id', $this->pow_id)
+            ->groupBy('purchase_order_number', 'supplier', 'created_at') // Keep grouping consistent
+            ->orderBy('purchase_order_number', 'asc'); // Order by a grouped column
+
+
 
         // Apply date range filter if set
         if ($this->startDate && $this->endDate) {
@@ -81,11 +88,7 @@ class PurchaseOrderTable extends PowerGridComponent
             ->add('purchase_order_number')
             ->add('supplier')
             ->add('quantity')
-            ->add('total_items', function () {
-                return PurchaseOrder::where('pow_id', $this->pow_id)
-                    ->distinct('purchase_order_number')
-                    ->count('purchase_order_number');
-            })
+            ->add('total_items')
             ->add('created_at'); // Keep this for filtering
     }
 
@@ -107,8 +110,12 @@ class PurchaseOrderTable extends PowerGridComponent
 
     public function actionsFromView($row): View
     {
-        return view('components.view-button', ['purchaseOrderNumber' => $row->purchase_order_number]);
+        return view('components.view-button', [
+            'purchaseOrderNumber' => $row->purchase_order_number,
+            'pow_id' => $row->pow_id,
+        ]);
     }
+
 
 
 
@@ -129,10 +136,4 @@ class PurchaseOrderTable extends PowerGridComponent
         }
     }
 
-    public function redirectToView($purchaseOrderNumber)
-    {
-        \Illuminate\Support\Facades\Log::info('View button clicked for PO number: ' . $purchaseOrderNumber);
-        // Redirect to the view-po-materials route and pass the purchase order number
-        return redirect()->route('view-po-materials', ['purchase_order_number' => $purchaseOrderNumber]);
-    }
 }

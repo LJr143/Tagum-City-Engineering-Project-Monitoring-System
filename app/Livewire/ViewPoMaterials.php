@@ -2,29 +2,33 @@
 
 namespace App\Livewire;
 
-use AllowDynamicProperties;
-use App\Models\PurchaseOrder;
-use Illuminate\Support\Facades\Log;
 use Livewire\Component;
+use App\Models\PurchaseOrder;
 
-
-#[AllowDynamicProperties] class ViewPoMaterials extends Component
+class ViewPoMaterials extends Component
 {
     public $purchaseOrderNumber;
+    public $pow_id;
+    public $materials = [];
 
-    public function mount($purchase_order_number): void
+    public function mount($purchaseOrderNumber, $pow_id)
     {
-        Log::info('Viewing PO number: ' . $purchase_order_number);
-        // Retrieve the purchase order number from the URL
-        $this->purchaseOrderNumber = $purchase_order_number;
+        $this->purchaseOrderNumber = $purchaseOrderNumber;
+        $this->pow_id = $pow_id;
+        $this->fetchMaterials();
+    }
 
-        // Optionally, load the details of the purchase order
-        $this->purchaseOrder = PurchaseOrder::where('purchase_order_number', $purchase_order_number)->first();
+    public function fetchMaterials()
+    {
+        // Get materials based on purchase_order_number and pow_id
+        $this->materials = PurchaseOrder::where('purchase_order_number', $this->purchaseOrderNumber)
+            ->where('pow_id', $this->pow_id)
+            ->with('material') // Assuming 'material' is a defined relationship in PurchaseOrder
+            ->get();
     }
 
     public function render()
     {
-        return view('livewire.view-po-materials', ['purchaseOrder' => $this->purchaseOrder]);
+        return view('livewire.view-po-materials');
     }
 }
-

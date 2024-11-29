@@ -46,9 +46,7 @@
             </div>
 
             <!-- Additional Information -->
-            <div>
-                <p class="text-sm">Here, you can display more details related to the purchase order.</p>
-            </div>
+           <livewire:view-po-materials :pow_id = '$pow_id' :purchaseOrderNumber="$purchaseOrderNumber"/>
 
             <!-- Action Buttons -->
             <div class="mt-6 flex justify-end space-x-2">
