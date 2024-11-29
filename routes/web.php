@@ -13,7 +13,7 @@ Route::get('/', function () {
 });
 
 // Authenticated Routes
-Route::middleware(['auth:sanctum', 'verified', 'inactivity.logout'])->group(function () {
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
 
     // Dashboard routing
