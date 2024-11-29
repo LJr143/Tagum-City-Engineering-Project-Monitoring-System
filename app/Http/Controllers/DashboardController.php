@@ -14,7 +14,7 @@ class DashboardController extends Controller
         // Get the authenticated user
         $user = Auth::user();
 
-
+        //redirecting
         if (Auth::user()->isProjectIncharge()){
             return redirect()->route('project-main', ['status' => 'all']);
         }

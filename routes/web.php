@@ -12,12 +12,11 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-
-
 // Authenticated Routes
 Route::middleware(['auth:sanctum', 'verified', 'inactivity.logout'])->group(function () {
 
-    // Dashboard
+
+    // Dashboard routing
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // User Profile
