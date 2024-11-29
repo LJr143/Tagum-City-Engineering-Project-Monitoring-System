@@ -47,25 +47,53 @@
                             <button onclick="openDeleteModal()"
                                     class="bg-red-500 mr-2 text-white text-[10px] sm:text-xs px-2 h-7 sm:px-4 py-1 sm:py-2 rounded shadow-md hover:bg-red-600 focus:outline-none flex items-center space-x-2">
                                 <span>Delete</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#FFFFFF">
-                                    <path d="M312-144q-29.7 0-50.85-21.15Q240-186.3 240-216v-480h-48v-72h192v-48h192v48h192v72h-48v479.57Q720-186 698.85-165T648-144H312Zm336-552H312v480h336v-480ZM384-288h72v-336h-72v336Zm120 0h72v-336h-72v336ZM312-696v480-480Z"/>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M10 10V16" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                                          stroke-linejoin="round"/>
+                                    <path d="M14 10V16" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                                          stroke-linejoin="round"/>
+                                    <path d="M18 6V18C18 19.1046 17.1046 20 16 20H8C6.89543 20 6 19.1046 6 18V6"
+                                          stroke="white" stroke-width="1.5" stroke-linecap="round"
+                                          stroke-linejoin="round"/>
+                                    <path d="M4 6H20" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                                          stroke-linejoin="round"/>
+                                    <path d="M15 6V5C15 3.89543 14.1046 3 13 3H11C9.89543 3 9 3.89543 9 5V6"
+                                          stroke="white" stroke-width="1.5" stroke-linecap="round"
+                                          stroke-linejoin="round"/>
                                 </svg>
                             </button>
                             @if($pow->project->status != 'suspended' && $pow->project->status != 'completed')
                                 <button onclick="openSuspendModal()"
                                         class="bg-red-500 text-white text-[10px] sm:text-xs px-2 sm:px-4 py-1 h-7 sm:py-2 rounded shadow-md hover:bg-red-600 focus:outline-none flex items-center space-x-2">
                                     <span>Suspend</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#FFFFFF">
-                                        <path d="M480-300q15 0 25.5-10.5T516-336q0-15-10.5-25.5T480-372q-15 0-25.5 10.5T444-336q0 15 10.5 25.5T480-300Zm-36-132h72v-240h-72v240ZM341-144 144-342v-277l197-197h278l197 197v278L618-144H341Zm30-72h218l155-155v-218L588-744H371L216-589v218l155 155Zm109-264Z"/>
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M10 10V16" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                                              stroke-linejoin="round"/>
+                                        <path d="M14 10V16" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                                              stroke-linejoin="round"/>
+                                        <path d="M18 6V18C18 19.1046 17.1046 20 16 20H8C6.89543 20 6 19.1046 6 18V6"
+                                              stroke="white" stroke-width="1.5" stroke-linecap="round"
+                                              stroke-linejoin="round"/>
+                                        <path d="M4 6H20" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                                              stroke-linejoin="round"/>
+                                        <path d="M15 6V5C15 3.89543 14.1046 3 13 3H11C9.89543 3 9 3.89543 9 5V6"
+                                              stroke="white" stroke-width="1.5" stroke-linecap="round"
+                                              stroke-linejoin="round"/>
                                     </svg>
-
-
                                 </button>
                             @elseif ($pow->project->status != 'completed')
                                 <button onclick="openResumeModal()" class="bg-green-500 text-white text-[10px] h-7 sm:text-xs px-2 sm:px-4 py-1 sm:py-2 rounded shadow-md hover:bg-green-600 focus:outline-none flex items-center space-x-1">
                                     <span>Resume</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
-                                        <path d="M240-240v-480h80v480h-80Zm160 0 400-240-400-240v480Zm80-141v-198l165 99-165 99Zm0-99Z"/>
+                                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <rect width="15" height="15" fill="url(#pattern0_1545_9266)"/>
+                                        <defs>
+                                            <pattern id="pattern0_1545_9266" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                                <use xlink:href="#image0_1545_9266" transform="scale(0.01)"/>
+                                            </pattern>
+                                            <image id="image0_1545_9266" width="100" height="100" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAAAsTAAALEwEAmpwYAAADyUlEQVR4nO3dXYgWVRzH8aNuvhGkIkZIShCk+RKsRsV6ISReBWIkZKaXISJEemH4hhca2+WKN90aCuKykCAseaNCFKQUalDSImuBb5AvmPj+lYMztOr67Mwz/2nOmfl9LpfdYfb89pxn57z8xzkRERERERERERERERHJDRgNLACWAYuA8UWbERgFdAIrgLXAKmC+/7oiat1wnwDnedINYCswpo0gJgE7gUGG9xewCZigYJ5tvM201ud7T44wlgKXyOZ34F2F8l/jvQM8zNBw6zOG8SFwj3z8928HOhofDLA/Y6P9mSGM2cC/tO8H4LVGhwKcy9FgL49wre8p7jqwxjUVcC1HY73Z4jrzsHUAmOyaJvmLzGpOi+tsw57/r2+xaxLDQPooxwPga2CsawLDQI5TrpPALFd3hoH8SPluAZ/X+ik/skBS/cArro4iDYRkJuADVzcRB0Iyw/ANMNHVRYWBnAZuYuMM8Jarg4oC2Z38zDTgEDZuAxvzTIIGqaJAPnpqvWRtwTmwoY4A012sqg4k5Z8xgBPYuAqsdDEKJRDPT78DO4D72NgLvOhiElIgKeA9YAAbfja7y8UixEA84CXgW2z4BbBu4AUXulADSSWbI/7Bxk/A6y5koQfiATOBY9jwv+9nLlQxBOL5nS/JLpU72DgITHGhiSWQFPA28Ad1XQCLLRDP7+UCerCbD+sJZgEsxkBSwHLgCjZO+X0BrmoxB+L5nTDAYWz4tljoqhR7IEPmw75IJhiL8j1uhqtKHQJJ+fsDfqG4XleVOgXi+R37yYd0lu2xrVSzvlK3QFLAEuBv2veVq0JdA/GAqcB3tOeoq0KdAxnyhP9rG4EMuCookOdSIIENWcfMb6jJQxbFP9R3lX2PjQgE/dsbTiCGD4YHy7i/xvQQbKdOLgOvWt5fowLBfnJxgdW9NS4QbKfffwbesLivxgWCFqhqu4Q7qCXcx7TJIeYhC20DCicQtFGutltJd7RT1eh/F+KQhTZbhxEIOo4QTg9BB3bCGLLQkbYgAtlT0qHPDdFXeajwWPRvhgc9dSzaIBALKhxg2EOKUmmNgEpr9Kv4TBiB3FJ5piepgFnZIinx1x3MCaeyqQhmfcvEzjXuGY0tE2tZSLnfIIjGF1LeZ1hqfFbBomQqNZ5sGvAfnCNZl7HHLQPu5gxCxfifasQvR2iw3pyvq3gfuJgxjLN6XcXwjfjxMC9f8eP5loIvdLnwnCAGk1IZ9SlgWdIrjzqTYacLGGdwzY7kmp/6oi/Aar3ySERERERERERERERExEXnEQrlvdEPbQz+AAAAAElFTkSuQmCC"/>
+                                        </defs>
                                     </svg>
                                 </button>
 
@@ -76,23 +104,37 @@
                             <button onclick="openRealignmentModal()"
                                     class=" w-full text-center bg-green-500 text-white text-[10px] h-7 sm:text-xs px-2 sm:px-4 py-1 sm:py-2 rounded shadow-md hover:bg-green-600 focus:outline-none flex items-center justify-center space-x-2">
                                 <span>Realignment Setting</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#FFFFFF">
-                                    <path d="M192-396v-72h288v72H192Zm0-150v-72h432v72H192Zm0-150v-72h432v72H192Zm336 504v-113l210-209q7.26-7.41 16.13-10.71Q763-528 771.76-528q9.55 0 18.31 3.5Q798.83-521 806-514l44 45q6.59 7.26 10.29 16.13Q864-444 864-435.24t-3.29 17.92q-3.3 9.15-10.71 16.32L641-192H528Zm288-243-45-45 45 45ZM576-240h45l115-115-22-23-22-22-116 115v45Zm138-138-22-22 44 45-22-23Z"/>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M10 10V16" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                                          stroke-linejoin="round"/>
+                                    <path d="M14 10V16" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                                          stroke-linejoin="round"/>
+                                    <path d="M18 6V18C18 19.1046 17.1046 20 16 20H8C6.89543 20 6 19.1046 6 18V6"
+                                          stroke="white" stroke-width="1.5" stroke-linecap="round"
+                                          stroke-linejoin="round"/>
+                                    <path d="M4 6H20" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                                          stroke-linejoin="round"/>
+                                    <path d="M15 6V5C15 3.89543 14.1046 3 13 3H11C9.89543 3 9 3.89543 9 5V6"
+                                          stroke="white" stroke-width="1.5" stroke-linecap="round"
+                                          stroke-linejoin="round"/>
                                 </svg>
                             </button>
                             @endif
                         </div>
                     </div>
-                @elseif(auth()->user()->isProjectIncharge() && ($pow->project->status != 'completed' || $pow->project->status != 'suspended'))
+                @elseif(auth()->user()->isProjectIncharge() && $pow->project->status != 'suspended')
 
                     <div class="w-full md:w-auto">
                         <div class="flex flex-col md:flex-row items-start md:items-end space-y-2 md:space-y-0 gap-2">
                             <div class="flex-shrink-0 w-full md:w-auto">
                                 <livewire:add-swaa-report :pow_id="$pow->id" class="w-full sm:w-auto"/>
                             </div>
+                            @if($pow->project->status != 'completed' && $pow->project->status != 'pending validation')
                             <div class="flex-shrink-0 w-full md:w-auto">
                                 <livewire:mark-project-complete :pow_id="$pow->id" class="w-full sm:w-auto"/>
                             </div>
+                            @endif
                         </div>
                     </div>
                 @endif
@@ -189,15 +231,14 @@
                                     Material History
                                 </h2>
 
+                                <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
+
+                                    <livewire:material-history :pow_id="$pow->id"/>
+                                </div>
+
                             </div>
                         </div>
                     </div>
-
-
-
-
-
-
 
                 </div>
 
@@ -286,17 +327,12 @@
                                             Filter
                                         </button>
                                     </div>
-
-
-
-
                                     <!-- Add Purchase Order Button -->
-                                    @if ((auth()->user()->isProjectIncharge()) && $pow->project->status != 'suspended' && $pow->project->status != 'completed')
-                                        <div>
-                                            <livewire:add-p-o :pow_id="$pow->id"/>
-                                        </div>
+                                    @if((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'suspended' && $pow->project->status != 'completed')
+                                    <div>
+                                        <livewire:add-p-o :pow_id="$pow->id"/>
+                                    </div>
                                     @endif
-
                                 </div>
                             </div>
 
@@ -325,7 +361,14 @@
                 </div>
 
 
+                <div id="materials-history" class="hidden w-full">
+                    <div class="bg-white shadow-md rounded-lg p-6">
+                        <h3 class="text-sm font-semibold mb-2 text-center"> Materials  History</h3>
+                        <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
 
+                        </div>
+                    </div>
+                </div>
 
             </div>
 
