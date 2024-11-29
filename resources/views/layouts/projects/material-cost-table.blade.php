@@ -295,9 +295,8 @@
                 <div id="purchase-order-history" class="hidden w-full">
                     <div class="bg-white shadow-md rounded-lg p-6">
                         <h3 class="text-sm font-semibold mb-2 text-center"> Purchase Order History</h3>
-                        <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
-                            <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 mb-3">
-
+                        <div class="relative overflow-hidden text-[12px] w-full">
+                            <div class="space-y-2 sm:space-y-0 sm:space-x-2 mb-3">
                                     <!-- Add Purchase Order Button -->
                                     @if(auth()->user()->isProjectIncharge() && $pow->project->status != 'suspended' && $pow->project->status != 'completed')
                                     <div>
