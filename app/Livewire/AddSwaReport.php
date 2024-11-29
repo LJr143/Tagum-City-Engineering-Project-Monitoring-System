@@ -12,6 +12,7 @@ class AddSwaReport extends Component
     public $pow;
     public $swa_report = [['item_no' => '', 'to_date_qty' => '', 'percent_accomplishment' => '']];
     public $pow_id;
+    public $existingSwa;
 
     public function mount($pow_id): void
     {
@@ -82,7 +83,7 @@ class AddSwaReport extends Component
                 SwaReport::create([
                     'pow_id' => $this->pow_id,
                     'item_no' => $swa['item_no'],
-                    'description' => $swa['description'],
+                    'description' => $this->existingSwa->description,
                     'quantity' => $thisMonthQty, // This month's quantity
                     'prev_qty' => $prevQty, // Previous total quantity (0 for new records)
                     'this_month_qty' => $thisMonthQty, // Only current month's quantity
