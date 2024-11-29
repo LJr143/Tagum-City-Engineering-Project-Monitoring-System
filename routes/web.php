@@ -12,6 +12,8 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+
+
 // Authenticated Routes
 Route::middleware(['auth:sanctum', 'verified', 'inactivity.logout'])->group(function () {
 
