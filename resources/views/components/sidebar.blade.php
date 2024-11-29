@@ -43,7 +43,7 @@
     <div class="text-sm">
         <ul class="mt-10 space-y-1 tracking-wide">
 
-            @if (auth()->user()->isAdmin())
+            @if (auth()->user()->isAdmin() || auth()->user()->isEncoder())
             <li x-data="{toggle: false}" @mouseenter="toggle = true"
                 @mouseleave="toggle = false"
                 :style="toggle ? 'background-color: rgba(36, 144, 0, 0.3);' : ''">
