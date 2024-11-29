@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use AllowDynamicProperties;
 use App\Models\Material;
+use Brick\Money\Money;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\View\View;
 use Livewire\WithPagination;
@@ -67,13 +68,19 @@ use PowerComponents\LivewirePowerGrid\Traits\WithExport;
             ->add('id')
             ->add('pow')
             ->add('item_no')
-            ->add('quantity')
+            ->add('quantity', function (Material $material) {
+                return round($material->quantity, 2);
+            })
             ->add('unit_of_issue')
             ->add('item_description')
-            ->add('estimated_unit_cost')
-            ->add('estimated_cost')
+            ->add('estimated_unit_cost', function (Material $material) {
+                return Money::of($material->estimated_unit_cost, 'PHP')->formatTo('en_PH');
+            })
+            ->add('estimated_cost', function (Material $material){
+                return Money::of($material->estimated_cost, 'PHP')->formatTo('en_PH');
+            })
             ->add('quantity_bal', function (Material $material) {
-                return $material->quantity - $material->quantity_use;
+                return round($material->quantity - $material->quantity_use, 2);
             });
 
     }

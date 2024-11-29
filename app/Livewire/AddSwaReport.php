@@ -2,18 +2,21 @@
 
 namespace App\Livewire;
 
+use App\Models\Pow;
 use App\Models\SwaReport;
 use Carbon\Carbon;
 use Livewire\Component;
 
 class AddSwaReport extends Component
 {
+    public $pow;
     public $swa_report = [['item_no' => '', 'to_date_qty' => '', 'percent_accomplishment' => '']];
     public $pow_id;
 
     public function mount($pow_id): void
     {
         $this->pow_id = $pow_id;
+        $pow = Pow::findOrFail($pow_id);
     }
 
     public function addSwa()

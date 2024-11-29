@@ -39,7 +39,9 @@
                 </button>
             </div>
             <div>
+                @if(auth()->user()->isProjectIncharge() && ($pow->project->status != 'completed' && $pow->project->status != 'suspended'))
                 <livewire:add-swa-report :pow_id="$pow_id"/>
+                @endif
             </div>
            <div class="text-[12px]">
                <livewire:swa-report-tbale :pow_id="$pow_id" />

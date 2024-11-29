@@ -47,7 +47,7 @@
                             class="bg-white border border-gray-300 text-gray-700 rounded-md text-xs px-4 py-2 hover:bg-gray-400">
                         Cancel
                     </button>
-                    <button type="submit"
+                    <button type="submit" @click="markProjectCompleteOpen = false"
                             class="bg-green-500 text-white rounded-md px-4 py-2 text-xs hover:bg-green-600 ml-2">
                         Mark Complete
                     </button>
