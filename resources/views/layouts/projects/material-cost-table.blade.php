@@ -287,6 +287,9 @@
                                         </button>
                                     </div>
 
+
+
+
                                     <!-- Add Purchase Order Button -->
                                     @if ((auth()->user()->isProjectIncharge()) && $pow->project->status != 'suspended' && $pow->project->status != 'completed')
                                         <div>
