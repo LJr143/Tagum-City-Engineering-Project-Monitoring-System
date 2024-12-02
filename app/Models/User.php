@@ -87,7 +87,7 @@ class User extends Authenticatable
 
     public function isProjectIncharge()
     {
-        return $this->role === 'project_incharge';
+        return $this->role === 'project incharge';
     }
 
     public function projects(): \Illuminate\Database\Eloquent\Relations\HasMany

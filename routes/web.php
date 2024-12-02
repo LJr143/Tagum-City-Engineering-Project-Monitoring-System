@@ -16,7 +16,7 @@ Route::get('/', function () {
 // Authenticated Routes
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
-    // Dashboard routing
+    // Dashboard routing redirection
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // User Profile

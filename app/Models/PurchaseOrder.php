@@ -11,7 +11,6 @@ class PurchaseOrder extends Model
 
     protected $fillable = ['pow_id', 'purchase_order_number', 'supplier', 'item_no', 'quantity', 'unit_cost', 'total_cost', 'file_name'];
 
-// In PurchaseOrder.php model
     public function material()
     {
         return $this->belongsTo(Material::class, 'item_no');

@@ -1,18 +1,15 @@
 <div>
-    <div class="mb-4">
-        <h3 class="text-sm font-bold">Materials Information for Purchase Order: {{ $purchaseOrderNumber }}</h3>
-        <ul>
-            @forelse($materials as $material)
-                <li class="text-sm">
-                    <strong>Item No:</strong> {{ $material->item_no }},
-                    <strong>Material Name:</strong> {{ $material->material->name }}, <!-- Assuming Material has a 'name' attribute -->
-                    <strong>Quantity:</strong> {{ $material->quantity }},
-                    <strong>Unit Cost:</strong> {{ $material->unit_cost }},
-                    <strong>Total Cost:</strong> {{ $material->total_cost }}
-                </li>
-            @empty
-                <p class="text-sm text-gray-500">No materials found for this purchase order.</p>
-            @endforelse
-        </ul>
-    </div>
+    <h3>Materials for Purchase Order: {{ $purchaseOrderNumber }}</h3>
+    <ul>
+        @forelse ($materials as $material)
+            <li>
+                <strong>Material:</strong> {{ $material->material->item_description ?? 'N/A' }} <br>
+                <strong>Quantity:</strong> {{ $material->quantity }} <br>
+                <strong>Unit Cost:</strong> {{ number_format($material->unit_cost, 2) }} <br>
+                <strong>Total Cost:</strong> {{ number_format($material->total_cost, 2) }}
+            </li>
+        @empty
+            <p>No materials found for this purchase order.</p>
+        @endforelse
+    </ul>
 </div>

@@ -43,10 +43,11 @@
             <!-- Display Purchase Order Number -->
             <div class="mb-4">
                 <p class="text-sm"><strong>Purchase Order Number:</strong> <span x-text="currentPurchaseOrder"></span></p>
+                <livewire:view-po-materials :pow_id="$pow_id" :purchase_order_number="$purchaseOrderNumber" />
             </div>
 
             <!-- Additional Information -->
-           <livewire:view-po-materials :pow_id = '$pow_id' :purchaseOrderNumber="$purchaseOrderNumber"/>
+
 
             <!-- Action Buttons -->
             <div class="mt-6 flex justify-end space-x-2">

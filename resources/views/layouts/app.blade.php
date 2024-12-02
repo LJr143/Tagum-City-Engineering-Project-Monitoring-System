@@ -66,10 +66,10 @@
                 {{ $main }}
             </main>
         @endif
+    </div>
         <div class="mt-auto pb-1 text-center">
             <p class="text-[8px]">Developed by USeP BSIT, 2024</p>
         </div>
-    </div>
 </div>
 
 {{ $slot }}
