@@ -1,399 +1,4 @@
 
-<script>
-
-    //TABS
-    function showProfileContent() {
-        document.getElementById('profileContent').style.display = 'block';
-        document.getElementById('securityContent').style.display = 'none';
-        document.getElementById('developersContent').style.display = 'none';
-        document.getElementById('profileButton').classList.add('text-green-500');
-        document.getElementById('profileButton').classList.remove('text-gray-600');
-        document.getElementById('securityButton').classList.add('text-gray-600');
-        document.getElementById('securityButton').classList.remove('text-green-500');
-        document.getElementById('developersButton').classList.add('text-gray-600');
-        document.getElementById('developersButton').classList.remove('text-green-500');
-    }
-
-    function showSecurityContent() {
-        document.getElementById('profileContent').style.display = 'none';
-        document.getElementById('securityContent').style.display = 'block';
-        document.getElementById('developersContent').style.display = 'none';
-        document.getElementById('profileButton').classList.remove('text-green-500');
-        document.getElementById('profileButton').classList.add('text-gray-600');
-        document.getElementById('securityButton').classList.remove('text-gray-600');
-        document.getElementById('securityButton').classList.add('text-green-500');
-        document.getElementById('developersButton').classList.add('text-gray-600');
-        document.getElementById('developersButton').classList.remove('text-green-500');
-    }
-
-    function showDevelopersContent() {
-        document.getElementById('profileContent').style.display = 'none';
-        document.getElementById('securityContent').style.display = 'none';
-        document.getElementById('developersContent').style.display = 'block';
-        document.getElementById('profileButton').classList.remove('text-green-500');
-        document.getElementById('profileButton').classList.add('text-gray-600');
-        document.getElementById('securityButton').classList.add('text-gray-600');
-        document.getElementById('securityButton').classList.remove('text-green-500');
-        document.getElementById('developersButton').classList.remove('text-gray-600');
-        document.getElementById('developersButton').classList.add('text-green-500');
-    }
-
-
-
-
-    function enableEditProfile() {
-        document.getElementById('name').style.display = 'none';
-        document.getElementById('nameInput').style.display = 'block';
-        document.getElementById('position').style.display = 'none';
-        document.getElementById('positionInput').style.display = 'block';
-        document.getElementById('positionInput').style.width = document.getElementById('nameInput').offsetWidth + 'px';
-        document.getElementById('photoLabel').style.display = 'block';
-        document.getElementById('editButton').style.display = 'none';
-        document.getElementById('saveButton').style.display = 'block';
-    }
-
-    function saveProfileChanges() {
-        document.getElementById('name').innerText = document.getElementById('nameInput').value;
-        document.getElementById('name').style.display = 'block';
-        document.getElementById('nameInput').style.display = 'none';
-        document.getElementById('position').innerText = document.getElementById('positionInput').value;
-        document.getElementById('position').style.display = 'block';
-        document.getElementById('positionInput').style.display = 'none';
-        document.getElementById('photoLabel').style.display = 'none';
-        document.getElementById('editButton').style.display = 'block';
-        document.getElementById('saveButton').style.display = 'none';
-    }
-
-    function previewImage(event) {
-        const reader = new FileReader();
-        reader.onload = function() {
-            const output = document.getElementById('photo');
-            output.src = reader.result;
-        };
-        reader.readAsDataURL(event.target.files[0]);
-    }
-
-
-
-
-
-    //PERSONAL INFORMATION
-    function enableEditPersonalInfo() {
-        document.getElementById('firstName').style.display = 'none';
-        document.getElementById('firstNameInput').style.display = 'block';
-        document.getElementById('middleInitial').style.display = 'none';
-        document.getElementById('middleInitialInput').style.display = 'block';
-        document.getElementById('lastName').style.display = 'none';
-        document.getElementById('lastNameInput').style.display = 'block';
-        document.getElementById('birthdate').style.display = 'none';
-        document.getElementById('birthdateInput').style.display = 'block';
-        document.getElementById('editPersonalInfoButton').style.display = 'none';
-        document.getElementById('savePersonalInfoButton').style.display = 'block';
-
-    }
-
-    function savePersonalInfoChanges() {
-        const firstNameInput = document.getElementById('firstNameInput');
-        const middleInitialInput = document.getElementById('middleInitialInput');
-        const lastNameInput = document.getElementById('lastNameInput');
-        const birthdateInput = document.getElementById('birthdateInput');
-
-        const firstNameError = document.getElementById('firstNameError');
-        const middleInitialError = document.getElementById('middleInitialError');
-        const lastNameError = document.getElementById('lastNameError');
-        const birthdateError = document.getElementById('birthdateError');
-        const birthdateTodayError = document.getElementById('birthdateTodayError');
-        const birthdateUnder18Error = document.getElementById('birthdateUnder18Error');
-
-
-        let isValid = true;
-
-        // Reset error messages and styles
-        firstNameError.classList.add('hidden');
-        middleInitialError.classList.add('hidden');
-        lastNameError.classList.add('hidden');
-        birthdateError.classList.add('hidden');
-        birthdateTodayError.classList.add('hidden');
-        birthdateUnder18Error.classList.add('hidden');
-
-        firstNameInput.classList.remove('border-red-500');
-        middleInitialInput.classList.remove('border-red-500');
-        lastNameInput.classList.remove('border-red-500');
-        birthdateInput.classList.remove('border-red-500');
-
-        // Validate First Name
-        if (firstNameInput.value.trim() === '') {
-            firstNameError.classList.remove('hidden');
-            firstNameInput.classList.add('border-red-500');
-            isValid = false;
-        }
-
-        // Validate Middle Initial
-        if (middleInitialInput.value.trim() !== '' && middleInitialInput.value.length > 1) {
-            middleInitialError.classList.remove('hidden');
-            middleInitialInput.classList.add('border-red-500');
-            isValid = false;
-        }
-
-        // Validate Last Name
-        if (lastNameInput.value.trim() === '') {
-            lastNameError.classList.remove('hidden');
-            lastNameInput.classList.add('border-red-500');
-            isValid = false;
-        }
-
-
-        // Validate Birthdate
-        const today = new Date();
-        const birthdate = new Date(birthdateInput.value);
-        const age = today.getFullYear() - birthdate.getFullYear();
-        const isBirthdayToday = today.getDate() === birthdate.getDate() && today.getMonth() === birthdate.getMonth();
-
-        if (isBirthdayToday) {
-            birthdateTodayError.classList.remove('hidden');
-            birthdateInput.classList.add('border-red-500');
-            isValid = false;
-        } else if (age < 18) {
-            birthdateUnder18Error.classList.remove('hidden');
-            birthdateInput.classList.add('border-red-500');
-            isValid = false;
-        }
-
-        if (birthdateInput.value === '') {
-            birthdateError.classList.remove('hidden');
-            birthdateInput.classList.add('border-red-500');
-            isValid = false;
-        }
-
-
-        // If all inputs are valid, update the displayed values
-        if (isValid) {
-            document.getElementById('firstName').innerText = firstNameInput.value;
-            document.getElementById('middleInitial').innerText = middleInitialInput.value;
-            document.getElementById('lastName').innerText = lastNameInput.value;
-            document.getElementById('birthdate').innerText = birthdateInput.value;
-
-            // Hide inputs and show the updated values
-            document.getElementById('firstName').style.display = 'block';
-            firstNameInput.style.display = 'none';
-            document.getElementById('middleInitial').style.display = 'block';
-            middleInitialInput.style.display = 'none';
-            document.getElementById('lastName').style.display = 'block';
-            lastNameInput.style.display = 'none';
-            document.getElementById('birthdate').style.display = 'block';
-            birthdateInput.style.display = 'none';
-
-            document.getElementById('editPersonalInfoButton').style.display = 'block';
-            document.getElementById('savePersonalInfoButton').style.display = 'none';
-        }
-    }
-
-
-
-
-
-
-
-
-
-    //CONTACT INFORMATION
-    function enableEditContactInfo() {
-        document.getElementById('email').style.display = 'none';
-        document.getElementById('emailInput').style.display = 'block';
-        document.getElementById('phone').style.display = 'none';
-        document.getElementById('phoneInput').style.display = 'block';
-        document.getElementById('editContactInfoButton').style.display = 'none';
-        document.getElementById('saveContactInfoButton').style.display = 'block';
-    }
-
-    function saveContactInfoChanges() {
-        const emailInput = document.getElementById('emailInput');
-        const phoneInput = document.getElementById('phoneInput');
-
-        const emailError = document.getElementById('emailError');
-        const phoneError = document.getElementById('phoneError');
-
-        let isValid = true;
-
-        // Reset error messages and styles
-        emailError.classList.add('hidden');
-        phoneError.classList.add('hidden');
-
-        emailInput.classList.remove('border-red-500');
-        phoneInput.classList.remove('border-red-500');
-
-        // Validate Email
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email pattern
-        if (!emailPattern.test(emailInput.value.trim())) {
-            emailError.classList.remove('hidden');
-            emailInput.classList.add('border-red-500');
-            isValid = false;
-        }
-
-        // Validate Phone Number
-        const phonePattern = /^(09\d{2}-\d{3}-\d{4}|(\+63)\s?9\d{2}\s?\d{3}\s?\d{4}|09\d{2}\s?\d{3}\s?\d{4})$/; // Formats: 0917-123-4567, +63 917 123 4567, 0917 123 4567
-        if (!phonePattern.test(phoneInput.value.trim())) {
-            phoneError.classList.remove('hidden');
-            phoneInput.classList.add('border-red-500');
-            isValid = false;
-        }
-
-        // If all inputs are valid, update the displayed values
-        if (isValid) {
-            document.getElementById('email').innerText = emailInput.value;
-            document.getElementById('phone').innerText = phoneInput.value;
-
-            // Hide inputs and show the updated values
-            document.getElementById('email').style.display = 'block';
-            emailInput.style.display = ' none';
-            document.getElementById('phone').style.display = 'block';
-            phoneInput.style.display = 'none';
-
-            document.getElementById('editContactInfoButton').style.display = 'block';
-            document.getElementById('saveContactInfoButton').style.display = 'none';
-        }
-    }
-
-
-
-
-
-    //script for show and hide password
-    function toggleCurrentPasswordVisibility() {
-        const currentPasswordInput = document.getElementById('current-password');
-        const eyeIconCurrent = document.getElementById('eyeIconCurrent');
-        const eyeSlashIconCurrent = document.getElementById('eyeSlashIconCurrent');
-
-        if (currentPasswordInput.type === 'password') {
-            currentPasswordInput.type = 'text';
-            eyeIconCurrent.classList.remove('hidden');
-            eyeSlashIconCurrent.classList.add('hidden');
-        } else {
-            currentPasswordInput.type = 'password';
-            eyeIconCurrent.classList.add('hidden');
-            eyeSlashIconCurrent.classList.remove('hidden');
-        }
-    }
-
-    function toggleNewPasswordVisibility() {
-        const newPasswordInput = document.getElementById('new-password');
-        const eyeIconNew = document.getElementById('eyeIconNew');
-        const eyeSlashIconNew = document.getElementById('eyeSlashIconNew');
-
-        if (newPasswordInput.type === 'password') {
-            newPasswordInput.type = 'text';
-            eyeIconNew.classList.remove('hidden');
-            eyeSlashIconNew.classList.add('hidden');
-        } else {
-            newPasswordInput.type = 'password';
-            eyeIconNew.classList.add('hidden');
-            eyeSlashIconNew.classList.remove('hidden');
-        }
-    }
-
-    function toggleRetypeNewPasswordVisibility() {
-        const retypeNewPasswordInput = document.getElementById('retype-new-password');
-        const eyeIconRetype = document.getElementById('eyeIconRetype');
-        const eyeSlashIconRetype = document.getElementById('eyeSlashIconRetype');
-
-        if (retypeNewPasswordInput.type === 'password') {
-            retypeNewPasswordInput.type = 'text';
-            eyeIconRetype.classList.remove('hidden');
-            eyeSlashIconRetype.classList.add('hidden');
-        } else {
-            retypeNewPasswordInput.type = 'password';
-            eyeIconRetype.classList.add('hidden');
-            eyeSlashIconRetype.classList.remove('hidden');
-        }
-    }
-
-
-
-    //input validation for changing password
-    function validatePassword() {
-        const password = document.getElementById('new-password').value;
-        const passwordError = document.getElementById('passwordRequirementError');
-        const newPasswordError = document.getElementById('newPasswordError');
-
-        const hasNumber = /\d/;
-        const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/;
-
-        if (password.length < 6 || !hasNumber.test(password) || !hasSpecialChar.test(password)) {
-            passwordError.style.display = 'block';
-            newPasswordError.style.display = 'none';
-            document.getElementById('new-password').classList.add('border-red-500', 'focus:ring-red-500', 'focus:border-red-500');
-        } else {
-            passwordError.style.display = 'none';
-            document.getElementById('new-password').classList.remove('border-red-500', 'focus:ring-red-500', 'focus:border-red-500');
-        }
-    }
-
-    function validateRetypePassword() {
-        const newPassword = document.getElementById('new-password').value;
-        const retypePassword = document.getElementById('retype-new-password').value;
-        const retypeNewPasswordError = document.getElementById('retypeNewPasswordError');
-
-        if (newPassword !== retypePassword) {
-            retypeNewPasswordError.style.display = 'block';
-            document.getElementById('retype-new-password').classList.add('border-red-500', 'focus:ring-red-500', 'focus:border-red-500');
-        } else {
-            retypeNewPasswordError.style.display = 'none';
-            document.getElementById('retype-new-password').classList.remove('border-red-500', 'focus:ring-red-500', 'focus:border-red-500');
-        }
-    }
-
-    function clearError(errorId) {
-        document.getElementById(errorId).style.display = 'none';
-        document.getElementById('new-password').classList.remove('border-red-500', 'focus:ring-red-500', 'focus:border-red-500');
-        document.getElementById('retype-new-password').classList.remove('border-red-500', 'focus:ring-red-500', 'focus:border-red-500');
-        document.getElementById('current-password').classList.remove('border-red-500', 'focus:ring-red-500', 'focus:border-red-500');
-        document.getElementById('user-id').classList.remove('border-red-500', 'focus:ring-red-500', 'focus:border-red-500');
-    }
-
-    document.getElementById('passwordForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        validatePassword();
-        validateRetypePassword();
-
-        const userId = document.getElementById('user-id').value;
-        const currentPassword = document.getElementById('current-password').value;
-        const userIdError = document.getElementById('userIdError');
-        const currentPasswordError = document.getElementById('currentPasswordError');
-        const currentPasswordIncorrectError = document.getElementById('currentPasswordIncorrectError');
-
-        // Simulated validation for user ID and current password
-        if (!userId) {
-            userIdError.style.display = 'block';
-            document.getElementById('user-id').classList.add('border-red-500', 'focus:ring-red-500', 'focus:border-red-500');
-        } else {
-            userIdError.style.display = 'none';
-            document.getElementById('user-id').classList.remove('border-red-500', 'focus:ring-red-500', 'focus:border-red-500');
-        }
-
-        if (!currentPassword) {
-            currentPasswordError.style.display = 'block';
-            document.getElementById('current-password').classList.add('border-red-500', 'focus:ring-red-500', 'focus:border-red-500');
-        } else if (currentPassword !== 'correctPassword') { // Replace 'correctPassword' with actual validation logic
-            currentPasswordIncorrectError.style.display = 'block';
-            document.getElementById('current-password').classList.add ('border-red-500', 'focus:ring-red-500', 'focus:border-red-500');
-        } else {
-            currentPasswordError.style.display = 'none';
-            currentPasswordIncorrectError.style.display = 'none';
-            document.getElementById('current-password').classList.remove('border-red-500', 'focus:ring-red-500', 'focus:border-red-500');
-        }
-
-        // Check if there are any validation errors before proceeding
-        if (userId && currentPassword && currentPassword === 'correctPassword' &&
-            document.getElementById('passwordRequirementError').style.display === 'none' &&
-            document.getElementById('retypeNewPasswordError').style.display === 'none') {
-            // Proceed with account update logic here
-            alert('Account updated successfully!');
-        }
-    });
-</script>
-
-
-
 <div class="container mx-auto">
     <h1 class="text-xl font-medium mb-6">
         Account Settings
@@ -425,36 +30,44 @@
                     My Profile
                 </h2>
 
-
-                <div class="bg-white p-2 px-4 rounded-lg shadow mb-4 relative">
-                    <div class="flex flex-col items-center mb-3 sm:flex-row sm:items-start">
-                        <div class="relative w-16 h-16 rounded-full overflow-hidden bg-gray-300 mb-4 sm:mb-0 mt-2">
-                            <img alt="Profile photo of a person" class="w-full h-full object-cover" height="64" id="photo" src="{{ asset('storage/pmsAssets/default.png') }}" width="64"/>
-                            <input accept="image/*" class="hidden" id="photoInput" onchange="previewImage(event)" type="file"/>
-                            <label class="absolute bottom-0 right-0 bg-black bg-opacity-50 text-white p-1 rounded-full cursor-pointer" for="photoInput" id="photoLabel" style="display: none;">
-                                <i class="fas fa-camera"></i>
-                            </label>
+                <form wire:submit.prevent="saveProfile">
+                    <div class="bg-white p-2 px-4 rounded-lg shadow mb-4 relative">
+                        <div class="flex flex-col items-center mb-3 sm:flex-row sm:items-start">
+                            <div class="relative w-16 h-16 rounded-full overflow-hidden bg-gray-300 mb-4 sm:mb-0 mt-2">
+                                <!-- Use the temporary URL or default URL for preview -->
+                                <img alt="Profile photo of a person" class="w-full h-full object-cover" height="64" id="photo"
+                                     src="{{ $profilePhotoUrl }}" width="64"/>
+                                <input accept="image/*" class="hidden" id="photoInput" wire:model="profileImage" type="file"/>
+                                <label class="absolute bottom-0 right-0 bg-black bg-opacity-50 text-white p-1 rounded-full cursor-pointer" for="photoInput" id="photoLabel" style="display: none;">
+                                    <i class="fas fa-camera"></i>
+                                </label>
+                            </div>
+                            <div class="text-center sm:mt-6 sm:text-left sm:ml-4">
+                                <h3 class="text-xs font-semibold text-gray-800" id="name">
+                                    {{ $first_name }} {{ $middle_initial }} {{ $last_name }}
+                                </h3>
+                                <input class="hidden text-xs font-semibold text-gray-800 border border-gray-300 rounded p-1 mb-1 focus:ring-green-500 focus:border-green-500"
+                                       id="nameInput" type="text" value="{{ $first_name }} {{ $middle_initial }} {{ $last_name }}" readonly/>
+                                <p class="text-[10px] text-gray-600" id="position">
+                                    {{$role}}
+                                </p>
+                                <input class="hidden text-[10px] h-7 text-gray-600 border border-gray-300 rounded p-1 focus:ring-green-500 focus:border-green-500"
+                                       id="positionInput" type="text" value="{{$role}}" readonly/>
+                            </div>
                         </div>
-                        <div class="text-center sm:mt-6 sm:text-left sm:ml-4"> <!-- Added sm:ml-4 for spacing on larger screens -->
-                            <h3 class="text-xs font-semibold text-gray-800" id="name">
-                                {{ $first_name }} {{ $middle_initial }} {{ $last_name }}
-                            </h3>
-                            <input class="hidden text-xs font-semibold text-gray-800 border border-gray-300 rounded p-1 mb-1 focus:ring-green-500 focus:border-green-500" id="nameInput" type="text" value="{{ $first_name }} {{ $middle_initial }} {{ $last_name }}" readonly/>
-                            <p class="text-[10px] text-gray-600" id="position">
-                                {{$role}}
-                            </p>
-                            <input class="hidden text-[10px] h-7 text-gray-600 border border-gray-300 rounded p-1 focus:ring-green-500 focus:border-green-500" id="positionInput" type="text" value="{{$role}}" readonly/>
-                        </div>
+                        <button type="button" class="text-xs text-gray-600 absolute top-3 right-3 hover:text-gray-800 transition duration-200"
+                                id="editButton" onclick="enableEditProfile()">
+                            <i class="fas fa-edit"></i>
+                            Edit
+                        </button>
+                        <button type="submit" wire:loading.attr="disabled" class="text-xs text-gray-600 absolute top-3 right-3 hidden hover:text-gray-800 transition duration-200"
+                                id="saveButton" style="display: none;">
+                            <i class="fas fa-save"></i>
+                            Save
+                        </button>
                     </div>
-                    <button class="text-xs text-gray-600 absolute top-3 right-3 hover:text-gray-800 transition duration-200" id="editButton" onclick="enableEditProfile()">
-                        <i class="fas fa-edit"></i>
-                        Edit
-                    </button>
-                    <button class="text-xs text-gray-600 absolute top-3 right-3 hidden hover:text-gray-800 transition duration-200" id="saveButton" onclick="saveProfileChanges()" style="display: none;">
-                        <i class="fas fa-save"></i>
-                        Save
-                    </button>
-                </div>
+                </form>
+
 
 
                 <div class="bg-white p-4 rounded-lg shadow mb-4 relative">
@@ -561,7 +174,6 @@
                     </div>
                 </div>
             </div>
-
 
 
             <div class="w-full md:w-4/4 md:pl-6 py-1" id="securityContent" style="display: none;">
@@ -793,8 +405,6 @@
             </div>
 
 
-
-
             <div id="developersContent" style="display: none;" class="w-full md:w-4/4 md:pl-4 py-1">
 
                 <h2 class="text-sm font-medium text-gray-800 mb-3">
@@ -863,4 +473,397 @@
 
         </div>
     </div>
+
+    <script>
+
+        //TABS
+        function showProfileContent() {
+            document.getElementById('profileContent').style.display = 'block';
+            document.getElementById('securityContent').style.display = 'none';
+            document.getElementById('developersContent').style.display = 'none';
+            document.getElementById('profileButton').classList.add('text-green-500');
+            document.getElementById('profileButton').classList.remove('text-gray-600');
+            document.getElementById('securityButton').classList.add('text-gray-600');
+            document.getElementById('securityButton').classList.remove('text-green-500');
+            document.getElementById('developersButton').classList.add('text-gray-600');
+            document.getElementById('developersButton').classList.remove('text-green-500');
+        }
+
+        function showSecurityContent() {
+            document.getElementById('profileContent').style.display = 'none';
+            document.getElementById('securityContent').style.display = 'block';
+            document.getElementById('developersContent').style.display = 'none';
+            document.getElementById('profileButton').classList.remove('text-green-500');
+            document.getElementById('profileButton').classList.add('text-gray-600');
+            document.getElementById('securityButton').classList.remove('text-gray-600');
+            document.getElementById('securityButton').classList.add('text-green-500');
+            document.getElementById('developersButton').classList.add('text-gray-600');
+            document.getElementById('developersButton').classList.remove('text-green-500');
+        }
+
+        function showDevelopersContent() {
+            document.getElementById('profileContent').style.display = 'none';
+            document.getElementById('securityContent').style.display = 'none';
+            document.getElementById('developersContent').style.display = 'block';
+            document.getElementById('profileButton').classList.remove('text-green-500');
+            document.getElementById('profileButton').classList.add('text-gray-600');
+            document.getElementById('securityButton').classList.add('text-gray-600');
+            document.getElementById('securityButton').classList.remove('text-green-500');
+            document.getElementById('developersButton').classList.remove('text-gray-600');
+            document.getElementById('developersButton').classList.add('text-green-500');
+        }
+
+
+
+
+        function enableEditProfile() {
+            document.getElementById('name').style.display = 'none';
+            document.getElementById('nameInput').style.display = 'block';
+            document.getElementById('position').style.display = 'none';
+            document.getElementById('positionInput').style.display = 'block';
+            document.getElementById('positionInput').style.width = document.getElementById('nameInput').offsetWidth + 'px';
+            document.getElementById('photoLabel').style.display = 'block';
+            document.getElementById('editButton').style.display = 'none';
+            document.getElementById('saveButton').style.display = 'block';
+        }
+
+        function saveProfileChanges() {
+            document.getElementById('name').innerText = document.getElementById('nameInput').value;
+            document.getElementById('name').style.display = 'block';
+            document.getElementById('nameInput').style.display = 'none';
+            document.getElementById('position').innerText = document.getElementById('positionInput').value;
+            document.getElementById('position').style.display = 'block';
+            document.getElementById('positionInput').style.display = 'none';
+            document.getElementById('photoLabel').style.display = 'none';
+            document.getElementById('editButton').style.display = 'block';
+            document.getElementById('saveButton').style.display = 'none';
+        }
+
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const output = document.getElementById('photo');
+                output.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+
+
+
+
+        //PERSONAL INFORMATION
+        function enableEditPersonalInfo() {
+            document.getElementById('firstName').style.display = 'none';
+            document.getElementById('firstNameInput').style.display = 'block';
+            document.getElementById('middleInitial').style.display = 'none';
+            document.getElementById('middleInitialInput').style.display = 'block';
+            document.getElementById('lastName').style.display = 'none';
+            document.getElementById('lastNameInput').style.display = 'block';
+            document.getElementById('birthdate').style.display = 'none';
+            document.getElementById('birthdateInput').style.display = 'block';
+            document.getElementById('editPersonalInfoButton').style.display = 'none';
+            document.getElementById('savePersonalInfoButton').style.display = 'block';
+
+        }
+
+        function savePersonalInfoChanges() {
+            const firstNameInput = document.getElementById('firstNameInput');
+            const middleInitialInput = document.getElementById('middleInitialInput');
+            const lastNameInput = document.getElementById('lastNameInput');
+            const birthdateInput = document.getElementById('birthdateInput');
+
+            const firstNameError = document.getElementById('firstNameError');
+            const middleInitialError = document.getElementById('middleInitialError');
+            const lastNameError = document.getElementById('lastNameError');
+            const birthdateError = document.getElementById('birthdateError');
+            const birthdateTodayError = document.getElementById('birthdateTodayError');
+            const birthdateUnder18Error = document.getElementById('birthdateUnder18Error');
+
+
+            let isValid = true;
+
+            // Reset error messages and styles
+            firstNameError.classList.add('hidden');
+            middleInitialError.classList.add('hidden');
+            lastNameError.classList.add('hidden');
+            birthdateError.classList.add('hidden');
+            birthdateTodayError.classList.add('hidden');
+            birthdateUnder18Error.classList.add('hidden');
+
+            firstNameInput.classList.remove('border-red-500');
+            middleInitialInput.classList.remove('border-red-500');
+            lastNameInput.classList.remove('border-red-500');
+            birthdateInput.classList.remove('border-red-500');
+
+            // Validate First Name
+            if (firstNameInput.value.trim() === '') {
+                firstNameError.classList.remove('hidden');
+                firstNameInput.classList.add('border-red-500');
+                isValid = false;
+            }
+
+            // Validate Middle Initial
+            if (middleInitialInput.value.trim() !== '' && middleInitialInput.value.length > 1) {
+                middleInitialError.classList.remove('hidden');
+                middleInitialInput.classList.add('border-red-500');
+                isValid = false;
+            }
+
+            // Validate Last Name
+            if (lastNameInput.value.trim() === '') {
+                lastNameError.classList.remove('hidden');
+                lastNameInput.classList.add('border-red-500');
+                isValid = false;
+            }
+
+
+            // Validate Birthdate
+            const today = new Date();
+            const birthdate = new Date(birthdateInput.value);
+            const age = today.getFullYear() - birthdate.getFullYear();
+            const isBirthdayToday = today.getDate() === birthdate.getDate() && today.getMonth() === birthdate.getMonth();
+
+            if (isBirthdayToday) {
+                birthdateTodayError.classList.remove('hidden');
+                birthdateInput.classList.add('border-red-500');
+                isValid = false;
+            } else if (age < 18) {
+                birthdateUnder18Error.classList.remove('hidden');
+                birthdateInput.classList.add('border-red-500');
+                isValid = false;
+            }
+
+            if (birthdateInput.value === '') {
+                birthdateError.classList.remove('hidden');
+                birthdateInput.classList.add('border-red-500');
+                isValid = false;
+            }
+
+
+            // If all inputs are valid, update the displayed values
+            if (isValid) {
+                document.getElementById('firstName').innerText = firstNameInput.value;
+                document.getElementById('middleInitial').innerText = middleInitialInput.value;
+                document.getElementById('lastName').innerText = lastNameInput.value;
+                document.getElementById('birthdate').innerText = birthdateInput.value;
+
+                // Hide inputs and show the updated values
+                document.getElementById('firstName').style.display = 'block';
+                firstNameInput.style.display = 'none';
+                document.getElementById('middleInitial').style.display = 'block';
+                middleInitialInput.style.display = 'none';
+                document.getElementById('lastName').style.display = 'block';
+                lastNameInput.style.display = 'none';
+                document.getElementById('birthdate').style.display = 'block';
+                birthdateInput.style.display = 'none';
+
+                document.getElementById('editPersonalInfoButton').style.display = 'block';
+                document.getElementById('savePersonalInfoButton').style.display = 'none';
+            }
+        }
+
+
+
+
+
+
+
+
+
+        //CONTACT INFORMATION
+        function enableEditContactInfo() {
+            document.getElementById('email').style.display = 'none';
+            document.getElementById('emailInput').style.display = 'block';
+            document.getElementById('phone').style.display = 'none';
+            document.getElementById('phoneInput').style.display = 'block';
+            document.getElementById('editContactInfoButton').style.display = 'none';
+            document.getElementById('saveContactInfoButton').style.display = 'block';
+        }
+
+        function saveContactInfoChanges() {
+            const emailInput = document.getElementById('emailInput');
+            const phoneInput = document.getElementById('phoneInput');
+
+            const emailError = document.getElementById('emailError');
+            const phoneError = document.getElementById('phoneError');
+
+            let isValid = true;
+
+            // Reset error messages and styles
+            emailError.classList.add('hidden');
+            phoneError.classList.add('hidden');
+
+            emailInput.classList.remove('border-red-500');
+            phoneInput.classList.remove('border-red-500');
+
+            // Validate Email
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email pattern
+            if (!emailPattern.test(emailInput.value.trim())) {
+                emailError.classList.remove('hidden');
+                emailInput.classList.add('border-red-500');
+                isValid = false;
+            }
+
+            // Validate Phone Number
+            const phonePattern = /^(09\d{2}-\d{3}-\d{4}|(\+63)\s?9\d{2}\s?\d{3}\s?\d{4}|09\d{2}\s?\d{3}\s?\d{4})$/; // Formats: 0917-123-4567, +63 917 123 4567, 0917 123 4567
+            if (!phonePattern.test(phoneInput.value.trim())) {
+                phoneError.classList.remove('hidden');
+                phoneInput.classList.add('border-red-500');
+                isValid = false;
+            }
+
+            // If all inputs are valid, update the displayed values
+            if (isValid) {
+                document.getElementById('email').innerText = emailInput.value;
+                document.getElementById('phone').innerText = phoneInput.value;
+
+                // Hide inputs and show the updated values
+                document.getElementById('email').style.display = 'block';
+                emailInput.style.display = ' none';
+                document.getElementById('phone').style.display = 'block';
+                phoneInput.style.display = 'none';
+
+                document.getElementById('editContactInfoButton').style.display = 'block';
+                document.getElementById('saveContactInfoButton').style.display = 'none';
+            }
+        }
+
+
+
+
+
+        //script for show and hide password
+        function toggleCurrentPasswordVisibility() {
+            const currentPasswordInput = document.getElementById('current-password');
+            const eyeIconCurrent = document.getElementById('eyeIconCurrent');
+            const eyeSlashIconCurrent = document.getElementById('eyeSlashIconCurrent');
+
+            if (currentPasswordInput.type === 'password') {
+                currentPasswordInput.type = 'text';
+                eyeIconCurrent.classList.remove('hidden');
+                eyeSlashIconCurrent.classList.add('hidden');
+            } else {
+                currentPasswordInput.type = 'password';
+                eyeIconCurrent.classList.add('hidden');
+                eyeSlashIconCurrent.classList.remove('hidden');
+            }
+        }
+
+        function toggleNewPasswordVisibility() {
+            const newPasswordInput = document.getElementById('new-password');
+            const eyeIconNew = document.getElementById('eyeIconNew');
+            const eyeSlashIconNew = document.getElementById('eyeSlashIconNew');
+
+            if (newPasswordInput.type === 'password') {
+                newPasswordInput.type = 'text';
+                eyeIconNew.classList.remove('hidden');
+                eyeSlashIconNew.classList.add('hidden');
+            } else {
+                newPasswordInput.type = 'password';
+                eyeIconNew.classList.add('hidden');
+                eyeSlashIconNew.classList.remove('hidden');
+            }
+        }
+
+        function toggleRetypeNewPasswordVisibility() {
+            const retypeNewPasswordInput = document.getElementById('retype-new-password');
+            const eyeIconRetype = document.getElementById('eyeIconRetype');
+            const eyeSlashIconRetype = document.getElementById('eyeSlashIconRetype');
+
+            if (retypeNewPasswordInput.type === 'password') {
+                retypeNewPasswordInput.type = 'text';
+                eyeIconRetype.classList.remove('hidden');
+                eyeSlashIconRetype.classList.add('hidden');
+            } else {
+                retypeNewPasswordInput.type = 'password';
+                eyeIconRetype.classList.add('hidden');
+                eyeSlashIconRetype.classList.remove('hidden');
+            }
+        }
+
+
+
+        //input validation for changing password
+        function validatePassword() {
+            const password = document.getElementById('new-password').value;
+            const passwordError = document.getElementById('passwordRequirementError');
+            const newPasswordError = document.getElementById('newPasswordError');
+
+            const hasNumber = /\d/;
+            const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/;
+
+            if (password.length < 6 || !hasNumber.test(password) || !hasSpecialChar.test(password)) {
+                passwordError.style.display = 'block';
+                newPasswordError.style.display = 'none';
+                document.getElementById('new-password').classList.add('border-red-500', 'focus:ring-red-500', 'focus:border-red-500');
+            } else {
+                passwordError.style.display = 'none';
+                document.getElementById('new-password').classList.remove('border-red-500', 'focus:ring-red-500', 'focus:border-red-500');
+            }
+        }
+
+        function validateRetypePassword() {
+            const newPassword = document.getElementById('new-password').value;
+            const retypePassword = document.getElementById('retype-new-password').value;
+            const retypeNewPasswordError = document.getElementById('retypeNewPasswordError');
+
+            if (newPassword !== retypePassword) {
+                retypeNewPasswordError.style.display = 'block';
+                document.getElementById('retype-new-password').classList.add('border-red-500', 'focus:ring-red-500', 'focus:border-red-500');
+            } else {
+                retypeNewPasswordError.style.display = 'none';
+                document.getElementById('retype-new-password').classList.remove('border-red-500', 'focus:ring-red-500', 'focus:border-red-500');
+            }
+        }
+
+        function clearError(errorId) {
+            document.getElementById(errorId).style.display = 'none';
+            document.getElementById('new-password').classList.remove('border-red-500', 'focus:ring-red-500', 'focus:border-red-500');
+            document.getElementById('retype-new-password').classList.remove('border-red-500', 'focus:ring-red-500', 'focus:border-red-500');
+            document.getElementById('current-password').classList.remove('border-red-500', 'focus:ring-red-500', 'focus:border-red-500');
+            document.getElementById('user-id').classList.remove('border-red-500', 'focus:ring-red-500', 'focus:border-red-500');
+        }
+
+        document.getElementById('passwordForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            validatePassword();
+            validateRetypePassword();
+
+            const userId = document.getElementById('user-id').value;
+            const currentPassword = document.getElementById('current-password').value;
+            const userIdError = document.getElementById('userIdError');
+            const currentPasswordError = document.getElementById('currentPasswordError');
+            const currentPasswordIncorrectError = document.getElementById('currentPasswordIncorrectError');
+
+            // Simulated validation for user ID and current password
+            if (!userId) {
+                userIdError.style.display = 'block';
+                document.getElementById('user-id').classList.add('border-red-500', 'focus:ring-red-500', 'focus:border-red-500');
+            } else {
+                userIdError.style.display = 'none';
+                document.getElementById('user-id').classList.remove('border-red-500', 'focus:ring-red-500', 'focus:border-red-500');
+            }
+
+            if (!currentPassword) {
+                currentPasswordError.style.display = 'block';
+                document.getElementById('current-password').classList.add('border-red-500', 'focus:ring-red-500', 'focus:border-red-500');
+            } else if (currentPassword !== 'correctPassword') { // Replace 'correctPassword' with actual validation logic
+                currentPasswordIncorrectError.style.display = 'block';
+                document.getElementById('current-password').classList.add ('border-red-500', 'focus:ring-red-500', 'focus:border-red-500');
+            } else {
+                currentPasswordError.style.display = 'none';
+                currentPasswordIncorrectError.style.display = 'none';
+                document.getElementById('current-password').classList.remove('border-red-500', 'focus:ring-red-500', 'focus:border-red-500');
+            }
+
+            // Check if there are any validation errors before proceeding
+            if (userId && currentPassword && currentPassword === 'correctPassword' &&
+                document.getElementById('passwordRequirementError').style.display === 'none' &&
+                document.getElementById('retypeNewPasswordError').style.display === 'none') {
+                // Proceed with account update logic here
+                alert('Account updated successfully!');
+            }
+        });
+    </script>
 </div>

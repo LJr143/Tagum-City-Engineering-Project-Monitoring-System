@@ -56,7 +56,7 @@ class MakeMaterialReport extends Component
                    'material_id' => $existingMaterial->id,
                    'pow_id' => $this->pow_id,
                    'quantity' => $material['quantity'],
-                   'total_cost' => $existingMaterial->estimated_unit_cost * $material['quantity'],
+                   'quantity_cost' => $existingMaterial->estimated_unit_cost * $material['quantity'],
                 ]);
             }
         }
