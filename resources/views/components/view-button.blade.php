@@ -44,6 +44,7 @@
             <div class="mb-4">
                 <p class="text-sm"><strong>Purchase Order Number:</strong> <span x-text="currentPurchaseOrder"></span></p>
                 <livewire:view-po-materials :pow_id="$pow_id" :purchase_order_number="$purchaseOrderNumber" />
+
             </div>
 
             <!-- Additional Information -->

@@ -85,6 +85,7 @@ class PurchaseOrderTable extends PowerGridComponent
     {
         return PowerGrid::fields()
             ->add('id')
+            ->add('pow_id')
             ->add('purchase_order_number')
             ->add('supplier')
             ->add('quantity')
@@ -96,6 +97,7 @@ class PurchaseOrderTable extends PowerGridComponent
     {
         $columns = [
             Column::make('Id', 'id')->hidden(),
+            Column::make('Pow_id', 'pow_id')->hidden(),
             Column::make('Purchase Order No.', 'purchase_order_number')->sortable()->searchable(),
             Column::make('Supplier', 'supplier')->sortable()->searchable(),
             Column::make('Total Items', 'total_items')->sortable()->searchable(),
@@ -112,7 +114,7 @@ class PurchaseOrderTable extends PowerGridComponent
     {
         return view('components.view-button', [
             'purchaseOrderNumber' => $row->purchase_order_number,
-            'pow_id' => $row->pow_id,
+            'pow_id' => $this->pow_id,
         ]);
     }
 

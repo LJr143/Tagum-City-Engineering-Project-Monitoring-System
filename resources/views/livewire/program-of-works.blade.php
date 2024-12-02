@@ -52,7 +52,7 @@
                             </div>
 
                             <div class="flex-1 text-center md:text-left mb-4 md:mb-0 ">
-                                <p class="text-[12px] font-bold">Php {{ number_format($totalIndirectCost + $totalDirectCost), 2 }}</p>
+                                <p class="text-[12px] font-bold">Php {{ number_format($totalProjectCost, 2)}}</p>
                                 <p class="text-gray-600 text-[10px]">Total Project Cost</p>
                             </div>
 

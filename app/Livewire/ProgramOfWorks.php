@@ -21,6 +21,7 @@ class ProgramOfWorks extends Component
     public $totalMaterialCost = 0;
 
     public $totalDirectCost = 0;
+    public $totalProjectCost = 0;
 
     public function mount($projectId)
     {
@@ -45,6 +46,9 @@ class ProgramOfWorks extends Component
             ->sum('amount');
         $this->totalMaterialCost = Material::where('pow_id', $this->pow->id)->sum('estimated_cost');
         $this->totalDirectCost = DirectCost::where('pow_id', $this->pow->id)->sum('total_cost');
+        $this->totalProjectCost = $this->totalIndirectCost + $this->totalDirectCost;
+
+
     }
 
     public function render()
@@ -61,6 +65,7 @@ class ProgramOfWorks extends Component
             'totalIndirectCost' => $this->totalIndirectCost,
             'totalDirectCost' => $this->totalDirectCost,
             'totalMaterialCost' => $this->totalMaterialCost,
+            'totalProjectCost' => $this->totalProjectCost,
         ]);
     }
 }
