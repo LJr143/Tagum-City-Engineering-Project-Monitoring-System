@@ -70,12 +70,12 @@ class AddProject extends Component
         // Get the newly created project's ID
         $projectId = $project->id;
 
-        $admins = User::where(function ($query) {
-            $query->whereRaw('role = ?', ['admin']);
+        $userToNotify = User::where(function ($query) {
+            $query->whereRaw('role = ?', ['admin', 'encoder']);
         })->get();
 
-        foreach ($admins as $admin) {
-            $admin->notify(new ProjectNotification('A new project has been created.', $projectId));
+        foreach ($userToNotify as $user) {
+            $user->notify(new ProjectNotification('A new project has been created.', $projectId));
         }
 
         LogService::logAction(
