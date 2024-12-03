@@ -205,7 +205,9 @@
                             <div class="  ">
                                 <div class="mb-2">
                                     @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'suspended' && $pow->project->status != 'completed')
-                                        <livewire:add-manual-material :pow_id="$pow->id"/>
+                                       <div class="hidden">
+                                           <livewire:add-manual-material :pow_id="$pow->id"/>
+                                       </div>
                                     @elseif(auth()->user()->isProjectIncharge() && $pow->project->status != 'suspended' && $pow->project->status != 'completed')
                                         <livewire:make-material-report :pow_id="$pow->id"/>
                                     @endif
@@ -257,7 +259,9 @@
                     <h3 class="text-sm font-semibold mb-2 text-center"> Indirect Cost</h3>
                     <div class="mb-2">
                         @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'suspended' && $pow->project->status != 'completed')
-                            <livewire:add-manual-indirect-cost :pow_id="$pow->id"/>
+                            <div class="hidden">
+                                <livewire:add-manual-indirect-cost :pow_id="$pow->id"/>
+                            </div>
                         @endif
                     </div>
                     <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
@@ -272,7 +276,9 @@
                     <h3 class="text-sm font-semibold mb-2 text-center"> Direct Cost</h3>
                     <div class="mb-2">
                         @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'suspended' && $pow->project->status != 'completed')
-                            <livewire:add-manual-direct-cost :pow_id="$pow->id"/>
+                            <div class="hidden">
+                                <livewire:add-manual-direct-cost :pow_id="$pow->id"/>
+                            </div>
                         @endif
                     </div>
                     <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">

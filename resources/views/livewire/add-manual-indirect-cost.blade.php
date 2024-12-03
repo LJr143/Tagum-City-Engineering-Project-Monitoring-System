@@ -89,4 +89,10 @@
             </form>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('indirect-costs-saved', () => {
+            document.querySelector('[x-data]').__x.$data.indirectOpen = false;
+        });
+    </script>
 </div>

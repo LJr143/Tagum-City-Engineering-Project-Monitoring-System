@@ -1,12 +1,12 @@
 <div class="flex text-left" x-data="{ open: false }" x-cloak @open-edit-modal.window="open = true" @user-edited.window="open = false">
-<div class="flex justify-end">
-        <div class="relative ml-2">
-            <button @click="open = true" class="flex bg-green-500 text-white text-xs px-4 py-2 rounded shadow-md hover:bg-green-600 focus:outline-none">
+<div class="flex justify-content-center align-items-center">
+        <div class="relative">
+            <button @click="open = true" class="flex  text-white text-xs  rounded focus:outline-none">
 
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="ml-2">
-                    <path d="M21 7L17 3L14 6L8 12V16H12L18 10L21 7Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M14 6L18 10" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M10 4H4V20H20V14" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 7L17 3L14 6L8 12V16H12L18 10L21 7Z" stroke="green" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M14 6L18 10" stroke="green" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M10 4H4V20H20V14" stroke="green" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
 
             </button>

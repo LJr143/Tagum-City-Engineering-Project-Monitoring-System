@@ -18,28 +18,7 @@
                         <div class="flex space-x-4">
 
                             @if ($project->status === 'pending validation')
-                                <div class="flex justify-content-center align-items-center">
-                                    <form action="{{ route('project.approve', $project->id) }}" method="POST">
-                                        @csrf
-                                        @method('POST') <!-- Ensures it's a POST request -->
-                                    <button
-                                        class=" text-xs text-center bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded flex items-center space-x-2 mr-2">
-                                        <i class="fas fa-check mr-1 "></i>
-                                        Approve
-                                    </button>
-                                    </form>
-
-                                    <form action="{{ route('project.deny', $project->id) }}" method="POST">
-                                        @csrf
-                                        @method('POST') <!-- Ensures it's a POST request -->
-                                    <button
-                                        class=" text-xs text-center bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded flex items-center space-x-2"
-                                        wire:click="denyProject({{ $project->id }})">
-                                        <i class="fas fa-times mr-1"></i>
-                                        Deny
-                                    </button>
-                                    </form>
-                                </div>
+                               <livewire:manage-approval-denial :project="$project"/>
 
                             @endif
 

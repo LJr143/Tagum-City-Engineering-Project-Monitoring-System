@@ -47,10 +47,16 @@
          x-on:open-edit-modal.window="pushNotification('success', 'Edit Modal Opened', 'Edit modal opened successfully.');"
          x-on:user-deleted.window="pushNotification('success', 'User Deleted', 'User deleted successfully.');"
          x-on:material-edited.window="pushNotification('success', 'Material Edited', 'Material edited successfully.');"
+         x-on:material-deleted.window="pushNotification('success', 'Material Deleted', 'Material deleted successfully.');"
          x-on:suspend-success.window="pushNotification('success', 'Project Suspended', 'Project suspended successfully.');"
          x-on:mismatch-import.window="pushNotification('error', 'Project Details Failed', 'PR total amount does not match pow total amount.');"
          x-on:resumed-success.window="pushNotification('success', 'Project Resumed', 'Project resumed successfully.');"
          x-on:realignment-success.window="pushNotification('success', 'Realignment Success', 'Funds realigned successfully.');"
+         x-on:indirect-costs-saved.window="pushNotification('success', 'Indirect Cost Added', 'Indirect cost added successfully.');"
+         x-on:mark-complete.window="pushNotification('success', 'Marked Complete', 'Project marked complete successfully.');"
+         x-on:marked-complete-approve.window="pushNotification('success', 'Project Approved', 'Project approved successfully.');"
+         x-on:marked-complete-deny.window="pushNotification('success', 'Project Denied', 'Project denied successfully.');"
+         x-on:swa-report-success.window="pushNotification('success', 'Report Added', 'Report added successfully.');"
     >
 
 

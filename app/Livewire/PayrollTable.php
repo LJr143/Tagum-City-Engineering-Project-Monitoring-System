@@ -18,7 +18,7 @@
         use WithExport;
         public $pow_id;
         public string $tableName = 'PayrollTable';
-
+        public $listeners = ['payroll-added'=>'$refresh'];
         public function setUp(): array
         {
             $this->showCheckBox();

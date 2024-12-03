@@ -120,4 +120,9 @@
             </form>
         </div>
     </div>
+    <script>
+        document.addEventListener('swa-report-success', () => {
+            document.querySelector('[x-data]').__x.$data.makeSwaReport = false; // Close modal safely
+        });
+    </script>
 </div>

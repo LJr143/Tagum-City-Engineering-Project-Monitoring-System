@@ -24,7 +24,7 @@ use PowerComponents\LivewirePowerGrid\Traits\WithExport;
 
     public $selectedUserId;
     public $pow_id;
-    public $listeners = ['material-edited'=>'$refresh'];
+    public $listeners = ['material-edited'=>'$refresh', 'material-deleted'=>'$refresh'];
 
     public function setUp(): array
     {

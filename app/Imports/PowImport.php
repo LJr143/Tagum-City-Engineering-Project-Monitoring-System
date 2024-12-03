@@ -9,6 +9,7 @@ use App\Models\Pow;
 use App\Models\SwaReport;
 use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Concerns\ToModel;
+use function PHPUnit\Framework\isEmpty;
 
 class PowImport implements ToModel
 {
@@ -126,7 +127,7 @@ class PowImport implements ToModel
      */
     private function isIndirectCostRow(array $row): bool
     {
-        return !is_null($row[4]) && is_numeric($row[10]) && $row[10] != 0;
+        return !is_null($row[4]) && is_numeric($row[10]) && $row[10] != 0  && !empty($row[4]);
     }
 
     /**
@@ -166,13 +167,14 @@ class PowImport implements ToModel
             $this->updateLaborCost($laborCost);
         }
 
-
-        // Process indirect cost first
-        $indirectCost = new IndirectCost([
-            'pow_id' => $this->powId,
-            'description' => $row[4],
-            'amount' => $row[10],
-        ]);
+        if (!isEmpty($row[4])) {
+            // Process indirect cost first
+            $indirectCost = new IndirectCost([
+                'pow_id' => $this->powId, // Assuming $this->powId is set in your class
+                'description' => $row[4], // Indirect cost description
+                'amount' => $row[10], // Amount of indirect cost
+            ]);
+        }
 
         // Process other direct cost
         $otherDirectCost = new OtherDirectCost([

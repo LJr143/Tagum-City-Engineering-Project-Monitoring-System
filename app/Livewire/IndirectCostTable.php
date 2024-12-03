@@ -23,6 +23,8 @@ class IndirectCostTable extends PowerGridComponent
 
     public $pow_id;
 
+    protected $listeners = ['indirect-costs-saved'=>'$refresh'];
+
 
     public function setUp(): array
     {

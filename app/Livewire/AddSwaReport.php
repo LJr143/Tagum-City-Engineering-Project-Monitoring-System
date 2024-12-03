@@ -100,7 +100,7 @@ class AddSwaReport extends Component
         $this->reset(['swa_report']);
 
         // Dispatch an event to indicate successful save
-        $this->dispatch('MaterialUpdateSaved');
+        $this->dispatch('swa-report-success');
     }
 
     public function render()

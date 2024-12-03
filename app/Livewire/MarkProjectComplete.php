@@ -17,7 +17,7 @@ class MarkProjectComplete extends Component
         $this->pow_id = $pow_id;
     }
 
-    public function markComplete()
+    public function markComplete(): void
     {
         // Validate the data
         $this->validate([
@@ -42,12 +42,18 @@ class MarkProjectComplete extends Component
                 // Notify each admin
                 foreach ($admins as $admin) {
                     $admin->notify(new ProjectNotification(
-                        'A new project has been marked completed and requires your attention.',
+                        'A project has been marked completed and requires your attention.',
                         $project->id
                     ));
                 }
 
+                $user = auth()->user();
+                $user->notify(new ProjectNotification(
+                    'Project marked complete and is waiting for validation.',
+                    $project->id
+                ));
 
+                $this->dispatch('mark-complete');
                 // Optionally, trigger a success message
                 session()->flash('message', 'Project marked as pending validation.');
             }

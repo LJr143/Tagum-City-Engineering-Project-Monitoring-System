@@ -28,6 +28,7 @@ class SwaReportTbale extends PowerGridComponent
 
     public bool $showFilters = true;
     public $pow_id;
+    protected $listeners = ['swa-report-success'=>'$refresh'];
 
 
     public function setUp(): array

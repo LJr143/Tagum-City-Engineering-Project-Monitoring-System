@@ -8,12 +8,12 @@ class PowInfoDetails extends Component
 {
     public $pow;
     public $index;
-    protected $listeners = ['suspend-success'=>'render', 'resumed-success'=>'render'];
+    protected $listeners = ['suspend-success'=>'render', 'resumed-success'=>'render', 'mark-complete'=>'render'];
 
     public function mount($pow, $index): void
     {
-        $this->pow = $pow;   // Assign to the class property
-        $this->index = $index; // Assign to the class property
+        $this->pow = $pow;
+        $this->index = $index;
     }
 
     public function render()
