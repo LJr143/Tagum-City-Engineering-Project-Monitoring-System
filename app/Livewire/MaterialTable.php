@@ -24,7 +24,7 @@ use PowerComponents\LivewirePowerGrid\Traits\WithExport;
 
     public $selectedUserId;
     public $pow_id;
-
+    public $listeners = ['material-edited'=>'$refresh'];
 
     public function setUp(): array
     {
@@ -98,8 +98,8 @@ use PowerComponents\LivewirePowerGrid\Traits\WithExport;
             Column::make('Quantity Bal.', 'quantity_bal')->sortable()->searchable(),
         ];
 
-        if (auth()->user()->isEncoder()) {
-            $columns[] = Column::action('Action')->bodyAttribute('text-center');
+        if (auth()->user()->isEncoder() || auth()->user()->isAdmin()) {
+            $columns[] = Column::action('Action')->bodyAttribute('');
         }
 
         return $columns;

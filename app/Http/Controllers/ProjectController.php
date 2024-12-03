@@ -34,9 +34,7 @@ class ProjectController extends Controller
     public function viewPowInfo($id,  $index)
     {
         $pow = Pow::findOrFail($id);
-        $contingencyBalance = $pow
-            ? $pow->directCosts()->where('description', 'contingencies')->value('remaining_cost')
-            : null;
+        $contingencyBalance = $pow?->directCosts()->where('description', 'contingencies')->value('remaining_cost');
         return view('layouts.Projects.material-cost-table', compact('pow', 'index', 'contingencyBalance'));
     }
 
@@ -68,56 +66,6 @@ class ProjectController extends Controller
             ->with('message', 'Pow deleted successfully.');
     }
 
-    public function suspend(Request $request)
-    {
-        // Validate the incoming request data
-        $request->validate([
-            'project_id' => 'required|exists:projects,id',
-            'pow_id' => 'required|exists:program_of_works,id',
-        ]);
-
-        // Find the project and update its status
-        $powId = $request->pow_id;
-        $project = Project::find($request->project_id);
-        $project->status = 'suspended';
-        $project->save();
-
-        // Store the suspension record in PowSuspendResume
-        PowSuspendResume::create([
-            'pow_id' => $powId,
-            'transaction' => 'suspended',
-            'user_id' => Auth::id(),
-            'created_at' => now(),
-        ]);
-
-
-        return redirect()->back();
-    }
-
-    public function resume(Request $request)
-    {
-        // Validate the incoming request data
-        $request->validate([
-            'project_id' => 'required|exists:projects,id',
-            'pow_id' => 'required|exists:program_of_works,id',
-        ]);
-
-        // Find the project and update its status
-        $powId = $request->pow_id;
-        $project = Project::find($request->project_id);
-        $project->status = 'ongoing'; // or any other status you prefer for resumed projects
-        $project->save();
-
-        PowSuspendResume::create([
-            'pow_id' => $powId,
-            'transaction' => 'ongoing', // or specific transaction type if needed
-            'user_id' => Auth::id(), // get the ID of the authenticated user
-            'created_at' => now(), // if you want to set the current timestamp manually
-        ]);
-
-        // Redirect back with a success message
-        return redirect()->back()->with('success', 'Project has been resumed successfully.');
-    }
 
     public function realignFunds(Request $request)
     {

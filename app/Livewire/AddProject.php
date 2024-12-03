@@ -71,7 +71,7 @@ class AddProject extends Component
         $projectId = $project->id;
 
         $userToNotify = User::where(function ($query) {
-            $query->whereRaw('role = ?', ['admin', 'encoder']);
+            $query->whereIn('role', ['admin', 'encoder']);
         })->get();
 
         foreach ($userToNotify as $user) {
@@ -90,7 +90,5 @@ class AddProject extends Component
         // Dispatch event
         $this->dispatch('project-added');
 
-        // Redirect
-        return redirect()->route('project-main')->with('success', 'Project added successfully.');
     }
 }

@@ -23,6 +23,8 @@ class ProgramOfWorks extends Component
     public $totalDirectCost = 0;
     public $totalProjectCost = 0;
 
+    protected $listeners = ['pow-added' => 'fetchPowInfo'];
+
     public function mount($projectId)
     {
         $this->projectId = $projectId;

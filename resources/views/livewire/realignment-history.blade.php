@@ -1,3 +1,5 @@
 <div>
-    {{-- A good traveler has no fixed plans and is not intent upon arriving. --}}
+    <div wire:poll.5000ms>
+        <livewire:power-grid-component :grid="$this" />
+    </div>
 </div>

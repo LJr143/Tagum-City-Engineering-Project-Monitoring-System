@@ -49,6 +49,8 @@
          x-on:material-edited.window="pushNotification('success', 'Material Edited', 'Material edited successfully.');"
          x-on:suspend-success.window="pushNotification('success', 'Project Suspended', 'Project suspended successfully.');"
          x-on:mismatch-import.window="pushNotification('error', 'Project Details Failed', 'PR total amount does not match pow total amount.');"
+         x-on:resumed-success.window="pushNotification('success', 'Project Resumed', 'Project resumed successfully.');"
+         x-on:realignment-success.window="pushNotification('success', 'Realignment Success', 'Funds realigned successfully.');"
     >
 
 

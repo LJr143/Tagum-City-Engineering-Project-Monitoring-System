@@ -15,7 +15,6 @@ class EditMaterial extends Component
         'quantity' => 'required|numeric',
         'estimated_cost' => 'required|numeric',
         'estimated_unit_cost' => 'required|numeric',
-        'quantity_use' => 'required|numeric',
     ];
 
     public function mount($materialId)
@@ -28,7 +27,6 @@ class EditMaterial extends Component
             $this->quantity = $material->quantity;
             $this->estimated_cost = $material->estimated_cost;
             $this->estimated_unit_cost = $material->estimated_unit_cost;
-            $this->quantity_use = $material->quantity_use;
             $this->spent_cost = $material->spent_cost;
         }
     }
@@ -56,7 +54,6 @@ class EditMaterial extends Component
                     'quantity' => $this->quantity,
                     'estimated_cost' => $this->estimated_cost,
                     'estimated_unit_cost' => $this->estimated_unit_cost,
-                    'quantity_use' => $this->quantity_use,
                     'spent_cost' => $this->spent_cost,
                 ]);
 
@@ -68,8 +65,10 @@ class EditMaterial extends Component
                     auth()->id()
                 );
 
+                $this->reset();
                 // Dispatch event to refresh the parent component or do any necessary actions
                 $this->dispatch('material-edited');
+
             }
         } catch (\Exception $e) {
             session()->flash('error', 'An error occurred while updating the material: ' . $e->getMessage());

@@ -10,7 +10,7 @@ class NotificationBell extends Component
     public $notifications;
     public $count = 0;
 
-    protected $listeners = ['notificationAdded' => 'loadNotifications', 'refreshNotifications' => 'loadNotifications'];
+    protected $listeners = ['notificationAdded' => 'loadNotifications', 'refreshNotifications' => 'loadNotifications','project-added' => 'loadNotifications'];
 
     public function mount()
     {

@@ -33,7 +33,6 @@ class SuspendProject extends Component
 
             $this->dispatch('suspend-success');
 
-            return redirect()->route('material-table-cost', ['pow_id' => $this->powId, 'index' => $this->index]);
 
         }
 

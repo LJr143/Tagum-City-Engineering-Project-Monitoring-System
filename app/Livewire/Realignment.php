@@ -111,6 +111,8 @@ class Realignment extends Component
             'realigned_by' => auth()->id(),
         ]);
 
+        $this->dispatch('realignment-success');
+        $this->reset();
         session()->flash('message', 'Realignment successful!');
     }
 
@@ -130,13 +132,11 @@ class Realignment extends Component
 
     protected function getBalance($item)
     {
-        // Check for the correct balance field dynamically
         return $item ? ($item->remaining_cost ?? $item->amount ?? 0) : 0;
     }
 
     protected function adjustBalance($item, $amount): void
     {
-        // Dynamically update the correct balance field
         if (isset($item->total_cost)) {
             $item->total_cost += $amount;
             $item->remaining_cost = $item->total_cost - $item->spent_cost;
@@ -147,7 +147,6 @@ class Realignment extends Component
 
     protected function adjustBalanceSource($item, $amount): void
     {
-        // Dynamically update the correct balance field
         if (isset($item->total_cost)) {
             $item->total_cost -= $amount;
             $item->remaining_cost = $item->total_cost - $item->spent_cost;

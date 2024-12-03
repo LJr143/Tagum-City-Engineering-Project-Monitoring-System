@@ -25,12 +25,14 @@ class ProjectFilter extends Component
 
     protected $paginationTheme = 'tailwind';
 
+    protected $listeners = ['project-added' => 'refreshProjects'];
+
+
     public function mount($status = 'all')
     {
         $this->selectedStatus = $status;
         $this->loadProjectCounts();
     }
-
 
     private function loadProjectCounts()
     {
@@ -51,10 +53,9 @@ class ProjectFilter extends Component
         }
     }
 
-
-        public function filterProjects()
+    public function filterProjects()
         {
-            $query = Project::with('pows.indirectCosts', 'pows.materials', 'pows.payroll');
+            $query = Project::with('pows.indirectCosts', 'pows.materials', 'pows.payroll')->orderBy('created_at', 'desc');
 
             $user = auth()->user();
 
@@ -152,6 +153,11 @@ class ProjectFilter extends Component
     {
         $this->searchTerm = $term;
         $this->resetPage();
+    }
+
+    public function refreshProjects()
+    {
+        $this->filterProjects(); // Assuming this method refreshes the projects
     }
 
     public function render()

@@ -20,7 +20,7 @@
                 @endforeach
             </select>
 
-        <p class="text-[11px] text-red-700 mb-2">Remaining Balance: {{ $balance }}</p>
+        <p class="text-[11px] text-red-700 mb-2">Remaining Balance: {{ number_format($balance,2) }}</p>
 
         <!-- Realign Amount -->
         <label for="realign_amount" class="block text-xs font-medium text-gray-700">Amount to Realign</label>
@@ -84,6 +84,11 @@
                     @this.set(id, value);
                 });
         }
+
+        document.addEventListener('realignment-success', () => {
+            closeRealignmentModal();
+        });
+
 
     </script>
 </div>

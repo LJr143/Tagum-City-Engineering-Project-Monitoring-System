@@ -24,6 +24,8 @@ class RealignmentHistory extends PowerGridComponent
 
     public $pow_id;
 
+    protected $listeners = ['realignment-success'=>'$refresh'];
+
     public function setUp(): array
     {
         $this->showCheckBox();

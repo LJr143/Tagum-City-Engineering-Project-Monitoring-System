@@ -195,9 +195,9 @@ class AddPow extends Component
             // Set the uploading state back to false
             $this->isUploading = false;
 
-            // Redirect to view the POW
-            return redirect()->route('view-project-pow', ['id' => $pow->project_id])
-                ->with('success', 'POW added successfully.');
+//            // Redirect to view the POW
+//            return redirect()->route('view-project-pow', ['id' => $pow->project_id])
+//                ->with('success', 'POW added successfully.');
         }
 
 
