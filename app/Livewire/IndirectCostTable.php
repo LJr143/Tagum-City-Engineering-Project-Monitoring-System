@@ -23,7 +23,7 @@ class IndirectCostTable extends PowerGridComponent
 
     public $pow_id;
 
-    protected $listeners = ['indirect-costs-saved'=>'$refresh'];
+    protected $listeners = ['indirect-costs-saved'=>'$refresh', 'indirect_update'=>'$refresh'];
 
 
     public function setUp(): array
@@ -70,6 +70,10 @@ class IndirectCostTable extends PowerGridComponent
                 $indirectCostAmount = $indirectCost->amount;
 
                 return Money::of($indirectCostAmount, 'PHP')->formatTo('en_PH');
+            })
+            ->add('balance', function (IndirectCost $indirectCost){
+                $balance = $indirectCost->amount - $indirectCost->spent_cost;
+                return Money::of($balance, 'PHP')->formatTo('en_PH');
             });
     }
     public function columns(): array
@@ -78,6 +82,7 @@ class IndirectCostTable extends PowerGridComponent
             Column::make('Id', 'id')->sortable(),
             Column::make('Description', 'description')->sortable()->searchable(),
             Column::make('Amount', 'amount')->sortable()->searchable(),
+            Column::make('Balance', 'balance')->sortable()->searchable(),
         ];
     }
 

@@ -262,6 +262,8 @@
                             <div class="hidden">
                                 <livewire:add-manual-indirect-cost :pow_id="$pow->id"/>
                             </div>
+                        @elseif(auth()->user()->isProjectIncharge() && $pow->project->status != 'suspended' && $pow->project->status != 'completed')
+                            <livewire:make-indirect-report :pow_id="$pow->id"/>
                         @endif
                     </div>
                     <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">

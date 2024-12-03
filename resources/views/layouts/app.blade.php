@@ -58,6 +58,7 @@
          x-on:marked-complete-deny.window="pushNotification('success', 'Project Denied', 'Project denied successfully.');"
          x-on:swa-report-success.window="pushNotification('success', 'Report Added', 'Report added successfully.');"
          x-on:swa-report-add-error.window="pushNotification('error', 'Material Not Found', 'No material matches item no.');"
+         x-on:indirect_update.window="pushNotification('success', 'Indirect Report Added', 'Indirect report added successfully.');"
     >
 
 

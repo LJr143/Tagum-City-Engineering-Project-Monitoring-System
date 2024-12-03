@@ -9,7 +9,7 @@ class IndirectCost extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['pow_id', 'description', 'amount'];
+    protected $fillable = ['pow_id', 'description', 'amount', 'spent_cost'];
 
     public function pow()
     {
