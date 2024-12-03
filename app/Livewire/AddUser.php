@@ -11,6 +11,7 @@ class AddUser extends Component
 {
     public $first_name;
     public $last_name;
+    public $username;
     public $middle_initial;
     public $gender;
     public $birth_date;
@@ -24,6 +25,7 @@ class AddUser extends Component
     protected $rules = [
         'first_name' => 'required|string|max:255',
         'last_name' => 'required|string|max:255',
+        'username' => 'required|string|max:255',
         'middle_initial' => 'required|string|max:2',
         'gender' => 'required|string|max:25',
         'birth_date' => 'required|date',
@@ -42,6 +44,7 @@ class AddUser extends Component
         User::create([
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
+            'username'=> $this->username,
             'middle_initial' => $this->middle_initial,
             'gender' => $this->gender,
             'birth_date' => $this->birth_date,
