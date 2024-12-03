@@ -19,7 +19,7 @@ class UserTable extends PowerGridComponent
 {
     use WithExport;
     public $selectedUserId;
-    protected $listeners = ['user-deleted' => '$refresh', 'user-edited' => '$refresh'];
+    protected $listeners = ['user-deleted' => '$refresh', 'user-edited' => '$refresh', 'user-added'=>'$refresh'];
 
 
     public function setUp(): array
