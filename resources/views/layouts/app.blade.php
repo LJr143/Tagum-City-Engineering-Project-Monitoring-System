@@ -57,6 +57,7 @@
          x-on:marked-complete-approve.window="pushNotification('success', 'Project Approved', 'Project approved successfully.');"
          x-on:marked-complete-deny.window="pushNotification('success', 'Project Denied', 'Project denied successfully.');"
          x-on:swa-report-success.window="pushNotification('success', 'Report Added', 'Report added successfully.');"
+         x-on:swa-report-add-error.window="pushNotification('error', 'Material Not Found', 'No material matches item no.');"
     >
 
 

@@ -49,6 +49,14 @@ class AddSwaReport extends Component
                 ->where('pow_id', $this->pow_id)
                 ->first();
 
+            if (!$existingSwa) {
+                // Dispatch an error message if item number doesn't exist
+                $this->dispatch('swa-report-add-error', [
+                    'message' => "Item No {$swa['item_no']} does not exist. Please check and try again.",
+                ]);
+                return; // Stop further processing
+            }
+
             $thisMonthQty = $swa['to_date_qty']; // Quantity for this month
             $prevQty = $existingSwa ? $existingSwa->to_date_qty : 0; // Previous total quantity
             $toDateQty = $prevQty + $thisMonthQty; // Total quantity up to date
