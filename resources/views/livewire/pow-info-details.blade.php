@@ -186,6 +186,7 @@
         </div>
 
         <div class="flex w-full gap-4">
+
             <!-- Material Cost Section -->
             <div id="materials" class="w-full">
                 <div class="bg-white shadow-lg rounded-lg" x-data="{ tab: 'materials' }">
@@ -198,10 +199,12 @@
                             Materials History
                         </button>
                     </div>
+
                     <!-- Tab Content -->
                     <div class="p-6">
                         <div class="text-gray-700" x-show="tab === 'materials'">
-                            <!-- <h2 class="text-sm font-semibold mb-4">Materials</h2>-->
+                            <h3 class="text-sm font-semibold mb-2 text-center"> Materials</h3>
+
                             <div class="  ">
                                 <div class="mb-2">
                                     @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'suspended' && $pow->project->status != 'completed')
@@ -218,40 +221,55 @@
 
                             </div>
                         </div>
+
                         <div class="text-gray-700" x-show="tab === 'materials-history'">
-                            <h2 class="text-sm font-semibold mb-4">
-                                Material History
-                            </h2>
-
+                            <h3 class="text-sm font-semibold mb-2 text-center"> Materials History</h3>
                             <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
-
                                 <livewire:material-history :pow_id="$pow->id"/>
                             </div>
-
                         </div>
                     </div>
                 </div>
-
             </div>
 
             <!-- Labor Cost Section -->
             <div id="labor-cost" class="hidden w-full">
-                <div class="bg-white shadow-md rounded-lg p-6">
-                    <h3 class="text-sm font-semibold mb-4 text-center">Labor Cost</h3>
-                    <!-- Filter, Search, Import Inside Card -->
-                    <div class="flex items-center justify-between mb-4 space-x-4">
-                        <div class="flex space-x-2 ml-auto">
-                            @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'suspended' && $pow->project->status != 'completed')
-                                <livewire:add-payroll :pow_id="$pow->id"/>
-                            @endif
-                        </div>
+                <div class="bg-white shadow-lg rounded-lg" x-data="{ tab: 'labor_cost' }">
+                    <!-- Tabs -->
+                    <div class="flex justify-center space-x-4 bg-gray-200 rounded-t-lg">
+                        <button :class="tab === 'labor_cost' ? 'bg-white font-bold text-green-500' : 'text-gray-500'" @click="tab = 'labor_cost'" class="w-1/2 px-4 py-2 rounded-t-lg text-sm">
+                           Labor Cost
+                        </button>
+                        <button :class="tab === 'job-order' ? 'bg-white font-bold text-green-500' : 'text-gray-500'" @click="tab = 'job-order'" class="w-1/2 px-4 py-2 rounded-t-lg text-sm">
+                            Job Order
+                        </button>
                     </div>
-                    <!-- Table for Material Costs -->
-                    <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
-                        <livewire:payroll-table :pow_id="$pow->id"/>
+
+                    <!-- Tab Content -->
+                    <div class="p-6">
+                        <div class="text-gray-700" x-show="tab === 'labor_cost'">
+                            <h3 class="text-sm font-semibold mb-2 text-center">Labor Cost</h3>
+                            <div class="flex items-center justify-between mb-4 space-x-4">
+                                <div class="flex space-x-2 ml-auto">
+                                    @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'suspended' && $pow->project->status != 'completed')
+                                        <livewire:add-payroll :pow_id="$pow->id"/>
+                                    @endif
+                                </div>
+                            </div>
+                            <!-- Table for Material Costs -->
+                            <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
+                                <livewire:payroll-table :pow_id="$pow->id"/>
+                            </div>
+
+                        </div>
+
+                        <div class="text-gray-700" x-show="tab === 'job-order'">
+                            <h3 class="text-sm font-semibold mb-2 text-center"> Job Order</h3>
+                        </div>
                     </div>
                 </div>
             </div>
+
 
             <!-- Indirect Cost Section -->
             <div id="indirect-cost" class="hidden w-full">
