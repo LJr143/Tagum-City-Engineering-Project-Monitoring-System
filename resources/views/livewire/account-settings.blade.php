@@ -35,7 +35,7 @@
                             <div class="relative w-16 h-16 rounded-full overflow-hidden bg-gray-300 mb-4 sm:mb-0 mt-2">
                                 <!-- Use the temporary URL or default URL for preview -->
                                 <img alt="Profile photo of a person" class="w-full h-full object-cover" height="64" id="photo"
-                                    src="{{ $profilePhotoUrl }}" width="64" />
+                                    src="{{  $profileImage ? $profileImage->temporaryUrl() : $profilePhotoUrl  }}" width="64" />
                                 <input accept="image/*" class="hidden" id="photoInput" wire:model="profileImage" type="file" />
                                 <label class="absolute bottom-0 right-0 bg-black bg-opacity-50 text-white p-1 rounded-full cursor-pointer" for="photoInput" id="photoLabel" style="display: none;">
                                     <i class="fas fa-camera"></i>
@@ -79,7 +79,7 @@
                             </i>
                             Edit
                         </button>
-                        <button wire:click="saveProfile" class="text-xs text-gray-600 absolute hover:text-gray-800 transition duration-200 top-2 right-2 hidden" id="savePersonalInfoButton" onclick="savePersonalInfoChanges()" style="display: none;">
+                        <button wire:click="savePersonalInfo" class="text-xs text-gray-600 absolute hover:text-gray-800 transition duration-200 top-2 right-2 hidden" id="savePersonalInfoButton" onclick="savePersonalInfoChanges()" style="display: none;">
                             <i class="fas fa-save">
                             </i>
                             Save
@@ -103,7 +103,7 @@
                             <p class="text-[11px] text-gray-800 font-medium" id="middleInitial">
                                 {{ $middle_initial }}
                             </p>
-                            <input class="hidden text-[11px] w-full md:w-2/3 h-7 text-gray-800 border border-gray-300 rounded p-1 focus:ring-green-500 focus:border-green-500" id="middleInitialInput" type="text" value="{{ $middle_initial }}" />
+                            <input wire:model="middle_initial" class="hidden text-[11px] w-full md:w-2/3 h-7 text-gray-800 border border-gray-300 rounded p-1 focus:ring-green-500 focus:border-green-500" id="middleInitialInput" type="text" value="{{ $middle_initial }}" />
                             <p class="text-red-500 text-xs hidden" id="middleInitialError">Please enter a valid middle initial.</p>
                         </div>
                         <div>
@@ -113,7 +113,7 @@
                             <p class="text-[11px] text-gray-800 font-medium" id="lastName">
                                 {{ $last_name }}
                             </p>
-                            <input class="hidden text-[11px] w-full md:w-2/3 text-gray-800 border border-gray-300 rounded p-1 focus:ring-green-500 focus:border-green-500" id="lastNameInput" type="text" value="{{ $last_name }}" />
+                            <input wire:model="last_name" class="hidden text-[11px] w-full md:w-2/3 text-gray-800 border border-gray-300 rounded p-1 focus:ring-green-500 focus:border-green-500" id="lastNameInput" type="text" value="{{ $last_name }}" />
                             <p class="text-red-500 text-xs hidden" id="lastNameError">Please enter a valid last name.</p>
                         </div>
                         <div>
@@ -121,7 +121,7 @@
                                 Birthdate
                             </p>
                             <p class="text-[11px] text-gray-800 font-medium" id="birthdate">
-                                01-01-1990
+                                {{ $birthdate }}
                             </p>
                             <input wire:model="birthdate" class="hidden text-[11px] w-full md:w-2/3 h-7 text-gray-800 border border-gray-300 rounded p-1 focus:ring-green-500 focus:border-green-500" id="birthdateInput" type="date" value="01/01/1990" />
                             <p class="text-red-500 text-xs hidden" id="birthdateError">Please enter a valid birthdate.</p>
@@ -143,7 +143,7 @@
                             </i>
                             Edit
                         </button>
-                        <button class="text-xs text-gray-600 hover:text-gray-800 transition duration-200 hidden" id="saveContactInfoButton" onclick="saveContactInfoChanges()" style="display: none;">
+                        <button wire:click="saveContactInfo" class="text-xs text-gray-600 hover:text-gray-800 transition duration-200 hidden" id="saveContactInfoButton" onclick="saveContactInfoChanges()" style="display: none;">
                             <i class="fas fa-save">
                             </i>
                             Save
@@ -155,7 +155,7 @@
                                 Email Address
                             </p>
                             <p class="text-[11px] text-gray-800 font-medium" id="email">
-                                email@example.com
+                                {{ $email }}
                             </p>
                             <input wire:model="email" class="hidden text-[11px] w-full md:w-2/3 h-7 text-gray-800 border border-gray-300 rounded p-1 focus:ring-green-500 focus:border-green-500" id="emailInput" type="email" value="email@example.com" />
                             <p class="text-red-500 text-xs hidden" id="emailError">Please enter a valid email address.</p>
@@ -165,7 +165,7 @@
                                 Phone Number
                             </p>
                             <p class="text-[11px] text-gray-800 font-medium" id="phone">
-                                0917-123-4567
+                                {{ $phoneNumber }}
                             </p>
                             <input wire:model="phoneNumber" class="hidden text-[11px] w-full md:w-2/3 h-7 text-gray-800 border border-gray-300 rounded p-1 focus:ring-green-500 focus:border-green-500" id="phoneInput" type="tel" value="0917-123-4567" />
                             <p class="text-red-500 text-xs hidden" id="phoneError">Please enter a valid phone number (format: 0917-123-4567).</p>
