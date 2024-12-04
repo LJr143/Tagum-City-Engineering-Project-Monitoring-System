@@ -9,7 +9,7 @@ class MaterialHistory extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['material_id','pow_id', 'quantity', 'total_cost'];
+    protected $fillable = ['material_id','pow_id', 'quantity', 'quantity_cost'];
 
     public function material()
     {

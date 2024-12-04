@@ -167,14 +167,12 @@ class PowImport implements ToModel
             $this->updateLaborCost($laborCost);
         }
 
-        if (!isEmpty($row[4])) {
             // Process indirect cost first
             $indirectCost = new IndirectCost([
                 'pow_id' => $this->powId, // Assuming $this->powId is set in your class
                 'description' => $row[4], // Indirect cost description
                 'amount' => $row[10], // Amount of indirect cost
             ]);
-        }
 
         // Process other direct cost
         $otherDirectCost = new OtherDirectCost([
