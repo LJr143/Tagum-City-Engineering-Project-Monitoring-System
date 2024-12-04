@@ -1,6 +1,6 @@
 <div x-data="{ addSwaaReport: @entangle('addSwaaReport') }" x-cloak @cost-added.window="addSwaaReport = false">
     <div class="flex">
-        <div class="relative sm:ml-2">
+        <div class="relative sm:ml-0">
             <button @click="addSwaaReport = true"
                     class="bg-white text-green-500 font-medium border border-green-500 text-[11px] sm:text-xs px-4 py-2 rounded hover:bg-green-100 focus:outline-none whitespace-nowrap">
                 Statement of Work Accomplishment

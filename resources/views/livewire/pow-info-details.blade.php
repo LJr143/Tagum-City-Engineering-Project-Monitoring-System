@@ -28,11 +28,15 @@
                 <h3 class="text-base font-semibold leading-6 text-gray-900 mb-2">Program of Work {{ $index }}</h3>
                 <span class="inline-block  bg-green-600 text-white px-3 py-1 rounded text-xs">
                             Ref: #{{ $pow->reference_number }}
-                    </span>
+                </span>
+                <div class="flex-shrink-0 w-full md:w-auto mt-1 ">
+                    <livewire:add-swaa-report :pow_id="$pow->id" class="w-full sm:w-auto"/>
+                </div>
             </div>
 
             @if ((auth()->user()->isAdmin() || auth()->user()->isEncoder()) && $pow->project->status != 'completed')
                 <div>
+
                     <div class="flex justify-content-between">
                         <button onclick="openDeleteModal()"
                                 class="bg-red-500 mr-2 text-white text-[10px] sm:text-xs px-2 h-7 sm:px-4 py-1 sm:py-2 rounded shadow-md hover:bg-red-600 focus:outline-none flex items-center space-x-2">
@@ -90,7 +94,7 @@
                         @endif
                     </div>
                     <div class="mt-2">
-                        @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'suspended')
+                        @if (auth()->user()->isEncoder() || auth()->user()->isAdmin())
                             <button onclick="openRealignmentModal()"
                                     class=" w-full text-center bg-green-500 text-white text-[10px] h-7 sm:text-xs px-2 sm:px-4 py-1 sm:py-2 rounded shadow-md hover:bg-green-600 focus:outline-none flex items-center justify-center space-x-2">
                                 <span>Realignment Setting</span>
@@ -207,7 +211,7 @@
 
                             <div class="  ">
                                 <div class="mb-2">
-                                    @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'suspended' && $pow->project->status != 'completed')
+                                    @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'completed')
                                        <div class="hidden">
                                            <livewire:add-manual-material :pow_id="$pow->id"/>
                                        </div>
@@ -251,7 +255,7 @@
                             <h3 class="text-sm font-semibold mb-2 text-center">Labor Cost</h3>
                             <div class="flex items-center justify-between mb-4 space-x-4">
                                 <div class="flex space-x-2 ml-auto">
-                                    @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'suspended' && $pow->project->status != 'completed')
+                                    @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'completed')
                                         <livewire:add-payroll :pow_id="$pow->id"/>
                                     @endif
                                 </div>
@@ -265,6 +269,17 @@
 
                         <div class="text-gray-700" x-show="tab === 'job-order'">
                             <h3 class="text-sm font-semibold mb-2 text-center"> Job Order</h3>
+                            <div class="flex items-center justify-between mb-4 space-x-4">
+                                <div class="flex space-x-2 ml-auto">
+                                    @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'completed')
+                                        <livewire:add-job-order :pow_id="$pow->id"/>
+                                    @endif
+                                </div>
+                            </div>
+                            <!-- Table for Material Costs -->
+                            <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
+                                <livewire:job-order-table :pow_id="$pow->id"/>
+                            </div>
                         </div>
                     </div>
                 </div>

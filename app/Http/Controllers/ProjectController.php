@@ -11,6 +11,7 @@ use App\Models\SystemConfiguration;
 use App\Notifications\ProjectNotification;
 use App\Services\LogService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -27,6 +28,8 @@ class ProjectController extends Controller
     public function view($id)
     {
         $project = Project::findOrFail($id);
+        $this->updateProjectStatus($project);
+
 
         return view('layouts.projects.viewproject1', compact('project'));
     }
@@ -67,81 +70,19 @@ class ProjectController extends Controller
     }
 
 
-    public function realignFunds(Request $request)
+    protected function updateProjectStatus(Project $project)
     {
-        $request->validate([
-            'project_id' => 'required|exists:projects,id',
-            'realign_amount' => 'required|numeric|min:0',
-            'destination' => 'required|in:material,labor',
-        ]);
+        $today = Carbon::today();
 
-        $project = Project::findOrFail($request->project_id);
-        $pow = $project->pows()->first();
-
-        if ($pow) {
-            $realignAmount = $request->realign_amount;
-
-            $directCost = $pow->inDirectCosts()->where('description', 'contingencies')->first();
-
-            if ($directCost) {
-                if ($directCost->remaining_cost >= $realignAmount) {
-                    if ($request->destination == 'material') {
-                        $pow->total_material_cost += $realignAmount;
-                    } else {
-                        $pow->total_labor_cost += $realignAmount;
-                    }
-
-                    $directCost->remaining_cost -= $realignAmount;
-                    $directCost->save();
-
-                    $pow->save();
-
-                    return redirect()->back()->with('status', 'Contingency fund realigned successfully!');
-                } else {
-                    return redirect()->back()->withErrors('Insufficient contingency funds for realignment.');
-                }
-            } else {
-                return redirect()->back()->withErrors('Contingency cost not found.');
-            }
+        // Update the project status if the start_date has passed or is today
+        if ($project->start_date && $project->start_date <= $today && $project->status !== 'ongoing') {
+            $project->update(['status' => 'ongoing']);
+        }else if (!$project->pows->isEmpty()) {
+            $project->update(['status' => 'for implementation']);
+        }else{
+            $project->update(['status' => 'approved project']);
         }
-
-        return redirect()->back()->withErrors('POW not found for the specified project.');
     }
-
-    public function approveProject($projectId)
-    {
-        $project = Project::findOrFail($projectId);
-
-        $project->projectIncharge->notify(new ProjectNotification(
-            'Your project has been approved. Please review.',
-            $project->id
-        ));
-
-        // Change status to "Complete"
-        $project->status = 'completed';
-        $project->save();
-
-        session()->flash('success', 'Project has been approved and marked as complete.');
-    }
-
-    public function denyProject($projectId)
-    {
-        $project = Project::findOrFail($projectId);
-
-        // Notify the project in-charge
-        $project->projectIncharge->notify(new ProjectNotification(
-            'Your project has been denied. Please review and resubmit.',
-            $project->id
-        ));
-
-        // Change status to "Ongoing"
-        $project->status = 'ongoing';
-        $project->save();
-
-        session()->flash('error', 'Project has been denied and status set to ongoing.');
-    }
-
-
 
 
 

@@ -20,6 +20,8 @@ class ProjectFilter extends Component
     public $ongoingProjects;
     public $completedProjects;
     public $suspendedProjects;
+    public $approvedProject;
+    public $forImplementation;
 
     public $totalMaterialCostTable = 0;
 
@@ -44,12 +46,16 @@ class ProjectFilter extends Component
             $this->ongoingProjects = Project::where('project_incharge_id', $user->id)->where('status', 'ongoing')->count();
             $this->completedProjects = Project::where('project_incharge_id', $user->id)->where('status', 'completed')->count();
             $this->suspendedProjects = Project::where('project_incharge_id', $user->id)->where('status', 'suspended')->count();
+            $this->approvedProject = Project::where('project_incharge_id', $user->id)->where('status', 'approved project')->count();
+            $this->forImplementation = Project::where('project_incharge_id', $user->id)->where('status', 'for implementation')->count();
         } else {
             // Count all projects for admin or other roles
             $this->totalProjects = Project::count();
             $this->ongoingProjects = Project::where('status', 'ongoing')->count();
             $this->completedProjects = Project::where('status', 'completed')->count();
             $this->suspendedProjects = Project::where('status', 'suspended')->count();
+            $this->approvedProject = Project::where('status', 'approved project')->count();
+            $this->forImplementation = Project::where('status', 'for implementation')->count();
         }
     }
 

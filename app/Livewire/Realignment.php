@@ -41,17 +41,12 @@ class Realignment extends Component
 
     public function updatedCategorySourceItem(): void
     {
-        // Debug the selected source item
-        \Log::info('Selected Source Item ID: ' . $this->category_source_item);
-
         // Fetch the source item and log it
         $sourceItem = $this->getSourceItem($this->category_source_item);
-        \Log::info('Source Item: ', ['item' => $sourceItem]);
 
         // Update balance
         $this->balance = $this->getBalance($sourceItem);
 
-        \Log::info('Balance :  ', ['balance' => $this->balance]);
     }
 
 

@@ -59,21 +59,26 @@
             return PowerGrid::fields()
                 ->add('id')
                 ->add('payroll_title')
+                ->add('job_order_id')
                 ->add('payroll_amount', function (Payroll $payroll){
                     $payrollAmount = $payroll->payroll_amount;
 
                     return Money::of($payrollAmount,'PHP')->formatTo('en_PH');
                 })
-                ->add('payroll_date');
+                ->add('payroll_period', function (Payroll $payroll) {
+                    // Format payroll period date range
+                    return $payroll->payroll_date_start . ' - ' . $payroll->payroll_date_end;
+                });
         }
 
         public function columns(): array
         {
             return [
                 Column::make('Payroll ID', 'id')->sortable()->searchable(),
+                Column::make('Job Order Id', 'job_order_id')->sortable()->searchable(),
                 Column::make('Payroll Title', 'payroll_title')->sortable()->searchable(),
                 Column::make('Payroll Amount', 'payroll_amount')->sortable()->searchable(),
-                Column::make('Payroll Date', 'payroll_date')->sortable()->searchable(),
+                Column::make('Payroll Period', 'payroll_period')->sortable()->searchable(),
             ];
         }
 

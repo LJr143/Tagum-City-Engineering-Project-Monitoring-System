@@ -1,7 +1,7 @@
 <div class="w-full">
     <!-- Project Filter -->
     <div x-data="{ selected: @entangle('selectedStatus') }"
-         class="bg-gray-200 rounded-full px-1 py-1 flex items-center justify-start space-x-1 sm:space-x-2 md:space-x-3 lg:px-2 lg:py-1 mb-4 w-full sm:w-1/2">
+         class="bg-gray-200 rounded-full px-1 py-1 flex items-center justify-start space-x-1 sm:space-x-2 md:space-x-2 lg:px-2 lg:py-1 mb-4 w-full sm:w-3/5">
 
 
     <!-- All projects Button -->
@@ -38,6 +38,24 @@
             @click="selected = 'suspended'; $wire.filterProjects()">
             <span :class="selected === 'suspended' ? 'text-green-500' : 'text-gray-600'">{{ $suspendedProjects }}</span>
             Suspended
+        </button>
+
+        <!-- Approve Project  Button -->
+        <button
+            :class="selected === 'approved project' ? 'bg-white text-black' : 'text-gray-600 hover:text-black'"
+            class="flex-grow px-1 py-1 rounded-full  font-semibold text-[10px] sm:text-xs"
+            @click="selected = 'approved project'; $wire.filterProjects()">
+            <span :class="selected === 'approved project' ? 'text-green-500' : 'text-gray-600'">{{ $approvedProject }}</span>
+            Approved Project
+        </button>
+
+        <!-- For Implementation Project  Button -->
+        <button
+            :class="selected === 'for implementation' ? 'bg-white text-black' : 'text-gray-600 hover:text-black'"
+            class="flex-grow px-1 py-1 rounded-full  font-semibold text-[10px] sm:text-xs"
+            @click="selected = 'for implementation'; $wire.filterProjects()">
+            <span :class="selected === 'for implementation' ? 'text-green-500' : 'text-gray-600'">{{ $forImplementation }}</span>
+            For Implementation
         </button>
     </div>
 

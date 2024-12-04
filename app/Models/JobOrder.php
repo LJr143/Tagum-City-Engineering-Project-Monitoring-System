@@ -5,17 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Payroll extends Model
+class JobOrder extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'pow_id',
-        'payroll_title',
-        'payroll_amount',
-        'payroll_date_start',
-        'payroll_date_end',
-        'job_order_id'
+        'name',
+        'designation',
+        'rate_per_date',
+        'job_order_from',
+        'job_order_to',
+        'amount',
+        'balance',
     ];
 }
-

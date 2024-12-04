@@ -11,16 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('payrolls', function (Blueprint $table) {
+        Schema::create('job_orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('pow_id');
             $table->foreign('pow_id')->references('id')->on('program_of_works')->onDelete('cascade');
-            $table->unsignedBigInteger('job_order_id');
-            $table->foreign('job_order_id')->references('id')->on('job_orders')->onDelete('cascade');
-            $table->string('payroll_title');
-            $table->double('payroll_amount');
-            $table->date('payroll_date_start');
-            $table->date('payroll_date_end');
+            $table->string('name');
+            $table->string('designation');
+            $table->double('rate_per_date');
+            $table->date('job_order_from');
+            $table->date('job_order_to');
+            $table->double('amount');
+            $table->double('balance');
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('payrolls');
+        Schema::dropIfExists('job_orders');
     }
 };
