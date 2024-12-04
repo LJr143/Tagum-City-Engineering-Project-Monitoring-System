@@ -114,7 +114,13 @@
                                     <span class="font-bold">Location :</span> {{ $project->baranggay }} {{ $project->street }} {{ $project->x_axis }} {{ $project->y_axis }}
                                 </p>
                                 <p class="text-[8px]"><span class="font-bold">Start Date :</span> {{$project->start_date}} &nbsp; <span class="font-bold">End Date :</span> {{$project->end_date}}</p>
-                                <p class="text-[8px] text-green-500"><span class="font-bold">Project Incharge : </span> {{$project->projectIncharge->first_name}} {{$project->projectIncharge->last_name}}</p>
+                                <p class="text-[8px] text-green-500"><span class="font-bold">Project Incharge : </span>
+                                    @if($project->projectIncharge && ($project->projectIncharge->first_name || $project->projectIncharge->last_name))
+                                        {{$project->projectIncharge->first_name}} {{$project->projectIncharge->last_name}}
+                                    @else
+                                        No Assigned Project Incharge Yet
+                                    @endif
+                                </p>
                             </div>
                         </div>
                     <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-8 mb-4 sm:mb-0">
@@ -164,6 +170,7 @@
                                     @if($project->status === 'completed') bg-green-500 text-white
                                     @elseif($project->status === 'ongoing') bg-yellow-500 text-white
                                     @elseif($project->status === 'suspended' || $project->status == 'terminated') bg-red-500 text-white
+                                    @elseif($project->status === 'approved project' || $project->status == 'for implementation') bg-orange-500 text-white
                                     @endif">
                                             {{ $project->status }}
                                         </div>

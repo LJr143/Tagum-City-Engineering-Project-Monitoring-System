@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('street')->nullable();
             $table->string('x_axis')->nullable();
             $table->string('y_axis')->nullable();
-            $table->unsignedBigInteger('project_incharge_id');
+            $table->unsignedBigInteger('project_incharge_id')->nullable();
             $table->foreign('project_incharge_id')->references('id')->on('users')->onDelete('cascade');
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();

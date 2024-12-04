@@ -6,6 +6,7 @@ use App\Imports\MaterialsImport;
 use App\Imports\PowImport;
 use App\Models\DirectCost;
 use App\Models\Pow;
+use App\Models\Project;
 use App\Models\User;
 use App\Services\LogService;
 use Illuminate\Support\Facades\Log;
@@ -80,7 +81,12 @@ class AddPow extends Component
 
         $pow = Pow::create($data);
 
-        // Handle materials file upload if provided
+        $project = Project::find($this->projectId);
+        if ($project) {
+            $project->status = 'for implementation';
+            $project->save();
+        }
+
         if ($this->materialsFile) {
         try {
             // Upload and import the materials file
@@ -135,73 +141,29 @@ class AddPow extends Component
             }
         }
 
-
-
-        // Save Direct costs if there are any
-        if (!empty(array_filter($this->direct_costs))) {
-            foreach ($this->direct_costs as $cost) {
-                if (!empty($cost['description']) && !empty($cost['unit_cost'])) {
-                    DirectCost::create([
-                        'pow_id' => $pow->id,
-                        'item_no' => $cost['item_no'],
-                        'description' => $cost['description'],
-                        '%_of_total' => $cost['%_of_total'],
-                        'quantity' => $cost['quantity'],
-                        'unit' => $cost['unit'],
-                        'unit_cost' => $cost['unit_cost'],
-                        'total_cost' => $cost['unit_cost'] * $cost['quantity'],
-                        'remaining_cost' => $cost['unit_cost'] * $cost['quantity'],
-                    ]);
-                }
-            }
-        }
-
-        // Save indirect costs if there are any
-        if (!empty(array_filter($this->indirect_costs))) {
-            foreach ($this->indirect_costs as $cost) {
-                if (!empty($cost['description']) && !empty($cost['amount'])) {
-                    IndirectCost::create([
-                        'pow_id' => $pow->id,
-                        'description' => $cost['description'],
-                        'amount' => $cost['amount'],
-                    ]);
-                }
-            }
-        }
-
         LogService::logAction(
             'added POW',
-            "Added POW with reference number: {$this->reference_number}",
+            "Added Program of Work With Reference Number: {$this->reference_number}",
             auth()->id()
         );
 
-        // Reset the form and dispatch success event
         if ($this->totalMaterialCost != $this->totalMaterialCostPow) {
             // Set the warning message
             $this->warningMessage = "The material costs from the PR and POW files do not match. Please review.";
             Log::info('Pow total MaterialCost: ' . $this->totalMaterialCost . ' ' . $this->totalMaterialCostPow);
-            $this->showWarningModal = true; // Show the warning modal
-            $this->deleteAssociatedRecords($pow->id); // Delete associated record
+            $this->showWarningModal = true;
+            $this->deleteAssociatedRecords($pow->id);
             $this->dispatch('mismatch-import');
         } else {
-            Log::info('Pow total MaterialCost: ' . $this->totalMaterialCost . ' ' . $this->totalMaterialCostPow);
             $this->dispatch('pow-added');
             $this->reset();
 
-            // Reset indirect and direct costs
             $this->indirect_costs = [['description' => '', 'amount' => '']];
             $this->direct_costs = [['description' => '', 'amount' => '']];
 
-            // Set the uploading state back to false
             $this->isUploading = false;
 
-//            // Redirect to view the POW
-//            return redirect()->route('view-project-pow', ['id' => $pow->project_id])
-//                ->with('success', 'POW added successfully.');
         }
-
-
-
     }
 
     private function deleteAssociatedRecords($powId): void
@@ -209,7 +171,6 @@ class AddPow extends Component
         $pow = Pow::find($powId);
         if ($pow) {
             $pow->delete();
-            Log::info('Deleted Pow record', ['pow_id' => $powId]);
         } else {
             Log::warning('Pow record not found, skipping deletion', ['pow_id' => $powId]);
         }
@@ -218,14 +179,12 @@ class AddPow extends Component
     protected function uploadMaterialsFile($file)
     {
         $path = $file->store('materials', 'public');
-        Log::info('Materials file uploaded successfully.', ['path' => $path]);
         return $path;
     }
 
     protected function uploadPowFile($file)
     {
         $path = $file->store('pow', 'public');
-        Log::info('Pow file uploaded successfully.', ['path' => $path]);
         return $path;
     }
 
@@ -248,8 +207,6 @@ class AddPow extends Component
             $this->indirect_costs = array_values($this->indirect_costs); // Re-index array after removal
         }
     }
-
-
 
     public function render()
     {

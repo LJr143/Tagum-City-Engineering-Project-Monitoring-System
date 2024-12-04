@@ -99,7 +99,9 @@
                                         <span class="text-[10px] sm:text-xs  text-black font-semibold">
                                          Project Incharge:
                                         </span>
-                                        {{ $project->projectIncharge->first_name }} {{ $project->projectIncharge->last_name }}
+                                        {{$project->projectIncharge && ($project->projectIncharge->first_name || $project->projectIncharge->last_name)
+                                        ? $project->projectIncharge->first_name . ' ' . $project->projectIncharge->last_name
+                                        : 'No Assigned Project Incharge Yet'}}
                                     </p>
                                 </div>
                             </div>

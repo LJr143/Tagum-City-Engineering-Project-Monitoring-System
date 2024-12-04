@@ -25,7 +25,7 @@ class DashboardController extends Controller
                 return $query->where('project_incharge_id', $user->id);
             })
             ->whereIn('status', ['ongoing', 'pending']) // Filter for ongoing or pending projects
-            ->paginate(10);
+            ->get();
 
         // Prepare chart data as an array of objects
         $chartData = $projects->map(function ($project) {
@@ -84,7 +84,7 @@ class DashboardController extends Controller
             'pendingProjects',
             'completedProjects',
             'suspendedProjects',
-            'chartData' // Pass the chart data to the view
+            'chartData'
         ));
     }
 

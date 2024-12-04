@@ -25,21 +25,19 @@ class AddProject extends Component
     protected $rules = [
         'title' => 'required|string|max:255',
         'baranggay' => 'required|string|max:255',
-        'street' => 'required|string|max:255',
-        'x_axis' => 'required|numeric|between:-180,180', // Assuming these are longitude values
-        'y_axis' => 'required|numeric|between:-90,90',   // Assuming these are latitude values
-        'start_date' => 'required|date',
-        'end_date' => 'required|date|after:start_date',
-        'description' => 'required|string',
-        'projectIncharge_id' => 'required|numeric|exists:users,id',
+        'street' => 'string|max:255',
+        'x_axis' => 'nullable|numeric|between:-180,180', // Assuming these are longitude values
+        'y_axis' => 'nullable|numeric|between:-90,90',   // Assuming these are latitude values
+        'start_date' => 'nullable|date',
+        'end_date' => 'nullable|date|after:start_date',
+        'description' => 'nullable|string',
+        'projectIncharge_id' => 'nullable|numeric|exists:users,id',
     ];
 
     protected $messages = [
         'end_date.after' => 'The end date must be after the start date.',
-        'x_axis.required' => 'The X Axis is required.',
         'x_axis.numeric' => 'The X Axis must be a number.',
         'x_axis.between' => 'The X Axis must be between -180 and 180.',
-        'y_axis.required' => 'The Y Axis is required.',
         'y_axis.numeric' => 'The Y Axis must be a number.',
         'y_axis.between' => 'The Y Axis must be between -90 and 90.',
         'projectIncharge_id.exists' => 'Please select a valid Project Incharge from the list.',
@@ -52,7 +50,11 @@ class AddProject extends Component
 
     public function submit()
     {
-        $this->validate(); // Validate all fields
+        $validatedData = $this->validate();
+
+        $validatedData['start_date'] = $this->start_date ?: null;
+        $validatedData['end_date'] = $this->end_date ?: null;
+
 
         // If validation passes, create the project
         $project = Project::create([
@@ -63,11 +65,11 @@ class AddProject extends Component
             'y_axis' => $this->y_axis,
             'start_date' => $this->start_date,
             'end_date' => $this->end_date,
+            'status' => 'approved project',
             'project_incharge_id' => $this->projectIncharge_id,
             'description' => $this->description,
         ]);
 
-        // Get the newly created project's ID
         $projectId = $project->id;
 
         $userToNotify = User::where(function ($query) {
@@ -84,10 +86,8 @@ class AddProject extends Component
             auth()->id()
         );
 
-        // Reset form input
         $this->reset();
 
-        // Dispatch event
         $this->dispatch('project-added');
 
     }

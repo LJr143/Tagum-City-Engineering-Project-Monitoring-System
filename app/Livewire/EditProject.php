@@ -26,14 +26,14 @@ class EditProject extends Component
 
     protected $rules = [
         'title' => 'required|string|max:255',
-        'baranggay' => 'required|string|max:255',
-        'street' => 'required|string|max:255',
-        'x_axis' => 'required|numeric|between:-180,180',
-        'y_axis' => 'required|numeric|between:-90,90',
-        'projectIncharge_id' => 'required|numeric|exists:users,id',
-        'start_date' => 'required|date',
-        'end_date' => 'required|date|after:start_date',// I added after:start_date
-        'description' => 'required|string',
+        'baranggay' => 'nullable|string|max:255',
+        'street' => 'nullable|string|max:255',
+        'x_axis' => 'nullable|numeric|between:-180,180',
+        'y_axis' => 'nullable|numeric|between:-90,90',
+        'projectIncharge_id' => 'nullable|numeric|exists:users,id',
+        'start_date' => 'nullable|date',
+        'end_date' => 'nullable|date|after:start_date',
+        'description' => 'nullable|string',
     ];
     protected $message = [
         'title.required' => 'The title is required.',
@@ -48,7 +48,7 @@ class EditProject extends Component
         'y_axis.numeric' => 'The Y Axis must be a number.',
         'y_axis.between' => 'The Y Axis must be between -90 and 90.',
         'projectIncharge_id.exists' => 'Please select a valid Project Incharge from the list.',
-        'projectIncharge_id.required' => 'Project Incharge   required.',
+        'projectIncharge_id.required' => 'Project Incharge  required.',
     ];
 
     public function mount(Project $project)
@@ -83,11 +83,12 @@ class EditProject extends Component
     }
 
 
-
-
     public function updateProject()
     {
-        $this->validate();
+        $validatedData = $this->validate();
+
+        $validatedData['start_date'] = $this->start_date ?: null;
+        $validatedData['end_date'] = $this->end_date ?: null;
 
         $this->project->update([
             'title' => $this->title,

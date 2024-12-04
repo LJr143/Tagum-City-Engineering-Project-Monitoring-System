@@ -72,22 +72,22 @@
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-2 mb-1 border-2 p-2 rounded">
                         <div>
                             <label class="block text-xs font-medium mb-1">Street</label>
-                            <input wire:model="street" type="text" placeholder="Select Street" class="w-full border border-gray-400 px-3 py-2 text-xs rounded p-2 focus:ring-2 focus:ring-green-500 focus:border-green-500" required>
+                            <input wire:model="street" type="text" placeholder="Select Street" class="w-full border border-gray-400 px-3 py-2 text-xs rounded p-2 focus:ring-2 focus:ring-green-500 focus:border-green-500">
                         </div>
                         <div>
                             <label class="block text-xs font-medium mb-1">Barangay</label>
-                            <input wire:model="baranggay" type="text" placeholder="Select Barangay" class="w-full border border-gray-400 px-3 py-2 text-xs rounded p-2 focus:ring-2 focus:ring-green-500 focus:border-green-500" required>
+                            <input wire:model="baranggay" type="text" placeholder="Select Barangay" class="w-full border border-gray-400 px-3 py-2 text-xs rounded p-2 focus:ring-2 focus:ring-green-500 focus:border-green-500">
                         </div>
                         <div>
                             <label class="block text-xs font-medium mb-1">X-Axis</label>
-                            <input wire:model="x_axis" type="text" placeholder="Must contain “axis”" class="w-full border border-gray-400 px-3 py-2 text-xs rounded p-2 focus:ring-2 focus:ring-green-500 focus:border-green-500" required>
+                            <input wire:model="x_axis" type="text" placeholder="Must contain “axis”" class="w-full border border-gray-400 px-3 py-2 text-xs rounded p-2 focus:ring-2 focus:ring-green-500 focus:border-green-500">
                             @error('x_axis')
                             <span class="text-red-500 text-xs">{{ $message }}</span>
                             @enderror
                         </div>
                         <div>
                             <label class="block text-xs font-medium mb-1">Y-Axis</label>
-                            <input wire:model="y_axis" type="text" placeholder="Must contain “axis”" class="w-full border border-gray-400 px-3 py-2 text-xs rounded p-2 focus:ring-2 focus:ring-green-500 focus:border-green-500" required>
+                            <input wire:model="y_axis" type="text" placeholder="Must contain “axis”" class="w-full border border-gray-400 px-3 py-2 text-xs rounded p-2 focus:ring-2 focus:ring-green-500 focus:border-green-500">
                             @error('y_axis')
                             <span class="text-red-500 text-xs">{{ $message }}</span>
                             @enderror
@@ -123,7 +123,7 @@
                                 class="w-full px-3 py-2 text-xs border border-gray-400 rounded focus:ring-green-500 focus:border-green-500"
                                 placeholder="Search Project In-Charge"
                                 autocomplete="off"
-                                required
+
                             />
 
                             <ul
@@ -160,7 +160,7 @@
                         <div class="relative mb-3">
                             <label class="block text-xs font-medium mb-1">Start Date</label>
                             <input type="date" wire:model="start_date"
-                                   class="w-full px-3 py-2 text-xs border border-gray-400 rounded focus:ring-2 focus:ring-green-500 focus:border-green-500" required>
+                                   class="w-full px-3 py-2 text-xs border border-gray-400 rounded focus:ring-2 focus:ring-green-500 focus:border-green-500">
                             <!-- Error message for start_date -->
                             @error('start_date')
                             <span class="text-red-500 ml-2 text-[10px]">{{ $message }}</span>
@@ -170,7 +170,7 @@
                         <div class="relative">
                             <label class="block text-xs font-medium mb-1">End Date</label>
                             <input type="date" wire:model="end_date"
-                                   class="w-full px-3 py-2 text-xs border border-gray-400 rounded focus:ring-2 focus:ring-green-500 focus:border-green-500" required>
+                                   class="w-full px-3 py-2 text-xs border border-gray-400 rounded focus:ring-2 focus:ring-green-500 focus:border-green-500" >
                             @error('end_date')
                             <span class="text-red-500 text-xs">{{ $message }}</span>
                             @enderror
