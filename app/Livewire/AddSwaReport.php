@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Pow;
+use App\Models\Project;
 use App\Models\SwaReport;
 use Carbon\Carbon;
 use Livewire\Component;
@@ -86,6 +87,18 @@ class AddSwaReport extends Component
                         'percent_accomplishment' => $cumulativeAccomplishment, // Add to accomplishment
                     ]);
                 }
+
+                $this->pow = Pow::find($this->pow_id);
+
+                if ($this->pow) {
+                    $percentProgress = SwaReport::where('pow_id', $this->pow_id)->sum('percent_accomplishment');
+                    $this->pow->progress_percentage += $percentProgress;
+                    $this->pow->progress_percentage = min($this->pow->progress_percentage, 100);
+                    $this->pow->save();
+                } else {
+                    throw new \Exception("Pow not found for ID: {$this->pow_id}");
+                }
+
             } else {
                 // Create a new record for this month's data
                 SwaReport::create([

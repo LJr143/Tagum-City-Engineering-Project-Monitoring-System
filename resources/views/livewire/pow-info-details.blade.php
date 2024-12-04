@@ -29,9 +29,7 @@
                 <span class="inline-block  bg-green-600 text-white px-3 py-1 rounded text-xs">
                             Ref: #{{ $pow->reference_number }}
                 </span>
-                <div class="flex-shrink-0 w-full md:w-auto mt-1 ">
-                    <livewire:add-swaa-report :pow_id="$pow->id" class="w-full sm:w-auto"/>
-                </div>
+
             </div>
 
             @if ((auth()->user()->isAdmin() || auth()->user()->isEncoder()) && $pow->project->status != 'completed')
@@ -90,7 +88,6 @@
                                     </defs>
                                 </svg>
                             </button>
-
                         @endif
                     </div>
                     <div class="mt-2">
@@ -115,6 +112,10 @@
                                 </svg>
                             </button>
                         @endif
+                    </div>
+
+                    <div class="flex-shrink-0 w-full md:w-auto mt-1 ">
+                        <livewire:add-swaa-report :pow_id="$pow->id" class="w-full sm:w-auto"/>
                     </div>
                 </div>
             @elseif(auth()->user()->isProjectIncharge() && $pow->project->status != 'suspended')

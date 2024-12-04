@@ -1,4 +1,4 @@
-<div x-data="{ makeSwaReport: @entangle('makeSwaReport') }" x-cloak @cost-added.window="makeSwaReport = false">
+<div x-data="{ makeSwaReport: @entangle('makeSwaReport') }" x-cloak @swa-report-success.window="makeSwaReport = false">
     <div class="flex justify-end">
         <div class="relative ml-2">
             <button @click="makeSwaReport = true"
