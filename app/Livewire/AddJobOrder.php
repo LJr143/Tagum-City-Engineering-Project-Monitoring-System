@@ -28,7 +28,6 @@ class AddJobOrder extends Component
         'jo_date_start' => 'required|date',
         'jo_date_end' => 'required|date',
         'jo_total_amount' => 'required|numeric',
-        'job_order_id' => 'required|exists:job_orders,id'
 
     ];
 
