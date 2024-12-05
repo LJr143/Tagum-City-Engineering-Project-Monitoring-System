@@ -23,8 +23,8 @@ class AddJobOrder extends Component
 
     protected $rules = [
         'jo_name' => 'required|string|max:255',
-        'jo_designation' => 'required|string|max:255',
-        'jo_rate_per_day' => 'required|numeric',
+        'jo_designation' => 'nullable|string|max:255',
+        'jo_rate_per_day' => 'nullable|numeric',
         'jo_date_start' => 'required|date',
         'jo_date_end' => 'required|date',
         'jo_total_amount' => 'required|numeric',
