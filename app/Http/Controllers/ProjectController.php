@@ -75,7 +75,7 @@ class ProjectController extends Controller
         $today = Carbon::today();
 
         // Ensure start_date is defined and compare it with today's date
-        if ($project->start_date && $project->start_date <= $today) {
+        if ($project->pows && $project->start_date && $project->start_date <= $today) {
             if ($project->status !== 'ongoing') {
                 $project->update(['status' => 'ongoing']);
             }
