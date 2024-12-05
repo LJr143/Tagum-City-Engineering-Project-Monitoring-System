@@ -88,16 +88,6 @@ class AddSwaReport extends Component
                     ]);
                 }
 
-                $this->pow = Pow::find($this->pow_id);
-
-                if ($this->pow) {
-                    $percentProgress = SwaReport::where('pow_id', $this->pow_id)->sum('percent_accomplishment');
-                    $this->pow->progress_percentage += $percentProgress;
-                    $this->pow->progress_percentage = min($this->pow->progress_percentage, 100);
-                    $this->pow->save();
-                } else {
-                    throw new \Exception("Pow not found for ID: {$this->pow_id}");
-                }
 
             } else {
                 // Create a new record for this month's data
@@ -115,6 +105,28 @@ class AddSwaReport extends Component
                     'total_cost' => 0, // Default or dynamic total cost
                 ]);
             }
+        }
+        $this->pow = Pow::find($this->pow_id);
+
+        if ($this->pow) {
+            // Fetch all SwaReports related to the given pow_id
+            $items = SwaReport::where('pow_id', $this->pow_id)->get();
+            $totalProgress = 0;
+
+            foreach ($items as $item) {
+                // Calculate the weighted contribution of each item
+                $itemContribution = $item->{'%_of_total'} * ($item->percent_accomplishment / 100);
+                $totalProgress += $itemContribution;
+            }
+
+            // Convert the total progress to a percentage (e.g., 0.43 to 43)
+            $totalProgress = min($totalProgress * 100, 100);
+
+            // Update the POW's progress percentage as an integer
+            $this->pow->progress_percentage = number_format($totalProgress, 2, '.', '');
+            $this->pow->save();
+        } else {
+            throw new \Exception("POW not found for ID: {$this->pow_id}");
         }
 
         // Reset the form fields
