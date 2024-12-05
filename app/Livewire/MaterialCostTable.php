@@ -6,6 +6,7 @@ use App\Models\Material;
 use App\Models\Payroll;
 use App\Models\Pow;
 use App\Models\IndirectCost;
+use App\Models\Project;
 use App\Models\ProjectConfiguration;
 use Livewire\Component;
 
@@ -38,12 +39,16 @@ class MaterialCostTable extends ProgressInformation
 
     public $showWarning = false;
     public $warningMessage;
+    public $project;
 
 
 
     public function mount($pow_id): void
     {
         $this->pow_id = $pow_id;
+
+        $this->project = Project::with('pows')->findOrFail($pow_id);
+
         $this->fetchPowInfo();
         $this->fetchProjectConfigurations();
         $this->calculateCosts();

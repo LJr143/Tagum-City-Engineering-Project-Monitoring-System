@@ -143,7 +143,7 @@ class ProgressInformation extends Component
         $totalPurchaseOrderAmount = $po->sum('total_cost');
 
         // Calculate savings
-        return $this->saving = $this->totalMaterialCost - $totalPurchaseOrderAmount;
+        return $this->saving = ($this->totalMaterialCost - $totalPurchaseOrderAmount) + $this->remainingMaterialCost + $this->remainingMaterialCost + $this->remainingDirectCost;
     }
 
 
