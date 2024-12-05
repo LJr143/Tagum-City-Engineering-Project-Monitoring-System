@@ -35,9 +35,9 @@
             @if ((auth()->user()->isAdmin() || auth()->user()->isEncoder()) && $pow->project->status != 'completed')
                 <div>
 
-                    <div class="flex justify-content-between">
+                    <div class="flex justify-content-between align-items-center ">
                         <button onclick="openDeleteModal()"
-                                class="bg-red-500 mr-2 text-white text-[10px] sm:text-xs px-2 h-7 sm:px-4 py-1 sm:py-2 rounded shadow-md hover:bg-red-600 focus:outline-none flex items-center space-x-2">
+                                class="bg-red-500 w-full align-items-center mr-2 text-white text-[10px] sm:text-xs px-2 h-7 sm:px-4 py-1 sm:py-2 rounded shadow-md hover:bg-red-600 focus:outline-none flex items-center justify-center  space-x-2">
                             <span>Delete</span>
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
@@ -57,7 +57,7 @@
                         </button>
                         @if($pow->project->status != 'suspended' && $pow->project->status != 'completed')
                             <button onclick="openSuspendModal()"
-                                    class="bg-red-500 text-white text-[10px] sm:text-xs px-2 sm:px-4 py-1 h-7 sm:py-2 rounded shadow-md hover:bg-red-600 focus:outline-none flex items-center space-x-2">
+                                    class="bg-red-500 w-full text-white text-[10px] sm:text-xs px-2 sm:px-4 py-1 h-7 sm:py-2 rounded shadow-md hover:bg-red-600 focus:outline-none flex items-center justify-center space-x-2">
                                 <span>Suspend</span>
                                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
@@ -134,13 +134,9 @@
                 </div>
             @endif
         </div>
-
-
-
         <livewire:material-cost-table :pow_id="$pow->id"/>
 
-
-        <div>
+        <div class="   ">
             <div class="sm:hidden mb-4">
                 <label for="tabs" class="sr-only">Select a tab</label>
                 <select id="tabs" name="tabs" onchange="changeTab(event)"
@@ -210,7 +206,7 @@
                         <div class="text-gray-700" x-show="tab === 'materials'">
                             <h3 class="text-sm font-semibold mb-2 text-center"> Materials</h3>
 
-                            <div class="  ">
+                            <div class="relative w-full">
                                 <div class="mb-2">
                                     @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'completed')
                                        <div class="hidden">
@@ -220,10 +216,10 @@
                                         <livewire:make-material-report :pow_id="$pow->id"/>
                                     @endif
                                 </div>
-                                <div class="relative bg-white shadow rounded-lg text-[12px]">
+
+                                <div class="shadow text-[12px] w-full bg-white mt-0 p-5 rounded-md md:max-w-[800px] min-[1408px]:max-w-[1100px] lg:max-w-[900px] xl:max-w-[870px] 2xl:max-w-[1190px]" >
                                     <livewire:material-table :pow_id="$pow->id"/>
                                 </div>
-
                             </div>
                         </div>
 
