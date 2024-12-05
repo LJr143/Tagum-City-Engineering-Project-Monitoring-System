@@ -25,6 +25,7 @@ class ReportRunningBalance extends PowerGridComponent
     use WithExport;
     use WithPagination;
 
+
     public bool $showFilters = true;
 
     public function setUp(): array

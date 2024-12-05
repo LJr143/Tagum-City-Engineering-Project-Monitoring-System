@@ -15,7 +15,7 @@
 
         <div class="container mx-auto">
             <div class="bg-white shadow-md rounded-lg">
-                <h3 class="text-sm font-semibold mt-4 text-center">Report</h3>
+                <h3 class="text-sm font-semibold mt-4 text-center">Overall Project Report</h3>
                 <div class="flex items-center justify-between mb-2 space-x-4">
                 </div>
                 @if(auth()->user()->isAdmin() || auth()->user()->isEncoder())
@@ -24,6 +24,7 @@
                         <livewire:admin-report />
                     </div>
                 </div>
+                    <h3 class="text-sm font-semibold mt-4 text-center">Project Running Balance Report</h3>
                 <div class="shadow text-[12px] w-full bg-white mt-5 p-5 rounded-md md:max-w-[800px] min-[1408px]:max-w-[1000px] lg:max-w-[900px] xl:max-w-[870px] 2xl:max-w-[1190px]">
                     <div class="powergrid-filters">
                         <livewire:report-running-balance />
