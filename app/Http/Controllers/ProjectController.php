@@ -79,7 +79,7 @@ class ProjectController extends Controller
             if ($project->status !== 'ongoing') {
                 $project->update(['status' => 'ongoing']);
             }
-        } elseif ($project->pows && $project->pows->isNotEmpty() && ($project->start_date && !$project->start_date <= $today) ) {
+        } elseif ($project->pows && $project->pows->isNotEmpty() && $project->status != 'ongoing' ) {
             // Update status to 'for implementation' if pows exist
             $project->update(['status' => 'for implementation']);
         } else {
