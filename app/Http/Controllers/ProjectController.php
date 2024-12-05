@@ -27,7 +27,7 @@ class ProjectController extends Controller
 
     public function view($id)
     {
-        $project = Project::findOrFail($id);
+        $project = Project::with('pows')->find($id);
         $this->updateProjectStatus($project);
 
 
@@ -74,14 +74,20 @@ class ProjectController extends Controller
     {
         $today = Carbon::today();
 
-        // Update the project status if the start_date has passed or is today
-        if ($project->start_date && $project->start_date <= $today && $project->status !== 'ongoing') {
-            $project->update(['status' => 'ongoing']);
-        }else if (!$project->pows->isEmpty()) {
+        // Ensure start_date is defined and compare it with today's date
+        if ($project->start_date && $project->start_date <= $today) {
+            if ($project->status !== 'ongoing') {
+                $project->update(['status' => 'ongoing']);
+            }
+        } elseif ($project->pows && $project->pows->isNotEmpty() && ($project->start_date && !$project->start_date <= $today) ) {
+            // Update status to 'for implementation' if pows exist
             $project->update(['status' => 'for implementation']);
-        }else{
+        } else {
+            // Default status update
             $project->update(['status' => 'approved project']);
         }
+
+
     }
 
 
