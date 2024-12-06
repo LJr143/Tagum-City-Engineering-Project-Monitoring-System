@@ -186,7 +186,7 @@
                         <h3 class="text-xs font-semibold text-gray-800 mb-3">
                             Change Password
                         </h3>
-                        <form>
+                        <form wire:submit.prevent="updatePassword">
                             <div class="mb-4">
                                 <label class="block text-[12px] text-gray-600" for="user-id">
                                     User ID
