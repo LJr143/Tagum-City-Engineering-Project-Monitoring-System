@@ -24,7 +24,7 @@
                     </div>
                 </div>
                 <!-- Table for Material Costs -->
-                <div class="shadow text-[12px] w-full bg-white mt-0 p-5 rounded-md md:max-w-[820px] min-[1408px]:max-w-[full] lg:max-w-[920px] xl:max-w-[870px] 2xl:max-w-[1190px]">
+                <div class="text-[12px] bg-white mt-0 p-5 rounded-md md:max-w-[800px] min-[90%]:max-w-[100%] lg:max-w-[900px] xl:w-[100%] xl:min-w-[100%] 2xl:max-w-[1190px]">
                     <livewire:user-table />
                 </div>
             </div>

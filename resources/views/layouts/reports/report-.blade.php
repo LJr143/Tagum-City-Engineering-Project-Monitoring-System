@@ -19,21 +19,21 @@
                 <div class="flex items-center justify-between mb-2 space-x-4">
                 </div>
                 @if(auth()->user()->isAdmin() || auth()->user()->isEncoder())
-                <div class="shadow text-[12px] w-full bg-white mt-0 p-5 rounded-md md:max-w-[800px] min-[1408px]:max-w-[1000px] lg:max-w-[900px] xl:max-w-[870px] 2xl:max-w-[1190px]">
-                    <div class="powergrid-filters">
-                        <livewire:admin-report />
+                    <div class="text-[12px] bg-white mt-0 p-5 rounded-md md:max-w-[800px] min-[90%]:max-w-[100%] lg:max-w-[900px] xl:w-[100%] xl:min-w-[100%] 2xl:w-[100%] 2xl:min-w-[100%]">
+                        <div class="powergrid-filters">
+                            <livewire:admin-report />
+                        </div>
                     </div>
-                </div>
                     <h3 class="text-sm font-semibold mt-4 text-center">Project Running Balance Report</h3>
-                <div class="shadow text-[12px] w-full bg-white mt-5 p-5 rounded-md md:max-w-[800px] min-[1408px]:max-w-[1000px] lg:max-w-[900px] xl:max-w-[870px] 2xl:max-w-[1190px]">
-                    <div class="powergrid-filters">
-                        <livewire:report-running-balance />
+                    <div class="text-[12px] bg-white mt-0 p-5 rounded-md md:max-w-[800px] min-[90%]:max-w-[100%] lg:max-w-[900px] xl:w-[100%] xl:min-w-[100%] 2xl:w-[100%] 2xl:min-w-[100%] ">
+                        <div class="powergrid-filters">
+                            <livewire:report-running-balance />
+                        </div>
                     </div>
-                </div>
 
                 @else
 
-                    <div class="shadow text-[12px] w-full bg-white mt-0 p-5 rounded-md md:max-w-[800px] min-[1408px]:max-w-[1000px] lg:max-w-[900px] xl:max-w-[870px] 2xl:max-w-[1190px] ">
+                    <div class="text-[12px] bg-white mt-0 p-5 rounded-md md:max-w-[800px] min-[90%]:max-w-[100%] lg:max-w-[900px] xl:w-[100%] xl:min-w-[100%] 2xl:max-w-[1190px]">
                         <div class="powergrid-filters text-[12px]">
                             <livewire:project-incharge-report />
                         </div>

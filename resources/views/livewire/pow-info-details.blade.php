@@ -39,54 +39,19 @@
                         <button onclick="openDeleteModal()"
                                 class="bg-red-500 w-full align-items-center mr-2 text-white text-[10px] sm:text-xs px-2 h-7 sm:px-4 py-1 sm:py-2 rounded shadow-md hover:bg-red-600 focus:outline-none flex items-center justify-center  space-x-2">
                             <span>Delete</span>
-                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path d="M10 10V16" stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                      stroke-linejoin="round"/>
-                                <path d="M14 10V16" stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                      stroke-linejoin="round"/>
-                                <path d="M18 6V18C18 19.1046 17.1046 20 16 20H8C6.89543 20 6 19.1046 6 18V6"
-                                      stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                      stroke-linejoin="round"/>
-                                <path d="M4 6H20" stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                      stroke-linejoin="round"/>
-                                <path d="M15 6V5C15 3.89543 14.1046 3 13 3H11C9.89543 3 9 3.89543 9 5V6"
-                                      stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                      stroke-linejoin="round"/>
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#FFFFFF"><path d="M312-144q-29.7 0-50.85-21.15Q240-186.3 240-216v-480h-48v-72h192v-48h192v48h192v72h-48v479.57Q720-186 698.85-165T648-144H312Zm336-552H312v480h336v-480ZM384-288h72v-336h-72v336Zm120 0h72v-336h-72v336ZM312-696v480-480Z"/></svg>
                         </button>
+
                         @if($pow->project->status != 'suspended' && $pow->project->status != 'completed')
                             <button onclick="openSuspendModal()"
                                     class="bg-red-500 w-full text-white text-[10px] sm:text-xs px-2 sm:px-4 py-1 h-7 sm:py-2 rounded shadow-md hover:bg-red-600 focus:outline-none flex items-center justify-center space-x-2">
                                 <span>Suspend</span>
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M10 10V16" stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                          stroke-linejoin="round"/>
-                                    <path d="M14 10V16" stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                          stroke-linejoin="round"/>
-                                    <path d="M18 6V18C18 19.1046 17.1046 20 16 20H8C6.89543 20 6 19.1046 6 18V6"
-                                          stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                          stroke-linejoin="round"/>
-                                    <path d="M4 6H20" stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                          stroke-linejoin="round"/>
-                                    <path d="M15 6V5C15 3.89543 14.1046 3 13 3H11C9.89543 3 9 3.89543 9 5V6"
-                                          stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                          stroke-linejoin="round"/>
-                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#FFFFFF"><path d="M480-300q15 0 25.5-10.5T516-336q0-15-10.5-25.5T480-372q-15 0-25.5 10.5T444-336q0 15 10.5 25.5T480-300Zm-36-132h72v-240h-72v240ZM341-144 144-342v-277l197-197h278l197 197v278L618-144H341Zm30-72h218l155-155v-218L588-744H371L216-589v218l155 155Zm109-264Z"/></svg>
                             </button>
                         @elseif ($pow->project->status != 'completed')
                             <button onclick="openResumeModal()" class="bg-green-500 text-white text-[10px] h-7 sm:text-xs px-2 sm:px-4 py-1 sm:py-2 rounded shadow-md hover:bg-green-600 focus:outline-none flex items-center space-x-1">
                                 <span>Resume</span>
-                                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                    <rect width="15" height="15" fill="url(#pattern0_1545_9266)"/>
-                                    <defs>
-                                        <pattern id="pattern0_1545_9266" patternContentUnits="objectBoundingBox" width="1" height="1">
-                                            <use xlink:href="#image0_1545_9266" transform="scale(0.01)"/>
-                                        </pattern>
-                                        <image id="image0_1545_9266" width="100" height="100" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAAAsTAAALEwEAmpwYAAADyUlEQVR4nO3dXYgWVRzH8aNuvhGkIkZIShCk+RKsRsV6ISReBWIkZKaXISJEemH4hhca2+WKN90aCuKykCAseaNCFKQUalDSImuBb5AvmPj+lYMztOr67Mwz/2nOmfl9LpfdYfb89pxn57z8xzkRERERERERERERERHJDRgNLACWAYuA8UWbERgFdAIrgLXAKmC+/7oiat1wnwDnedINYCswpo0gJgE7gUGG9xewCZigYJ5tvM201ud7T44wlgKXyOZ34F2F8l/jvQM8zNBw6zOG8SFwj3z8928HOhofDLA/Y6P9mSGM2cC/tO8H4LVGhwKcy9FgL49wre8p7jqwxjUVcC1HY73Z4jrzsHUAmOyaJvmLzGpOi+tsw57/r2+xaxLDQPooxwPga2CsawLDQI5TrpPALFd3hoH8SPluAZ/X+ik/skBS/cArro4iDYRkJuADVzcRB0Iyw/ANMNHVRYWBnAZuYuMM8Jarg4oC2Z38zDTgEDZuAxvzTIIGqaJAPnpqvWRtwTmwoY4A012sqg4k5Z8xgBPYuAqsdDEKJRDPT78DO4D72NgLvOhiElIgKeA9YAAbfja7y8UixEA84CXgW2z4BbBu4AUXulADSSWbI/7Bxk/A6y5koQfiATOBY9jwv+9nLlQxBOL5nS/JLpU72DgITHGhiSWQFPA28Ad1XQCLLRDP7+UCerCbD+sJZgEsxkBSwHLgCjZO+X0BrmoxB+L5nTDAYWz4tljoqhR7IEPmw75IJhiL8j1uhqtKHQJJ+fsDfqG4XleVOgXi+R37yYd0lu2xrVSzvlK3QFLAEuBv2veVq0JdA/GAqcB3tOeoq0KdAxnyhP9rG4EMuCookOdSIIENWcfMb6jJQxbFP9R3lX2PjQgE/dsbTiCGD4YHy7i/xvQQbKdOLgOvWt5fowLBfnJxgdW9NS4QbKfffwbesLivxgWCFqhqu4Q7qCXcx7TJIeYhC20DCicQtFGutltJd7RT1eh/F+KQhTZbhxEIOo4QTg9BB3bCGLLQkbYgAtlT0qHPDdFXeajwWPRvhgc9dSzaIBALKhxg2EOKUmmNgEpr9Kv4TBiB3FJ5piepgFnZIinx1x3MCaeyqQhmfcvEzjXuGY0tE2tZSLnfIIjGF1LeZ1hqfFbBomQqNZ5sGvAfnCNZl7HHLQPu5gxCxfifasQvR2iw3pyvq3gfuJgxjLN6XcXwjfjxMC9f8eP5loIvdLnwnCAGk1IZ9SlgWdIrjzqTYacLGGdwzY7kmp/6oi/Aar3ySERERERERERERERExEXnEQrlvdEPbQz+AAAAAElFTkSuQmCC"/>
-                                    </defs>
-                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#FFFFFF"><path d="M240-240v-480h72v480h-72Zm144 0 384-240-384-240v480Zm72-130v-220l176 110-176 110Zm0-110Z"/></svg>
                             </button>
                         @endif
                     </div>
@@ -95,21 +60,7 @@
                             <button onclick="openRealignmentModal()"
                                     class=" w-full text-center bg-green-500 text-white text-[10px] h-7 sm:text-xs px-2 sm:px-4 py-1 sm:py-2 rounded shadow-md hover:bg-green-600 focus:outline-none flex items-center justify-center space-x-2">
                                 <span>Realignment Setting</span>
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M10 10V16" stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                          stroke-linejoin="round"/>
-                                    <path d="M14 10V16" stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                          stroke-linejoin="round"/>
-                                    <path d="M18 6V18C18 19.1046 17.1046 20 16 20H8C6.89543 20 6 19.1046 6 18V6"
-                                          stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                          stroke-linejoin="round"/>
-                                    <path d="M4 6H20" stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                          stroke-linejoin="round"/>
-                                    <path d="M15 6V5C15 3.89543 14.1046 3 13 3H11C9.89543 3 9 3.89543 9 5V6"
-                                          stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                          stroke-linejoin="round"/>
-                                </svg>
+
                             </button>
                         @endif
                     </div>
@@ -136,11 +87,11 @@
         </div>
         <livewire:material-cost-table :pow_id="$pow->id"/>
 
-        <div class="   ">
+        <div>
             <div class="sm:hidden mb-4">
                 <label for="tabs" class="sr-only">Select a tab</label>
                 <select id="tabs" name="tabs" onchange="changeTab(event)"
-                        class="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                        class="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-green-500 focus:outline-none focus:ring-green-500 sm:text-sm">
                     <option value="materials">Materials</option>
                     <option value="labor-cost">Labor Cost</option>
                     <option value="indirect-cost">Indirect Cost</option>
@@ -178,9 +129,6 @@
                         <a id="realignment-history-tab" href="#" onclick="changeTabTo('realignment-history')"
                            class="text-gray-500 hover:border-green-600 hover:text-green-600 whitespace-nowrap border-b-2 pb-1 px-1 text-xs font-medium">
                             Realignment History</a>
-
-
-
                     </nav>
                 </div>
             </div>
@@ -209,27 +157,32 @@
                             <div class="relative w-full">
                                 <div class="mb-2">
                                     @if ((auth()->user()->isEncoder() || auth()->user()->isAdmin()) && $pow->project->status != 'completed')
-                                       <div class="hidden">
-                                           <livewire:add-manual-material :pow_id="$pow->id"/>
-                                       </div>
+                                        <div class="hidden">
+                                            <livewire:add-manual-material :pow_id="$pow->id"/>
+                                        </div>
                                     @elseif(auth()->user()->isProjectIncharge() && $pow->project->status != 'suspended' && $pow->project->status != 'completed')
                                         <livewire:make-material-report :pow_id="$pow->id"/>
                                     @endif
                                 </div>
 
-                                <div class="shadow text-[12px] w-full bg-white mt-0 p-5 rounded-md md:max-w-[800px] min-[1408px]:max-w-[1100px] lg:max-w-[900px] xl:max-w-[870px] 2xl:max-w-[1190px]" >
-                                    <livewire:material-table :pow_id="$pow->id"/>
+
+                                <div class="text-[12px] bg-white mt-0 p-5 rounded-md md:max-w-[800px] min-[90%]:max-w-[100%] lg:max-w-[900px] xl:w-[100%] xl:min-w-[100%] 2xl:max-w-[1190px]" >
+                                    <livewire:material-table :pow_id="$pow->id" />
                                 </div>
+
                             </div>
                         </div>
 
                         <div class="text-gray-700" x-show="tab === 'materials-history'">
                             <h3 class="text-sm font-semibold mb-2 text-center"> Materials History</h3>
-                            <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
+                            <div class="text-[12px] bg-white mt-0 p-5 rounded-md md:max-w-[800px] min-[90%]:max-w-[100%] lg:max-w-[900px] xl:w-[100%] xl:min-w-[100%] 2xl:max-w-[1190px]">
                                 <livewire:material-history :pow_id="$pow->id"/>
                             </div>
                         </div>
                     </div>
+
+
+
                 </div>
             </div>
 
@@ -239,7 +192,7 @@
                     <!-- Tabs -->
                     <div class="flex justify-center space-x-4 bg-gray-200 rounded-t-lg">
                         <button :class="tab === 'labor_cost' ? 'bg-white font-bold text-green-500' : 'text-gray-500'" @click="tab = 'labor_cost'" class="w-1/2 px-4 py-2 rounded-t-lg text-sm">
-                           Labor Cost
+                            Labor Cost
                         </button>
                         <button :class="tab === 'job-order' ? 'bg-white font-bold text-green-500' : 'text-gray-500'" @click="tab = 'job-order'" class="w-1/2 px-4 py-2 rounded-t-lg text-sm">
                             Job Order
@@ -257,8 +210,8 @@
                                     @endif
                                 </div>
                             </div>
-                            <!-- Table for Material Costs -->
-                            <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
+                            <!-- Table for Payroll -->
+                            <div class="text-[12px] bg-white mt-0 p-5 rounded-md md:max-w-[800px] min-[90%]:max-w-[100%] lg:max-w-[900px] xl:w-[100%] xl:min-w-[100%] 2xl:max-w-[1190px]">
                                 <livewire:payroll-table :pow_id="$pow->id"/>
                             </div>
 
@@ -273,8 +226,8 @@
                                     @endif
                                 </div>
                             </div>
-                            <!-- Table for Material Costs -->
-                            <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
+                            <!-- Table for Job Order -->
+                            <div class="text-[12px] bg-white mt-0 p-5 rounded-md md:max-w-[800px] min-[90%]:max-w-[100%] lg:max-w-[900px] xl:w-[100%] xl:min-w-[100%] 2xl:max-w-[1190px]">
                                 <livewire:job-order-table :pow_id="$pow->id"/>
                             </div>
                         </div>
@@ -296,7 +249,7 @@
                             <livewire:make-indirect-report :pow_id="$pow->id"/>
                         @endif
                     </div>
-                    <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
+                    <div class="text-[12px] bg-white mt-0 p-5 rounded-md md:max-w-[800px] min-[90%]:max-w-[100%] lg:max-w-[900px] xl:w-[100%] xl:min-w-[100%] 2xl:max-w-[1190px]">
                         <livewire:indirect-cost-table :pow_id="$pow->id"/>
                     </div>
                 </div>
@@ -313,7 +266,7 @@
                             </div>
                         @endif
                     </div>
-                    <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
+                    <div class="text-[12px] bg-white mt-0 p-5 rounded-md md:max-w-[800px] min-[90%]:max-w-[100%] lg:max-w-[900px] xl:w-[100%] xl:min-w-[100%] 2xl:max-w-[1190px]">
                         <livewire:other-direct-cost-table :pow_id="$pow->id"/>
                     </div>
                 </div>
@@ -333,7 +286,7 @@
                             @endif
                         </div>
                     </div>
-                    <div class="text-[12px]">
+                    <div class="text-[12px] bg-white mt-0 p-5 rounded-md md:max-w-[800px] min-[90%]:max-w-[100%] lg:max-w-[900px] xl:w-[100%] xl:min-w-[100%] 2xl:max-w-[1190px]">
                         <livewire:purchase-order-table :pow_id="$pow->id"/>
                     </div>
 
@@ -345,7 +298,7 @@
         <div id="pow-suspension-resume" class="hidden w-full">
             <div class="bg-white shadow-md rounded-lg p-6">
                 <h3 class="text-sm font-semibold mb-2 text-center"> Suspension / Continuation  History</h3>
-                <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
+                <div class="shadow text-[12px] bg-white mt-0 rounded-md md:max-w-[800px] min-[90%]:max-w-[100%] lg:max-w-[900px] xl:w-[100%] xl:min-w-[100%] 2xl:max-w-[1190px] ">
                     <livewire:pow-suspend-resume :pow_id="$pow->id"/>
                 </div>
             </div>
@@ -354,22 +307,11 @@
         <div id="realignment-history" class="hidden w-full">
             <div class="bg-white shadow-md rounded-lg p-6">
                 <h3 class="text-sm font-semibold mb-2 text-center"> Project Realignment  History</h3>
-                <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
+                <div class="shadow text-[12px] bg-white mt-0 rounded-md md:max-w-[800px] min-[90%]:max-w-[100%] lg:max-w-[900px] xl:w-[100%] xl:min-w-[100%] 2xl:max-w-[1190px] ">
                     <livewire:realignment-history :pow_id="$pow->id"/>
                 </div>
             </div>
         </div>
-
-
-        <div id="materials-history" class="hidden w-full">
-            <div class="bg-white shadow-md rounded-lg p-6">
-                <h3 class="text-sm font-semibold mb-2 text-center"> Materials  History</h3>
-                <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
-
-                </div>
-            </div>
-        </div>
-
     </div>
 
     <!-- Modal for Edit Item -->

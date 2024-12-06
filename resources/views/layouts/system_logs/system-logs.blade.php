@@ -16,9 +16,8 @@
         <p class="mb-6 text-[11px]">System Activity Logs and Event History</p>
 
         <div class="container mx-auto bg-white p-6 rounded-lg shadow">
-            <div class="relative bg-white shadow rounded-lg overflow-hidden text-[12px] w-full">
-
-            <livewire:system-logs/>
+            <div class="text-[12px] bg-white mt-0 p-5 rounded-md md:max-w-[800px] min-[90%]:max-w-[100%] lg:max-w-[900px] xl:w-[100%] xl:min-w-[100%] 2xl:max-w-[1190px]">
+                <livewire:system-logs/>
             </div>
 
         </div>
@@ -566,9 +565,6 @@
             // Initial render
             renderTable();
         </script>
-        </body>
-        </html>
-
     </x-slot>
 </x-app-layout>
 
