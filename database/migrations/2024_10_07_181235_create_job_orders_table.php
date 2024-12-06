@@ -16,8 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('pow_id');
             $table->foreign('pow_id')->references('id')->on('program_of_works')->onDelete('cascade');
             $table->string('name');
-            $table->string('designation')->nullable();
-            $table->double('rate_per_date')->nullable();
+            $table->string('designation')->nullable()->default('n/a');
+            $table->double('rate_per_date')->nullable()->default(null);
             $table->date('job_order_from');
             $table->date('job_order_to');
             $table->double('amount');

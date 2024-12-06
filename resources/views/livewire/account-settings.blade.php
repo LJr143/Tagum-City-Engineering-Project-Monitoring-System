@@ -54,16 +54,18 @@
                                     id="positionInput" type="text" value="{{$role}}" readonly />
                             </div>
                         </div>
-                        <button type="button" class="text-xs text-gray-600 absolute top-3 right-3 hover:text-gray-800 transition duration-200"
-                            id="editButton" onclick="enableEditProfile()">
-                            <i class="fas fa-edit"></i>
-                            Edit
-                        </button>
-                        <button type="submit" wire:loading.attr="disabled" class="text-xs text-gray-600 absolute top-3 right-3 hidden hover:text-gray-800 transition duration-200"
-                            id="saveButton" style="display: none;">
-                            <i class="fas fa-save"></i>
-                            Save
-                        </button>
+                        <div>
+                            <button type="button" class="text-xs text-gray-600 absolute top-3 right-3 hover:text-gray-800 transition duration-200"
+                                    id="editButton" onclick="enableEditProfile()">
+                                <i class="fas fa-edit"></i>
+                                Edit
+                            </button>
+                            <button type="submit" wire:loading.attr="disabled" class="text-xs text-gray-600 absolute top-3 right-3 hidden hover:text-gray-800 transition duration-200"
+                                    id="saveButton" style="display: none;">
+                                <i class="fas fa-save"></i>
+                                Save
+                            </button>
+                        </div>
                     </div>
                 </form>
 

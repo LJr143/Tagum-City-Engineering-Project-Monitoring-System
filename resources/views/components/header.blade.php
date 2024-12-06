@@ -71,14 +71,18 @@
                 <x-slot name="content">
                     <a href="{{ route('userProfile') }}" class="block px-4 py-2 text-[11px] text-gray-700 hover:bg-gray-100">Account Settings</a>
                     <!-- Logout Form -->
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+
+
+                    <a href="#"
+                       onclick="event.preventDefault(); showLogoutModal();"
+                       class="block px-4 py-2 text-[11px] text-gray-700 hover:bg-gray-100">
+                        Logout
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
                         @csrf
                     </form>
 
-                    <!-- Logout Link -->
-                    <a href="#" onclick="event.preventDefault(); showLogoutModal();" class="block px-4 py-2 text-[11px] text-gray-700 hover:bg-gray-100">
-                        Logout
-                    </a>
 
                 </x-slot>
             </x-dropdown>

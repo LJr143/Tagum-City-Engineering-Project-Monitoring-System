@@ -14,8 +14,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-         user::factory(10)->create();
-         project::factory(20)->create();
 
         User::factory()->create([
             'username' => 'admin@example',
@@ -23,6 +21,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@example.com',
             'role' => 'admin',
             'password' => 'password',
+            'profile_photo_path' => 'pmsAssets/default.png'
         ]);
 
         User::factory()->create([
@@ -32,6 +31,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'encoder@example.com',
             'role' => 'encoder',
             'password' => 'password',
+            'profile_photo_path' => 'pmsAssets/default.png'
         ]);
 
         User::factory()->create([
@@ -41,6 +41,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'projectIncharge@example.com',
             'role' => 'project incharge',
             'password' => 'password',
+            'profile_photo_path' => 'pmsAssets/default.png'
         ]);
     }
 }

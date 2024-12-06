@@ -53,7 +53,7 @@
                </div>
 
                 <label for="job_order_id" class="block text-xs font-medium text-gray-700">Realign To</label>
-                <select wire:model="job_order_id" id="job_order_id" class="select2 w-full border border-gray-300 rounded-md px-2 py-2 text-xs mb-4" required>
+                <select wire:model.live="job_order_id" id="job_order_id" class="select2 w-full border border-gray-300 rounded-md px-2 py-2 text-xs mb-4" required>
                     <option value="">Select a Job Order</option>
                     @foreach($job_orders as $item)
                         <option value="{{ $item->id }}"> {{ $item->id }} . {{ $item->name }}</option>

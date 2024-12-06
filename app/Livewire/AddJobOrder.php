@@ -53,7 +53,7 @@ class AddJobOrder extends Component
                 'pow_id' => $this->pow_id,
                 'name' => $this->jo_name,
                 'designation' => $this->jo_designation,
-                'rate_per_date' => $this->jo_rate_per_day,
+                'rate_per_date' => $this->jo_rate_per_day !== '' ? (float)$this->jo_rate_per_day : null,
                 'job_order_from' => $this->jo_date_start,
                 'job_order_to' => $this->jo_date_end,
                 'amount' => $this->jo_total_amount,

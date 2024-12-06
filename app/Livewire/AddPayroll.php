@@ -17,6 +17,8 @@ class AddPayroll extends Component
     public $job_order_id;
     public $job_orders;
 
+    protected $listeners = ['job-order-added' => 'refreshJobOrders'];
+
     protected $rules = [
         'payroll_title' => 'required|string|max:255',
         'payroll_amount' => 'required|numeric',
@@ -27,7 +29,12 @@ class AddPayroll extends Component
     public function mount($pow_id): void
     {
         $this->pow_id = $pow_id;
-        $this->job_orders = JobOrder::where('pow_id', $pow_id)->get();
+        $this->refreshJobOrders();
+    }
+
+    public function refreshJobOrders()
+    {
+        $this->job_orders = JobOrder::where('pow_id', $this->pow_id)->get();
     }
 
     public function submit()
@@ -51,7 +58,6 @@ class AddPayroll extends Component
             $job_order->balance -= $this->payroll_amount;
             $job_order->save();
         } else {
-            // Handle the case where no matching JobOrder is found
             throw new \Exception('Job Order not found.');
         }
 
@@ -61,10 +67,7 @@ class AddPayroll extends Component
             auth()->id()
         );
 
-        // Dispatch browser event
         $this->dispatch('payroll-added');
-
-        // Optionally clear fields or reset form
         $this->reset(['payroll_title', 'payroll_amount', 'payroll_date_start', 'payroll_date_end']);
     }
 
