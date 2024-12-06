@@ -23,7 +23,7 @@
                             @endif
 
                             @if ((auth()->user()->isAdmin() || auth()->user()->isEncoder()) && $project->status != 'pending validation' )
-                                <livewire:project-configuration-settings :projectId="$project->id"/>
+                                <livewire:project-configuration-settings :projectId="$project->id" wire:poll.0.5s/>
 
                             @endif
 

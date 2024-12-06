@@ -64,6 +64,8 @@
          x-on:indirect_update.window="pushNotification('success', 'Indirect Report Added', 'Indirect report added successfully.');"
          x-on:job-order-failed.window="pushNotification('error', 'Failed to add job order', 'Insufficient labor cost balance.');"
          x-on:job-order-added.window="pushNotification('success', 'Job Order Added', 'Job order added successfully.');"
+         x-on:project-extended.window="pushNotification('success', 'Project Extended', 'Project extended successfully.');"
+         x-on:progress-saved.window="pushNotification('success', 'Project Saved', 'Project saved successfully.');"
     >
 
 

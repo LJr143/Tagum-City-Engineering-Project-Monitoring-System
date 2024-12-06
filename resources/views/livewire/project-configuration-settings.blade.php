@@ -48,9 +48,9 @@
             </button>
 
             <h2 class="text-sm font-bold mb-4">Project Configuration Settings</h2>
-            <form wire:submit.prevent="saveProgress" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <form wire:submit.prevent.live="saveProgress" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <!-- Available Dates Table -->
-                <div class="border-2 p-2 rounded">
+                <div class="border-2 p-2 rounded min-h-[200px] max-h-[200px] overflow-x-auto">
                     <!-- Custom Date Section -->
                     <div x-data="{ showCustomDate: @entangle('showCustomDate') }" class="">
                         <button type="button" @click="showCustomDate = !showCustomDate" class="text-blue-500 text-xs font-medium hover:underline">
@@ -66,7 +66,7 @@
                         </div>
                     </div>
                     <label class="block text-xs font-medium">Available Dates (15th and 30th):</label>
-                    <div class="overflow-x-auto mt-2" style="max-height: 200px;">
+                    <div class="overflow-x-auto mt-2">
                         <table class="min-w-full border-collapse">
                             <thead>
                             <tr class="bg-gray-100">
@@ -93,7 +93,7 @@
                 <!-- Column 2 -->
 
                 <!-- Saved Progress List -->
-                <div class="border-2 p-2 rounded overflow-y-auto" style="max-height: 200px;">
+                <div class="border-2 p-2 rounded overflow-y-auto min-h-[200px] max-h-[200px]" style="max-height: 200px;">
                     <h3 class="font-bold text-sm">Currently Saved Progress</h3>
                     <table class="text-xs w-full border border-gray-300">
                         <thead>
@@ -123,13 +123,28 @@
                     <div x-show="extendProject" class="mt-2">
                         <label class="block text-xs font-medium">New Project End Date:</label>
                         <input type="date" wire:model="newEndDate" class="text-xs border border-gray-400 rounded px-2 py-1 mr-2 w-full">
-                        <label class="block text-xs font-medium mt-2">Upload Extension Order (PDF):</label>
-                        <input type="file" wire:model="extensionOrderFile" accept="application/pdf" class="text-xs border border-gray-400 rounded px-2 py-1 mr-2 w-full">
+{{--                        <label class="block text-xs font-medium mt-2">Upload Extension Order (PDF):</label>--}}
+{{--                        <input type="file" wire:model="extensionOrderFile" accept="application/pdf" class="text-xs border border-gray-400 rounded px-2 py-1 mr-2 w-full">--}}
+                       <div class="w-full flex justify-end">
+                           <button type="button" wire:click="extendProjectEndDate"
+                                   class="bg-green-500 text-white mt-2 px-6 py-2 rounded hover:bg-green-600 text-xs w-full sm:w-[150px] h-[35px]"
+                                   wire:loading.attr="disabled">
+                               <span wire:loading.remove>Save Extension</span>
+                               <span wire:loading>
+                                <svg class="animate-spin h-5 w-5 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C6.477 0 2 4.477 2 10h2zm2 5.291V14c0-4.418 3.582-8 8-8h2c0 4.418-3.582 8-8 8z"></path>
+                                </svg>
+                                Processing...
+                            </span>
+                           </button>
+
+                       </div>
                     </div>
                 </div>
 
                 <!-- Past Deadlines Table -->
-                <div class="border-2 p-2 rounded overflow-y-auto" style="max-height: 200px;">
+                <div class="border-2 p-2 rounded overflow-y-auto min-h-[200px] max-h-[200px]" style="max-height: 200px;">
                     <h3 class="font-bold text-sm">Project Extension History</h3>
                     <table class="min-w-full border-collapse mt-2">
                         <thead>
@@ -170,15 +185,3 @@
 </div>
 
 
-
-@script
-<script>
-    Livewire.on('progress-saved', () => {
-        alert('Progress saved successfully!');
-    });
-
-    Livewire.on('progress-error', (event) => {
-        alert(event.message);
-    });
-</script>
-@endscript

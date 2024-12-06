@@ -23,6 +23,8 @@ class ProjectConfigurationSettings extends Component
     public $extensionOrderFile;
     public $pastDeadlines = [];
 
+    protected $listeners = ['project-extended'=>'$refresh', 'progress-saved'=>'$refresh'];
+
 
     public function mount($projectId)
     {
@@ -113,8 +115,8 @@ class ProjectConfigurationSettings extends Component
     public function extendProjectEndDate()
     {
         $this->validate([
-            'newEndDate' => 'required|date',
-            'extensionOrderFile' => 'required|file|mimes:pdf|max:2048',
+            'newEndDate' => 'required|date|after:' . $this->project->end_date,
+            'extensionOrderFile' => 'nullable|file|mimes:pdf|max:2048',
         ]);
 
         $project = Project::find($this->projectId);
@@ -125,15 +127,18 @@ class ProjectConfigurationSettings extends Component
             'set_by' => auth()->user()->id
         ]);
 
-        $filePath = $this->extensionOrderFile->storeAs('extensions', 'extension_order_' . $this->projectId . '_' . time() . '.pdf');
+//        $filePath = $this->extensionOrderFile->storeAs(
+//            'extensions',
+//            'extension_order_project_' . $this->projectId . '_user_' . auth()->id() . '_' . time() . '.pdf'
+//        );
 
-        $project->update(['end_date' => $this->newEndDate]);
+        $this->project->update(['end_date' => $this->newEndDate]);
 
         $this->reset('newEndDate', 'extensionOrderFile');
 
         $this->pastDeadlines = PastDeadline::where('project_id', $this->projectId)->get();
 
-        $this->dispatch('project-extended', ['filePath' => $filePath]);
+        $this->dispatch('project-extended');
     }
 
     private function getAvailableDates()
@@ -151,7 +156,6 @@ class ProjectConfigurationSettings extends Component
 
         return $dates;
     }
-
 
     public function render()
     {
